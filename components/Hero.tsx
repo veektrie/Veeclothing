@@ -3,6 +3,8 @@ import React from 'react'
 import CustomButton  from './CustomButton'
 import Image from 'next/image'
 import Link from 'next/link'
+import Metadata from 'next/metadata'
+
 
 const Hero = () => {
   const whatsappNumber = '2348103031020'; 
@@ -18,6 +20,8 @@ const Hero = () => {
 
   return (
     <div className='hero'>
+    
+      
       <div className="flex-1 pt-36 padding-x">
         <h1 className="hero__title">
           Bespoke Tailoring <br />
