@@ -23,7 +23,7 @@ const Hero = () => {
           Bespoke Tailoring <br />
           For The <br />
           Discerning 
-          Gentleman.
+          Gentlman.
         </h1>
 
         <p className="hero__subtitle">
