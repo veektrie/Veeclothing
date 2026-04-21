@@ -13,7 +13,7 @@ const ShopPreview = () => (
   <section
     id="collection"
     style={{
-      background: 'var(--charcoal)',
+      background: 'var(--navy)',
       padding: '7rem 0',
       position: 'relative',
       overflow: 'hidden',

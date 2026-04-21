@@ -17,8 +17,8 @@ const navGroups = [
     heading: 'Studio',
     links: [
       { title: 'Our Craft',       url: '#bespoke' },
-      { title: 'The Journal',     url: '#journal' },
-      { title: 'Client Sentiments', url: '#' },
+      { title: 'The Journal',     url: '/journal' },
+      { title: 'Client Sentiments', url: '/#sentiments' },
       { title: 'About Vee',       url: '#' },
     ],
   },
@@ -41,12 +41,12 @@ const Footer = () => {
         {/* Brand column — NAP for Local SEO */}
         <div itemScope itemType="https://schema.org/ClothingStore">
           <Image
-            src="/VCC1.png"
+            src="/VCC-gold.png"
             alt="Vee Clothing Company"
             width={110}
             height={36}
             className="object-contain mb-6"
-            style={{ height: 'auto', filter: 'brightness(0) invert(1) sepia(1) saturate(2) hue-rotate(355deg) brightness(0.9)', opacity: 0.8 }}
+            style={{ height: 'auto', opacity: 0.9 }}
           />
           <p
             style={{

@@ -1,5 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 
 const articles = [
@@ -119,17 +120,27 @@ const Journal = () => {
                 >
                   {a.readTime}
                 </span>
-                <span className="journal-read-more">
-                  Read More
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </span>
+                <Link href="/journal">
+                  <span className="journal-read-more">
+                    Read More
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </Link>
               </div>
             </motion.div>
           ))}
         </div>
 
+        {/* View All Button */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '4rem' }}>
+          <Link href="/journal">
+            <button className="btn-ghost-navy">
+              View All Editorials
+            </button>
+          </Link>
+        </div>
       </div>
     </section>
   );

@@ -37,7 +37,7 @@ const Hero = () => {
         willChange: 'transform', height: '115%', top: '-7.5%',
         opacity: isCorporate ? 1 : 0, transition: 'opacity 0.7s ease', zIndex: 0,
       }}>
-        <Image src="/hero2.png"
+        <Image src="/cop06.jpg"
           alt="Vee Clothing Company corporate executive menswear Lagos uniform engineering"
           fill priority sizes="100vw" className="object-cover object-top"
         />
@@ -49,7 +49,7 @@ const Hero = () => {
         willChange: 'transform', height: '115%', top: '-7.5%',
         opacity: isCorporate ? 0 : 1, transition: 'opacity 0.7s ease', zIndex: 0,
       }}>
-        <Image src="/hero2.png"
+        <Image src="/kaftan07.jpeg"
           alt="Bespoke tailoring private commission custom suit Lagos Nigeria discerning gentleman"
           fill priority sizes="100vw" className="object-cover object-center"
           style={{ filter: 'grayscale(20%)' }}

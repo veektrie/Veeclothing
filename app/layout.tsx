@@ -4,6 +4,7 @@ import "./globals.css";
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://veeclothingcompany.com"),
   title: "Vee Clothing Company | Bespoke Tailoring & Corporate Uniforms Lagos",
   description:
     "Vee Clothing Company — Lagos's premier destination for bespoke tailoring, corporate uniform engineering, and executive menswear. Custom tailored suits, premium African menswear, and branded corporate apparel crafted to global standards with local soul.",
@@ -25,15 +26,18 @@ export const metadata: Metadata = {
     siteName: "Vee Clothing Company",
     locale: "en_NG",
     type: "website",
+    images: [
+      {
+        url: "/kaftan07.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "Vee Clothing Company",
+      },
+    ],
   },
   icons: {
-    icon: [
-      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
-    ],
-    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+    icon: "/favicon.ico",
   },
-  manifest: "/site.webmanifest",
 };
 
 export default function RootLayout({

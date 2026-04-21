@@ -2,8 +2,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 
 type Category = 'all' | 'corporate' | 'bespoke' | 'kaftan' | 'accessories';
 
@@ -43,8 +41,6 @@ export default function ShopPage() {
   const filtered = active === 'all' ? products : products.filter(p => p.cat === active);
 
   return (
-    <>
-      <Navbar />
       <main style={{ background: 'var(--cream)', minHeight: '100vh', paddingTop: 80 }}>
 
         {/* ── Shop Hero Banner ── */}
@@ -278,7 +274,5 @@ export default function ShopPage() {
         )}
 
       </main>
-      <Footer />
-    </>
   );
 }

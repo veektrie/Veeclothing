@@ -28,11 +28,11 @@ const Navbar = () => {
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <Image
-            src="/VCC1.png"
+            src="/VCC-white.png"
             alt="Vee Clothing Company"
             width={130}
             height={40}
-            className="object-contain brightness-0 invert"
+            className="object-contain"
             style={{ height: 'auto' }}
             priority
           />
@@ -40,10 +40,8 @@ const Navbar = () => {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
-          <Link href="/#corporate"     className="nav-link">Corporate</Link>
-          <Link href="/#bespoke"       className="nav-link">Bespoke</Link>
           <Link href="/shop"           className="nav-link">The Shop</Link>
-          <Link href="/#journal"       className="nav-link">The Journal</Link>
+          <Link href="/journal"        className="nav-link">The Journal</Link>
           <Link href="/#consultation"  className="nav-link">Contact</Link>
         </nav>
 
@@ -91,10 +89,8 @@ const Navbar = () => {
           style={{ background: 'rgba(26, 82, 118, 0.95)' }}
         >
           {[
-            { href: '/#corporate',    label: 'Corporate'    },
-            { href: '/#bespoke',      label: 'Bespoke'      },
             { href: '/shop',          label: 'The Shop'     },
-            { href: '/#journal',      label: 'The Journal'  },
+            { href: '/journal',       label: 'The Journal'  },
             { href: '/#consultation', label: 'Contact'      },
           ].map(({ href, label }) => (
             <Link
