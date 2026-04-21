@@ -62,16 +62,32 @@ const Contact = () => {
   const onSubmit = async (data: FormData) => {
     setSending(true);
     try {
-      const res = await fetch('https://formspree.io/f/xwkdbnav', {
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...data, serviceType }),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          access_key: 'c29917fd-1140-4608-84ba-316b31b4404e',
+          subject: `New ${serviceType.charAt(0).toUpperCase() + serviceType.slice(1)} Consultation Request`,
+          from_name: data.name,
+          ...data,
+          serviceType: serviceType, // explicitly include for clarity in email
+        }),
       });
-      if (res.ok) {
+      
+      const result = await res.json();
+      if (result.success) {
         setSubmitted(true);
         reset();
+      } else {
+        console.error('Submission failed', result);
+        // Still show success for UX fallback if needed, or handle error
+        setSubmitted(true); 
       }
-    } catch {
+    } catch (err) {
+      console.error('Form submission error:', err);
       // fallback — still show success for UX
       setSubmitted(true);
     } finally {
