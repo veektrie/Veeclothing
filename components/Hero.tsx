@@ -37,7 +37,7 @@ const Hero = () => {
         willChange: 'transform', height: '115%', top: '-7.5%',
         opacity: isCorporate ? 1 : 0, transition: 'opacity 0.7s ease', zIndex: 0,
       }}>
-        <Image src="/cop06.jpg"
+        <Image src="/corporate-hero.png"
           alt="Vee Clothing Company corporate executive menswear Lagos uniform engineering"
           fill priority sizes="100vw" className="object-cover object-top"
         />

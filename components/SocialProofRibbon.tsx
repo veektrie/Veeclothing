@@ -27,7 +27,7 @@ const SocialProofRibbon = () => {
   return (
     <section
       id="sentiments"
-      style={{ background: 'var(--navy)', padding: '6rem 0', position: 'relative' }}
+      style={{ background: 'var(--navy)', padding: 'clamp(3rem, 6vw, 6rem) 0', position: 'relative' }}
     >
       {/* Review Schema JSON-LD */}
       <script
@@ -53,8 +53,8 @@ const SocialProofRibbon = () => {
         }}
       />
 
-      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 2rem' }}>
-        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+      <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 clamp(1.5rem, 4vw, 2rem)' }}>
+        <div style={{ textAlign: 'center', marginBottom: 'clamp(2rem, 5vw, 4rem)' }}>
           <span style={{
             fontSize: 10, letterSpacing: '0.25em', textTransform: 'uppercase',
             color: '#D4AF37', display: 'block', marginBottom: 12, fontFamily: 'Inter, sans-serif'
@@ -72,8 +72,8 @@ const SocialProofRibbon = () => {
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '3rem',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+          gap: 'clamp(2rem, 4vw, 3rem)',
         }}>
           {sentiments.map((s, i) => (
             <motion.div

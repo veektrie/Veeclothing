@@ -30,11 +30,11 @@ export default function Home() {
       {/* 5. Shop Preview — collection teaser → /shop */}
       <ShopPreview />
 
-      {/* 6. Social Proof Ribbon — merged testimonials + reviews */}
-      <SocialProofRibbon />
-
-      {/* 7. The Journal — SEO topical authority */}
+      {/* 6. The Journal — SEO topical authority */}
       <Journal />
+
+      {/* 7. Social Proof Ribbon — merged testimonials + reviews */}
+      <SocialProofRibbon />
 
       {/* 8. FAQ — friction removal */}
       <FAQSection />

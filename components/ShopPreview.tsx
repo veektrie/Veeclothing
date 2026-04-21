@@ -14,7 +14,7 @@ const ShopPreview = () => (
     id="collection"
     style={{
       background: 'var(--navy)',
-      padding: '7rem 0',
+      padding: 'clamp(4rem, 8vw, 7rem) 0',
       position: 'relative',
       overflow: 'hidden',
     }}
@@ -27,7 +27,7 @@ const ShopPreview = () => (
       pointerEvents: 'none',
     }} />
 
-    <div style={{ maxWidth: 1440, margin: '0 auto', padding: '0 4rem' }}>
+    <div style={{ maxWidth: 1440, margin: '0 auto', padding: '0 clamp(1.5rem, 5vw, 4rem)' }}>
 
       {/* Header row */}
       <div style={{
@@ -77,7 +77,7 @@ const ShopPreview = () => (
       </div>
 
       {/* Product preview grid */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '1.5rem', marginBottom: '3rem' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem', marginBottom: '3rem' }}>
         {previews.map((item, i) => (
           <motion.div
             key={i}
