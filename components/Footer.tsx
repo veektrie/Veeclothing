@@ -38,8 +38,8 @@ const Footer = () => {
     <footer className="footer-luxury">
       {/* Top */}
       <div className="footer-top">
-        {/* Brand column */}
-        <div>
+        {/* Brand column — NAP for Local SEO */}
+        <div itemScope itemType="https://schema.org/ClothingStore">
           <Image
             src="/VCC.png"
             alt="Vee Clothing Company"
@@ -60,9 +60,56 @@ const Footer = () => {
           >
             Bespoke tailoring and corporate identity solutions from Lagos, Nigeria — crafted to global standards with local soul.
           </p>
+
+          {/* NAP block — matches Google Business Profile exactly */}
+          <address
+            style={{
+              fontStyle: 'normal',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 10,
+              marginBottom: 20,
+            }}
+          >
+            {[
+              {
+                icon: (
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.5"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                ),
+                label: 'Lagos, Nigeria',
+                itemProp: 'address',
+              },
+              {
+                icon: (
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 011 1.18 2 2 0 013 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+                ),
+                label: '+234 810 303 1020',
+                itemProp: 'telephone',
+              },
+              {
+                icon: (
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                ),
+                label: 'veeclothingcompany@gmail.com',
+                itemProp: 'email',
+              },
+            ].map((item) => (
+              <div
+                key={item.label}
+                itemProp={item.itemProp}
+                style={{ display: 'flex', alignItems: 'center', gap: 10 }}
+              >
+                {item.icon}
+                <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.03em' }}>
+                  {item.label}
+                </span>
+              </div>
+            ))}
+          </address>
+
           {/* Gold accent line */}
-          <div style={{ width: 40, height: 1, background: 'rgba(212,175,55,0.5)', marginBottom: 20 }} />
-          <p style={{ fontSize: 11, letterSpacing: '0.15em', color: 'rgba(212,175,55,0.5)', textTransform: 'uppercase' }}>
+          <div style={{ width: 40, height: 1, background: 'rgba(212,175,55,0.5)', marginBottom: 16 }} />
+          <p style={{ fontSize: 10, letterSpacing: '0.2em', color: 'rgba(212,175,55,0.45)', textTransform: 'uppercase' }}>
             Est. Lagos, Nigeria
           </p>
         </div>

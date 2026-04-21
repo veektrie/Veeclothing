@@ -40,10 +40,11 @@ const Navbar = () => {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
-          <Link href="#collection" className="nav-link">Collection</Link>
           <Link href="#corporate" className="nav-link">Corporate</Link>
-          <Link href="#bespoke" className="nav-link">Bespoke</Link>
-          <Link href="#journal" className="nav-link">Journal</Link>
+          <Link href="#bespoke"   className="nav-link">Bespoke</Link>
+          <Link href="#collection" className="nav-link">The Shop</Link>
+          <Link href="#journal"   className="nav-link">The Journal</Link>
+          <Link href="#consultation" className="nav-link">Contact</Link>
         </nav>
 
         {/* Desktop CTAs */}
