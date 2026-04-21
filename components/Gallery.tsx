@@ -1,88 +1,131 @@
+'use client';
 import React from 'react';
-import { BsInstagram, BsArrowLeftShort, BsArrowRightShort } from 'react-icons/bs';
-import images from '../constants/images';
-import './Gallery.css';
-import CustomButton from './CustomButton';
 import Image from 'next/image';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
+import images from '../constants/images';
 
-const galleryImages = [
-                       images.hero1, images.kaftan02, images.kaftan03, images.kaftan04, 
-                       images.suit01, images.suit02, images.suit03, images.suit04, images.suit05, 
-                       images.cop4, images.cop2, images.cop6,  images.cop5,  images.cop7,
-                       images.kaftan05, images.kaftan06, images.kaftan07, images.kaftan08, images.kaftan09, images.kaftan10,,
-                      ];
+// Editorial lookbook images
+const lookbookItems = [
+  { src: images.hero1,     alt: 'Vee Clothing Company bespoke kaftan collection Lagos', label: 'The Kaftan Edit',   category: 'Kaftans' },
+  { src: images.kaftan02,  alt: 'Vee Clothing Company luxury kaftan artisan tailoring',  label: 'Structural Volume',  category: 'Kaftans' },
+  { src: images.kaftan03,  alt: 'Premium kaftan menswear Nigeria bespoke tailored',       label: 'Clean Drape',        category: 'Kaftans' },
+  { src: images.suit01,    alt: 'Bespoke slim fit suit custom tailored Lagos menswear',   label: 'The Power Suit',     category: 'Suiting' },
+  { src: images.suit02,    alt: 'Premium African menswear executive suit Lagos',          label: 'Executive Cut',      category: 'Suiting' },
+  { src: images.cop4,      alt: 'Vee Clothing Company corporate branded uniform',         label: 'Corporate Identity', category: 'Corporate' },
+];
 
-const Gallery = () => {
-  const whatsappNumber = '2348103031020'; 
-  const whatsappUrl = `https://wa.me/c/${whatsappNumber}`;
-  const InstagramUrl = `http://linktr.ee/veeclothingcompany`;
+const Lookbook = () => {
+  const whatsappUrl = 'https://wa.me/c/2348103031020';
 
-
-  const scrollRef = React.useRef(null);
-
-  const  scroll = (direction) => {
-    const { current } = scrollRef;
-
-    if(direction === 'left') {
-      current.scrollLeft -= 300;
-    } else {
-      current.scrollLeft += 300;
-    }
-  }
-  
   return (
-    <div className="app__gallery flex__center bg-blue-100">
-      <div className="app__gallery-content">
-        {/* <SubHeading title="Instagram" /> */}
-        <h1 className="hero__title ">
-            Express your Unique Style, Embrace Timeless Elegance
-        </h1>
-
-        <p className="hero__subtitle" style={{ marginTop: '2rem' }}>
-           Discover a curated collection of quality fabrics and exquisite outfits by expert tailors crafted to reflect your individual taste <br/>
-        </p>
-
-        <p className="hero__subtitle" style={{ marginTop: '1rem' }}>
-            Find your perfect fit,color and design that's undeniably you!
-        </p>
-
-        <p className="hero__subtitle" style={{ marginTop: '1rem' }}>
-            We get it – young professionals appreciate quality without breaking the bank!
-        </p>
- 
+    <section className="lookbook-section" id="collection">
+      {/* Header */}
+      <div className="lookbook-header">
+        <div>
+          <span className="section-label">The Collection</span>
+          <div className="gold-divider my-4" />
+          <h2
+            className="hero-title"
+            style={{
+              fontFamily: 'Cormorant Garamond, serif',
+              fontSize: 'clamp(2rem, 4vw, 3.8rem)',
+              color: '#1C1C1E',
+              maxWidth: 480,
+            }}
+          >
+            Garments That Speak Before You Do.
+          </h2>
+        </div>
         <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-          <CustomButton
-            title="View More"
-            rightIcon='/right-arrow.svg'
-            containerStyles='bg-primary-blue text-white rounded-full mt-12 w-[170%] h-[60px] tracking-[5px]'
-          />
+          <button className="btn-ghost-gold" style={{ flexShrink: 0 }}>
+            View Full Catalog
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </button>
         </Link>
-
       </div>
 
-      <div className="app__gallery-images">
-        <div className="app__gallery-images_container" ref={scrollRef}>
-          {galleryImages.map((image, index) => (
-            <div className="app__gallery-images_card flex__center" key={`gallery_image-${index+ 1}`}>
-
-              <Link href={InstagramUrl}>
-                <BsInstagram className="gallery__image-icon" />
-              </Link>
-
-              <Image src={image} alt="gallery"  priority/>
+      {/* Lookbook Grid */}
+      <div className="lookbook-grid">
+        {lookbookItems.map((item, i) => (
+          <motion.div
+            key={i}
+            className={`lookbook-card ${i === 0 ? 'lookbook-card--featured' : ''}`}
+            style={i === 0 ? { gridRow: 'span 2', aspectRatio: 'auto' } : {}}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: i * 0.1 }}
+            viewport={{ once: true }}
+          >
+            <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+              <Image
+                src={item.src}
+                alt={item.alt}
+                fill
+                className="object-cover"
+                style={{ transition: 'transform 0.8s ease' }}
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+              />
             </div>
-          ))}
-        </div>
 
-        <div className="app__gallery-images_arrows">
-          <BsArrowLeftShort className="gallery__arrow-icons" onClick={() => scroll('left')} />
-          <BsArrowRightShort className="gallery__arrow-icons" onClick={() => scroll('right')} />
-        </div>
-        
+            {/* Hover overlay */}
+            <div className="lookbook-card-overlay">
+              <span
+                style={{
+                  fontSize: 9,
+                  letterSpacing: '0.3em',
+                  textTransform: 'uppercase',
+                  color: '#D4AF37',
+                  marginBottom: 6,
+                }}
+              >
+                {item.category}
+              </span>
+              <p
+                style={{
+                  fontFamily: 'Cormorant Garamond, serif',
+                  fontSize: '1.4rem',
+                  color: '#fff',
+                  fontWeight: 400,
+                  marginBottom: 16,
+                }}
+              >
+                {item.label}
+              </p>
+              <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+                <button
+                  className="btn-ghost-navy"
+                  style={{ fontSize: 10, padding: '10px 20px' }}
+                >
+                  Enquire
+                </button>
+              </Link>
+            </div>
+          </motion.div>
+        ))}
       </div>
 
-    </div>
-  )
+      {/* Bottom strip */}
+      <div
+        className="mt-12 flex items-center justify-center gap-12 flex-wrap"
+        style={{ padding: '0 4rem' }}
+      >
+        {['Kaftans', 'Suiting', 'Corporate Uniforms', 'Wedding Collections', 'Ready-to-Wear'].map((cat) => (
+          <span
+            key={cat}
+            className="section-label cursor-pointer transition-colors duration-300"
+            style={{ color: '#6B6B6B' }}
+            onMouseEnter={(e) => ((e.target as HTMLElement).style.color = '#D4AF37')}
+            onMouseLeave={(e) => ((e.target as HTMLElement).style.color = '#6B6B6B')}
+          >
+            {cat}
+          </span>
+        ))}
+      </div>
+    </section>
+  );
 };
-export default Gallery;
+
+export default Lookbook;
