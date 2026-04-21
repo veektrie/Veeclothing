@@ -8,10 +8,10 @@ type Category = 'all' | 'corporate' | 'bespoke' | 'kaftan' | 'accessories';
 const products = [
   { id: 1, name: 'The Executive Blazer',       price: '₦85,000',   cat: 'corporate', src: '/cop01.jpg',    tag: 'BESTSELLER', desc: 'Structured authority. Engineered for the boardroom.' },
   { id: 2, name: 'The Boardroom Suit',          price: '₦145,000',  cat: 'bespoke',   src: '/suit01.jpg',   tag: 'SIGNATURE',  desc: 'Two-piece. Full canvas. Hand-finished lapels.' },
-  { id: 3, name: 'Premium Kaftan — Grand Boubou', price: '₦120,000', cat: 'kaftan',  src: '/kaftan01.jpg', tag: 'NEW',        desc: 'Flowing silhouette. Premium damask fabric.' },
+  { id: 3, name: 'Premium Kaftan — Grand Boubou', price: '₦120,000', cat: 'kaftan',  src: '/kaftan01.webp', tag: 'NEW',        desc: 'Flowing silhouette. Premium damask fabric.' },
   { id: 4, name: 'Corporate Uniform Set',       price: 'From ₦45,000 / staff', cat: 'corporate', src: '/cop02.png', tag: 'CORPORATE', desc: 'Minimum 5 units. Brand alignment guaranteed.' },
-  { id: 5, name: 'Agbada — Full Set',           price: '₦180,000',  cat: 'bespoke',   src: '/kaftan02.jpg', tag: 'BESPOKE',   desc: 'Three-piece. Aso-oke or Damask. Commission only.' },
-  { id: 6, name: 'The Senator Kaftan',          price: '₦65,000',   cat: 'kaftan',    src: '/kaftan05.jpg', tag: null,         desc: 'Clean lines. Premium linen. Ready in 2 weeks.' },
+  { id: 5, name: 'Agbada — Full Set',           price: '₦180,000',  cat: 'bespoke',   src: '/kaftan02.webp', tag: 'BESPOKE',   desc: 'Three-piece. Aso-oke or Damask. Commission only.' },
+  { id: 6, name: 'The Senator Kaftan',          price: '₦65,000',   cat: 'kaftan',    src: '/kaftan05.jpg', tag: null,         desc: 'Clean lines. Premium linen. Ready in 10 working days.' },
   { id: 7, name: 'Executive Shirt — Embroidered', price: '₦38,000', cat: 'bespoke',   src: '/cop04.png',   tag: null,         desc: 'Bespoke embroidery on premium cotton poplin.' },
   { id: 8, name: 'Staff Polo — Branded',        price: 'From ₦15,000 / unit', cat: 'corporate', src: '/cop05.jpg', tag: null,  desc: 'Bulk production. Custom colours and logo.' },
   { id: 9, name: 'Luxury Suit — Linen',         price: '₦130,000',  cat: 'bespoke',   src: '/suit02.png',  tag: 'LIMITED',   desc: 'Italian linen. Two-button slim. Summer edition.' },

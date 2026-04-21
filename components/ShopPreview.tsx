@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 const previews = [
   { src: '/suit01.jpg',   label: 'Executive Suits',   tag: 'SIGNATURE'  },
-  { src: '/kaftan01.jpg', label: 'Premium Kaftans',   tag: 'BESTSELLER' },
+  { src: '/kaftan01.webp', label: 'Premium Kaftans',   tag: 'BESTSELLER' },
   { src: '/cop01.jpg',    label: 'Corporate Blazers', tag: 'CORPORATE'  },
 ];
 

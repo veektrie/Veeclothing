@@ -16,7 +16,7 @@ const faqs = {
     },
     {
       q: 'What is the typical turnaround time for corporate orders?',
-      a: 'Standard corporate orders (10–50 units) are completed within 3–4 weeks. Large-scale orders (50–500 units) require 6–8 weeks. Rush production is available for urgent events at an additional surcharge.',
+      a: 'All corporate uniform orders are completed within a minimum of 10 working days. Bulk orders of 50+ units may require up to 15 working days. Rush production is available for urgent events at an additional surcharge. On-site fittings in Lagos and Abuja are arranged before production begins.',
     },
     {
       q: 'Do you offer corporate gifting services?',
@@ -34,7 +34,7 @@ const faqs = {
     },
     {
       q: 'How long does a bespoke garment take to complete?',
-      a: 'A standard bespoke commission — suit, kaftan, or agbada — takes 4–6 weeks from the consultation to final delivery. Rushed commissions for imminent occasions may be accommodated depending on our schedule.',
+      a: 'A bespoke commission — suit, kaftan, or agbada — is completed within a minimum of 10 working days from the consultation. Rushed commissions for imminent occasions may be accommodated depending on our current schedule.',
     },
     {
       q: 'What fabrics do you work with?',

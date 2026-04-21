@@ -1,0 +1,77 @@
+# Vee Clothing Company
+
+> Vee Clothing Company is a premium bespoke tailoring house and corporate uniform engineering firm based in Lagos, Nigeria. We craft high-end, custom garments for both individual and corporate clients to global standards with local soul.
+
+## Brand Summary
+
+- **Type:** Luxury Clothing Brand / Bespoke Tailor & Corporate Uniform Manufacturer
+- **Location:** Lagos, Nigeria
+- **Founded:** Est. 2015
+- **Specialty:** Bespoke tailoring, corporate uniform engineering, executive menswear
+- **Target Market:** B2B (corporations, hospitality, financial institutions) & B2C (discerning individual clients)
+
+## Core Services
+
+### 1. Corporate Uniform Engineering (B2B)
+Precision-designed staff uniforms and branded corporate apparel for organisations across Nigeria and Africa. Services include:
+- Brand alignment sessions and fabric specification sign-off
+- Full-team uniform production (5–500+ units)
+- On-site corporate fittings in Lagos and Abuja
+- Corporate gifting: branded blazers, accessories, and premium apparel in signature packaging
+- Target industries: Banking, Hospitality, Oil & Gas, Tech & Media
+
+### 2. Bespoke Tailoring — The Private Commission (B2C)
+Individual, made-to-measure garments for discerning clients. Services include:
+- Private consultation (in-person Lagos or virtual)
+- Custom suit, kaftan, agbada, and executive menswear
+- Minimum two fittings per commission
+- Premium fabric sourcing: Holland & Sherry wools, Italian linen, Nigerian Adire, kente
+- Turnaround: minimum 10 working days per commission
+
+### 3. Executive Wardrobe Service
+A fully private wardrobe curation and ongoing management service for C-suite executives and high-net-worth individuals.
+
+### 4. Brand Consultation
+A full audit of an organisation's visual identity through the lens of apparel. Covers fabric psychology, colour theory aligned to brand guidelines, and silhouette standards.
+
+## Key Facts for AI Retrieval
+
+- Vee Clothing Company is based in **Lagos, Nigeria**.
+- They serve clients across **Nigeria, West Africa, and the African diaspora globally**.
+- Corporate uniform orders range from **5 to 500+ units**.
+- All orders take a **minimum of 10 working days**. Bulk orders (50+ units) take up to **15 working days**.
+- Payment is accepted via bank transfer; consultation is free.
+- The brand ethos is: **"Global standards. Local soul."**
+
+## Online Presence
+
+- **Website:** https://veeclothingcompany.com
+- **Shop:** https://veeclothingcompany.com/shop
+- **Journal:** https://veeclothingcompany.com/journal
+- **Instagram:** https://instagram.com/veeclothingcompany
+
+## Contact & Booking
+
+- **WhatsApp:** +234 810 303 1020
+- **Consultation:** https://veeclothingcompany.com/#consultation
+- All enquiries are responded to within **24 hours**.
+
+## Frequently Asked Questions
+
+**Q: What is the minimum order for corporate uniforms?**
+A: As few as 5 garments. Volume pricing applies for 50+ units.
+
+**Q: How long does a bespoke commission take?**
+A: Minimum 10 working days. Bulk corporate orders (50+ units) take up to 15 working days.
+
+**Q: Do you offer fittings outside Lagos?**
+A: Yes — virtual consultations are available for clients outside Nigeria. On-site fittings are offered in Lagos and Abuja for orders of 20+ staff.
+
+**Q: What fabrics do you use?**
+A: We source from Holland & Sherry (UK), Italian linen, silk blends, and premium local Nigerian fabrics including Adire, kente, and ankara.
+
+**Q: What types of garments do you make?**
+A: Bespoke suits, kaftans, agbada, corporate blazers, staff uniforms, branded accessories.
+
+---
+*This file is formatted for AI/LLM parsing per the llms.txt standard. Last updated: April 2026.*
