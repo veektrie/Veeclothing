@@ -125,13 +125,13 @@ const Hero = () => {
         }}>
           {isCorporate ? (
             <>
-              Uniforming Excellence:<br />
-              <em style={{ color: '#D4AF37', fontStyle: 'italic' }}>Corporate Identity Engineered.</em>
+              Corporate Identity,<br />
+              <em style={{ color: '#D4AF37', fontStyle: 'italic' }}>Tailored for Scale.</em>
             </>
           ) : (
             <>
-              The Private Commission:<br />
-              <em style={{ color: '#D4AF37', fontStyle: 'italic' }}>Bespoke for the Discerning Individual.</em>
+              Exclusively<br />
+              <em style={{ color: '#D4AF37', fontStyle: 'italic' }}>Yours.</em>
             </>
           )}
         </h1>
@@ -147,8 +147,8 @@ const Hero = () => {
           fontFamily: 'Inter, sans-serif',
         }}>
           {isCorporate
-            ? 'From branded blazers for 500 staff to executive wardrobe programmes — we engineer visual authority at scale, without sacrificing precision.'
-            : 'One garment. Crafted for one person. From the first consultation to the final press — a commission as unique as the individual wearing it.'}
+            ? 'From the boardroom to the front line, we design cohesive wardrobes that command respect. Professional outfitting for 5 to 500, delivered with the uncompromising soul of bespoke tailoring.'
+            : 'The art of the individual. Every stitch is a deliberate choice, resulting in a commission that exists for no one else. This is bespoke, redefined for the modern gentleman.'}
         </p>
 
         {/* CTAs */}
