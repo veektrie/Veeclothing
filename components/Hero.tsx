@@ -49,7 +49,7 @@ const Hero = () => {
         willChange: 'transform', height: '115%', top: '-7.5%',
         opacity: isCorporate ? 0 : 1, transition: 'opacity 0.7s ease', zIndex: 0,
       }}>
-        <Image src="/kaftan07.jpeg"
+        <Image src="/bespoke-hero.png"
           alt="Bespoke tailoring private commission custom suit Lagos Nigeria discerning gentleman"
           fill priority sizes="100vw" className="object-cover object-center"
           style={{ filter: 'grayscale(20%)' }}
@@ -60,18 +60,19 @@ const Hero = () => {
       {/* ── Glassmorphic Self-Identifier Toggle ── */}
       <div style={{
         position: 'absolute', top: 104, left: '50%', transform: 'translateX(-50%)',
-        zIndex: 20, display: 'flex',
+        zIndex: 20, display: 'flex', flexWrap: 'nowrap',
         background: 'rgba(20,20,30,0.3)', backdropFilter: 'blur(18px)',
         WebkitBackdropFilter: 'blur(18px)',
         border: '1px solid rgba(212,175,55,0.2)', padding: 3,
+        width: 'auto', whiteSpace: 'nowrap'
       }}>
         {(['corporate', 'bespoke'] as Mode[]).map((m) => (
           <button
             key={m}
             onClick={() => switchMode(m)}
             style={{
-              padding: '10px 28px',
-              fontSize: 9,
+              padding: 'clamp(8px, 1.5vw, 10px) clamp(16px, 3vw, 28px)',
+              fontSize: 'clamp(8px, 1.5vw, 9px)',
               fontFamily: 'Inter, sans-serif',
               fontWeight: 500,
               letterSpacing: '0.26em',
