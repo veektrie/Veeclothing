@@ -99,6 +99,7 @@ const ReviewCarousel = () => {
               background: 'rgba(26,82,118,0.08)',
               border: '1px solid rgba(26,82,118,0.15)',
               backdropFilter: 'blur(8px)',
+              borderRadius: 6,
             }}
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
@@ -127,6 +128,7 @@ const ReviewCarousel = () => {
                 border: '1px solid rgba(212,175,55,0.18)',
                 padding: '2.5rem 3rem',
                 maxWidth: 720,
+                borderRadius: 16,
               }}
             >
               <StarRating count={reviews[current].rating} />
@@ -185,6 +187,7 @@ const ReviewCarousel = () => {
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
                 color: '#D4AF37',
+                borderRadius: 4,
               }}
               onMouseEnter={e => { (e.currentTarget).style.background = 'rgba(212,175,55,0.1)'; }}
               onMouseLeave={e => { (e.currentTarget).style.background = 'transparent'; }}
@@ -209,6 +212,7 @@ const ReviewCarousel = () => {
                     cursor: 'pointer',
                     transition: 'all 0.35s ease',
                     padding: 0,
+                    borderRadius: 4,
                   }}
                 />
               ))}
@@ -225,6 +229,7 @@ const ReviewCarousel = () => {
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
                 color: '#D4AF37',
+                borderRadius: 4,
               }}
               onMouseEnter={e => { (e.currentTarget).style.background = 'rgba(212,175,55,0.1)'; }}
               onMouseLeave={e => { (e.currentTarget).style.background = 'transparent'; }}

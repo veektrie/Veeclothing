@@ -19,21 +19,22 @@ const Navbar = () => {
       className="navbar"
       style={{
         background: scrolled
-          ? 'rgba(26, 82, 118, 0.75)'
+          ? 'rgba(26, 82, 118, 0.92)'
           : 'rgba(26, 82, 118, 0.45)',
+        height: scrolled ? '70px' : '85px',
       }}
     >
       <div className="navbar-inner">
 
         {/* Logo */}
-        <Link href="/" className="flex items-center">
+        <Link href="/" className="flex items-center transition-all duration-500 hover:opacity-80">
           <Image
             src="/VCC-white.png"
             alt="Vee Clothing Company"
-            width={130}
-            height={40}
+            width={scrolled ? 95 : 115}
+            height={36}
             className="object-contain"
-            style={{ height: 'auto' }}
+            style={{ height: 'auto', transition: 'width 0.5s ease' }}
             priority
           />
         </Link>

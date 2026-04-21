@@ -145,6 +145,7 @@ const Contact = () => {
           <div style={{
             display: 'inline-flex', border: '1px solid rgba(212,175,55,0.2)',
             padding: 3, background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(10px)',
+            borderRadius: 8,
           }}>
             {(['corporate', 'individual'] as ServiceType[]).map((t) => (
               <button
@@ -158,6 +159,7 @@ const Contact = () => {
                   background: serviceType === t ? 'rgba(212,175,55,0.12)' : 'transparent',
                   border: serviceType === t ? '1px solid rgba(212,175,55,0.4)' : '1px solid transparent',
                   color: serviceType === t ? '#D4AF37' : 'rgba(255,255,255,0.35)',
+                  borderRadius: 6,
                   transition: 'all 0.3s ease',
                 }}
               >
@@ -177,6 +179,7 @@ const Contact = () => {
             border: '1px solid rgba(212,175,55,0.3)',
             padding: '4rem 3rem',
             textAlign: 'center',
+            borderRadius: 16,
             animation: 'fadeIn 0.6s ease',
           }}>
             <div style={{ marginBottom: 24 }}>
@@ -204,7 +207,7 @@ const Contact = () => {
                 background: 'none', border: '1px solid rgba(212,175,55,0.35)',
                 color: 'rgba(212,175,55,0.65)', padding: '10px 24px',
                 fontSize: 10, letterSpacing: '0.25em', textTransform: 'uppercase',
-                cursor: 'pointer', transition: 'all 0.3s ease',
+                cursor: 'pointer', borderRadius: 4, transition: 'all 0.3s ease',
               }}
               onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = '#D4AF37'; (e.currentTarget as HTMLElement).style.color = '#D4AF37'; }}
               onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(212,175,55,0.35)'; (e.currentTarget as HTMLElement).style.color = 'rgba(212,175,55,0.65)'; }}
@@ -298,6 +301,7 @@ const Contact = () => {
                 fontSize: 11, letterSpacing: '0.3em', textTransform: 'uppercase',
                 cursor: sending ? 'not-allowed' : 'pointer',
                 transition: 'all 0.35s ease', display: 'flex',
+                borderRadius: 4,
                 alignItems: 'center', justifyContent: 'center', gap: 10,
               }}
               onMouseEnter={e => { if (!sending) { (e.currentTarget as HTMLElement).style.background = 'rgba(212,175,55,0.15)'; (e.currentTarget as HTMLElement).style.color = '#D4AF37'; }}}

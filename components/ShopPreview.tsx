@@ -56,6 +56,7 @@ const ShopPreview = () => (
           backdropFilter: 'blur(10px)',
           padding: '1.2rem 1.8rem',
           maxWidth: 260,
+          borderRadius: 8,
         }}>
           <span style={{
             fontSize: 8, letterSpacing: '0.3em', textTransform: 'uppercase',
@@ -89,6 +90,7 @@ const ShopPreview = () => (
               position: 'relative', overflow: 'hidden',
               aspectRatio: '3/4', cursor: 'pointer',
               border: '1px solid rgba(212,175,55,0.1)',
+              borderRadius: 16,
             }}
           >
             <Image
@@ -109,6 +111,7 @@ const ShopPreview = () => (
               padding: '4px 10px',
               background: i === 1 ? '#D4AF37' : 'rgba(26,82,118,0.7)',
               backdropFilter: 'blur(8px)',
+              borderRadius: 4,
             }}>
               <span style={{
                 fontSize: 8, letterSpacing: '0.25em',

@@ -81,7 +81,9 @@ const TrustBar = () => {
             <div style={{
               width: 36, height: 36, position: 'relative',
               filter: 'grayscale(100%) contrast(1.1) brightness(0.9)', opacity: 0.6,
-              transition: 'all 0.4s ease'
+              transition: 'all 0.4s ease',
+              borderRadius: 6,
+              overflow: 'hidden'
             }}
               className="brand-logo-wrapper"
             >

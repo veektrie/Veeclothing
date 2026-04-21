@@ -84,6 +84,7 @@ const FAQSection = () => {
           display: 'inline-flex', marginBottom: '3rem',
           border: '1px solid rgba(212,175,55,0.25)', padding: 3,
           background: 'rgba(255,255,255,0.5)', backdropFilter: 'blur(10px)',
+          borderRadius: 8,
         }}>
           {(['corporate', 'bespoke'] as Tab[]).map((t) => (
             <button
@@ -97,6 +98,7 @@ const FAQSection = () => {
                 background: tab === t ? '#D4AF37' : 'transparent',
                 border: 'none', transition: 'all 0.35s ease',
                 fontWeight: tab === t ? 500 : 400,
+                borderRadius: 6,
               }}
             >
               {t === 'corporate' ? 'Corporate Clients' : 'Individual Clients'}
@@ -144,6 +146,7 @@ const FAQSection = () => {
                       border: '1px solid rgba(212,175,55,0.4)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
                       color: '#D4AF37', transition: 'transform 0.35s ease',
+                      borderRadius: 4,
                       transform: openIdx === i ? 'rotate(45deg)' : 'rotate(0deg)',
                     }}>
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

@@ -64,7 +64,8 @@ const Hero = () => {
         background: 'rgba(20,20,30,0.3)', backdropFilter: 'blur(18px)',
         WebkitBackdropFilter: 'blur(18px)',
         border: '1px solid rgba(212,175,55,0.2)', padding: 3,
-        width: 'auto', whiteSpace: 'nowrap'
+        width: 'auto', whiteSpace: 'nowrap',
+        borderRadius: 8,
       }}>
         {(['corporate', 'bespoke'] as Mode[]).map((m) => (
           <button
@@ -82,6 +83,7 @@ const Hero = () => {
               border: mode === m ? '1px solid rgba(212,175,55,0.45)' : '1px solid transparent',
               cursor: 'pointer',
               transition: 'all 0.35s ease',
+              borderRadius: 6,
             }}
           >
             {m === 'corporate' ? 'For Business' : 'For Individuals'}
@@ -105,6 +107,7 @@ const Hero = () => {
           padding: '6px 16px',
           background: 'rgba(26,82,118,0.28)', backdropFilter: 'blur(10px)',
           border: '1px solid rgba(212,175,55,0.22)', width: 'fit-content',
+          borderRadius: 4,
         }}>
           <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#D4AF37', display: 'inline-block' }} />
           <span style={{ fontSize: 9, letterSpacing: '0.35em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.65)', fontFamily: 'Inter, sans-serif' }}>
@@ -163,6 +166,7 @@ const Hero = () => {
                   border: '1px solid rgba(212,175,55,0.55)', color: '#D4AF37',
                   fontFamily: 'Inter, sans-serif', fontSize: 10,
                   letterSpacing: '0.25em', textTransform: 'uppercase', cursor: 'pointer',
+                  borderRadius: 4,
                   transition: 'all 0.35s ease',
                 }}
                   onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(212,175,55,0.22)'; }}
@@ -175,20 +179,6 @@ const Hero = () => {
               <Link href="#corporate">
                 <button className="btn-ghost-navy">View Corporate Services</button>
               </Link>
-              <a href="/VCC-Corporate-Lookbook.pdf" download style={{
-                display: 'inline-flex', alignItems: 'center', gap: 8, padding: '15px 22px',
-                fontFamily: 'Inter, sans-serif', fontSize: 10, letterSpacing: '0.2em',
-                textTransform: 'uppercase', color: 'rgba(255,255,255,0.4)',
-                background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(8px)',
-                border: '1px solid rgba(255,255,255,0.10)', cursor: 'pointer',
-                transition: 'all 0.35s ease', textDecoration: 'none',
-              }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#D4AF37'; (e.currentTarget as HTMLElement).style.borderColor = 'rgba(212,175,55,0.35)'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.4)'; (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.10)'; }}
-              >
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                Download Lookbook
-              </a>
             </>
           ) : (
             <>
@@ -199,6 +189,7 @@ const Hero = () => {
                   border: '1px solid rgba(212,175,55,0.55)', color: '#D4AF37',
                   fontFamily: 'Inter, sans-serif', fontSize: 10,
                   letterSpacing: '0.25em', textTransform: 'uppercase', cursor: 'pointer',
+                  borderRadius: 4,
                   transition: 'all 0.35s ease',
                 }}
                   onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(212,175,55,0.22)'; }}
