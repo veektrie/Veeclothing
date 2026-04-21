@@ -28,11 +28,11 @@ const Navbar = () => {
         {/* Logo */}
         <Link href="/" className="flex items-center">
           <Image
-            src="/VCC.png"
+            src="/VCC1.png"
             alt="Vee Clothing Company"
             width={130}
             height={40}
-            className="object-contain brightness-0 invert opacity-90"
+            className="object-contain brightness-0 invert"
             style={{ height: 'auto' }}
             priority
           />
@@ -40,11 +40,11 @@ const Navbar = () => {
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex items-center gap-8">
-          <Link href="#corporate" className="nav-link">Corporate</Link>
-          <Link href="#bespoke"   className="nav-link">Bespoke</Link>
-          <Link href="#collection" className="nav-link">The Shop</Link>
-          <Link href="#journal"   className="nav-link">The Journal</Link>
-          <Link href="#consultation" className="nav-link">Contact</Link>
+          <Link href="/#corporate"     className="nav-link">Corporate</Link>
+          <Link href="/#bespoke"       className="nav-link">Bespoke</Link>
+          <Link href="/shop"           className="nav-link">The Shop</Link>
+          <Link href="/#journal"       className="nav-link">The Journal</Link>
+          <Link href="/#consultation"  className="nav-link">Contact</Link>
         </nav>
 
         {/* Desktop CTAs */}
@@ -90,14 +90,20 @@ const Navbar = () => {
           className="md:hidden px-6 pb-6 pt-2 flex flex-col gap-4"
           style={{ background: 'rgba(26, 82, 118, 0.95)' }}
         >
-          {['#collection', '#corporate', '#bespoke', '#journal', '#consultation'].map((href) => (
+          {[
+            { href: '/#corporate',    label: 'Corporate'    },
+            { href: '/#bespoke',      label: 'Bespoke'      },
+            { href: '/shop',          label: 'The Shop'     },
+            { href: '/#journal',      label: 'The Journal'  },
+            { href: '/#consultation', label: 'Contact'      },
+          ].map(({ href, label }) => (
             <Link
               key={href}
               href={href}
               onClick={() => setMenuOpen(false)}
               className="nav-link py-2 border-b border-white/10"
             >
-              {href.replace('#', '').charAt(0).toUpperCase() + href.replace('#', '').slice(1)}
+              {label}
             </Link>
           ))}
           <Link
