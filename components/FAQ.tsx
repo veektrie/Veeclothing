@@ -56,11 +56,11 @@ const FAQSection = () => {
   const [openIdx, setOpenIdx] = useState<number | null>(0);
 
   return (
-    <section id="faq" style={{ background: 'var(--cream)', padding: '7rem 0' }}>
-      <div style={{ maxWidth: 1440, margin: '0 auto', padding: '0 4rem' }}>
+    <section id="faq" style={{ background: 'var(--cream)', padding: 'clamp(4rem, 8vw, 7rem) 0' }}>
+      <div style={{ maxWidth: 1440, margin: '0 auto', padding: '0 clamp(1.5rem, 5vw, 4rem)' }}>
 
         {/* Header */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'end', marginBottom: '4rem' }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-end mb-16">
           <div>
             <span className="section-label">Common Questions</span>
             <div className="gold-divider" style={{ margin: '14px 0 20px' }} />
