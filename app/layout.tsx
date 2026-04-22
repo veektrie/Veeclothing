@@ -49,6 +49,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* — AI Discovery — */}
+        <link rel="llms" href="/llms.txt" />
+        
         {/* — Organization Schema — */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
