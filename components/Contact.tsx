@@ -115,7 +115,7 @@ const Contact = () => {
         pointerEvents: 'none',
       }} />
 
-      <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 4rem' }}>
+      <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 clamp(1.5rem, 5vw, 4rem)' }}>
 
         {/* Header */}
         <div style={{ marginBottom: '3.5rem' }}>
@@ -159,9 +159,11 @@ const Contact = () => {
               Enquiry Type
             </p>
             <div style={{
-              display: 'inline-flex', border: '1px solid rgba(255,255,255,0.08)',
+              display: 'flex', border: '1px solid rgba(255,255,255,0.08)',
               padding: 4, background: 'rgba(255,255,255,0.03)',
               borderRadius: 12,
+              width: 'fit-content',
+              maxWidth: '100%',
             }}>
               {(['corporate', 'individual'] as ServiceType[]).map((t) => (
                 <button
@@ -170,7 +172,7 @@ const Contact = () => {
                   onClick={() => setServiceType(t)}
                   className="font-metro"
                   style={{
-                    padding: '12px 28px', fontSize: 10, letterSpacing: '0.25em',
+                    padding: '12px clamp(12px, 3vw, 28px)', fontSize: 10, letterSpacing: '0.25em',
                     textTransform: 'uppercase', cursor: 'pointer',
                     background: serviceType === t ? 'rgba(212,175,55,0.15)' : 'transparent',
                     border: '1px solid transparent',
@@ -179,6 +181,7 @@ const Contact = () => {
                     borderRadius: 10,
                     transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                     fontWeight: serviceType === t ? 700 : 400,
+                    flex: '1 1 auto',
                   }}
                 >
                   {t === 'corporate' ? 'Corporate' : 'Individual'}
