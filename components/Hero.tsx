@@ -2,228 +2,346 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import TrustBar from './TrustBar';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 type Mode = 'corporate' | 'bespoke';
 
 const Hero = () => {
-  const [mode, setMode]                       = useState<Mode>('corporate');
+  const [mode, setMode] = useState<Mode>('corporate');
   const [isTransitioning, setIsTransitioning] = useState(false);
   const corporateRef = useRef<HTMLDivElement>(null);
-  const bespokeRef   = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY;
-      if (corporateRef.current) corporateRef.current.style.transform = `translateY(${y * 0.12}px)`;
-      if (bespokeRef.current)   bespokeRef.current.style.transform   = `translateY(${y * 0.08}px)`;
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  const switchMode = (next: Mode) => {
-    if (next === mode) return;
-    setIsTransitioning(true);
-    setTimeout(() => { setMode(next); setIsTransitioning(false); }, 350);
-  };
+  const bespokeRef = useRef<HTMLDivElement>(null);
+  const blurOverlayRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLDivElement>(null);
+  const highlightRef = useRef<HTMLDivElement>(null);
 
   const isCorporate = mode === 'corporate';
 
-  return (
-    <section style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden' }}>
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.to(corporateRef.current, {
+        y: '5%',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: 'section',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
+      gsap.to(bespokeRef.current, {
+        y: '3%',
+        ease: 'none',
+        scrollTrigger: {
+          trigger: 'section',
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
+    });
+    return () => ctx.revert();
+  }, []);
 
-      {/* Corporate BG */}
+  useEffect(() => {
+    if (highlightRef.current && toggleRef.current) {
+      const activeBtn = toggleRef.current.children[isCorporate ? 1 : 2] as HTMLElement;
+      if (activeBtn) {
+        gsap.to(highlightRef.current, {
+          x: activeBtn.offsetLeft,
+          width: activeBtn.offsetWidth,
+          duration: 0.4,
+          ease: 'power3.inOut',
+        });
+      }
+    }
+  }, [mode, isCorporate]);
+
+  const switchMode = (next: Mode) => {
+    if (next === mode || isTransitioning) return;
+    setIsTransitioning(true);
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        setMode(next);
+        setIsTransitioning(false);
+        gsap.to(blurOverlayRef.current, {
+          opacity: 0,
+          backdropFilter: 'blur(0px)',
+          duration: 0.5,
+          ease: 'power2.out',
+        });
+        gsap.fromTo(
+          contentRef.current,
+          { y: 15, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.4, ease: 'power3.out' }
+        );
+      },
+    });
+
+    tl.to(blurOverlayRef.current, {
+      opacity: 1,
+      backdropFilter: 'blur(40px)',
+      duration: 0.25,
+      ease: 'power2.inOut',
+    });
+
+    tl.to(contentRef.current, {
+      opacity: 0,
+      y: -5,
+      duration: 0.15,
+      ease: 'power2.in',
+    }, 0);
+
+    tl.to([corporateRef.current, bespokeRef.current], {
+      scale: 1.02,
+      filter: 'contrast(1.1) brightness(1.05)',
+      duration: 0.25,
+      ease: 'power2.inOut',
+    }, 0);
+
+    tl.to([corporateRef.current, bespokeRef.current], {
+      scale: 1,
+      filter: 'contrast(1) brightness(1)',
+      duration: 0.25,
+      delay: 0.25,
+    });
+  };
+
+  return (
+    <section style={{ 
+      position: 'relative', 
+      minHeight: '120vh', // Increased to accommodate card + trust bar
+      display: 'flex', 
+      flexDirection: 'column',
+      alignItems: 'center', 
+      overflow: 'hidden',
+      background: '#000',
+      paddingTop: '160px' // Added padding to ensure navbar is not on the hero
+    }}>
+      
+      {/* Background Images - Extended to fill the entire tall section */}
       <div ref={corporateRef} className="absolute inset-0" style={{
-        willChange: 'transform', height: '115%', top: '-7.5%',
-        opacity: isCorporate ? 1 : 0, transition: 'opacity 0.7s ease', zIndex: 0,
+        willChange: 'transform', height: '110%', top: '-5%',
+        opacity: isCorporate ? 1 : 0, transition: 'opacity 0.8s ease', zIndex: 0,
       }}>
         <Image src="/corporate-hero.png"
-          alt="Vee Clothing Company corporate executive menswear Lagos uniform engineering"
+          alt="Corporate branding"
           fill priority sizes="100vw" className="object-cover object-top"
         />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(26,82,118,0.88) 0%, rgba(26,82,118,0.50) 55%, rgba(28,28,30,0.78) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,1) 100%)' }} />
       </div>
 
-      {/* Bespoke BG */}
       <div ref={bespokeRef} className="absolute inset-0" style={{
-        willChange: 'transform', height: '115%', top: '-7.5%',
-        opacity: isCorporate ? 0 : 1, transition: 'opacity 0.7s ease', zIndex: 0,
+        willChange: 'transform', height: '110%', top: '-5%',
+        opacity: isCorporate ? 0 : 1, transition: 'opacity 0.8s ease', zIndex: 0,
       }}>
         <Image src="/bespoke-hero.png"
-          alt="Bespoke tailoring private commission custom suit Lagos Nigeria discerning gentleman"
+          alt="Bespoke tailoring"
           fill priority sizes="100vw" className="object-cover object-center"
-          style={{ filter: 'grayscale(20%)' }}
+          style={{ filter: 'grayscale(10%)' }}
         />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(135deg, rgba(28,28,30,0.92) 0%, rgba(41,40,52,0.62) 55%, rgba(26,82,118,0.42) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.8) 70%, rgba(0,0,0,1) 100%)' }} />
       </div>
 
-      {/* ── Glassmorphic Self-Identifier Toggle ── */}
+      <div
+        ref={blurOverlayRef}
+        style={{
+          position: 'absolute',
+          inset: 0,
+          zIndex: 15,
+          opacity: 0,
+          background: 'rgba(0,0,0,0.1)',
+          backdropFilter: 'blur(0px)',
+          pointerEvents: 'none',
+          willChange: 'backdrop-filter, opacity',
+        }}
+      />
+
+      {/* ── Main Hero Card ── */}
       <div style={{
-        position: 'absolute', top: 104, left: '50%', transform: 'translateX(-50%)',
-        zIndex: 20, display: 'flex', flexWrap: 'nowrap',
-        background: 'rgba(20,20,30,0.3)', backdropFilter: 'blur(18px)',
-        WebkitBackdropFilter: 'blur(18px)',
-        border: '1px solid rgba(212,175,55,0.2)', padding: 3,
-        width: 'auto', whiteSpace: 'nowrap',
-        borderRadius: 8,
+        position: 'relative',
+        zIndex: 10,
+        width: '95%',
+        maxWidth: '1400px',
+        minHeight: '70vh',
+        background: 'rgba(255, 255, 255, 0.03)',
+        backdropFilter: 'blur(40px)',
+        WebkitBackdropFilter: 'blur(40px)',
+        border: '1px solid rgba(255, 255, 255, 0.08)',
+        borderRadius: 'clamp(24px, 5vw, 48px)',
+        display: 'flex',
+        flexDirection: 'column',
+        boxShadow: '0 40px 100px -20px rgba(0,0,0,0.6)',
+        marginBottom: '60px' // Space before trust bar
       }}>
-        {(['corporate', 'bespoke'] as Mode[]).map((m) => (
-          <button
-            key={m}
-            onClick={() => switchMode(m)}
+        
+        {/* Card Content */}
+        <div 
+          ref={contentRef}
+          style={{
+            flex: 1,
+            padding: 'clamp(2.5rem, 8vw, 6rem)',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            textAlign: 'center',
+            width: '100%'
+          }}
+        >
+          {/* Tag */}
+          <div style={{
+            display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 24,
+            padding: '8px 20px', background: 'rgba(212,175,55,0.08)',
+            border: '1px solid rgba(212,175,55,0.2)', borderRadius: '999px', width: 'fit-content'
+          }}>
+            <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#D4AF37' }} />
+            <span style={{ fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#D4AF37', fontWeight: 600 }}>
+              {isCorporate ? 'Corporate Identity' : 'Private Commission'}
+            </span>
+          </div>
+
+          <h1 style={{
+            fontFamily: 'Cormorant Garamond, serif',
+            fontWeight: 300,
+            fontSize: 'clamp(2.8rem, 7vw, 7.5rem)',
+            color: '#fff',
+            lineHeight: 1.05,
+            letterSpacing: '-0.02em',
+            marginBottom: 32,
+            maxWidth: '1100px'
+          }}>
+            {isCorporate ? (
+              <>Corporate Identity,<br /><em style={{ color: '#D4AF37', fontStyle: 'italic' }}>Tailored for Scale.</em></>
+            ) : (
+              <>Exclusively<br /><em style={{ color: '#D4AF37', fontStyle: 'italic' }}>Yours.</em></>
+            )}
+          </h1>
+
+          {/* Mode Toggle */}
+          <div 
+            ref={toggleRef}
             style={{
-              padding: 'clamp(8px, 1.5vw, 10px) clamp(16px, 3vw, 28px)',
-              fontSize: 'clamp(8px, 1.5vw, 9px)',
-              fontFamily: 'Inter, sans-serif',
-              fontWeight: 500,
-              letterSpacing: '0.26em',
-              textTransform: 'uppercase',
-              color: mode === m ? '#D4AF37' : 'rgba(255,255,255,0.4)',
-              background: mode === m ? 'rgba(212,175,55,0.10)' : 'transparent',
-              border: mode === m ? '1px solid rgba(212,175,55,0.45)' : '1px solid transparent',
-              cursor: 'pointer',
-              transition: 'all 0.35s ease',
-              borderRadius: 6,
+              display: 'flex', flexWrap: 'nowrap',
+              background: 'rgba(255,255,255,0.04)',
+              backdropFilter: 'blur(12px)',
+              border: '1px solid rgba(255,255,255,0.1)', padding: 4,
+              borderRadius: '999px',
+              position: 'relative',
+              marginBottom: 40,
+              zIndex: 20
             }}
           >
-            {m === 'corporate' ? 'For Business' : 'For Individuals'}
-          </button>
-        ))}
-      </div>
+            <div 
+              ref={highlightRef}
+              style={{
+                position: 'absolute', top: 4, bottom: 4, left: 0,
+                background: 'rgba(212,175,55,0.15)', border: '1px solid rgba(212,175,55,0.3)',
+                borderRadius: '999px', zIndex: -1, pointerEvents: 'none'
+              }}
+            />
+            {(['corporate', 'bespoke'] as Mode[]).map((m) => (
+              <button
+                key={m}
+                onClick={() => switchMode(m)}
+                style={{
+                  padding: '10px 32px',
+                  fontSize: 9,
+                  fontFamily: 'Inter, sans-serif',
+                  fontWeight: 600,
+                  letterSpacing: '0.2em',
+                  textTransform: 'uppercase',
+                  color: mode === m ? '#D4AF37' : 'rgba(255,255,255,0.3)',
+                  background: 'transparent', border: 'none', cursor: 'pointer',
+                  transition: 'all 0.35s ease', borderRadius: '999px',
+                }}
+              >
+                {m === 'corporate' ? 'Business' : 'Individual'}
+              </button>
+            ))}
+          </div>
 
-      {/* ── Content ── */}
-      <div style={{
-        position: 'relative', zIndex: 10, minHeight: '100vh',
-        display: 'flex', flexDirection: 'column', justifyContent: 'flex-end',
-        padding: 'clamp(2rem, 5vw, 5rem)', paddingTop: 160,
-        opacity: isTransitioning ? 0 : 1,
-        transform: isTransitioning ? 'translateY(10px)' : 'translateY(0)',
-        transition: 'opacity 0.35s ease, transform 0.35s ease',
-      }}>
+          <p style={{
+            color: 'rgba(255,255,255,0.65)',
+            fontSize: 'clamp(14px, 1.3vw, 19px)',
+            fontWeight: 300,
+            maxWidth: '620px',
+            lineHeight: 1.8,
+            marginBottom: 50,
+            fontFamily: 'Inter, sans-serif',
+          }}>
+            {isCorporate
+              ? 'From the boardroom to the front line, we design cohesive wardrobes that command respect. Professional outfitting for 5 to 500, delivered with the uncompromising soul of bespoke tailoring.'
+              : 'The art of the individual. Every stitch is a deliberate choice, resulting in a commission that exists for no one else. This is bespoke, redefined for the modern gentleman.'}
+          </p>
 
-        {/* Badge */}
+          <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', justifyContent: 'center' }}>
+            <Link href="#consultation">
+              <button style={{
+                padding: '18px 40px',
+                background: '#D4AF37', color: '#000',
+                fontFamily: 'Inter, sans-serif', fontSize: 10,
+                fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase', 
+                cursor: 'pointer', borderRadius: '999px', border: 'none',
+                transition: 'all 0.4s ease',
+              }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 10px 25px rgba(212,175,55,0.3)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}
+              >
+                {isCorporate ? 'Inquire for Partnerships' : 'Book a Private Fitting'}
+              </button>
+            </Link>
+            <Link href={isCorporate ? '#corporate' : '#bespoke'}>
+              <button style={{
+                padding: '18px 40px',
+                background: 'rgba(255,255,255,0.05)', color: '#fff',
+                fontFamily: 'Inter, sans-serif', fontSize: 10,
+                fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', 
+                cursor: 'pointer', borderRadius: '999px', border: '1px solid rgba(255, 255, 255, 0.1)',
+                transition: 'all 0.4s ease',
+              }}
+              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.1)'; }}
+              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.05)'; }}
+              >
+                {isCorporate ? 'View Corporate Services' : 'Discover the Process'}
+              </button>
+            </Link>
+          </div>
+        </div>
+        
+        {/* Card Footer */}
         <div style={{
-          display: 'inline-flex', alignItems: 'center', gap: 8, marginBottom: 20,
-          padding: '6px 16px',
-          background: 'rgba(26,82,118,0.28)', backdropFilter: 'blur(10px)',
-          border: '1px solid rgba(212,175,55,0.22)', width: 'fit-content',
-          borderRadius: 4,
+          padding: '28px 48px',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          borderTop: '1px solid rgba(255, 255, 255, 0.05)',
+          background: 'rgba(255,255,255,0.01)',
+          flexWrap: 'wrap',
+          gap: 20
         }}>
-          <span style={{ width: 5, height: 5, borderRadius: '50%', background: '#D4AF37', display: 'inline-block' }} />
-          <span style={{ fontSize: 9, letterSpacing: '0.35em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.65)', fontFamily: 'Inter, sans-serif' }}>
-            {isCorporate ? 'Corporate Identity & Uniform Engineering' : 'Private Commission — Lagos, Nigeria'}
+          <div style={{ display: 'flex', gap: 24 }}>
+            {['Instagram', 'Lagos', 'Abuja'].map(item => (
+              <span key={item} style={{ fontSize: 8, letterSpacing: '0.35em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', fontWeight: 600 }}>{item}</span>
+            ))}
+          </div>
+          <span style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 11, color: '#D4AF37', letterSpacing: '0.15em', fontStyle: 'italic', opacity: 0.6 }}>
+            Premium Tailoring — Nigeria
           </span>
         </div>
-
-        {/* ── Headline — Cormorant Garamond 300, mixed-case, italic gold accent ── */}
-        <h1 style={{
-          fontFamily: 'Cormorant Garamond, serif',
-          fontWeight: 300,
-          fontSize: 'clamp(3rem, 7vw, 7rem)',
-          color: '#fff',
-          lineHeight: 1.05,
-          letterSpacing: '-0.01em',
-          maxWidth: 820,
-          marginBottom: 24,
-        }}>
-          {isCorporate ? (
-            <>
-              Corporate Identity,<br />
-              <em style={{ color: '#D4AF37', fontStyle: 'italic' }}>Tailored for Scale.</em>
-            </>
-          ) : (
-            <>
-              Exclusively<br />
-              <em style={{ color: '#D4AF37', fontStyle: 'italic' }}>Yours.</em>
-            </>
-          )}
-        </h1>
-
-        {/* Subtext — Inter 300 */}
-        <p style={{
-          color: 'rgba(255,255,255,0.6)',
-          fontSize: 'clamp(14px, 1.5vw, 17px)',
-          fontWeight: 300,
-          maxWidth: 520,
-          lineHeight: 1.8,
-          marginBottom: 40,
-          fontFamily: 'Inter, sans-serif',
-        }}>
-          {isCorporate
-            ? 'From the boardroom to the front line, we design cohesive wardrobes that command respect. Professional outfitting for 5 to 500, delivered with the uncompromising soul of bespoke tailoring.'
-            : 'The art of the individual. Every stitch is a deliberate choice, resulting in a commission that exists for no one else. This is bespoke, redefined for the modern gentleman.'}
-        </p>
-
-        {/* CTAs */}
-        <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', alignItems: 'center' }}>
-          {isCorporate ? (
-            <>
-              <Link href="#consultation">
-                <button style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 10,
-                  padding: '15px 34px',
-                  background: 'rgba(212,175,55,0.12)', backdropFilter: 'blur(12px)',
-                  border: '1px solid rgba(212,175,55,0.55)', color: '#D4AF37',
-                  fontFamily: 'Inter, sans-serif', fontSize: 10,
-                  letterSpacing: '0.25em', textTransform: 'uppercase', cursor: 'pointer',
-                  borderRadius: 4,
-                  transition: 'all 0.35s ease',
-                }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(212,175,55,0.22)'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(212,175,55,0.12)'; }}
-                >
-                  Inquire for Partnerships
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </button>
-              </Link>
-              <Link href="#corporate">
-                <button className="btn-ghost-navy">View Corporate Services</button>
-              </Link>
-            </>
-          ) : (
-            <>
-              <Link href="#consultation">
-                <button style={{
-                  display: 'inline-flex', alignItems: 'center', gap: 10, padding: '15px 34px',
-                  background: 'rgba(212,175,55,0.12)', backdropFilter: 'blur(12px)',
-                  border: '1px solid rgba(212,175,55,0.55)', color: '#D4AF37',
-                  fontFamily: 'Inter, sans-serif', fontSize: 10,
-                  letterSpacing: '0.25em', textTransform: 'uppercase', cursor: 'pointer',
-                  borderRadius: 4,
-                  transition: 'all 0.35s ease',
-                }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(212,175,55,0.22)'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(212,175,55,0.12)'; }}
-                >
-                  Book a Private Fitting
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </button>
-              </Link>
-              <Link href="#bespoke">
-                <button className="btn-ghost-navy">Discover the Process</button>
-              </Link>
-            </>
-          )}
-        </div>
-
-        {/* Vertical Est. text */}
-        <div style={{ position: 'absolute', bottom: 56, right: 'clamp(1.5rem, 4vw, 4rem)' }}>
-          <span style={{
-            fontFamily: 'Cormorant Garamond, serif', fontSize: 10,
-            color: 'rgba(212,175,55,0.4)', letterSpacing: '0.2em',
-            textTransform: 'uppercase', writingMode: 'vertical-rl',
-          }}>Est. Lagos, Nigeria</span>
-        </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div style={{
-        position: 'absolute', bottom: 28, left: '50%', transform: 'translateX(-50%)',
-        zIndex: 20, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
-      }}>
-        <span style={{ fontSize: 8, letterSpacing: '0.3em', color: 'rgba(255,255,255,0.3)', textTransform: 'uppercase', fontFamily: 'Inter, sans-serif' }}>Scroll</span>
-        <div style={{ width: 1, height: 36, background: 'linear-gradient(to bottom, rgba(212,175,55,0.5), transparent)' }} />
-      </div>
+      {/* ── Trust Bar Integrated with Hero Background ── */}
+      <TrustBar />
+
     </section>
   );
 };

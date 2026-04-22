@@ -1,7 +1,6 @@
 'use client';
 
 import Hero              from './../components/Hero';
-import TrustBar          from './../components/TrustBar';
 import CorporateAtelier  from './../components/Brand';
 import BespokeProcess    from './../components/Category';
 import ShopPreview       from './../components/ShopPreview';
@@ -15,34 +14,31 @@ export default function Home() {
   return (
     <main className="overflow-hidden">
 
-      {/* 1. Hero — corporate/bespoke toggle */}
+      {/* 1. Hero — corporate/bespoke toggle & Trust Bar inside */}
       <Hero />
 
-      {/* 2. Trust bar — client marquee */}
-      <TrustBar />
-
-      {/* 3. Corporate Atelier — B2B services */}
+      {/* 2. Corporate Atelier — B2B services */}
       <CorporateAtelier />
 
-      {/* 4. Private Commissions — directly under Corporate */}
+      {/* 3. Private Commissions — directly under Corporate */}
       <BespokeProcess />
 
-      {/* 5. Shop Preview — collection teaser → /shop */}
+      {/* 4. Shop Preview — collection teaser → /shop */}
       <ShopPreview />
 
-      {/* 6. The Journal — SEO topical authority */}
+      {/* 5. The Journal — SEO topical authority */}
       <Journal />
 
-      {/* 7. Social Proof Ribbon — merged testimonials + reviews */}
+      {/* 6. Social Proof Ribbon — merged testimonials + reviews */}
       <SocialProofRibbon />
 
-      {/* 8. FAQ — friction removal */}
+      {/* 7. FAQ — friction removal */}
       <FAQSection />
 
-      {/* 9. Concierge Portal — consultation CTA */}
+      {/* 8. Concierge Portal — consultation CTA */}
       <Contact />
 
-      {/* 10. Floating craft video widget */}
+      {/* 9. Floating craft video widget */}
       <CraftWidget />
 
     </main>

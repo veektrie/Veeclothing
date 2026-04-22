@@ -1,7 +1,10 @@
 import Navbar    from "@/components/Navbar";
 import Footer    from "@/components/Footer";
+import SmoothScroll from "@/components/SmoothScroll";
+import GSAPInitializer from "@/components/GSAPInitializer";
 import "./globals.css";
 import type { Metadata } from 'next';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://veeclothingcompany.com"),
@@ -105,11 +108,26 @@ export default function RootLayout({
             { "@type": "Question", "name": "How does Vee Clothing Company ensure corporate brand consistency?", "acceptedAnswer": { "@type": "Answer", "text": "A Brand Alignment session precedes all production. Approved colour codes, logo placements, and fabric specifications are documented and signed off. Every garment in the order is verified against the approved sample before dispatch." }}
           ]
         })}} />
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-BJ0RRN35YS"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-BJ0RRN35YS');
+          `}
+        </Script>
       </head>
       <body className="relative">
-        <Navbar />
-        {children}
-        <Footer />
+        <GSAPInitializer />
+        <SmoothScroll>
+          <Navbar />
+          {children}
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );
