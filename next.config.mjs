@@ -1,11 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    images: {
-        domains: ["cdn.imagin.studio"]
-    },
-    typescript: {
-        ignoreBuildErrors: true,
-    }
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.imagin.studio',
+      },
+    ],
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 }
 
 export default nextConfig;

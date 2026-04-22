@@ -5,8 +5,9 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { products, Product } from '../../data';
 
-export default function ProductDetailPage({ params }: { params: { id: string } }) {
-  const productId = parseInt(params.id);
+export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = React.use(params);
+  const productId = parseInt(resolvedParams.id);
   const product = products.find((p) => p.id === productId);
 
   const [selectedSize, setSelectedSize] = useState(product?.sizes?.[0] || '');

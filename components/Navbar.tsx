@@ -99,7 +99,7 @@ const Navbar = () => {
               width={scrolled ? 80 : 100}
               height={36}
               className="object-contain"
-              style={{ height: 'auto', transition: 'width 0.5s ease' }}
+              style={{ width: scrolled ? '80px' : '100px', height: 'auto', transition: 'width 0.5s ease' }}
               priority
             />
           </Link>
