@@ -78,23 +78,49 @@ const CorporateAtelier = () => {
         </div>
 
         {/* Service Cards */}
-        <div className="atelier-grid mt-12">
+        <div 
+          className="atelier-grid mt-12"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '2rem'
+          }}
+        >
           {services.map((s, i) => (
             <motion.div
               key={s.number}
-              className="atelier-card"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: i * 0.12 }}
               viewport={{ once: true }}
+              style={{
+                background: 'rgba(255, 255, 255, 0.02)',
+                backdropFilter: 'blur(30px)',
+                WebkitBackdropFilter: 'blur(30px)',
+                border: '1px solid rgba(255, 255, 255, 0.06)',
+                padding: '2.5rem',
+                borderRadius: 24,
+                transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                cursor: 'default',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
+                e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.3)';
+                e.currentTarget.style.transform = 'translateY(-8px)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.02)';
+                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.06)';
+                e.currentTarget.style.transform = 'translateY(0)';
+              }}
             >
-              <div className="flex items-start justify-between mb-4">
+              <div className="flex items-start justify-between mb-6">
                 <span
                   style={{
                     fontFamily: 'Cormorant Garamond, serif',
                     fontSize: '3rem',
                     fontWeight: 300,
-                    color: 'rgba(212,175,55,0.3)',
+                    color: 'rgba(212,175,55,0.4)',
                     lineHeight: 1,
                   }}
                 >
@@ -102,13 +128,13 @@ const CorporateAtelier = () => {
                 </span>
                 <span
                   style={{
-                    fontSize: 9,
+                    fontSize: 8,
                     letterSpacing: '0.25em',
                     textTransform: 'uppercase',
-                    color: 'rgba(212,175,55,0.7)',
-                    border: '1px solid rgba(212,175,55,0.25)',
-                    padding: '3px 10px',
-                    marginTop: 6,
+                    color: '#D4AF37',
+                    background: 'rgba(212, 175, 55, 0.08)',
+                    padding: '6px 12px',
+                    borderRadius: 4,
                   }}
                 >
                   {s.tag}
@@ -116,16 +142,17 @@ const CorporateAtelier = () => {
               </div>
               <h3
                 style={{
-                  fontFamily: 'Playfair Display, serif',
-                  fontSize: '1.3rem',
+                  fontFamily: 'Cormorant Garamond, serif',
+                  fontSize: '1.6rem',
                   color: '#fff',
-                  fontWeight: 500,
-                  marginBottom: 12,
+                  fontWeight: 400,
+                  marginBottom: 14,
+                  letterSpacing: '0.02em'
                 }}
               >
                 {s.title}
               </h3>
-              <p style={{ color: 'rgba(255,255,255,0.45)', fontSize: 13, lineHeight: 1.8, fontWeight: 300 }}>
+              <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 14, lineHeight: 1.8, fontWeight: 300, fontFamily: 'Inter, sans-serif' }}>
                 {s.description}
               </p>
             </motion.div>

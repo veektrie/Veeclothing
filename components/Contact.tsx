@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { FaInstagram, FaWhatsapp } from 'react-icons/fa6';
 import { FaFacebookF } from 'react-icons/fa';
 
@@ -134,189 +135,200 @@ const Contact = () => {
           </p>
         </div>
 
-        {/* ── SERVICE TYPE TOGGLE ── */}
-        <div style={{ marginBottom: '3rem' }}>
-          <p className="font-metro" style={{
-            fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase',
-            color: 'rgba(212,175,55,0.6)', marginBottom: 12,
-          }}>
-            I am enquiring as:
-          </p>
-          <div style={{
-            display: 'inline-flex', border: '1px solid rgba(212,175,55,0.2)',
-            padding: 3, background: 'rgba(255,255,255,0.03)', backdropFilter: 'blur(10px)',
-            borderRadius: 8,
-          }}>
-            {(['corporate', 'individual'] as ServiceType[]).map((t) => (
+        {/* ── SERVICE TYPE TOGGLE & FORM CONTAINER ── */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          style={{
+            background: 'rgba(255, 255, 255, 0.02)',
+            backdropFilter: 'blur(40px)',
+            WebkitBackdropFilter: 'blur(40px)',
+            border: '1px solid rgba(255, 255, 255, 0.06)',
+            padding: 'clamp(1.5rem, 4vw, 4rem)',
+            borderRadius: 32,
+            boxShadow: '0 40px 100px rgba(0,0,0,0.1)',
+          }}
+        >
+          {/* Toggle Area */}
+          <div style={{ marginBottom: '3rem' }}>
+            <p className="font-metro" style={{
+              fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase',
+              color: 'rgba(212,175,55,0.7)', marginBottom: 16, fontWeight: 700
+            }}>
+              Enquiry Type
+            </p>
+            <div style={{
+              display: 'inline-flex', border: '1px solid rgba(255,255,255,0.08)',
+              padding: 4, background: 'rgba(255,255,255,0.03)',
+              borderRadius: 12,
+            }}>
+              {(['corporate', 'individual'] as ServiceType[]).map((t) => (
+                <button
+                  key={t}
+                  type="button"
+                  onClick={() => setServiceType(t)}
+                  className="font-metro"
+                  style={{
+                    padding: '12px 28px', fontSize: 10, letterSpacing: '0.25em',
+                    textTransform: 'uppercase', cursor: 'pointer',
+                    background: serviceType === t ? 'rgba(212,175,55,0.15)' : 'transparent',
+                    border: '1px solid transparent',
+                    borderColor: serviceType === t ? 'rgba(212,175,55,0.3)' : 'transparent',
+                    color: serviceType === t ? '#D4AF37' : 'rgba(255,255,255,0.4)',
+                    borderRadius: 10,
+                    transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                    fontWeight: serviceType === t ? 700 : 400,
+                  }}
+                >
+                  {t === 'corporate' ? 'Corporate' : 'Individual'}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {submitted ? (
+            /* Success state */
+            <div style={{
+              padding: '2rem 0',
+              textAlign: 'center',
+              animation: 'fadeIn 0.6s ease',
+            }}>
+              <div style={{ marginBottom: 30 }}>
+                <div style={{ 
+                  width: 64, height: 64, borderRadius: '50%', background: 'rgba(212,175,55,0.1)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto'
+                }}>
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.5">
+                    <path d="M20 6L9 17l-5-5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </div>
+              </div>
+              <h3 className="font-kento" style={{
+                fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
+                color: '#fff', marginBottom: 16,
+                fontFamily: 'Cormorant Garamond, serif'
+              }}>
+                Enquiry <em style={{ color: '#D4AF37' }}>Sent.</em>
+              </h3>
+              <p className="font-metro" style={{
+                color: 'rgba(255,255,255,0.5)', fontSize: 15, lineHeight: 1.8,
+                maxWidth: 420, margin: '0 auto 32px',
+              }}>
+                Thank you for reaching out. A dedicated consultant will review your request and contact you within 24 hours.
+              </p>
               <button
-                key={t}
-                type="button"
-                onClick={() => setServiceType(t)}
-                className="font-metro"
+                onClick={() => setSubmitted(false)}
                 style={{
-                  padding: '11px 30px', fontSize: 10, letterSpacing: '0.25em',
-                  textTransform: 'uppercase', cursor: 'pointer',
-                  background: serviceType === t ? 'rgba(212,175,55,0.12)' : 'transparent',
-                  border: serviceType === t ? '1px solid rgba(212,175,55,0.4)' : '1px solid transparent',
-                  color: serviceType === t ? '#D4AF37' : 'rgba(255,255,255,0.35)',
-                  borderRadius: 6,
-                  transition: 'all 0.3s ease',
+                  background: 'none', border: '1px solid rgba(212,175,55,0.3)',
+                  color: '#D4AF37', padding: '14px 32px',
+                  fontSize: 10, letterSpacing: '0.25em', textTransform: 'uppercase',
+                  cursor: 'pointer', borderRadius: 8, transition: 'all 0.3s ease',
+                  fontWeight: 700
                 }}
               >
-                {t === 'corporate' ? '⌂  Corporate' : '◇  Individual'}
+                Return to Form
               </button>
-            ))}
-          </div>
-        </div>
-
-        {/* ── FORM or SUCCESS STATE ── */}
-        {submitted ? (
-          /* Success state */
-          <div style={{
-            background: 'rgba(212,175,55,0.07)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-            border: '1px solid rgba(212,175,55,0.3)',
-            padding: '4rem 3rem',
-            textAlign: 'center',
-            borderRadius: 16,
-            animation: 'fadeIn 0.6s ease',
-          }}>
-            <div style={{ marginBottom: 24 }}>
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" style={{ margin: '0 auto 20px' }}>
-                <circle cx="12" cy="12" r="11" stroke="rgba(212,175,55,0.4)" strokeWidth="1"/>
-                <path d="M8 12l3 3 5-5" stroke="#D4AF37" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
             </div>
-            <h3 className="font-kento" style={{
-              fontSize: 'clamp(1.4rem, 2.5vw, 2.2rem)',
-              color: '#D4AF37', marginBottom: 16,
-            }}>
-              Request Received.
-            </h3>
-            <p className="font-metro" style={{
-              color: 'rgba(255,255,255,0.55)', fontSize: 15, lineHeight: 1.8,
-              maxWidth: 420, margin: '0 auto 28px',
-            }}>
-              Your consultation request has been received. Our concierge will contact you within 24 hours.
-            </p>
-            <button
-              onClick={() => setSubmitted(false)}
-              className="font-metro"
-              style={{
-                background: 'none', border: '1px solid rgba(212,175,55,0.35)',
-                color: 'rgba(212,175,55,0.65)', padding: '10px 24px',
-                fontSize: 10, letterSpacing: '0.25em', textTransform: 'uppercase',
-                cursor: 'pointer', borderRadius: 4, transition: 'all 0.3s ease',
-              }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor = '#D4AF37'; (e.currentTarget as HTMLElement).style.color = '#D4AF37'; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(212,175,55,0.35)'; (e.currentTarget as HTMLElement).style.color = 'rgba(212,175,55,0.65)'; }}
-            >
-              Submit Another Enquiry
-            </button>
-          </div>
-        ) : (
-          <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+          ) : (
+            <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
 
-            {/* Name row */}
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
-              <Field id="name" label="First Name" error={!!errors.name}>
-                <input id="name" {...register('name', { required: true })}
-                  placeholder="Emeka" style={inputStyle}
-                  onFocus={handleFocus} onBlur={handleBlur}
-                />
-              </Field>
-              <Field id="phone" label="Phone / WhatsApp" error={!!errors.phone}>
-                <input id="phone" {...register('phone', { required: true })}
-                  placeholder="+234 800 000 0000" style={inputStyle}
-                  onFocus={handleFocus} onBlur={handleBlur}
-                />
-              </Field>
-            </div>
-
-            <Field id="email" label="Email Address" error={!!errors.email}>
-              <input id="email" type="email" {...register('email', { required: true })}
-                placeholder="emeka@organisation.com" style={inputStyle}
-                onFocus={handleFocus} onBlur={handleBlur}
-              />
-            </Field>
-
-            {/* Conditional fields */}
-            {serviceType === 'corporate' ? (
-              <>
-                <Field id="organisation" label="Organisation Name">
-                  <input id="organisation" {...register('organisation')}
-                    placeholder="Company or Institution Name" style={inputStyle}
+              {/* Name row */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 32 }}>
+                <Field id="name" label="Full Name" error={!!errors.name}>
+                  <input id="name" {...register('name', { required: true })}
+                    placeholder="Full Name" style={inputStyle}
                     onFocus={handleFocus} onBlur={handleBlur}
                   />
                 </Field>
-                <Field id="scale" label="Project Scale" error={!!errors.scale}>
-                  <select id="scale" {...register('scale', { required: true })}
-                    style={{
-                      ...inputStyle,
-                      appearance: 'none',
-                      cursor: 'pointer',
-                    }}
+                <Field id="phone" label="Phone Number" error={!!errors.phone}>
+                  <input id="phone" {...register('phone', { required: true })}
+                    placeholder="+234..." style={inputStyle}
                     onFocus={handleFocus} onBlur={handleBlur}
-                  >
-                    {corporateScales.map((s) => (
-                      <option key={s} value={s === corporateScales[0] ? '' : s}
-                        disabled={s === corporateScales[0]}
-                        style={{ background: '#1A5276' }}>
-                        {s}
-                      </option>
-                    ))}
-                  </select>
+                  />
                 </Field>
-              </>
-            ) : (
-              <Field id="occasion" label="Occasion / Event">
-                <input id="occasion" {...register('occasion')}
-                  placeholder="e.g. Wedding, Gala, Birthday, Daily Wardrobe"
-                  style={inputStyle} onFocus={handleFocus} onBlur={handleBlur}
+              </div>
+
+              <Field id="email" label="Email Address" error={!!errors.email}>
+                <input id="email" type="email" {...register('email', { required: true })}
+                  placeholder="name@email.com" style={inputStyle}
+                  onFocus={handleFocus} onBlur={handleBlur}
                 />
               </Field>
-            )}
 
-            <Field id="message" label="Your Vision" error={!!errors.message}>
-              <textarea id="message" {...register('message', { required: true })}
-                rows={4}
-                placeholder={serviceType === 'corporate'
-                  ? 'Describe your branding requirements, timeline, or any specific details…'
-                  : 'Describe the garment, style references, or any details that will help us understand your vision…'}
-                style={{ ...inputStyle, resize: 'none' }}
-                onFocus={handleFocus} onBlur={handleBlur}
-              />
-            </Field>
+              {/* Conditional fields */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 32 }}>
+                {serviceType === 'corporate' ? (
+                  <>
+                    <Field id="organisation" label="Organisation">
+                      <input id="organisation" {...register('organisation')}
+                        placeholder="Company Name" style={inputStyle}
+                        onFocus={handleFocus} onBlur={handleBlur}
+                      />
+                    </Field>
+                    <Field id="scale" label="Scale" error={!!errors.scale}>
+                      <select id="scale" {...register('scale', { required: true })}
+                        style={{
+                          ...inputStyle,
+                          appearance: 'none',
+                          cursor: 'pointer',
+                        }}
+                        onFocus={handleFocus} onBlur={handleBlur}
+                      >
+                        {corporateScales.map((s) => (
+                          <option key={s} value={s === corporateScales[0] ? '' : s}
+                            disabled={s === corporateScales[0]}
+                            style={{ background: '#112D42', color: '#fff' }}>
+                            {s}
+                          </option>
+                        ))}
+                      </select>
+                    </Field>
+                  </>
+                ) : (
+                  <Field id="occasion" label="Occasion">
+                    <input id="occasion" {...register('occasion')}
+                      placeholder="e.g. Bespoke Agbada, Wedding Suit"
+                      style={inputStyle} onFocus={handleFocus} onBlur={handleBlur}
+                    />
+                  </Field>
+                )}
+              </div>
 
-            <button
-              type="submit"
-              disabled={sending}
-              style={{
-                width: '100%', padding: '18px',
-                background: sending ? 'rgba(212,175,55,0.1)' : '#D4AF37',
-                border: '1px solid rgba(212,175,55,0.5)',
-                color: sending ? '#D4AF37' : 'var(--charcoal)',
-                fontFamily: 'Metrophobic, Inter, sans-serif',
-                fontSize: 11, letterSpacing: '0.3em', textTransform: 'uppercase',
-                cursor: sending ? 'not-allowed' : 'pointer',
-                transition: 'all 0.35s ease', display: 'flex',
-                borderRadius: 4,
-                alignItems: 'center', justifyContent: 'center', gap: 10,
-              }}
-              onMouseEnter={e => { if (!sending) { (e.currentTarget as HTMLElement).style.background = 'rgba(212,175,55,0.15)'; (e.currentTarget as HTMLElement).style.color = '#D4AF37'; }}}
-              onMouseLeave={e => { if (!sending) { (e.currentTarget as HTMLElement).style.background = '#D4AF37'; (e.currentTarget as HTMLElement).style.color = 'var(--charcoal)'; }}}
-            >
-              {sending ? 'Sending…' : 'Submit Consultation Request'}
-              {!sending && (
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-              )}
-            </button>
+              <Field id="message" label="Requirements" error={!!errors.message}>
+                <textarea id="message" {...register('message', { required: true })}
+                  rows={3}
+                  placeholder="Share your vision or specific requirements..."
+                  style={{ ...inputStyle, resize: 'none' }}
+                  onFocus={handleFocus} onBlur={handleBlur}
+                />
+              </Field>
 
-          </form>
-        )}
+              <button
+                type="submit"
+                disabled={sending}
+                style={{
+                  width: '100%', padding: '22px',
+                  background: sending ? 'rgba(212,175,55,0.1)' : '#D4AF37',
+                  border: '1px solid rgba(212,175,55,0.3)',
+                  color: sending ? '#D4AF37' : 'var(--charcoal)',
+                  fontFamily: 'Inter, sans-serif',
+                  fontSize: 11, letterSpacing: '0.3em', textTransform: 'uppercase',
+                  cursor: sending ? 'not-allowed' : 'pointer',
+                  transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                  borderRadius: 12,
+                  fontWeight: 800,
+                  boxShadow: sending ? 'none' : '0 15px 35px rgba(212,175,55,0.2)',
+                }}
+                onMouseEnter={e => { if (!sending) { (e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 20px 40px rgba(212,175,55,0.3)'; }}}
+                onMouseLeave={e => { if (!sending) { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 15px 35px rgba(212,175,55,0.2)'; }}}
+              >
+                {sending ? 'Processing...' : 'Request Consultation'}
+              </button>
+
+            </form>
+          )}
+        </motion.div>
 
         {/* ── Contact & Socials strip ── */}
         <div style={{
