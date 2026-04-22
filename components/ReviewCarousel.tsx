@@ -90,7 +90,11 @@ const ReviewCarousel = () => {
           </div>
 
           {/* Verified badge */}
-          <div
+          <a
+            href="https://share.google/ke8GbfXDtVbkXHiSL"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="See our reviews on Google"
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -100,16 +104,21 @@ const ReviewCarousel = () => {
               border: '1px solid rgba(26,82,118,0.15)',
               backdropFilter: 'blur(8px)',
               borderRadius: 6,
+              textDecoration: 'none',
+              cursor: 'pointer',
+              transition: 'background 0.3s ease',
             }}
+            onMouseEnter={e => { (e.currentTarget).style.background = 'rgba(26,82,118,0.15)'; }}
+            onMouseLeave={e => { (e.currentTarget).style.background = 'rgba(26,82,118,0.08)'; }}
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
               <circle cx="12" cy="12" r="10" stroke="#1A5276" strokeWidth="1.5"/>
               <path d="M9 12l2 2 4-4" stroke="#D4AF37" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
             <span style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#1A5276', fontFamily: 'Inter, sans-serif' }}>
-              Google Verified Business
+              Read Google Reviews
             </span>
-          </div>
+          </a>
         </div>
 
         {/* Carousel */}

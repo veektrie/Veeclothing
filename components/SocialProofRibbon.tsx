@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
 import { motion } from 'framer-motion';
+import { FaGoogle } from 'react-icons/fa';
 
 const sentiments = [
   {
@@ -68,6 +69,39 @@ const SocialProofRibbon = () => {
           }}>
             The Discerning Choice
           </h2>
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
+            <a
+              href="https://share.google/ke8GbfXDtVbkXHiSL"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="See our reviews on Google"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 12,
+                padding: '10px 24px',
+                background: 'rgba(212,175,55,0.05)',
+                border: '1px solid rgba(212,175,55,0.25)',
+                borderRadius: 4,
+                textDecoration: 'none',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={e => { 
+                (e.currentTarget).style.background = 'rgba(212,175,55,0.15)'; 
+                (e.currentTarget).style.borderColor = 'rgba(212,175,55,0.5)';
+              }}
+              onMouseLeave={e => { 
+                (e.currentTarget).style.background = 'rgba(212,175,55,0.05)'; 
+                (e.currentTarget).style.borderColor = 'rgba(212,175,55,0.25)';
+              }}
+            >
+              <FaGoogle size={16} color="#D4AF37" />
+              <span style={{ fontSize: 11, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#D4AF37', fontFamily: 'Inter, sans-serif' }}>
+                Read Google Reviews
+              </span>
+            </a>
+          </div>
         </div>
 
         <div style={{
