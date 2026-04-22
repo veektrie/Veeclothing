@@ -45,7 +45,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
       <section style={{ padding: 'clamp(100px, 15vh, 160px) 4vw 80px', maxWidth: '1600px', margin: '0 auto', position: 'relative', zIndex: 2 }}>
         
         {/* Breadcrumbs */}
-        <div style={{ display: 'flex', gap: 10, fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 'clamp(30px, 5vh, 50px)', fontFamily: 'Inter, sans-serif' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', marginBottom: 'clamp(30px, 5vh, 50px)', fontFamily: 'Inter, sans-serif' }}>
           <Link href="/shop" style={{ textDecoration: 'none', color: 'inherit' }}>The Archive</Link>
           <span style={{ opacity: 0.3 }}>/</span>
           <span style={{ color: '#D4AF37' }}>{product.name}</span>
@@ -53,6 +53,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
 
         {/* ── UNIFIED GRAND COMMISSION CARD ── */}
         <motion.div 
+          className="flex flex-col lg:grid lg:grid-cols-12"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -63,8 +64,6 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
             borderRadius: 'clamp(32px, 5vw, 64px)',
             border: '1px solid rgba(255, 255, 255, 0.08)',
             padding: 'clamp(2rem, 6vw, 6rem)',
-            display: 'grid',
-            gridTemplateColumns: 'repeat(12, 1fr)',
             gap: 'clamp(2rem, 5vw, 4rem)',
             boxShadow: '0 50px 150px -30px rgba(0,0,0,0.7)',
             position: 'relative',
@@ -75,7 +74,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
           <div style={{ position: 'absolute', top: '-10%', left: '-10%', width: '40%', height: '40%', background: 'radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 70%)', zIndex: 0 }} />
 
           {/* Left Column: Product Story (Grid Span 4) */}
-          <div style={{ gridColumn: 'span 4', display: 'flex', flexDirection: 'column', gap: 40, zIndex: 2, order: 1 }}>
+          <div className="lg:col-span-4" style={{ display: 'flex', flexDirection: 'column', gap: 40, zIndex: 2, order: 1 }}>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
                 <span style={{ fontSize: 9, letterSpacing: '0.4em', textTransform: 'uppercase', color: '#D4AF37', fontWeight: 800 }}>Vee Atelier</span>
@@ -120,8 +119,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
           </div>
 
           {/* Center Column: 3D Image Showcase (Grid Span 5) */}
-          <div style={{ 
-            gridColumn: 'span 5', 
+          <div className="lg:col-span-5" style={{ 
             position: 'relative', 
             display: 'flex', 
             alignItems: 'center', 
@@ -136,6 +134,7 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
               style={{ 
                 width: '100%', 
                 height: '100%', 
+                minHeight: '400px',
                 position: 'relative', 
                 perspective: 1000 
               }}
@@ -160,15 +159,12 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
           </div>
 
           {/* Right Column: Customization (Grid Span 3) */}
-          <div style={{ 
-            gridColumn: 'span 3', 
+          <div className="lg:col-span-3 border-t lg:border-t-0 lg:border-l border-white/5 pt-8 lg:pt-0 lg:pl-5" style={{ 
             display: 'flex', 
             flexDirection: 'column', 
             gap: 40, 
             zIndex: 2,
-            order: 3,
-            paddingLeft: '20px',
-            borderLeft: '1px solid rgba(255,255,255,0.05)'
+            order: 3
           }}>
             {/* Sizing Section */}
             <div>
