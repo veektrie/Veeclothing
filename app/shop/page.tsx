@@ -21,7 +21,6 @@ export default function ShopPage() {
 
   return (
       <main style={{ background: '#fcfbf9', minHeight: '100vh', paddingTop: 80 }}>
-        <Navbar />
 
         {/* ── Shop Hero Banner ── */}
         <div style={{
@@ -266,8 +265,6 @@ export default function ShopPage() {
             ))}
           </div>
         </div>
-
-
 
       </main>
   );

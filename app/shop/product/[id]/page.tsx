@@ -4,8 +4,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { products, Product } from '../../data';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 
 export default function ProductDetailPage({ params }: { params: { id: string } }) {
   const productId = parseInt(params.id);
@@ -29,7 +27,6 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
 
   return (
     <main style={{ background: '#fcfbf9', minHeight: '100vh', color: '#1c1c1e', position: 'relative', overflowX: 'hidden' }}>
-      <Navbar />
 
       {/* Subtle Grain Texture Overlay */}
       <div style={{
@@ -301,7 +298,6 @@ export default function ProductDetailPage({ params }: { params: { id: string } }
         </div>
       </section>
 
-      <Footer />
     </main>
   );
 }
