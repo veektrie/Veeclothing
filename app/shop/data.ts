@@ -132,7 +132,7 @@ export const products: Product[] = [
     id: 6,
     name: 'Kaftans',
     price: '₦65,000',
-    cat: 'kaftan'
+    cat: 'kaftan',
     src: '/kaftan05.jpg',
     tag: null,
     desc: 'Clean lines. Premium linen. Ready in 10 working days.',
