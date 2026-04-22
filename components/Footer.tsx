@@ -50,7 +50,7 @@ const Footer = () => {
           />
           <p
             style={{
-              color: 'rgba(255,255,255,0.4)',
+              color: 'rgba(28,28,30,0.6)',
               fontSize: 13,
               lineHeight: 1.85,
               fontWeight: 300,
@@ -100,7 +100,7 @@ const Footer = () => {
                 style={{ display: 'flex', alignItems: 'center', gap: 10 }}
               >
                 {item.icon}
-                <span style={{ fontSize: 12, color: 'rgba(255,255,255,0.4)', letterSpacing: '0.03em' }}>
+                <span style={{ fontSize: 12, color: 'rgba(28,28,30,0.6)', letterSpacing: '0.03em' }}>
                   {item.label}
                 </span>
               </div>
@@ -109,7 +109,7 @@ const Footer = () => {
 
           {/* Gold accent line */}
           <div style={{ width: 40, height: 1, background: 'rgba(212,175,55,0.5)', marginBottom: 16 }} />
-          <p style={{ fontSize: 10, letterSpacing: '0.2em', color: 'rgba(212,175,55,0.45)', textTransform: 'uppercase' }}>
+          <p style={{ fontSize: 10, letterSpacing: '0.2em', color: '#1A5276', textTransform: 'uppercase', fontWeight: 600 }}>
             Est. Lagos, Nigeria
           </p>
         </div>
@@ -137,7 +137,7 @@ const Footer = () => {
 
       {/* Separator */}
       <div style={{ maxWidth: 1440, margin: '0 auto', padding: '0 4rem' }}>
-        <div style={{ height: 1, background: 'rgba(255,255,255,0.06)' }} />
+        <div style={{ height: 1, background: 'rgba(28,28,30,0.06)' }} />
       </div>
 
       {/* Bottom */}

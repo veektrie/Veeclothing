@@ -30,9 +30,11 @@ export const products: Product[] = [
       { title: 'Reinforced Stitched', desc: 'Double-stitched seams for durability in active roles.' }
     ],
     colors: [
-      { name: 'Navy', hex: '#1A5276' },
-      { name: 'Charcoal', hex: '#1C1C1E' },
-      { name: 'Black', hex: '#000000' }
+      { name: 'Red', hex: '#C0392B' },
+      { name: 'Yellow', hex: '#F1C40F' },
+      { name: 'Green', hex: '#27AE60' },
+      { name: 'Blue', hex: '#2980B9' },
+      { name: 'Navy (Standard)', hex: '#1A5276' }
     ],
     sizes: ['S', 'M', 'L', 'XL', 'XXL']
   },
@@ -51,8 +53,10 @@ export const products: Product[] = [
       { title: 'Bespoke Fit', desc: 'Tailored to your exact measurements in our Lagos atelier.' }
     ],
     colors: [
-      { name: 'Royal Blue', hex: '#2E4053' },
-      { name: 'Steel Grey', hex: '#5D6D7E' }
+      { name: 'Onion Pink', hex: '#D7BDE2' },
+      { name: 'Steel Grey', hex: '#5D6D7E' },
+      { name: 'Midnight Blue', hex: '#1B2631' },
+      { name: 'Oxblood', hex: '#641E16' }
     ],
     sizes: ['Bespoke']
   },
@@ -71,9 +75,10 @@ export const products: Product[] = [
       { title: 'Flowing Cut', desc: 'Designed for comfort and commanding presence.' }
     ],
     colors: [
-      { name: 'Gold', hex: '#D4AF37' },
-      { name: 'White', hex: '#FFFFFF' },
-      { name: 'Deep Green', hex: '#0E6251' }
+      { name: 'Champagne Gold', hex: '#D4AF37' },
+      { name: 'Burnt Orange', hex: '#BA4A00' },
+      { name: 'Deep Emerald', hex: '#0E6251' },
+      { name: 'Dusty Rose', hex: '#A93226' }
     ],
     sizes: ['S', 'M', 'L', 'XL']
   },
@@ -90,6 +95,15 @@ export const products: Product[] = [
       { title: 'Brand Alignment', desc: 'Custom colors and logos integrated seamlessly.' },
       { title: 'Scale Ready', desc: 'Efficient production for teams of 5 to 500.' },
       { title: 'Easy Care', desc: 'Fabrics selected for durability and low maintenance.' }
+    ],
+    colors: [
+      { name: 'Red', hex: '#E74C3C' },
+      { name: 'Orange', hex: '#E67E22' },
+      { name: 'Yellow', hex: '#F1C40F' },
+      { name: 'Green', hex: '#2ECC71' },
+      { name: 'Blue', hex: '#3498DB' },
+      { name: 'Indigo', hex: '#2980B9' },
+      { name: 'Violet', hex: '#8E44AD' }
     ],
     sizes: ['Bulk Sizing']
   },
@@ -108,8 +122,9 @@ export const products: Product[] = [
       { title: 'Heritage Design', desc: 'Modernizing traditional silhouettes for the today\'s leader.' }
     ],
     colors: [
-      { name: 'Midnight', hex: '#1C1C1E' },
-      { name: 'Ivory', hex: '#FDFEFE' }
+      { name: 'Rich Aubergine', hex: '#4A235A' },
+      { name: 'Ivory Cream', hex: '#FDFEFE' },
+      { name: 'Charcoal Noir', hex: '#17202A' }
     ],
     sizes: ['Bespoke']
   },
@@ -128,9 +143,10 @@ export const products: Product[] = [
       { title: 'Rapid Craft', desc: 'Commission to delivery in just 10 working days.' }
     ],
     colors: [
-      { name: 'Sand', hex: '#F5B041' },
-      { name: 'Sky', hex: '#AED6F1' },
-      { name: 'Forest', hex: '#1E8449' }
+      { name: 'Desert Sand', hex: '#F5B041' },
+      { name: 'Powder Blue', hex: '#AED6F1' },
+      { name: 'Olive Drab', hex: '#3E4F39' },
+      { name: 'Terracotta', hex: '#CC5500' }
     ],
     sizes: ['S', 'M', 'L', 'XL']
   },
@@ -148,6 +164,11 @@ export const products: Product[] = [
       { title: 'Monogramming', desc: 'Complimentary monogramming on every commission.' },
       { title: 'French Cuffs', desc: 'Standard on all executive series commissions.' }
     ],
+    colors: [
+      { name: 'Pristine White', hex: '#FFFFFF' },
+      { name: 'Ice Blue', hex: '#D6EAF8' },
+      { name: 'Pale Lilac', hex: '#E8DAEF' }
+    ],
     sizes: ['Bespoke']
   },
   { 
@@ -158,6 +179,15 @@ export const products: Product[] = [
     src: '/cop05.jpg', 
     tag: null, 
     desc: 'Bulk production. Custom colours and logo.',
+    colors: [
+      { name: 'Red', hex: '#E74C3C' },
+      { name: 'Orange', hex: '#E67E22' },
+      { name: 'Yellow', hex: '#F1C40F' },
+      { name: 'Green', hex: '#2ECC71' },
+      { name: 'Blue', hex: '#3498DB' },
+      { name: 'Indigo', hex: '#2980B9' },
+      { name: 'Violet', hex: '#8E44AD' }
+    ],
     sizes: ['S', 'M', 'L', 'XL', 'XXL']
   },
   { 
@@ -175,8 +205,9 @@ export const products: Product[] = [
       { title: 'Natural Horn', desc: 'Genuine horn buttons for a luxurious finish.' }
     ],
     colors: [
-      { name: 'Sage', hex: '#A9DFBF' },
-      { name: 'Tan', hex: '#D35400' }
+      { name: 'Muted Sage', hex: '#A9DFBF' },
+      { name: 'Tobacco Tan', hex: '#D35400' },
+      { name: 'Stone Grey', hex: '#CCD1D1' }
     ],
     sizes: ['Bespoke']
   },

@@ -688,9 +688,9 @@ body {
 
 /* ===== FOOTER ===== */
 .footer-luxury {
-  background: var(--charcoal);
-  border-top: 1px solid rgba(212, 175, 55, 0.2);
-  color: rgba(255,255,255,0.7);
+  background: var(--cream);
+  border-top: 1px solid rgba(28, 28, 30, 0.05);
+  color: var(--charcoal);
 }
 
 .footer-top {
@@ -724,10 +724,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid rgba(28,28,30,0.05);
   font-size: 12px;
   letter-spacing: 0.05em;
-  color: rgba(255,255,255,0.35);
+  color: rgba(28,28,30,0.5);
 }
 
 @media (max-width: 768px) {
@@ -741,7 +741,7 @@ body {
 
 .footer-link {
   font-size: 13px;
-  color: rgba(255,255,255,0.5);
+  color: var(--stone);
   text-decoration: none;
   transition: color 0.3s ease;
   letter-spacing: 0.03em;
@@ -749,7 +749,7 @@ body {
 }
 
 .footer-link:hover {
-  color: var(--gold);
+  color: var(--navy);
 }
 
 .footer-heading {
@@ -758,7 +758,7 @@ body {
   font-weight: 600;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--navy);
   margin-bottom: 1.5rem;
 }
 
