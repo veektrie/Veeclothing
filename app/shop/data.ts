@@ -15,13 +15,13 @@ export interface Product {
 }
 
 export const products: Product[] = [
-  { 
-    id: 1, 
-    name: 'The Executive Blazer', 
-    price: '₦85,000', 
-    cat: 'corporate', 
-    src: '/cop01.jpg', 
-    tag: 'BESTSELLER', 
+  {
+    id: 1,
+    name: 'The Executive Blazer',
+    price: '₦85,000',
+    cat: 'corporate',
+    src: '/cop01.jpg',
+    tag: 'BESTSELLER',
     desc: 'Structured authority. Engineered for the boardroom.',
     longDesc: 'A masterpiece of corporate engineering. Our Executive Blazer features a structured shoulder and a slightly tapered waist to project authority while maintaining comfort during long days in the boardroom. Crafted from high-twist wool that resists creasing.',
     features: [
@@ -38,13 +38,13 @@ export const products: Product[] = [
     ],
     sizes: ['S', 'M', 'L', 'XL', 'XXL']
   },
-  { 
-    id: 2, 
-    name: 'The Boardroom Suit', 
-    price: '₦145,000', 
-    cat: 'bespoke', 
-    src: '/suit01.jpg', 
-    tag: 'SIGNATURE', 
+  {
+    id: 2,
+    name: 'Suits',
+    price: '₦145,000',
+    cat: 'bespoke',
+    src: '/suit01.jpg',
+    tag: 'SIGNATURE',
     desc: 'Two-piece. Full canvas. Hand-finished lapels.',
     longDesc: 'Our signature two-piece suit. Each garment is hand-canvassed to ensure the fabric drapes perfectly over your silhouette. Featuring pick-stitched lapels and functional sleeve buttons, this is the pinnacle of bespoke tailoring.',
     features: [
@@ -60,15 +60,15 @@ export const products: Product[] = [
     ],
     sizes: ['Bespoke']
   },
-  { 
-    id: 3, 
-    name: 'Premium Kaftan — Grand Boubou', 
-    price: '₦120,000', 
-    cat: 'kaftan', 
-    src: '/kaftan01.webp', 
-    tag: 'NEW', 
+  {
+    id: 3,
+    name: 'Premium Kaftans',
+    price: '₦120,000',
+    cat: 'kaftan',
+    src: '/kaftan01.webp',
+    tag: 'NEW',
     desc: 'Flowing silhouette. Premium damask fabric.',
-    longDesc: 'The Grand Boubou redefined. We use only the finest damask and polished cotton to create a garment that feels as regal as it looks. The intricate embroidery is done by hand, taking over 40 hours per piece.',
+    longDesc: 'The Kaftan redefined. We use only the finest damask and polished cotton to create a garment that feels as regal as it looks. The intricate embroidery is done by hand, taking over 40 hours per piece.',
     features: [
       { title: 'Hand Embroidered', desc: 'Artisan embroidery that tells a story of heritage.' },
       { title: 'Premium Damask', desc: 'Sourced from the finest mills for a superior sheen.' },
@@ -82,13 +82,13 @@ export const products: Product[] = [
     ],
     sizes: ['S', 'M', 'L', 'XL']
   },
-  { 
-    id: 4, 
-    name: 'Corporate Uniform Set', 
-    price: 'From ₦45,000', 
-    cat: 'corporate', 
-    src: '/cop02.png', 
-    tag: 'CORPORATE', 
+  {
+    id: 4,
+    name: 'Corporate Branding',
+    price: 'From ₦45,000',
+    cat: 'corporate',
+    src: '/cop02.png',
+    tag: 'CORPORATE',
     desc: 'Minimum 5 units. Brand alignment guaranteed.',
     longDesc: 'A complete uniform solution for your organization. We work with your brand guidelines to create a cohesive look that empowers your staff and communicates your values to every client.',
     features: [
@@ -107,13 +107,13 @@ export const products: Product[] = [
     ],
     sizes: ['Bulk Sizing']
   },
-  { 
-    id: 5, 
-    name: 'Agbada — Full Set', 
-    price: '₦180,000', 
-    cat: 'bespoke', 
-    src: '/kaftan02.webp', 
-    tag: 'BESPOKE', 
+  {
+    id: 5,
+    name: 'Agbada — Full Set',
+    price: '₦180,000',
+    cat: 'bespoke',
+    src: '/kaftan02.webp',
+    tag: 'BESPOKE',
     desc: 'Three-piece. Aso-oke or Damask. Commission only.',
     longDesc: 'The ultimate statement piece. Our three-piece Agbada set includes the inner tunic, trousers, and the grand outer robe. Each set is a unique commission, crafted from hand-woven Aso-oke or premium Damask.',
     features: [
@@ -128,13 +128,13 @@ export const products: Product[] = [
     ],
     sizes: ['Bespoke']
   },
-  { 
-    id: 6, 
-    name: 'The Senator Kaftan', 
-    price: '₦65,000', 
-    cat: 'kaftan', 
-    src: '/kaftan05.jpg', 
-    tag: null, 
+  {
+    id: 6,
+    name: 'Kaftans',
+    price: '₦65,000',
+    cat: 'kaftan'
+    src: '/kaftan05.jpg',
+    tag: null,
     desc: 'Clean lines. Premium linen. Ready in 10 working days.',
     longDesc: 'The modern classic. Our Senator Kaftan is designed for the man who values simplicity and precision. Made from premium linen-cotton blends, it offers the perfect balance of breathability and structure.',
     features: [
@@ -150,13 +150,13 @@ export const products: Product[] = [
     ],
     sizes: ['S', 'M', 'L', 'XL']
   },
-  { 
-    id: 7, 
-    name: 'Executive Shirt — Embroidered', 
-    price: '₦38,000', 
-    cat: 'bespoke', 
-    src: '/cop04.png', 
-    tag: null, 
+  {
+    id: 7,
+    name: 'Executive Shirts',
+    price: '₦38,000',
+    cat: 'bespoke',
+    src: '/cop04.png',
+    tag: null,
     desc: 'Bespoke embroidery on premium cotton poplin.',
     longDesc: 'Elevate your daily attire. Our Executive Shirt features subtle, hand-guided embroidery on the cuff or collar. Crafted from 100% Giza cotton poplin with a silky finish.',
     features: [
@@ -171,13 +171,13 @@ export const products: Product[] = [
     ],
     sizes: ['Bespoke']
   },
-  { 
-    id: 8, 
-    name: 'Staff Polo — Branded', 
-    price: 'From ₦15,000', 
-    cat: 'corporate', 
-    src: '/cop05.jpg', 
-    tag: null, 
+  {
+    id: 8,
+    name: 'Staff Polo — Branded',
+    price: 'From ₦15,000',
+    cat: 'corporate',
+    src: '/cop05.jpg',
+    tag: null,
     desc: 'Bulk production. Custom colours and logo.',
     colors: [
       { name: 'Red', hex: '#E74C3C' },
@@ -190,13 +190,13 @@ export const products: Product[] = [
     ],
     sizes: ['S', 'M', 'L', 'XL', 'XXL']
   },
-  { 
-    id: 9, 
-    name: 'Luxury Suit — Linen', 
-    price: '₦130,000', 
-    cat: 'bespoke', 
-    src: '/suit02.png', 
-    tag: 'LIMITED', 
+  {
+    id: 9,
+    name: 'Luxury Suit',
+    price: '₦130,000',
+    cat: 'bespoke',
+    src: '/suit02.png',
+    tag: 'LIMITED',
     desc: 'Italian linen. Two-button slim. Summer edition.',
     longDesc: 'Effortless elegance. Our limited edition linen suit is perfect for destination weddings or tropical events. The Italian linen is pre-washed for a soft feel and a refined, relaxed texture.',
     features: [
