@@ -1,4 +1,5 @@
-'use client';
+import { client } from "@/lib/sanity";
+import { groq } from "next-sanity";
 
 import Hero from '../components/landingPages/Hero';
 import CorporateAtelier from '@/components/landingPages/Brand';
@@ -10,7 +11,19 @@ import FAQSection from '@/components/landingPages/FAQ';
 import Contact from '@/components/landingPages/Contact';
 import CraftWidget from '@/components/landingPages/CraftWidget';
 
-export default function Home() {
+const latestArticlesQuery = groq`*[_type == "blog"] | order(publishedAt desc)[0...3] {
+  _id,
+  title,
+  "slug": slug.current,
+  category,
+  publishedAt,
+  "excerpt": array::join(string::split((pt::text(content)), "")[0..150], "") + "...",
+  "readTime": "6 min read" 
+}`;
+
+export default async function Home() {
+  const articles = await client.fetch(latestArticlesQuery);
+
   return (
     <main className="overflow-hidden">
 
@@ -27,7 +40,7 @@ export default function Home() {
       <ShopPreview />
 
       {/* 5. The Journal — SEO topical authority */}
-      <Journal />
+      <Journal articles={articles} />
 
       {/* 6. Social Proof Ribbon — merged testimonials + reviews */}
       <SocialProofRibbon />

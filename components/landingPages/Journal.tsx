@@ -3,34 +3,21 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 
-const articles = [
-  {
-    category: 'Craft & Heritage',
-    title: 'The Anatomy of a Bespoke Suit: What Separates Artisanal from Average',
-    excerpt:
-      'From the canvas chest piece to the hand-padded lapels — a deep dive into why bespoke tailoring is the ultimate investment piece for the discerning gentleman.',
-    readTime: '7 min read',
-    keywords: 'bespoke tailoring Lagos, custom suit craftsmanship Africa',
-  },
-  {
-    category: 'Corporate Identity',
-    title: "Brand Cohesion in Modern Business: Why Your Team's Uniform is Your Handshake",
-    excerpt:
-      'In high-stakes industries, the first impression your team makes is worn, not spoken. We explore how Nigeria\'s leading corporations are using apparel to signal authority.',
-    readTime: '6 min read',
-    keywords: 'corporate uniform Lagos, executive branding Nigeria',
-  },
-  {
-    category: 'Sustainable Luxury',
-    title: 'Sustainable Luxury in African Fashion: Quality Over Volume',
-    excerpt:
-      'The future of African menswear is not fast fashion — it is intentional craftsmanship. Here is how Vee Clothing Company approaches sustainable luxury from Lagos.',
-    readTime: '8 min read',
-    keywords: 'sustainable luxury African fashion, premium menswear Nigeria',
-  },
-];
+interface Article {
+  _id: string;
+  title: string;
+  slug: string;
+  category: string;
+  publishedAt: string;
+  excerpt: string;
+  readTime: string;
+}
 
-const Journal = () => {
+interface JournalProps {
+  articles: Article[];
+}
+
+const Journal = ({ articles }: JournalProps) => {
   return (
     <section className="journal-section" id="journal">
       <div className="journal-inner">
@@ -120,7 +107,7 @@ const Journal = () => {
                 >
                   {a.readTime}
                 </span>
-                <Link href="/journal">
+                <Link href={`/blog/${a.slug}`}>
                   <span className="journal-read-more">
                     Read More
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -135,7 +122,7 @@ const Journal = () => {
 
         {/* View All Button */}
         <div style={{ display: 'flex', justifyContent: 'center', marginTop: '4rem' }}>
-          <Link href="/journal">
+          <Link href="/blog">
             <button className="btn-ghost-navy">
               View All Editorials
             </button>
