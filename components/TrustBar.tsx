@@ -64,11 +64,11 @@ const TrustBar = () => {
           background: 'linear-gradient(to right, rgba(10,10,15,0.95) 80%, transparent)',
         }}>
           <span style={{
-            fontSize: 8, letterSpacing: '0.4em', textTransform: 'uppercase',
+            fontSize: 8, letterSpacing: '0.4em',
             color: '#D4AF37', fontFamily: 'Inter, sans-serif',
-            fontWeight: 800, whiteSpace: 'nowrap',
+            fontWeight: 900, whiteSpace: 'nowrap',
           }}>
-            Trusted
+            Trusted By
           </span>
         </div>
 
@@ -93,7 +93,7 @@ const TrustBar = () => {
               {/* Brand Logo */}
               <div style={{
                 width: 36, height: 36, position: 'relative',
-                filter: 'grayscale(100%) brightness(2) contrast(0.8)', opacity: 0.5,
+                filter: 'grayscale(100%) brightness(2) contrast(0.8)',
                 transition: 'all 0.4s ease',
                 borderRadius: 4,
                 overflow: 'hidden',

@@ -8,7 +8,7 @@ import Script from 'next/script';
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://veeclothingcompany.com"),
-  title: "Vee Clothing Company | Bespoke Tailoring & Corporate Uniforms Lagos",
+  title: "VeeClothingCompany",
   description:
     "Vee Clothing Company — Lagos's premier destination for bespoke tailoring, corporate uniform engineering, and executive menswear. Custom tailored suits, premium African menswear, and branded corporate apparel crafted to global standards with local soul.",
   keywords: [

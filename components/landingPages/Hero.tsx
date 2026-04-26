@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import TrustBar from './TrustBar';
+import TrustBar from '../TrustBar';
 
 if (typeof window !== 'undefined') {
   gsap.registerPlugin(ScrollTrigger);
@@ -116,36 +116,43 @@ const Hero = () => {
   };
 
   return (
-    <section style={{ 
-      position: 'relative', 
-      minHeight: '120vh', // Increased to accommodate card + trust bar
-      display: 'flex', 
+    <section style={{
+      position: 'relative',
+      minHeight: '90vh', // Increased to accommodate card + trust bar
+      display: 'flex',
       flexDirection: 'column',
-      alignItems: 'center', 
+      alignItems: 'center',
       overflow: 'hidden',
       background: '#000',
-      paddingTop: '160px' // Added padding to ensure navbar is not on the hero
+      paddingTop: '100px' // Added padding to ensure navbar is not on the hero
     }}>
-      
+
       {/* Background Images - Extended to fill the entire tall section */}
-      <div ref={corporateRef} className="absolute inset-0" style={{
-        willChange: 'transform', height: '110%', top: '-5%',
-        opacity: isCorporate ? 1 : 0, transition: 'opacity 0.8s ease', zIndex: 0,
-      }}>
+      <div ref={corporateRef}
+        className="absolute inset-0"
+        style={{
+          willChange: 'transform', height: '110%', top: '-5%',
+          opacity: isCorporate ? 1 : 0, transition: 'opacity 0.8s ease', zIndex: 0,
+        }}>
         <Image src="/corporate-hero.png"
           alt="Corporate branding"
-          fill priority sizes="100vw" className="object-cover object-top"
+          fill priority sizes="100vw"
+          className="object-cover object-top"
         />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,1) 100%)' }} />
       </div>
 
-      <div ref={bespokeRef} className="absolute inset-0" style={{
-        willChange: 'transform', height: '110%', top: '-5%',
-        opacity: isCorporate ? 0 : 1, transition: 'opacity 0.8s ease', zIndex: 0,
-      }}>
+      <div
+        ref={bespokeRef}
+        className="absolute inset-0"
+        style={{
+          willChange: 'transform', height: '110%', top: '-5%',
+          opacity: isCorporate ? 0 : 1, transition: 'opacity 0.8s ease', zIndex: 0,
+        }}>
         <Image src="/bespoke-hero.png"
           alt="Bespoke tailoring"
-          fill priority sizes="100vw" className="object-cover object-center"
+          fill priority sizes="100vw"
+          className="object-cover object-center"
           style={{ filter: 'grayscale(10%)' }}
         />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.8) 70%, rgba(0,0,0,1) 100%)' }} />
@@ -171,7 +178,7 @@ const Hero = () => {
         zIndex: 10,
         width: '95%',
         maxWidth: '1400px',
-        minHeight: '70vh',
+        minHeight: '50vh',
         background: 'rgba(255, 255, 255, 0.03)',
         backdropFilter: 'blur(40px)',
         WebkitBackdropFilter: 'blur(40px)',
@@ -182,9 +189,9 @@ const Hero = () => {
         boxShadow: '0 40px 100px -20px rgba(0,0,0,0.6)',
         marginBottom: '60px' // Space before trust bar
       }}>
-        
+
         {/* Card Content */}
-        <div 
+        <div
           ref={contentRef}
           style={{
             flex: 1,
@@ -198,11 +205,12 @@ const Hero = () => {
           }}
         >
           {/* Tag */}
-          <div style={{
-            display: 'inline-flex', alignItems: 'center', gap: 10, marginBottom: 24,
-            padding: '8px 20px', background: 'rgba(212,175,55,0.08)',
-            border: '1px solid rgba(212,175,55,0.2)', borderRadius: '999px', width: 'fit-content'
-          }}>
+          <div
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 5, marginBottom: 24,
+              padding: '8px 20px', background: 'rgba(212,175,55,0.08)',
+              border: '1px solid rgba(212,175,55,0.2)', borderRadius: '999px', width: 'fit-content'
+            }}>
             <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#D4AF37' }} />
             <span style={{ fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#D4AF37', fontWeight: 600 }}>
               {isCorporate ? 'Corporate Identity' : 'Private Commission'}
@@ -227,20 +235,22 @@ const Hero = () => {
           </h1>
 
           {/* Mode Toggle */}
-          <div 
+          <div
             ref={toggleRef}
             style={{
-              display: 'flex', flexWrap: 'nowrap',
+              display: 'flex',
+              flexWrap: 'nowrap',
               background: 'rgba(255,255,255,0.04)',
               backdropFilter: 'blur(12px)',
-              border: '1px solid rgba(255,255,255,0.1)', padding: 4,
+              border: '1px solid rgba(255,255,255,0.1)',
+              padding: 4,
               borderRadius: '999px',
               position: 'relative',
               marginBottom: 40,
               zIndex: 20
             }}
           >
-            <div 
+            <div
               ref={highlightRef}
               style={{
                 position: 'absolute', top: 4, bottom: 4, left: 0,
@@ -289,12 +299,13 @@ const Hero = () => {
                 padding: '18px 40px',
                 background: '#D4AF37', color: '#000',
                 fontFamily: 'Inter, sans-serif', fontSize: 10,
-                fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase', 
+                fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase',
                 cursor: 'pointer', borderRadius: '999px', border: 'none',
                 transition: 'all 0.4s ease',
+                boxShadow: '0 10px 25px rgba(212,175,55,0.3)'
               }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 10px 25px rgba(212,175,55,0.3)'; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 10px 25px rgba(212,175,55,0.3)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}
               >
                 {isCorporate ? 'Inquire for Partnerships' : 'Book a Private Fitting'}
               </button>
@@ -304,19 +315,19 @@ const Hero = () => {
                 padding: '18px 40px',
                 background: 'rgba(255,255,255,0.05)', color: '#fff',
                 fontFamily: 'Inter, sans-serif', fontSize: 10,
-                fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase', 
+                fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase',
                 cursor: 'pointer', borderRadius: '999px', border: '1px solid rgba(255, 255, 255, 0.1)',
                 transition: 'all 0.4s ease',
               }}
-              onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.1)'; }}
-              onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.05)'; }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.1)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.05)'; }}
               >
                 {isCorporate ? 'View Corporate Services' : 'Discover the Process'}
               </button>
             </Link>
           </div>
         </div>
-        
+
         {/* Card Footer */}
         <div style={{
           padding: '28px 48px',
@@ -333,9 +344,6 @@ const Hero = () => {
               <span key={item} style={{ fontSize: 8, letterSpacing: '0.35em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', fontWeight: 600 }}>{item}</span>
             ))}
           </div>
-          <span style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 11, color: '#D4AF37', letterSpacing: '0.15em', fontStyle: 'italic', opacity: 0.6 }}>
-            Premium Tailoring — Nigeria
-          </span>
         </div>
       </div>
 

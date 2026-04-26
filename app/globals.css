@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&family=Metrophobic&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
+/* @import "tailwindcss"; */
 
 /* Kento = Cormorant Garamond bold uppercase (closest Google Fonts match) */
 .font-kento {
@@ -19,16 +20,21 @@
 
 /* ===== DESIGN TOKENS ===== */
 :root {
-  --navy:       #1A5276;
-  --navy-mid:   #2980B9;
-  --sky:        #85C1E9;
-  --gold:       #D4AF37;
+  --navy: #1A5276;
+  --navy-mid: #2980B9;
+  --sky: #85C1E9;
+  --gold: #D4AF37;
   --gold-light: #F0D060;
-  --cream:      #FAF8F5;
-  --charcoal:   #1C1C1E;
-  --stone:      #6B6B6B;
-  --glass-bg:   rgba(26, 82, 118, 0.3);
+  --cream: #FAF8F5;
+  --charcoal: #1C1C1E;
+  --stone: #6B6B6B;
+  --glass-bg: rgba(26, 82, 118, 0.3);
   --glass-border: rgba(212, 175, 55, 0.25);
+
+  /* Typography */
+  --font-title: "Kento";
+  --font-subheading: "Homenaje";
+  --font-body: "Metrophobic";
 }
 
 * {
@@ -176,8 +182,8 @@ body {
   align-items: center;
   gap: 10px;
   padding: 14px 32px;
-  border: 1px solid rgba(255,255,255,0.4);
-  color: rgba(255,255,255,0.9);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.9);
   background: transparent;
   font-family: "Inter", sans-serif;
   font-size: 11px;
@@ -403,7 +409,7 @@ body {
 .lookbook-card-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(26,82,118,0.85) 0%, transparent 55%);
+  background: linear-gradient(to top, rgba(26, 82, 118, 0.85) 0%, transparent 55%);
   opacity: 0;
   transition: opacity 0.5s ease;
   display: flex;
@@ -431,7 +437,7 @@ body {
   right: -200px;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(212,175,55,0.06) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.06) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -461,7 +467,7 @@ body {
 }
 
 .atelier-card {
-  background: rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(212, 175, 55, 0.15);
   padding: 2.5rem;
   transition: all 0.4s ease;
@@ -482,7 +488,7 @@ body {
 }
 
 .atelier-card:hover {
-  background: rgba(255,255,255,0.07);
+  background: rgba(255, 255, 255, 0.07);
   border-color: rgba(212, 175, 55, 0.35);
 }
 
@@ -529,7 +535,7 @@ body {
 
 .process-step {
   padding: 2rem 0;
-  border-top: 1px solid rgba(28,28,30,0.12);
+  border-top: 1px solid rgba(28, 28, 30, 0.12);
   transition: all 0.3s ease;
 }
 
@@ -566,7 +572,7 @@ body {
 }
 
 .testimonial-card {
-  background: rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(212, 175, 55, 0.2);
   padding: 2.5rem;
   transition: border-color 0.4s ease;
@@ -634,7 +640,7 @@ body {
   left: -200px;
   width: 700px;
   height: 700px;
-  background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -661,7 +667,7 @@ body {
   padding: 14px 0;
   background: transparent;
   border: none;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   color: #fff;
   font-family: "Inter", sans-serif;
   font-size: 14px;
@@ -671,7 +677,7 @@ body {
 }
 
 .consultation-form-field::placeholder {
-  color: rgba(255,255,255,0.4);
+  color: rgba(255, 255, 255, 0.4);
   font-size: 13px;
   letter-spacing: 0.05em;
 }
@@ -724,10 +730,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-top: 1px solid rgba(28,28,30,0.05);
+  border-top: 1px solid rgba(28, 28, 30, 0.05);
   font-size: 12px;
   letter-spacing: 0.05em;
-  color: rgba(28,28,30,0.5);
+  color: rgba(28, 28, 30, 0.5);
 }
 
 @media (max-width: 768px) {
@@ -800,7 +806,7 @@ body {
 }
 
 .journal-card {
-  border-bottom: 1px solid rgba(28,28,30,0.1);
+  border-bottom: 1px solid rgba(28, 28, 30, 0.1);
   padding-bottom: 2rem;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -830,7 +836,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255, 255, 255, 0.6);
   font-size: 15px;
   transition: all 0.3s ease;
   cursor: pointer;
