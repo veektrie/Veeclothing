@@ -1,5 +1,5 @@
 {
-  "name": "VeeClothingCompany",
+  "name": "vee-clothing-company",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,24 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
-<<<<<<< HEAD
-    "@headlessui/react": "^1.7.18",
-    "@sanity/client": "^7.22.0",
-    "@sanity/image-url": "^2.1.1",
-    "@sanity/vision": "^5.22.0",
-    "dotenv": "^17.4.2",
-    "framer-motion": "^11.0.8",
-=======
     "@headlessui/react": "^2.0.0",
     "framer-motion": "^11.15.0",
->>>>>>> ff82f0a950f754370a192b0bf41e9953933dad81
     "gsap": "^3.15.0",
     "lenis": "^1.3.23",
-    "lucide-react": "^1.8.0",
-    "next": "^14.1.0",
-    "next-sanity": "^12.3.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "next": "^16.2.4",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
     "react-hook-form": "^7.51.0",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^5.0.1",
@@ -34,8 +23,8 @@
   },
   "devDependencies": {
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
     "autoprefixer": "^10.0.1",
     "postcss": "^8",
     "sharp": "^0.34.5",
