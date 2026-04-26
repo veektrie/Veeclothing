@@ -8,7 +8,7 @@ import Script from 'next/script';
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://veeclothingcompany.com"),
-  title: "Vee Clothing Company | Bespoke Tailoring & Corporate Uniforms Lagos",
+  title: "VeeClothingCompany",
   description:
     "Vee Clothing Company — Lagos's premier destination for bespoke tailoring, corporate uniform engineering, and executive menswear. Custom tailored suits, premium African menswear, and branded corporate apparel crafted to global standards with local soul.",
   keywords: [
@@ -49,9 +49,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* — AI Discovery — */}
-        <link rel="llms" href="/llms.txt" />
-        
         {/* — Organization Schema — */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           "@context": "https://schema.org",
