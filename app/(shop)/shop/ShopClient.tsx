@@ -21,11 +21,11 @@ const getTagColor = (tag: string) => {
     if (!tag) return null;
     switch (tag.toUpperCase()) {
         case 'BESTSELLER': return '#D4AF37'; // Gold
-        case 'NEW': return '#2ECC71'; // Green
-        case 'LIMITED': return '#E74C3C'; // Red
-        case 'SIGNATURE': return '#9B59B6'; // Purple
-        case 'CORPORATE': return '#3498DB'; // Blue
-        case 'BESPOKE': return '#34495E'; // Navy
+        case 'NEW': return '##27AE60'; // Green
+        case 'LIMITED': return '#C0392B'; // Red
+        case 'SIGNATURE': return '#1A5276'; // Purple
+        case 'CORPORATE': return '#2980B9'; // Blue
+        case 'BESPOKE': return '#8E44AD'; // Navy
         default: return '#1A5276';
     }
 };
