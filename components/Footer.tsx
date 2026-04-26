@@ -46,7 +46,7 @@ const Footer = () => {
             width={110}
             height={36}
             className="object-contain mb-6"
-            style={{ width: 'auto', height: 'auto', opacity: 0.9 }}
+            style={{ height: 'auto', opacity: 0.9 }}
           />
           <p
             style={{

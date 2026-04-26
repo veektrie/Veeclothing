@@ -1,14 +1,14 @@
 'use client';
 
-import Hero              from './../components/Hero';
-import CorporateAtelier  from './../components/Brand';
-import BespokeProcess    from './../components/Category';
-import ShopPreview       from './../components/ShopPreview';
-import SocialProofRibbon from '@/components/SocialProofRibbon';
-import Journal           from '@/components/Journal';
-import FAQSection        from '@/components/FAQ';
-import Contact           from './../components/Contact';
-import CraftWidget       from '@/components/CraftWidget';
+import Hero from '../components/landingPages/Hero';
+import CorporateAtelier from '@/components/landingPages/Brand';
+import BespokeProcess from '@/components/landingPages/Category';
+import ShopPreview from '@/components/landingPages/ShopPreview';
+import SocialProofRibbon from '@/components/landingPages/SocialProofRibbon';
+import Journal from '@/components/landingPages/Journal';
+import FAQSection from '@/components/landingPages/FAQ';
+import Contact from '@/components/landingPages/Contact';
+import CraftWidget from '@/components/landingPages/CraftWidget';
 
 export default function Home() {
   return (
