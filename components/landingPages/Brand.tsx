@@ -6,39 +6,39 @@ import Link from 'next/link';
 const services = [
   {
     number: '01',
-    title: 'Uniform Engineering',
+    title: 'Custom Uniforms',
     description:
-      'We design and produce precision-branded uniforms that communicate hierarchy, professionalism, and brand cohesion across your entire organisation.',
-    tag: 'Corporate Identity',
+      'We make high-quality uniforms that show your brand style and keep your team looking professional.',
+    tag: 'Business Clothes',
   },
   {
     number: '02',
-    title: 'Executive Wardrobe',
+    title: 'Executive Wear',
     description:
-      'A private wardrobe service for C-suite executives. From boardroom to formal events — we ensure your leadership projects the right authority.',
+      'Special clothes for leaders. From meetings to big events, we help you look your best.',
     tag: 'Private Service',
   },
   {
     number: '03',
-    title: 'Corporate Gifting',
+    title: 'Business Gifts',
     description:
-      'Bespoke branded blazers, accessories, and premium apparel for employee recognition programmes and high-value client gifts.',
+      'Custom blazers, gifts, and more to reward your team or thank your clients.',
     tag: 'Branded Gifting',
   },
   {
     number: '04',
-    title: 'Brand Consultation',
+    title: 'Style Advice',
     description:
-      'A full audit of your organisation\'s visual identity in apparel. We align fabric choice, colour psychology, and silhouette to your brand guidelines.',
+      'We help you pick the right fabrics, colors, and styles that match your brand perfectly.',
     tag: 'Identity Strategy',
   },
 ];
 
 const corporate = [
-  { name: 'Financial Institutions', description: 'Precision-tailored uniforms for banking professionals across Lagos & Abuja.' },
-  { name: 'Hospitality Groups', description: 'Elegantly branded staff wear for 5-star hotel and restaurant groups.' },
-  { name: 'Oil & Gas Sector', description: 'Executive corporate wear for Nigeria\'s leading energy organisations.' },
-  { name: 'Tech & Media Houses', description: 'Contemporary branded apparel for modern, image-conscious corporations.' },
+  { name: 'Banks & Finance', description: 'Custom suits and uniforms for bank staff in Lagos and Abuja.' },
+  { name: 'Hotels & Restaurants', description: 'Stylish uniforms for hotels and restaurants.' },
+  { name: 'Energy Companies', description: 'Professional clothes for Nigeria\'s top energy firms.' },
+  { name: 'Tech & Media', description: 'Modern clothes for creative and tech teams.' },
 ];
 
 const CorporateAtelier = () => {
@@ -49,7 +49,7 @@ const CorporateAtelier = () => {
         {/* Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-2">
           <div>
-            <span className="section-label">Corporate Atelier</span>
+            <span className="section-label">Our Business Services</span>
             <div className="gold-divider my-4" />
             <h2
               className="hero-title"
@@ -60,7 +60,7 @@ const CorporateAtelier = () => {
                 maxWidth: 560,
               }}
             >
-              We Engineer the Visual Identity of Institutions.
+              We Create the Look for Businesses.
             </h2>
           </div>
           <p
@@ -73,7 +73,7 @@ const CorporateAtelier = () => {
               flexShrink: 0,
             }}
           >
-            From a single executive to an organisation of 500 — our corporate solutions are built for scale without sacrificing precision.
+            From a single leader to a team of 500 — we provide quality clothes for businesses of any size.
           </p>
         </div>
 
@@ -177,7 +177,7 @@ const CorporateAtelier = () => {
               marginBottom: '1.5rem',
             }}
           >
-            Sectors We've Served
+            Industries We Serve
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {corporate.map((c) => (
@@ -193,7 +193,7 @@ const CorporateAtelier = () => {
         <div className="mt-12 flex gap-4 flex-wrap">
           <Link href="#consultation">
             <button className="btn-solid-gold">
-              Request Corporate Partnership
+              Partner With Us
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>

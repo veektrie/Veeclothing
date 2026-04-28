@@ -37,7 +37,7 @@ const ShopPreview = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <span className="section-label" style={{ display: 'block', marginBottom: 16 }}>The Atelier Curation</span>
+            <span className="section-label" style={{ display: 'block', marginBottom: 16 }}>Our Collection</span>
             <h2 style={{
               fontFamily: 'Cormorant Garamond, serif',
               fontWeight: 300,
@@ -46,7 +46,7 @@ const ShopPreview = () => {
               lineHeight: 1,
               marginBottom: 24
             }}>
-              Curating <em style={{ color: 'var(--gold)', fontStyle: 'italic' }}>Distinction.</em>
+              Pick Your <em style={{ color: 'var(--gold)', fontStyle: 'italic' }}>Style.</em>
             </h2>
             <div className="gold-divider-center" />
           </motion.div>
@@ -129,7 +129,7 @@ const ShopPreview = () => {
                       color: 'rgba(255,255,255,0.4)', lineHeight: 1.6, fontWeight: 300,
                       marginBottom: 24
                     }}>
-                      Hand-engineered with precision. Available for private commission in signature fabrics.
+                      Made with care. Available for custom orders in premium fabrics.
                     </p>
                     
                     <div style={{ 
@@ -137,7 +137,7 @@ const ShopPreview = () => {
                       color: 'var(--gold)', fontSize: 9, letterSpacing: '0.2em',
                       fontWeight: 600, textTransform: 'uppercase'
                     }}>
-                      Discover Piece
+                      See Details
                       <div style={{ width: 30, height: 1, background: 'var(--gold)', opacity: 0.5 }} />
                     </div>
                   </div>
@@ -167,7 +167,7 @@ const ShopPreview = () => {
             <span style={{ 
               fontSize: 9, letterSpacing: '0.3em', color: 'rgba(255,255,255,0.2)',
               textTransform: 'uppercase', marginBottom: 16 
-            }}>Expansion Archive</span>
+            }}>Coming Soon</span>
             <h4 style={{ 
               fontFamily: 'Cormorant Garamond, serif', fontSize: '1.4rem', 
               color: 'rgba(255,255,255,0.4)', fontWeight: 300 
@@ -188,7 +188,7 @@ const ShopPreview = () => {
         >
           <Link href="/shop">
             <button className="btn-solid-gold" style={{ padding: '20px 50px', borderRadius: 100 }}>
-              View Complete Boutique
+              Shop All
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginLeft: 10 }}>
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>

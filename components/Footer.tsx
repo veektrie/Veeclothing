@@ -6,26 +6,26 @@ const navGroups = [
   {
     heading: 'Services',
     links: [
-      { title: 'Corporate Partnerships', url: '#corporate' },
-      { title: 'Private Commissions', url: '#bespoke' },
-      { title: 'The Collection',        url: '/shop' },
-      { title: 'Executive Wardrobe',    url: '#bespoke' },
-      { title: 'Corporate Gifting',     url: '#corporate' },
+      { title: 'Business Partner', url: '#corporate' },
+      { title: 'Custom Orders', url: '#bespoke' },
+      { title: 'Our Shop',        url: '/shop' },
+      { title: 'Executive Wear',    url: '#bespoke' },
+      { title: 'Business Gifts',     url: '#corporate' },
     ],
   },
   {
     heading: 'Studio',
     links: [
       { title: 'Our Craft',       url: '#bespoke' },
-      { title: 'The Journal',     url: '/journal' },
-      { title: 'Client Sentiments', url: '/#sentiments' },
+      { title: 'Blog',     url: '/journal' },
+      { title: 'Client Reviews', url: '/#sentiments' },
       { title: 'About Vee',       url: '#' },
     ],
   },
   {
     heading: 'Contact',
     links: [
-      { title: 'Request Consultation', url: '#consultation' },
+      { title: 'Talk to Us', url: '#consultation' },
       { title: 'WhatsApp Us',          url: 'https://wa.me/2348103031020' },
       { title: 'Instagram',            url: 'https://instagram.com/veeclothingcompany' },
       { title: 'Facebook',             url: 'https://facebook.com/veeclothingcompany' },
@@ -58,7 +58,7 @@ const Footer = () => {
               marginBottom: 24,
             }}
           >
-            Bespoke tailoring and corporate identity solutions from Lagos, Nigeria — crafted to global standards with local soul.
+            Custom tailoring and business uniforms from Lagos, Nigeria — high quality with local style.
           </p>
 
           {/* NAP block — matches Google Business Profile exactly */}

@@ -62,7 +62,7 @@ const CraftWidget = () => {
             color: 'rgba(255,255,255,0.7)', fontFamily: 'Inter, sans-serif',
             whiteSpace: 'nowrap',
           }}>
-            Live Craft
+            Watch Us Work
           </span>
           <button
             onClick={() => setDismissed(true)}

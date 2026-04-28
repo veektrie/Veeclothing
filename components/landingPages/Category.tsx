@@ -5,27 +5,27 @@ import Link from 'next/link';
 const steps = [
   {
     number: '01',
-    title: 'The Consultation',
+    title: 'Talk to Us',
     description:
-      'A private session — in-person in Lagos or virtually — where we understand your lifestyle, occasion, and vision.',
+      'A quick chat in Lagos or online to discuss your style and what you need.',
   },
   {
     number: '02',
-    title: 'Fabric Curation',
+    title: 'Choosing Fabrics',
     description:
-      'We source from the finest mills globally and locally. Holland & Sherry wools, Ghanaian kente, and premium Nigerian Adire — your story, your cloth.',
+      'We use the best fabrics from around the world and right here at home. Pick the cloth that fits your story.',
   },
   {
     number: '03',
-    title: 'The Fitting',
+    title: 'Testing the Fit',
     description:
-      'Minimum two fittings. We sculpt the garment to your body — not the other way around. Every seam is intentional.',
+      'We do at least two fittings to make sure everything fits you perfectly. Every detail matters.',
   },
   {
     number: '04',
-    title: 'The Delivery',
+    title: 'Getting Your Order',
     description:
-      'Your garment arrives pristine, pressed, and housed in our signature packaging. A keepsake as refined as the garment within.',
+      'Your clothes arrive ready to wear in our special packaging. It’s as nice as the clothes inside.',
   },
 ];
 
@@ -39,7 +39,7 @@ const BespokeProcess = () => {
         {/* Header */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-end mb-2">
           <div>
-            <span className="section-label">Private Commissions</span>
+            <span className="section-label">Custom Made</span>
             <div className="gold-divider my-4" />
             <h2
               style={{
@@ -50,7 +50,7 @@ const BespokeProcess = () => {
                 lineHeight: 1.1,
               }}
             >
-              Excellence for<br />
+              Quality for<br />
               the Individual.
             </h2>
           </div>
@@ -63,7 +63,7 @@ const BespokeProcess = () => {
               maxWidth: 420,
             }}
           >
-            Bespoke tailoring is not a service; it is a collaboration. From the first stitch to the final press, we build garments that are uniquely, irrevocably yours.
+            Custom tailoring is a team effort. From start to finish, we make clothes that fit you perfectly.
           </p>
         </div>
 
@@ -101,7 +101,7 @@ const BespokeProcess = () => {
         <div className="mt-14 flex gap-4 flex-wrap">
           <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
             <button className="btn-ghost-gold">
-              Begin Your Commission
+              Start Your Order
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
@@ -125,7 +125,7 @@ const BespokeProcess = () => {
               marginBottom: 16,
             }}
           >
-            "Global Standards. Local Soul. Every garment is a handshake between the craft traditions of Lagos and the precision of Savile Row."
+            "World-class quality with a local touch. We mix the best of Lagos style with expert tailoring."
           </blockquote>
           <span className="section-label" style={{ color: '#6B6B6B' }}>
             — Vee Clothing Company, Lagos

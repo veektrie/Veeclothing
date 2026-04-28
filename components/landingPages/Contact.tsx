@@ -18,13 +18,13 @@ type FormData = {
 };
 
 const corporateScales = [
-  'Select project scale…',
-  'Individual Executive Wardrobe',
-  'Small Team (5–20 staff)',
-  'Mid-Size (20–100 staff)',
-  'Enterprise (100+ staff)',
-  'Corporate Gifting Campaign',
-  'Brand Consultation',
+  'Select size…',
+  'Personal Wardrobe',
+  'Small Team (5–20)',
+  'Medium Team (20–100)',
+  'Large Team (100+)',
+  'Business Gifts',
+  'Style Advice',
 ];
 
 const Field = ({
@@ -119,19 +119,19 @@ const Contact = () => {
 
         {/* Header */}
         <div style={{ marginBottom: '3.5rem' }}>
-          <span className="section-label" style={{ display: 'block', marginBottom: 14 }}>Private Consultation</span>
+          <span className="section-label" style={{ display: 'block', marginBottom: 14 }}>Talk to Us</span>
           <div className="gold-divider" style={{ marginBottom: 20 }} />
           <h2 className="font-kento" style={{
             fontSize: 'clamp(2rem, 4.5vw, 4rem)',
             color: '#fff', lineHeight: 1.08, marginBottom: 16,
           }}>
-            Begin the{' '}
-            <em style={{ color: '#D4AF37', fontStyle: 'normal' }}>Conversation.</em>
+            Get in{' '}
+            <em style={{ color: '#D4AF37', fontStyle: 'normal' }}>Touch.</em>
           </h2>
           <p className="font-metro" style={{
             color: 'rgba(255,255,255,0.45)', fontSize: 15, lineHeight: 1.8, maxWidth: 480,
           }}>
-            All enquiries receive a personal response within 24 hours. We respond to every message — no automated replies.
+            We\'ll get back to you within 24 hours. A real person will answer your message.
           </p>
         </div>
 
@@ -156,7 +156,7 @@ const Contact = () => {
               fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase',
               color: 'rgba(212,175,55,0.7)', marginBottom: 16, fontWeight: 700
             }}>
-              Enquiry Type
+              Select Service
             </p>
             <div style={{
               display: 'inline-flex', border: '1px solid rgba(255,255,255,0.08)',
@@ -209,13 +209,13 @@ const Contact = () => {
                 color: '#fff', marginBottom: 16,
                 fontFamily: 'Cormorant Garamond, serif'
               }}>
-                Enquiry <em style={{ color: '#D4AF37' }}>Sent.</em>
+                Message <em style={{ color: '#D4AF37' }}>Sent.</em>
               </h3>
               <p className="font-metro" style={{
                 color: 'rgba(255,255,255,0.5)', fontSize: 15, lineHeight: 1.8,
                 maxWidth: 420, margin: '0 auto 32px',
               }}>
-                Thank you for reaching out. A dedicated consultant will review your request and contact you within 24 hours.
+                Thanks for contacting us. We\'ll get back to you within 24 hours.
               </p>
               <button
                 onClick={() => setSubmitted(false)}
@@ -295,10 +295,10 @@ const Contact = () => {
                 )}
               </div>
 
-              <Field id="message" label="Requirements" error={!!errors.message}>
+              <Field id="message" label="Your Message" error={!!errors.message}>
                 <textarea id="message" {...register('message', { required: true })}
                   rows={3}
-                  placeholder="Share your vision or specific requirements..."
+                  placeholder="Tell us what you need..."
                   style={{ ...inputStyle, resize: 'none' }}
                   onFocus={handleFocus} onBlur={handleBlur}
                 />
@@ -323,7 +323,7 @@ const Contact = () => {
                 onMouseEnter={e => { if (!sending) { (e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 20px 40px rgba(212,175,55,0.3)'; }}}
                 onMouseLeave={e => { if (!sending) { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 15px 35px rgba(212,175,55,0.2)'; }}}
               >
-                {sending ? 'Processing...' : 'Request Consultation'}
+                {sending ? 'Sending...' : 'Send Message'}
               </button>
 
             </form>

@@ -64,10 +64,10 @@ const Navbar = () => {
 
   const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/shop', label: 'The Shop' },
-    { href: '/blog', label: 'The Journal' },
-    { href: '/#bespoke', label: 'Bespoke' },
-    { href: '/#corporate', label: 'Corporate' },
+    { href: '/shop', label: 'Shop' },
+    { href: '/blog', label: 'Blog' },
+    { href: '/#bespoke', label: 'Custom' },
+    { href: '/#corporate', label: 'Business' },
     { href: '/#consultation', label: 'Contact' },
   ];
 
@@ -119,7 +119,7 @@ const Navbar = () => {
               href="#consultation"
               className="ml-4 px-6 py-4 bg-[#D4AF37]/10 border border-[#D4AF37]/40 text-[#D4AF37] text-[9px] uppercase tracking-[0.25em] hover:bg-[#D4AF37]/20 transition-all duration-500 rounded-full"
             >
-              Consultation
+              Talk to Us
             </Link>
           </nav>
 
@@ -169,7 +169,7 @@ const Navbar = () => {
               onClick={() => setMenuOpen(false)}
               className="px-10 py-4 w-3 h-4 border border-white/20 text-[#D4AF37] uppercase tracking-[0.3em] text-[10px] hover:bg-white/5 transition-all duration-500"
             >
-              Book Consultation
+              Book Now
             </Link>
             <div className="flex gap-8 text-white/20 text-[9px] uppercase tracking-[0.2em] font-light mt-4">
               <span>Instagram</span>

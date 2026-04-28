@@ -213,7 +213,7 @@ const Hero = () => {
             }}>
             <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#D4AF37' }} />
             <span style={{ fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#D4AF37', fontWeight: 600 }}>
-              {isCorporate ? 'Corporate Identity' : 'Private Commission'}
+              {isCorporate ? 'Business' : 'Custom Order'}
             </span>
           </div>
 
@@ -228,9 +228,9 @@ const Hero = () => {
             maxWidth: '1100px'
           }}>
             {isCorporate ? (
-              <>Corporate Identity,<br /><em style={{ color: '#D4AF37', fontStyle: 'italic' }}>Tailored for Scale.</em></>
+              <>Workwear for Teams,<br /><em style={{ color: '#D4AF37', fontStyle: 'italic' }}>Made to Order.</em></>
             ) : (
-              <>Exclusively<br /><em style={{ color: '#D4AF37', fontStyle: 'italic' }}>Yours.</em></>
+              <>Made Just<br /><em style={{ color: '#D4AF37', fontStyle: 'italic' }}>For You.</em></>
             )}
           </h1>
 
@@ -274,7 +274,7 @@ const Hero = () => {
                   transition: 'all 0.35s ease', borderRadius: '999px',
                 }}
               >
-                {m === 'corporate' ? 'Business' : 'Individual'}
+                {m === 'corporate' ? 'For Business' : 'For You'}
               </button>
             ))}
           </div>
@@ -289,8 +289,8 @@ const Hero = () => {
             fontFamily: 'Inter, sans-serif',
           }}>
             {isCorporate
-              ? 'From the boardroom to the front line, we design cohesive wardrobes that command respect. Professional outfitting for 5 to 500, delivered with the uncompromising soul of bespoke tailoring.'
-              : 'The art of the individual. Every stitch is a deliberate choice, resulting in a commission that exists for no one else. This is bespoke, redefined for the modern gentleman.'}
+              ? 'From the office to the field, we make great uniforms for teams of any size. Get high-quality clothes for your business.'
+              : 'Made just for you. Every detail is carefully picked to create a unique piece. Modern custom tailoring at its best.'}
           </p>
 
           <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', justifyContent: 'center' }}>
@@ -307,7 +307,7 @@ const Hero = () => {
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 10px 25px rgba(212,175,55,0.3)'; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}
               >
-                {isCorporate ? 'Inquire for Partnerships' : 'Book a Private Fitting'}
+                {isCorporate ? 'Partner With Us' : 'Book a Fitting'}
               </button>
             </Link>
             <Link href={isCorporate ? '#corporate' : '#bespoke'}>
@@ -322,7 +322,7 @@ const Hero = () => {
                 onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.1)'; }}
                 onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.05)'; }}
               >
-                {isCorporate ? 'View Corporate Services' : 'Discover the Process'}
+                {isCorporate ? 'Our Services' : 'How It Works'}
               </button>
             </Link>
           </div>

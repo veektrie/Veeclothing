@@ -6,20 +6,20 @@ const sentiments = [
   {
     name: 'Chukwuemeka A.',
     role: 'CEO, Financial Group',
-    pull: '"The corporate branding transformed our executive presence."',
-    full: 'Vee Clothing Company transformed how our executive team presents itself. The attention to detail in every blazer — the stitching, the brand embossing — was extraordinary.',
+    pull: '"The new branding improved our team\'s look."',
+    full: 'Vee Clothing changed how our team looks. The quality of every blazer, from the stitching to the logo, is great.',
   },
   {
     name: 'Barrister Rotimi O.',
     role: 'Senior Counsel',
     pull: '"Three months on, people still ask where I had it made."',
-    full: 'I wore a Vee suit to my daughter\'s wedding. Three months later, guests still ask about the tailor. That is not coincidence — that is craftsmanship of a different order.',
+    full: 'I wore a Vee suit to my daughter\'s wedding. Three months later, guests still ask about the tailor. That is because the quality is so good.',
   },
   {
     name: 'Oluwaseun A.',
     role: 'Operations Director',
     pull: '"Every stitch was intentional. Our team is transformed."',
-    full: 'Exceptional quality and precision. My corporate blazers arrived perfectly finished. Our team\'s presentation has transformed completely.',
+    full: 'Great quality and detail. My blazers look perfect. Our team looks much better now.',
   },
 ];
 
@@ -59,14 +59,14 @@ const SocialProofRibbon = () => {
             fontSize: 10, letterSpacing: '0.25em', textTransform: 'uppercase',
             color: '#D4AF37', display: 'block', marginBottom: 12, fontFamily: 'Inter, sans-serif'
           }}>
-            Client Sentiments
+            Client Reviews
           </span>
           <h2 style={{
             fontFamily: 'Cormorant Garamond, serif',
             fontSize: 'clamp(2rem, 4vw, 3rem)',
             color: '#fff', fontWeight: 300, lineHeight: 1.2
           }}>
-            The Discerning Choice
+            What Our Clients Say
           </h2>
         </div>
 

@@ -25,7 +25,7 @@ const Journal = ({ articles }: JournalProps) => {
         {/* Header */}
         <div className="flex flex-col md:flex-row items-end justify-between gap-6">
           <div>
-            <span className="section-label">The Journal</span>
+            <span className="section-label">Our Blog</span>
             <div className="gold-divider my-4" />
             <h2
               style={{
@@ -37,7 +37,7 @@ const Journal = ({ articles }: JournalProps) => {
                 maxWidth: 480,
               }}
             >
-              Thoughts on Craft, Style &amp; Identity.
+              Stories About Style and Craft.
             </h2>
           </div>
           <span
@@ -49,7 +49,7 @@ const Journal = ({ articles }: JournalProps) => {
               fontWeight: 300,
             }}
           >
-            Long-form perspectives on bespoke tailoring, corporate branding, and the heritage of African menswear.
+            Read about custom tailoring, business style, and African fashion history.
           </span>
         </div>
 
@@ -124,7 +124,7 @@ const Journal = ({ articles }: JournalProps) => {
         <div style={{ display: 'flex', justifyContent: 'center', marginTop: '4rem' }}>
           <Link href="/blog">
             <button className="btn-ghost-navy">
-              View All Editorials
+              See All Posts
             </button>
           </Link>
         </div>

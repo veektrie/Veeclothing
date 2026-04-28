@@ -8,51 +8,51 @@ const faqs = {
   corporate: [
     {
       q: 'What is the minimum order size for corporate uniforms?',
-      a: 'We accommodate orders from as few as 5 garments up to 500+. Each order — regardless of size — receives the same precision and quality assurance. Volume pricing is available for orders exceeding 50 units.',
+      a: 'We take orders from 5 to 500+ items. Every order gets the same high quality. We offer better prices for more than 50 items.',
     },
     {
       q: 'How do you ensure brand consistency across a large team?',
-      a: 'We conduct a Brand Alignment session before any production begins. Your approved colour codes, logo placements, and fabric specifications are documented and signed off, ensuring every garment in the order is identical to the approved sample.',
+      a: 'We meet with you first to match your brand. We check colors, logos, and fabrics to make sure every item looks exactly like your sample.',
     },
     {
       q: 'What is the typical turnaround time for corporate orders?',
-      a: 'All corporate uniform orders are completed within a minimum of 10 working days. Bulk orders of 50+ units may require up to 15 working days. Rush production is available for urgent events at an additional surcharge. On-site fittings in Lagos and Abuja are arranged before production begins.',
+      a: 'Corporate orders take at least 10 working days. Large orders (50+) take up to 15 days. We can finish faster if you\'re in a hurry for an extra fee. We arrange fittings in Lagos and Abuja.',
     },
     {
       q: 'Do you offer corporate gifting services?',
-      a: 'Yes. We design and produce bespoke branded apparel — executive blazers, accessories, and premium items — packaged in our signature presentation boxes for employee recognition programmes and high-value client gifting.',
+      a: 'Yes. We make custom blazers, gifts, and more in nice boxes to reward your team or thank your clients.',
     },
     {
       q: 'Can you visit our office for fittings?',
-      a: 'Absolutely. For corporate orders of 20+ staff, we offer on-site fitting sessions at your Lagos or Abuja office. We bring our full measurement team and fabric swatches. Virtual consultations are also available for clients outside Nigeria.',
+      a: 'Yes. For orders of 50 or more, we can visit your office in Lagos or Abuja for fittings. We can also meet online if you are outside Nigeria.',
     },
   ],
   bespoke: [
     {
       q: 'How does the bespoke commission process work?',
-      a: 'It begins with a private consultation — in-person in Lagos or virtually. We discuss your occasion, lifestyle, and aesthetic. From there, we curate fabric options, conduct a minimum of two fittings, and deliver a complete, hand-finished garment.',
+      a: 'We start with a chat in Lagos or online. We discuss your style and what you need. Then we pick fabrics, do at least two fittings, and deliver your finished clothes.',
     },
     {
       q: 'How long does a bespoke garment take to complete?',
-      a: 'A bespoke commission — suit, kaftan, or agbada — is completed within a minimum of 10 working days from the consultation. Rushed commissions for imminent occasions may be accommodated depending on our current schedule.',
+      a: 'Custom suits, kaftans, or agbadas take at least 10 working days. We might be able to finish faster if you have a tight deadline.',
     },
     {
       q: 'What fabrics do you work with?',
-      a: 'We source from premium mills globally: Holland & Sherry wools from the UK, Italian linen and silk blends, and the finest locally sourced Nigerian Adire, kente, and ankara — depending on the garment and the client\'s vision.',
+      a: 'We use high-quality fabrics from around the world and Nigeria, like UK wools, Italian linen, and local Adire or Kente.',
     },
     {
       q: 'Can I see fabric samples before committing?',
-      a: 'Yes. At the consultation, we present a curated fabric board tailored to your occasion and preference. We encourage clients to touch, feel, and compare before any decision is made.',
+      a: 'During our meeting, we show you a range of fabrics chosen for you. You can see and feel them before you decide.',
     },
     {
       q: 'Do you offer alterations on existing garments?',
-      a: 'We offer alterations exclusively for garments originally commissioned through Vee Clothing Company. For new clients, we recommend beginning with a fresh commission to ensure the garment meets our quality standards from the first stitch.',
+      a: 'We only fix clothes made by us. For new clients, we suggest starting with a new order to ensure the best quality.',
     },
   ],
 };
 
 const FAQSection = () => {
-  const [tab, setTab]       = useState<Tab>('corporate');
+  const [tab, setTab] = useState<Tab>('corporate');
   const [openIdx, setOpenIdx] = useState<number | null>(0);
 
   return (
@@ -68,14 +68,14 @@ const FAQSection = () => {
               fontSize: 'clamp(1.8rem, 3.5vw, 3rem)',
               color: 'var(--charcoal)', lineHeight: 1.12,
             }}>
-              Frequently Asked.
+              Common Questions.
             </h2>
           </div>
           <p className="font-metro" style={{
             color: 'var(--stone)', fontSize: 15, lineHeight: 1.8,
             fontWeight: 400, maxWidth: 420,
           }}>
-            High-value decisions deserve clear answers. We address the questions our corporate and individual clients ask most before beginning a commission.
+            We\'ve answered the most common questions from our clients below.
           </p>
         </div>
 
@@ -150,7 +150,7 @@ const FAQSection = () => {
                       transform: openIdx === i ? 'rotate(45deg)' : 'rotate(0deg)',
                     }}>
                       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M12 5v14M5 12h14"/>
+                        <path d="M12 5v14M5 12h14" />
                       </svg>
                     </span>
                   </button>
@@ -190,7 +190,7 @@ const FAQSection = () => {
             <button className="btn-ghost-gold" style={{ fontFamily: 'Metrophobic, Inter, sans-serif', fontSize: 10 }}>
               Ask a Question
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
+                <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </button>
           </a>
