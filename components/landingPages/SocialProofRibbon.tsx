@@ -62,9 +62,12 @@ const SocialProofRibbon = () => {
             Client Reviews
           </span>
           <h2 style={{
-            fontFamily: 'Cormorant Garamond, serif',
+            fontFamily: 'Inter, sans-serif',
             fontSize: 'clamp(2rem, 4vw, 3rem)',
-            color: '#1C1C1E', fontWeight: 300, lineHeight: 1.2
+            color: '#1C1C1E', 
+            fontWeight: 800,
+            letterSpacing: '-0.04em',
+            lineHeight: 1.2
           }}>
             What Our Clients Say
           </h2>

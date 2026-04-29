@@ -64,8 +64,12 @@ const FAQSection = () => {
           <span className="section-label">Common Questions</span>
           <div className="navy-divider" style={{ margin: '14px auto 20px' }} />
           <h2 className="font-kento" style={{
+            fontFamily: 'Inter, sans-serif',
             fontSize: 'clamp(1.8rem, 3.5vw, 3rem)',
-            color: 'var(--charcoal)', lineHeight: 1.12,
+            color: 'var(--charcoal)', 
+            fontWeight: 800,
+            letterSpacing: '-0.04em',
+            lineHeight: 1.12,
             marginBottom: '20px'
           }}>
             Common Questions.

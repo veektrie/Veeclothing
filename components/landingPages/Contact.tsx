@@ -119,8 +119,11 @@ const Contact = () => {
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
           <span className="section-label">Talk to Us</span>
           <div className="gold-divider" style={{ margin: '14px auto 20px' }} />
-          <h2 className="font-kento" style={{
+          <h2 style={{
+            fontFamily: 'Inter, sans-serif',
             fontSize: 'clamp(2rem, 4.5vw, 4rem)',
+            fontWeight: 800,
+            letterSpacing: '-0.04em',
             color: '#1C1C1E', lineHeight: 1.08, marginBottom: 16,
           }}>
             Get in{' '}

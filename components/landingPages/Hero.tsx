@@ -130,7 +130,7 @@ const Hero = () => {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.4 }}
         >
-          <Link href="/#contact">
+          <Link href="/#consultation">
             <button
               style={{
                 padding: 'clamp(14px, 3vw, 20px) clamp(32px, 5vw, 48px)',

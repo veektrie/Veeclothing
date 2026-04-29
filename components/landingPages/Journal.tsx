@@ -28,10 +28,11 @@ const Journal = ({ articles }: JournalProps) => {
           <div className="navy-divider" style={{ margin: '14px auto 20px' }} />
           <h2
             style={{
-              fontFamily: 'Cormorant Garamond, serif',
+              fontFamily: 'Inter, sans-serif',
               fontSize: 'clamp(2rem, 4vw, 3.5rem)',
               color: '#1C1C1E',
-              fontWeight: 400,
+              fontWeight: 800,
+              letterSpacing: '-0.04em',
               lineHeight: 1.1,
               maxWidth: 600,
               margin: '0 auto 20px'

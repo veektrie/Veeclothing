@@ -46,9 +46,11 @@ const BespokeProcess = () => {
           <div className="navy-divider" style={{ margin: '14px auto 20px' }} />
           <h2
             style={{
-              fontFamily: 'Cormorant Garamond, serif',
+              fontFamily: 'Inter, sans-serif',
               fontSize: 'clamp(2.2rem, 4vw, 4rem)',
               color: '#1C1C1E',
+              fontWeight: 800,
+              letterSpacing: '-0.04em',
               margin: '0 auto 24px',
               maxWidth: 700,
               lineHeight: 1.1
