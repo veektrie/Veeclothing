@@ -3,73 +3,92 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { ArrowLeft, ShoppingBag, Check } from 'lucide-react';
+import toast from 'react-hot-toast';
+import { useCartStore } from '@/store/useCartStore';
 
-// Helper for tag colors (matching your shop page)
-const getTagColor = (tag: string) => {
-    if (!tag) return null;
-    switch (tag.toUpperCase()) {
-        case 'BESTSELLER': return '#D4AF37'; // Gold
-        case 'NEW': return '##27AE60'; // Green
-        case 'LIMITED': return '#C0392B'; // Red
-        case 'SIGNATURE': return '#1A5276'; // Purple
-        case 'CORPORATE': return '#2980B9'; // Blue
-        case 'BESPOKE': return '#8E44AD'; // Navy
-        default: return '#1A5276';
-    }
-};
-
-export default function ProductClient({ product }: { product: any }) {
+export default function ProductClient({ product, relatedProducts }: { product: any, relatedProducts: any[] }) {
     const [selectedSize, setSelectedSize] = useState<string>(product.sizes?.[0] || '');
     const [selectedColor, setSelectedColor] = useState<any>(product.colors?.[0] || null);
     const [isAdding, setIsAdding] = useState(false);
 
-    const handleAddToCart = () => {
-        setIsAdding(true);
-        // Add your cart logic here (e.g., useCartStore().addItem({...}))
-        console.log("Added to cart:", { product, selectedSize, selectedColor });
+    const addItem = useCartStore((state: { addItem: any; }) => state.addItem);
 
-        setTimeout(() => setIsAdding(false), 1500); // Simulate network/UI delay
+    const handleAddToCart = () => {
+        // Validation: Make sure they picked a size if sizes exist
+        if (product.sizes?.length > 0 && !selectedSize) {
+            toast.error('Please select a size first.');
+            return;
+        }
+
+        // Validation: Make sure they picked a color if colors exist
+        if (product.colors?.length > 0 && !selectedColor) {
+            toast.error('Please select a color first.');
+            return;
+        }
+
+        setIsAdding(true);
+
+        // 3. SEND DATA TO STORE
+        addItem({
+            id: product._id,
+            name: product.name,
+            price: product.price,
+            image: product.src,
+            quantity: 1,
+            size: selectedSize,
+            color: selectedColor?.name,
+        });
+
+        // 4. SHOW SUCCESS TOAST
+        toast.success(`${product.name} added to your cart.`);
+
+        // Reset button state quickly
+        setTimeout(() => setIsAdding(false), 600);
     };
 
     return (
-        <main className="bg-[#08101A] min-h-screen relative overflow-x-hidden pt-[clamp(100px,12vh,140px)] pb-24">
+        <main className="bg-[#08101A] min-h-screen relative font-sans overflow-x-hidden">
 
-            {/* Background Atmosphere */}
-            <div
-                className="fixed inset-0 z-0 pointer-events-none"
-                style={{
-                    background: 'radial-gradient(circle at 20% 30%, rgba(212,175,55,0.08) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(26, 82, 118, 0.15) 0%, transparent 50%)',
-                }}
-            />
-            <div
-                className="fixed inset-0 z-10 opacity-[0.04] pointer-events-none"
-                style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Ffilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
-                }}
-            />
+            {/* --- TOP SECTION (DARK) --- */}
+            <div className="pt-32 pb-24 px-[clamp(1rem,5vw,4rem)] max-w-[1440px] mx-auto">
 
-            <div className="max-w-[1440px] mx-auto px-[clamp(1rem,5vw,4rem)] relative z-20">
+                {/* Breadcrumb */}
+                <div className="flex gap-2 text-[10px] tracking-[0.2em] font-bold uppercase mb-8">
+                    <Link href="/shop" className="text-white/40 hover:text-white transition-colors">ARCHIVE</Link>
+                    <span className="text-white/20">/</span>
+                    <span className="text-[#D4AF37]">{product.name}</span>
+                </div>
 
-                {/* Top Navigation */}
-                <Link
-                    href="/shop"
-                    className="inline-flex items-center gap-2 text-white/50 hover:text-[#D4AF37] transition-colors font-sans text-[10px] tracking-[0.2em] uppercase font-bold mb-10"
-                >
-                    <ArrowLeft className="w-4 h-4" />
-                    Back to Archive
-                </Link>
+                {/* 3-Column Main Product Card */}
+                <div className="bg-[#111822] rounded-[3rem] p-8 md:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-8 items-center shadow-2xl border border-white/[0.02]">
 
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+                    {/* Column 1: Text Details */}
+                    <div className="flex flex-col">
+                        <div className="flex items-center gap-4 text-[#D4AF37] text-[9px] tracking-[0.3em] uppercase font-bold mb-6">
+                            VEE ATELIER
+                            <div className="h-[1px] w-12 bg-[#D4AF37]/50" />
+                        </div>
 
-                    {/* LEFT: Image Gallery */}
-                    <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.6 }}
-                        className="relative w-full aspect-[3/4] md:aspect-[4/5] rounded-[2rem] overflow-hidden bg-white/[0.02] border border-white/[0.08] backdrop-blur-3xl shadow-2xl"
-                    >
+                        <h1 className="font-serif text-4xl md:text-5xl lg:text-[3.5rem] text-white leading-[1.1] mb-6">
+                            {product.name}
+                        </h1>
+
+                        <p className="font-serif text-2xl text-[#D4AF37] font-bold mb-12">
+                            {String(product.price).toLowerCase().includes('from')
+                                ? product.price
+                                : `₦${product.price?.toLocaleString()}`}
+                        </p>
+
+                        <span className="text-[9px] tracking-[0.2em] text-white/40 uppercase font-bold mb-3 block">
+                            ENGINEERING & SOUL
+                        </span>
+                        <p className="text-sm text-white/60 leading-[1.8] font-light max-w-sm">
+                            {product.longDesc || product.desc}
+                        </p>
+                    </div>
+
+                    {/* Column 2: Center Image */}
+                    <div className="relative w-full aspect-[3/4] rounded-2xl overflow-hidden bg-black/20 shadow-2xl transform lg:scale-110 z-10">
                         {product.src && (
                             <Image
                                 src={product.src}
@@ -77,100 +96,29 @@ export default function ProductClient({ product }: { product: any }) {
                                 fill
                                 priority
                                 className="object-cover"
-                                sizes="(max-width: 1024px) 100vw, 50vw"
                             />
                         )}
+                    </div>
 
-                        {product.tag && (
-                            <div
-                                className="absolute top-6 left-6 px-4 py-2 rounded-xl backdrop-blur-md border border-white/10 z-10"
-                                style={{ background: getTagColor(product.tag) ? `${getTagColor(product.tag)}bb` : 'rgba(26,82,118,0.7)' }}
-                            >
-                                <span className="text-[10px] tracking-[0.2em] font-extrabold text-white font-sans uppercase">
-                                    {product.tag}
-                                </span>
-                            </div>
-                        )}
-                    </motion.div>
+                    {/* Column 3: Options & Buttons */}
+                    <div className="flex flex-col lg:pl-10">
 
-                    {/* RIGHT: Product Details */}
-                    <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        className="flex flex-col pt-4 lg:pt-10"
-                    >
-                        <span className="text-[10px] tracking-[0.3em] uppercase text-[#D4AF37] font-extrabold block mb-3">
-                            {product.cat} Collection
-                        </span>
-
-                        <h1 className="font-serif font-light text-4xl md:text-5xl lg:text-6xl text-white leading-[1.1] mb-4">
-                            {product.name}
-                        </h1>
-
-                        <p className="font-serif text-3xl text-[#D4AF37] mb-8">
-                            ₦{product.price?.toLocaleString()}
-                        </p>
-
-                        <div className="h-[1px] w-full bg-white/10 mb-8" />
-
-                        <p className="font-sans text-[14px] text-white/60 leading-[1.8] font-light mb-10">
-                            {product.longDesc || product.desc}
-                        </p>
-
-                        {/* Colors Selection */}
-                        {product.colors && product.colors.length > 0 && (
-                            <div className="mb-8">
-                                <div className="flex justify-between items-center mb-4">
-                                    <span className="font-sans text-[10px] tracking-[0.2em] uppercase text-white/80 font-bold">
-                                        Select Color
-                                    </span>
-                                    <span className="font-sans text-[11px] text-white/40">
-                                        {selectedColor?.name}
-                                    </span>
-                                </div>
-                                <div className="flex flex-wrap gap-4">
-                                    {product.colors.map((color: any) => (
-                                        <button
-                                            key={color.name}
-                                            onClick={() => setSelectedColor(color)}
-                                            className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${selectedColor?.name === color.name
-                                                ? 'ring-2 ring-offset-2 ring-offset-[#08101A] ring-[#D4AF37] scale-110'
-                                                : 'ring-1 ring-white/20 hover:scale-110'
-                                                }`}
-                                            style={{ backgroundColor: color.hex }}
-                                            title={color.name}
-                                        >
-                                            {selectedColor?.name === color.name && (
-                                                <Check className={`w-4 h-4 ${['#FFFFFF', '#FDFEFE', '#F1C40F'].includes(color.hex?.toUpperCase()) ? 'text-black' : 'text-white'}`} />
-                                            )}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Sizes Selection */}
+                        {/* Sizes */}
                         {product.sizes && product.sizes.length > 0 && (
                             <div className="mb-10">
-                                <div className="flex justify-between items-center mb-4">
-                                    <span className="font-sans text-[10px] tracking-[0.2em] uppercase text-white/80 font-bold">
-                                        Select Size
-                                    </span>
-                                    <Link href="#" className="font-sans text-[10px] tracking-[0.1em] text-[#D4AF37] hover:underline uppercase">
-                                        Size Guide
-                                    </Link>
-                                </div>
+                                <span className="text-[10px] tracking-[0.2em] text-white/40 uppercase font-bold mb-4 block">
+                                    SELECT SIZE
+                                </span>
                                 <div className="flex flex-wrap gap-3">
                                     {product.sizes.map((size: string) => (
                                         <button
                                             key={size}
                                             onClick={() => setSelectedSize(size)}
                                             className={`
-                        px-6 py-3 font-sans text-[11px] tracking-[0.1em] uppercase font-bold rounded-lg border backdrop-blur-sm transition-all duration-300
+                        min-w-[4rem] px-5 py-3 text-[10px] tracking-[0.1em] uppercase font-bold rounded-full transition-all duration-300
                         ${selectedSize === size
-                                                    ? 'bg-[#D4AF37] border-[#D4AF37] text-[#08101A]'
-                                                    : 'bg-white/[0.02] border-white/10 text-white/60 hover:border-white/30 hover:bg-white/[0.05]'}
+                                                    ? 'bg-[#D4AF37] text-black shadow-lg shadow-[#D4AF37]/20'
+                                                    : 'bg-transparent border border-white/20 text-white/80 hover:border-white/50'}
                       `}
                                         >
                                             {size}
@@ -180,48 +128,90 @@ export default function ProductClient({ product }: { product: any }) {
                             </div>
                         )}
 
-                        {/* Action Buttons */}
-                        <div className="flex gap-4 mb-12">
-                            <button
-                                onClick={handleAddToCart}
-                                disabled={isAdding || (product.sizes?.length > 0 && !selectedSize)}
-                                className="flex-1 bg-[#D4AF37] hover:bg-[#b5952f] disabled:bg-white/10 disabled:text-white/30 disabled:cursor-not-allowed text-[#08101A] py-5 px-8 rounded-xl font-sans text-[11px] tracking-[0.2em] uppercase font-extrabold flex items-center justify-center gap-3 transition-all duration-300"
-                            >
-                                {isAdding ? (
-                                    <>Adding to Commission...</>
-                                ) : (
-                                    <>
-                                        <ShoppingBag className="w-5 h-5" />
-                                        Begin Commission
-                                    </>
-                                )}
-                            </button>
-                        </div>
-
-                        {/* Features Accordion / List */}
-                        {product.features && product.features.length > 0 && (
-                            <div className="bg-white/[0.02] border border-white/10 rounded-2xl p-8 backdrop-blur-md">
-                                <h3 className="font-serif text-2xl text-white mb-6 border-b border-white/10 pb-4">
-                                    Engineering Details
-                                </h3>
-                                <ul className="flex flex-col gap-5">
-                                    {product.features.map((feature: any, idx: number) => (
-                                        <li key={idx} className="flex flex-col gap-1">
-                                            <span className="font-sans text-[12px] font-bold tracking-[0.1em] uppercase text-[#D4AF37]">
-                                                {feature.title}
-                                            </span>
-                                            <span className="font-sans text-[14px] font-light text-white/60 leading-[1.6]">
-                                                {feature.desc}
-                                            </span>
-                                        </li>
+                        {/* Colors */}
+                        {product.colors && product.colors.length > 0 && (
+                            <div className="mb-12">
+                                <span className="text-[10px] tracking-[0.2em] text-white/40 uppercase font-bold mb-4 block">
+                                    THE PALETTE
+                                </span>
+                                <div className="flex flex-wrap gap-4">
+                                    {product.colors.map((color: any) => (
+                                        <button
+                                            key={color.name}
+                                            onClick={() => setSelectedColor(color)}
+                                            title={color.name}
+                                            className={`
+                        w-8 h-8 rounded-full transition-all duration-300
+                        ${selectedColor?.name === color.name ? 'ring-2 ring-offset-4 ring-offset-[#111822] ring-[#D4AF37] scale-110' : 'hover:scale-110'}
+                      `}
+                                            style={{ backgroundColor: color.hex }}
+                                        />
                                     ))}
-                                </ul>
+                                </div>
                             </div>
                         )}
 
-                    </motion.div>
+                        {/* Buttons */}
+                        <div className="flex flex-col gap-4 mt-auto">
+                            <button
+                                onClick={handleAddToCart}
+                                disabled={isAdding}
+                                className="w-full bg-[#D4AF37] text-black hover:bg-[#b5952f] py-4 rounded-full text-[10px] tracking-[0.2em] uppercase font-extrabold transition-colors disabled:opacity-50"
+                            >
+                                {isAdding ? 'ADDING...' : 'ADD TO CART'}
+                            </button>
+                            <Link href='/cart'>
+                                <button className="w-full bg-transparent border border-white/20 text-white hover:border-white/60 py-4 rounded-full text-[10px] tracking-[0.2em] uppercase font-bold transition-colors">
+                                    Go To Cart
+                                </button>
+                            </Link>
+                        </div>
+
+                    </div>
                 </div>
             </div>
+
+            {/* --- BOTTOM SECTION (LIGHT / RELATED PRODUCTS) --- */}
+            {relatedProducts && relatedProducts.length > 0 && (
+                <div className="bg-[#FDFBF7] py-24 px-[clamp(1rem,5vw,4rem)]">
+                    <div className="max-w-[1440px] mx-auto text-center">
+
+                        <span className="text-[9px] tracking-[0.3em] uppercase text-[#1A5276] font-bold block mb-4">
+                            EXPLORE
+                        </span>
+                        <h2 className="font-serif text-4xl md:text-5xl text-black mb-16">
+                            You Might Also Like
+                        </h2>
+
+                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10">
+                            {relatedProducts.map((item) => (
+                                <Link key={item._id} href={`/shop/product/${item.slug}`} className="group no-underline ">
+                                    <div className="flex flex-col items-center ">
+                                        <div className="relative w-full aspect-[4/5] rounded-[2rem] overflow-hidden mb-6 bg-gray-100">
+                                            {item.src && (
+                                                <Image
+                                                    src={item.src}
+                                                    alt={item.name}
+                                                    fill
+                                                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                                                />
+                                            )}
+                                        </div>
+                                        <h3 className="text-sm font-sans text-gray-900 mb-2">{item.name}</h3>
+                                        <p className="text-xs font-sans text-[#1A5276] font-semibold">
+                                            {String(item.price).toLowerCase().includes('from')
+                                                ? item.price
+                                                : `₦${item.price?.toLocaleString()}`}
+                                        </p>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+
+                    </div>
+                </div>
+            )}
+
         </main>
     );
 }

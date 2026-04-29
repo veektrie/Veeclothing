@@ -3,26 +3,28 @@ import { groq } from "next-sanity";
 import Link from "next/link";
 import ProductClient from "./ProductClient";
 
-// Query to get the single product based on the slug
-const singleProductQuery = groq`*[_type == "product" && slug.current == $slug][0] {
-  _id,
-  name,
-  price,
-  "src": image.asset->url,
-  tag,
-  "cat": category,
-  "desc": description,
-  longDesc,
-  features[]{ title, desc },
-  colors[]{ name, hex },
-  sizes
-}`;
-
-export const revalidate = 60; // Optional cache revalidation
+export const revalidate = 60;
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const product = await client.fetch(singleProductQuery, { slug });
+
+  // 1. Fetch the main product
+  const product = await client.fetch(
+    groq`*[_type == "product" && slug.current == $slug][0] {
+      _id,
+      name,
+      price,
+      "src": image.asset->url,
+      tag,
+      "cat": category,
+      "desc": description,
+      longDesc,
+      features[]{ title, desc },
+      colors[]{ name, hex },
+      sizes
+    }`,
+    { slug }
+  );
 
   if (!product) {
     return (
@@ -35,5 +37,17 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     );
   }
 
-  return <ProductClient product={product} />;
+  // 2. Fetch related products from the same category (excluding the current one)
+  const relatedProducts = await client.fetch(
+    groq`*[_type == "product" && category == $category && _id != $currentId][0...4] {
+      _id,
+      name,
+      price,
+      "slug": slug.current,
+      "src": image.asset->url
+    }`,
+    { category: product.cat, currentId: product._id }
+  );
+
+  return <ProductClient product={product} relatedProducts={relatedProducts} />;
 }

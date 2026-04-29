@@ -4,6 +4,8 @@ import { ArrowLeft, Clock, Calendar, Share2 } from "lucide-react";
 import { client } from "@/lib/sanity";
 import { groq } from "next-sanity";
 import { PortableText } from "@portabletext/react";
+import SubscribeForm from "@/components/SubscribeForm";
+
 
 // Query to get the single article based on the slug
 const singleArticleQuery = groq`*[_type == "blog" && slug.current == $slug][0] {
@@ -22,6 +24,7 @@ const singleArticleQuery = groq`*[_type == "blog" && slug.current == $slug][0] {
 export default async function JournalArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const article = await client.fetch(singleArticleQuery, { slug });
+  
 
   if (!article) {
     return (
@@ -133,19 +136,15 @@ export default async function JournalArticlePage({ params }: { params: Promise<{
 
         {/* Article Footer */}
         <footer className="mt-20 pt-10 border-t border-gray-200">
-          <div className="bg-gray-900 text-white p-10 text-center rounded-sm">
-            <h3 className="font-serif text-3xl mb-3">Join the movement.</h3>
-            <p className="font-sans text-white/60 mb-6 text-sm max-w-md mx-auto">
-              Subscribe to thevinonobrand journal for exclusive insights on style, heritage, and modern craftsmanship.
-            </p>
-            <Link href="/">
-              <button className="bg-[#D4AF37] hover:bg-[#b5952f] text-gray-900 px-8 py-3 font-sans text-xs uppercase tracking-widest font-bold transition-colors">
-                Subscribe Now
-              </button>
-            </Link>
-          </div>
-        </footer>
-
+  <div className="bg-gray-900 text-white p-10 text-center rounded-sm">
+    <h3 className="font-serif text-3xl mb-3">Join the movement.</h3>
+    <p className="font-sans text-white/60 mb-6 text-sm max-w-md mx-auto">
+      Subscribe to thevinonobrand journal for exclusive insights on style, heritage, and modern craftsmanship.
+    </p>
+    
+    <SubscribeForm />
+  </div>
+</footer>
       </article>
     </main>
   );

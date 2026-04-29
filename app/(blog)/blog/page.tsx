@@ -14,10 +14,16 @@ const allArticlesQuery = groq`*[_type == "blog"] | order(publishedAt desc) {
   "readTime": "5 min read" 
 }`;
 
+export const revalidate = 30;
+
 export default async function JournalPage() {
   // Fetch live data from Sanity
-  const articles = await client.fetch(allArticlesQuery);
-
+  // const articles = await client.fetch(allArticlesQuery);
+  const articles = await client.fetch(
+    allArticlesQuery,
+    {}, // empty params
+    { next: { revalidate: 30 } } // Checks for new data every 30 seconds
+  );
   // Pass it to the interactive client component
   return <JournalClient articles={articles} />;
 }
