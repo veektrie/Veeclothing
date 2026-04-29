@@ -194,7 +194,25 @@ const FAQSection = () => {
             Don't see your question? Our team responds to all inquiries within 24 hours.
           </p>
           <a href="#contact" style={{ textDecoration: 'none' }}>
-            <button className="btn-ghost-navy" style={{ margin: '0 auto', fontFamily: 'Metrophobic, Inter, sans-serif', fontSize: 10, color: '#1A5276', border: '1px solid rgba(26, 82, 118, 0.3)', padding: '12px 32px', borderRadius: '999px', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, justifyContent: 'center' }}>
+            <button className="btn-solid-navy" style={{ 
+              margin: '0 auto', 
+              fontFamily: 'Inter, sans-serif', 
+              fontSize: 10, 
+              color: '#FFFFFF', 
+              background: '#1A5276',
+              border: 'none', 
+              padding: '14px 36px', 
+              borderRadius: '999px', 
+              cursor: 'pointer', 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: 8, 
+              justifyContent: 'center',
+              fontWeight: 700,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              boxShadow: '0 10px 20px rgba(26, 82, 118, 0.2)'
+            }}>
               Ask a Question
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7" />
