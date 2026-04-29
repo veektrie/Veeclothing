@@ -805,6 +805,12 @@ body {
   }
 }
 
+@media (max-width: 640px) {
+  .journal-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .journal-card {
   border-bottom: 1px solid rgba(28, 28, 30, 0.1);
   padding-bottom: 2rem;

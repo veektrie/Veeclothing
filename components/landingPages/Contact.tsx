@@ -113,7 +113,7 @@ const Contact = () => {
         pointerEvents: 'none',
       }} />
 
-      <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 4rem' }}>
+      <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 clamp(1.5rem, 5vw, 4rem)' }}>
 
         {/* Header - Centered */}
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
@@ -230,7 +230,7 @@ const Contact = () => {
             <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
 
               {/* Name row */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 32 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 'clamp(20px, 4vw, 32px)' }}>
                 <Field id="name" label="Full Name" error={!!errors.name}>
                   <input id="name" {...register('name', { required: true })}
                     placeholder="Full Name" style={inputStyle}
@@ -253,7 +253,7 @@ const Contact = () => {
               </Field>
 
               {/* Conditional fields */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 32 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 'clamp(20px, 4vw, 32px)' }}>
                 {serviceType === 'corporate' ? (
                   <>
                     <Field id="organisation" label="Organisation">
@@ -327,13 +327,8 @@ const Contact = () => {
         </motion.div>
 
         {/* ── Contact & Socials strip ── */}
-        <div style={{
-          marginTop: '3.5rem', paddingTop: '2.5rem',
-          borderTop: '1px solid rgba(0,0,0,0.06)',
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          flexWrap: 'wrap', gap: 20,
-        }}>
-          <div style={{ display: 'flex', gap: 32, flexWrap: 'wrap' }}>
+        <div className="contact-footer-strip">
+          <div className="contact-info-items">
             {[
               { label: 'WhatsApp', value: '+234 810 303 1020', href: 'https://wa.me/2348103031020' },
               { label: 'Instagram', value: '@veeclothingcompany', href: 'https://instagram.com/veeclothingcompany' },
@@ -365,6 +360,34 @@ const Contact = () => {
             ))}
           </div>
         </div>
+
+        <style jsx>{`
+          .contact-footer-strip {
+            margin-top: 3.5rem;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(0,0,0,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 24px;
+          }
+          .contact-info-items {
+            display: flex;
+            gap: clamp(24px, 5vw, 48px);
+            flex-wrap: wrap;
+          }
+          @media (max-width: 640px) {
+            .contact-footer-strip {
+              justify-content: center;
+              text-align: center;
+            }
+            .contact-info-items {
+              justify-content: center;
+              gap: 20px;
+            }
+          }
+        `}</style>
 
       </div>
     </section>
