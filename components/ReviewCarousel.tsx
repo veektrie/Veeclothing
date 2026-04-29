@@ -96,15 +96,15 @@ const ReviewCarousel = () => {
               alignItems: 'center',
               gap: 10,
               padding: '10px 18px',
-              background: 'rgba(26,82,118,0.08)',
-              border: '1px solid rgba(26,82,118,0.15)',
-              backdropFilter: 'blur(8px)',
+              background: '#FFFFFF',
+              border: '1px solid rgba(26,82,118,0.1)',
               borderRadius: 6,
+              boxShadow: '0 4px 12px rgba(0,0,0,0.02)'
             }}
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
               <circle cx="12" cy="12" r="10" stroke="#1A5276" strokeWidth="1.5"/>
-              <path d="M9 12l2 2 4-4" stroke="#D4AF37" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M9 12l2 2 4-4" stroke="#1A5276" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
             <span style={{ fontSize: 10, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#1A5276', fontFamily: 'Inter, sans-serif' }}>
               Google Verified Business
@@ -123,12 +123,12 @@ const ReviewCarousel = () => {
               exit={{ opacity: 0, x: direction * -60 }}
               transition={{ duration: 0.45, ease: 'easeInOut' }}
               style={{
-                background: 'rgba(255,255,255,0.65)',
-                backdropFilter: 'blur(16px)',
-                border: '1px solid rgba(212,175,55,0.18)',
+                background: '#FFFFFF',
+                border: '1px solid rgba(26,82,118,0.1)',
                 padding: '2.5rem 3rem',
                 maxWidth: 720,
                 borderRadius: 16,
+                boxShadow: '0 20px 40px -15px rgba(0,0,0,0.05)'
               }}
             >
               <StarRating count={reviews[current].rating} />
@@ -138,7 +138,7 @@ const ReviewCarousel = () => {
                 fontSize: 9,
                 letterSpacing: '0.3em',
                 textTransform: 'uppercase',
-                color: reviews[current].type === 'Corporate' ? '#1A5276' : '#D4AF37',
+                color: '#1A5276',
                 display: 'block',
                 marginBottom: 12,
                 fontFamily: 'Inter, sans-serif',
@@ -181,15 +181,15 @@ const ReviewCarousel = () => {
               aria-label="Previous review"
               style={{
                 width: 40, height: 40,
-                border: '1px solid rgba(212,175,55,0.3)',
+                border: '1px solid rgba(26, 82, 118, 0.2)',
                 background: 'transparent',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
-                color: '#D4AF37',
+                color: '#1A5276',
                 borderRadius: 4,
               }}
-              onMouseEnter={e => { (e.currentTarget).style.background = 'rgba(212,175,55,0.1)'; }}
+              onMouseEnter={e => { (e.currentTarget).style.background = 'rgba(26, 82, 118, 0.05)'; }}
               onMouseLeave={e => { (e.currentTarget).style.background = 'transparent'; }}
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -207,7 +207,7 @@ const ReviewCarousel = () => {
                   style={{
                     width: i === current ? 24 : 6,
                     height: 6,
-                    background: i === current ? '#D4AF37' : 'rgba(212,175,55,0.25)',
+                    background: i === current ? '#1A5276' : 'rgba(26, 82, 118, 0.2)',
                     border: 'none',
                     cursor: 'pointer',
                     transition: 'all 0.35s ease',
@@ -223,15 +223,15 @@ const ReviewCarousel = () => {
               aria-label="Next review"
               style={{
                 width: 40, height: 40,
-                border: '1px solid rgba(212,175,55,0.3)',
+                border: '1px solid rgba(26, 82, 118, 0.2)',
                 background: 'transparent',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 cursor: 'pointer',
                 transition: 'all 0.3s ease',
-                color: '#D4AF37',
+                color: '#1A5276',
                 borderRadius: 4,
               }}
-              onMouseEnter={e => { (e.currentTarget).style.background = 'rgba(212,175,55,0.1)'; }}
+              onMouseEnter={e => { (e.currentTarget).style.background = 'rgba(26, 82, 118, 0.05)'; }}
               onMouseLeave={e => { (e.currentTarget).style.background = 'transparent'; }}
             >
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

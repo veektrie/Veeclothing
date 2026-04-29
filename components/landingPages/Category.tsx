@@ -5,27 +5,31 @@ import Link from 'next/link';
 const steps = [
   {
     number: '01',
-    title: 'The Consultation',
+    title: 'Talk to Us',
     description:
-      'A private session — in-person in Lagos or virtually — where we understand your lifestyle, occasion, and vision.',
+      'A quick chat in Lagos or online to discuss your style and what you need.',
+    tag: 'Consultation',
   },
   {
     number: '02',
-    title: 'Fabric Curation',
+    title: 'Choosing Fabrics',
     description:
-      'We source from the finest mills globally and locally. Holland & Sherry wools, Ghanaian kente, and premium Nigerian Adire — your story, your cloth.',
+      'We use the best fabrics from around the world and right here at home. Pick the cloth that fits your story.',
+    tag: 'Curation',
   },
   {
     number: '03',
-    title: 'The Fitting',
+    title: 'Testing the Fit',
     description:
-      'Minimum two fittings. We sculpt the garment to your body — not the other way around. Every seam is intentional.',
+      'We do at least two fittings to make sure everything fits you perfectly. Every detail matters.',
+    tag: 'Precision',
   },
   {
     number: '04',
-    title: 'The Delivery',
+    title: 'Getting Your Order',
     description:
-      'Your garment arrives pristine, pressed, and housed in our signature packaging. A keepsake as refined as the garment within.',
+      'Your clothes arrive ready to wear in our special packaging. It’s as nice as the clothes inside.',
+    tag: 'Delivery',
   },
 ];
 
@@ -33,76 +37,128 @@ const BespokeProcess = () => {
   const whatsappUrl = 'https://wa.me/c/2348103031020';
 
   return (
-    <section className="process-section" id="bespoke">
-      <div className="process-inner">
+    <section className="atelier-section" id="bespoke">
+      <div className="atelier-inner">
 
-        {/* Header */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-end mb-2">
-          <div>
-            <span className="section-label">Private Commissions</span>
-            <div className="gold-divider my-4" />
-            <h2
-              style={{
-                fontFamily: 'Cormorant Garamond, serif',
-                fontSize: 'clamp(2.2rem, 4vw, 4rem)',
-                color: '#1C1C1E',
-                fontWeight: 400,
-                lineHeight: 1.1,
-              }}
-            >
-              Excellence for<br />
-              the Individual.
-            </h2>
-          </div>
-          <p
+        {/* Header - Centered */}
+        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+          <span className="section-label">Custom Made</span>
+          <div className="navy-divider" style={{ margin: '14px auto 20px' }} />
+          <h2
             style={{
-              color: '#6B6B6B',
-              fontSize: 15,
-              lineHeight: 1.85,
-              fontWeight: 300,
-              maxWidth: 420,
+              fontFamily: 'Inter, sans-serif',
+              fontSize: 'clamp(2.2rem, 4vw, 4rem)',
+              color: '#1C1C1E',
+              fontWeight: 800,
+              letterSpacing: '-0.04em',
+              margin: '0 auto 24px',
+              maxWidth: 700,
+              lineHeight: 1.1
             }}
           >
-            Bespoke tailoring is not a service; it is a collaboration. From the first stitch to the final press, we build garments that are uniquely, irrevocably yours.
+            Quality for the Individual.
+          </h2>
+          <p
+            style={{
+              color: 'rgba(28,28,30,0.6)',
+              fontSize: 15,
+              maxWidth: 500,
+              lineHeight: 1.8,
+              fontWeight: 300,
+              margin: '0 auto'
+            }}
+          >
+            Custom tailoring is a team effort. From start to finish, we make clothes that fit you perfectly.
           </p>
         </div>
 
-        {/* Steps */}
-        <div className="process-steps">
-          {steps.map((step, i) => (
+        {/* Step Cards */}
+        <div 
+          className="atelier-grid mt-12"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '2rem'
+          }}
+        >
+          {steps.map((s, i) => (
             <motion.div
-              key={step.number}
-              className="process-step"
+              key={s.number}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: i * 0.12 }}
               viewport={{ once: true }}
+              style={{
+                background: '#FFFFFF',
+                border: '1px solid rgba(0, 0, 0, 0.05)',
+                padding: '2.5rem',
+                borderRadius: 24,
+                transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                cursor: 'default',
+                boxShadow: '0 10px 30px -10px rgba(0,0,0,0.05)'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(26, 82, 118, 0.3)';
+                e.currentTarget.style.transform = 'translateY(-8px)';
+                e.currentTarget.style.boxShadow = '0 20px 40px -15px rgba(0,0,0,0.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.05)';
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 10px 30px -10px rgba(0,0,0,0.05)';
+              }}
             >
-              <span className="process-number">{step.number}</span>
+              <div className="flex items-start justify-between mb-6">
+                <span
+                  style={{
+                    fontFamily: 'Cormorant Garamond, serif',
+                    fontSize: '3rem',
+                    fontWeight: 300,
+                    color: 'rgba(26, 82, 118, 0.4)',
+                    lineHeight: 1,
+                  }}
+                >
+                  {s.number}
+                </span>
+                <span
+                  style={{
+                    fontSize: 8,
+                    letterSpacing: '0.25em',
+                    textTransform: 'uppercase',
+                    color: '#1A5276',
+                    background: 'rgba(26, 82, 118, 0.08)',
+                    padding: '6px 12px',
+                    borderRadius: 4,
+                  }}
+                >
+                  {s.tag}
+                </span>
+              </div>
               <h3
                 style={{
-                  fontFamily: 'Playfair Display, serif',
-                  fontSize: '1.15rem',
+                  fontFamily: 'Cormorant Garamond, serif',
+                  fontSize: '1.6rem',
                   color: '#1C1C1E',
-                  fontWeight: 500,
-                  marginBottom: 12,
+                  fontWeight: 400,
+                  marginBottom: 14,
+                  letterSpacing: '0.02em'
                 }}
               >
-                {step.title}
+                {s.title}
               </h3>
-              <p style={{ color: '#6B6B6B', fontSize: 13, lineHeight: 1.8, fontWeight: 300 }}>
-                {step.description}
+              <p style={{ color: 'rgba(28,28,30,0.5)', fontSize: 14, lineHeight: 1.8, fontWeight: 300, fontFamily: 'Inter, sans-serif' }}>
+                {s.description}
               </p>
             </motion.div>
           ))}
         </div>
 
         {/* CTA */}
-        <div className="mt-14 flex gap-4 flex-wrap">
+        <div className="mt-12 flex gap-4 flex-wrap mobile-center-cta">
           <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-            <button className="btn-ghost-gold">
-              Begin Your Commission
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <button className="btn-solid-gold" style={{ background: '#1A5276', color: '#fff', border: '1px solid #1A5276' }}>
+              Start Your Order
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </button>
@@ -112,7 +168,7 @@ const BespokeProcess = () => {
         {/* Craft quote */}
         <div
           className="mt-20 p-10 border-l-2"
-          style={{ borderColor: '#D4AF37', background: 'rgba(212,175,55,0.04)' }}
+          style={{ borderColor: '#1A5276', background: 'rgba(26, 82, 118, 0.02)' }}
         >
           <blockquote
             style={{
@@ -125,14 +181,25 @@ const BespokeProcess = () => {
               marginBottom: 16,
             }}
           >
-            "Global Standards. Local Soul. Every garment is a handshake between the craft traditions of Lagos and the precision of Savile Row."
+            "World-class quality with a local touch. We mix the best of Lagos style with expert tailoring."
           </blockquote>
-          <span className="section-label" style={{ color: '#6B6B6B' }}>
+          <span className="section-label" style={{ color: 'rgba(28,28,30,0.4)' }}>
             — Vee Clothing Company, Lagos
           </span>
         </div>
 
       </div>
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .mobile-center-cta {
+            justify-content: center;
+          }
+          .btn-solid-gold {
+            width: 100%;
+            justify-content: center;
+          }
+        }
+      `}</style>
     </section>
   );
 };

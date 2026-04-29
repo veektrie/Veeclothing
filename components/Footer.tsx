@@ -6,26 +6,26 @@ const navGroups = [
   {
     heading: 'Services',
     links: [
-      { title: 'Corporate Partnerships', url: '#corporate' },
-      { title: 'Private Commissions', url: '#bespoke' },
-      { title: 'The Collection',        url: '/shop' },
-      { title: 'Executive Wardrobe',    url: '#bespoke' },
-      { title: 'Corporate Gifting',     url: '#corporate' },
+      { title: 'Business Partner', url: '#corporate' },
+      { title: 'Custom Orders', url: '#bespoke' },
+      { title: 'Our Shop',        url: '/shop' },
+      { title: 'Executive Wear',    url: '#bespoke' },
+      { title: 'Business Gifts',     url: '#corporate' },
     ],
   },
   {
     heading: 'Studio',
     links: [
       { title: 'Our Craft',       url: '#bespoke' },
-      { title: 'The Journal',     url: '/journal' },
-      { title: 'Client Sentiments', url: '/#sentiments' },
+      { title: 'Blog',     url: '/journal' },
+      { title: 'Client Reviews', url: '/#sentiments' },
       { title: 'About Vee',       url: '#' },
     ],
   },
   {
     heading: 'Contact',
     links: [
-      { title: 'Request Consultation', url: '#consultation' },
+      { title: 'Talk to Us', url: '#consultation' },
       { title: 'WhatsApp Us',          url: 'https://wa.me/2348103031020' },
       { title: 'Instagram',            url: 'https://instagram.com/veeclothingcompany' },
       { title: 'Facebook',             url: 'https://facebook.com/veeclothingcompany' },
@@ -58,7 +58,7 @@ const Footer = () => {
               marginBottom: 24,
             }}
           >
-            Bespoke tailoring and corporate identity solutions from Lagos, Nigeria — crafted to global standards with local soul.
+            Custom tailoring and business uniforms from Lagos, Nigeria — high quality with local style.
           </p>
 
           {/* NAP block — matches Google Business Profile exactly */}
@@ -74,21 +74,21 @@ const Footer = () => {
             {[
               {
                 icon: (
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.5"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1A5276" strokeWidth="1.5"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
                 ),
                 label: 'Lagos, Nigeria',
                 itemProp: 'address',
               },
               {
                 icon: (
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 011 1.18 2 2 0 013 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1A5276" strokeWidth="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 011 1.18 2 2 0 013 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92z"/></svg>
                 ),
                 label: '+234 810 303 1020',
                 itemProp: 'telephone',
               },
               {
                 icon: (
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1A5276" strokeWidth="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
                 ),
                 label: 'veeclothingcompany@gmail.com',
                 itemProp: 'email',
@@ -107,8 +107,8 @@ const Footer = () => {
             ))}
           </address>
 
-          {/* Gold accent line */}
-          <div style={{ width: 40, height: 1, background: 'rgba(212,175,55,0.5)', marginBottom: 16 }} />
+          {/* Navy accent line */}
+          <div style={{ width: 40, height: 1, background: 'rgba(26, 82, 118, 0.5)', marginBottom: 16 }} />
           <p style={{ fontSize: 10, letterSpacing: '0.2em', color: '#1A5276', textTransform: 'uppercase', fontWeight: 600 }}>
             Est. Lagos, Nigeria
           </p>

@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { useSearchParams } from 'next/navigation';
 
 // Hardcoded categories to ensure labels look nice (matches your Sanity values)
 type Category = 'all' | 'corporate' | 'bespoke' | 'kaftan' | 'accessories';
@@ -20,23 +21,36 @@ const CATEGORIES: { key: Category; label: string }[] = [
 const getTagColor = (tag: string) => {
     if (!tag) return null;
     switch (tag.toUpperCase()) {
-        case 'BESTSELLER': return '#D4AF37'; // Gold
-        case 'NEW': return '##27AE60'; // Green
+        case 'BESTSELLER': return '#1A5276'; // Navy
+        case 'NEW': return '#27AE60'; // Green
         case 'LIMITED': return '#C0392B'; // Red
-        case 'SIGNATURE': return '#1A5276'; // Purple
+        case 'SIGNATURE': return '#1A5276'; // Navy
         case 'CORPORATE': return '#2980B9'; // Blue
-        case 'BESPOKE': return '#8E44AD'; // Navy
+        case 'BESPOKE': return '#1A5276'; // Navy
         default: return '#1A5276';
     }
 };
 
 export default function ShopClient({ initialProducts = [] }: { initialProducts: any[] }) {
+    const searchParams = useSearchParams();
+    const searchParam = searchParams.get('search');
     const [active, setActive] = useState<Category>('all');
+    const [searchQuery, setSearchQuery] = useState(searchParam || '');
 
-    // Filter based on active category
-    const filtered = active === 'all'
-        ? initialProducts
-        : initialProducts.filter(p => p.cat === active);
+    useEffect(() => {
+        if (searchParam) {
+            setSearchQuery(searchParam);
+        }
+    }, [searchParam]);
+
+    // Filter based on active category and search query
+    const filtered = initialProducts.filter(p => {
+        const matchesCategory = active === 'all' || p.cat === active;
+        const matchesSearch = !searchQuery || 
+            p.name?.toLowerCase().includes(searchQuery.toLowerCase()) || 
+            p.desc?.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesCategory && matchesSearch;
+    });
 
     return (
         <main className="bg-[#08101A] min-h-screen relative overflow-x-hidden">
@@ -45,7 +59,7 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
             <div
                 className="fixed inset-0 z-0 pointer-events-none"
                 style={{
-                    background: 'radial-gradient(circle at 80% 20%, rgba(212,175,55,0.06) 0%, transparent 50%), radial-gradient(circle at 20% 80%, rgba(26, 82, 118, 0.12) 0%, transparent 50%)',
+                    background: 'radial-gradient(circle at 80% 20%, rgba(26, 82, 118, 0.06) 0%, transparent 50%), radial-gradient(circle at 20% 80%, rgba(26, 82, 118, 0.12) 0%, transparent 50%)',
                 }}
             />
 
@@ -68,8 +82,8 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
                             <Link href="/" className="text-[10px] text-white/30 font-sans tracking-[0.15em] uppercase no-underline hover:text-white transition-colors">
                                 Home
                             </Link>
-                            <div className="w-1 h-1 rounded-full bg-[#D4AF37]/30" />
-                            <span className="text-[10px] text-[#D4AF37] font-sans tracking-[0.15em] uppercase font-semibold">
+                            <div className="w-1 h-1 rounded-full bg-[#1A5276]/30" />
+                            <span className="text-[10px] text-[#1A5276] font-sans tracking-[0.15em] uppercase font-semibold">
                                 The Archive
                             </span>
                         </div>
@@ -79,14 +93,14 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6 }}
                         >
-                            <span className="text-[9px] tracking-[0.4em] uppercase text-[#D4AF37] font-extrabold block mb-4">
+                            <span className="text-[9px] tracking-[0.4em] uppercase text-[#1A5276] font-extrabold block mb-4">
                                 Boutique Collection
                             </span>
-                            <div className="h-[1px] w-20 bg-[#D4AF37]/20 mb-6" />
+                            <div className="h-[1px] w-20 bg-[#1A5276]/20 mb-6" />
 
                             <h1 className="font-serif font-light text-[clamp(2.5rem,6vw,4.8rem)] text-white leading-[1.05] mb-5 tracking-[-0.02em]">
                                 The Collection.<br />
-                                <em className="text-[#D4AF37] italic">Made to Measure.</em>
+                                <em className="text-[#1A5276] italic">Made to Measure.</em>
                             </h1>
 
                             <p className="text-white/50 text-[clamp(14px,1.2vw,16px)] font-light leading-[1.8] max-w-[520px] font-sans">
@@ -97,11 +111,11 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
                 </div>
 
                 {/* ── Offer Strip (Glassmorphic) ── */}
-                <div className="bg-[#D4AF37]/5 backdrop-blur-[20px] border-y border-[#D4AF37]/10 py-3 px-[clamp(1rem,5vw,4rem)] flex items-center justify-center gap-6">
-                    <span className="font-serif text-[clamp(0.9rem,1.1vw,1.1rem)] italic text-[#D4AF37] font-normal">
+                <div className="bg-[#1A5276]/5 backdrop-blur-[20px] border-y border-[#1A5276]/10 py-3 px-[clamp(1rem,5vw,4rem)] flex items-center justify-center gap-6">
+                    <span className="font-serif text-[clamp(0.9rem,1.1vw,1.1rem)] italic text-[#1A5276] font-normal">
                         Exclusive Heritage Fabrics Now in Stock
                     </span>
-                    <div className="h-3 w-[1px] bg-[#D4AF37]/20 hidden md:block" />
+                    <div className="h-3 w-[1px] bg-[#1A5276]/20 hidden md:block" />
                     <span className="text-[9px] tracking-[0.2em] text-white/50 font-sans uppercase font-bold hidden md:block">
                         Complimentary Fitting on All Commissions
                     </span>
@@ -109,26 +123,52 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
 
                 {/* ── Filter & Search Bar ── */}
                 <div className="max-w-[1440px] mx-auto px-[clamp(1rem,5vw,4rem)] pt-[clamp(2rem,5vw,4rem)]">
-                    <div className="flex gap-3 overflow-x-auto pb-[15px] hide-scrollbar touch-pan-x">
-                        {CATEGORIES.map((c) => {
-                            const isActive = active === c.key;
-                            return (
-                                <button
-                                    key={c.key}
-                                    onClick={() => setActive(c.key)}
-                                    className={`
-                    px-6 py-3 text-[10px] tracking-[0.2em] uppercase cursor-pointer font-sans whitespace-nowrap
-                    rounded-full border backdrop-blur-[20px] transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]
-                    ${isActive
-                                            ? 'font-extrabold bg-[#D4AF37]/10 text-[#D4AF37] border-[#D4AF37]/30'
-                                            : 'font-semibold bg-white/5 text-white/40 border-white/5 hover:bg-white/10 hover:text-white/70'}
-                  `}
-                                >
-                                    {c.label}
-                                </button>
-                            );
-                        })}
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+                        <div className="flex gap-3 overflow-x-auto pb-[15px] hide-scrollbar touch-pan-x">
+                            {CATEGORIES.map((c) => {
+                                const isActive = active === c.key;
+                                return (
+                                    <button
+                                        key={c.key}
+                                        onClick={() => setActive(c.key)}
+                                        className={`
+                        px-6 py-3 text-[10px] tracking-[0.2em] uppercase cursor-pointer font-sans whitespace-nowrap
+                        rounded-full border backdrop-blur-[20px] transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]
+                        ${isActive
+                                                ? 'font-extrabold bg-[#1A5276]/10 text-[#1A5276] border-[#1A5276]/30'
+                                                : 'font-semibold bg-white/5 text-white/40 border-white/5 hover:bg-white/10 hover:text-white/70'}
+                      `}
+                                    >
+                                        {c.label}
+                                    </button>
+                                );
+                            })}
+                        </div>
+
+                        {/* Inline Search Input */}
+                        <div className="relative w-full max-w-[300px]">
+                            <input 
+                                type="text"
+                                placeholder="Search the archive..."
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                className="w-full bg-white/5 border border-white/10 rounded-full py-3 px-6 text-[10px] text-white font-sans tracking-widest uppercase focus:outline-none focus:border-[#1A5276]/40 transition-colors"
+                            />
+                        </div>
                     </div>
+                    
+                    {searchQuery && (
+                        <div className="mb-8 flex items-center gap-3">
+                            <span className="text-[10px] text-white/30 uppercase tracking-[0.2em]">Results for:</span>
+                            <span className="text-[10px] text-[#1A5276] uppercase tracking-[0.2em] font-bold">"{searchQuery}"</span>
+                            <button 
+                                onClick={() => setSearchQuery('')}
+                                className="text-[10px] text-white/20 hover:text-white transition-colors uppercase tracking-[0.2em]"
+                            >
+                                (Clear)
+                            </button>
+                        </div>
+                    )}
                 </div>
 
                 {/* ── Product Grid (Glassmorphic) ── */}
@@ -148,7 +188,7 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
                                         href={`/shop/product/${product.slug}`} // Using Sanity's slug for routing
                                         className="no-underline text-inherit block h-full"
                                     >
-                                        <div className="bg-white/[0.02] backdrop-blur-[40px] rounded-[24px] overflow-hidden cursor-pointer h-full flex flex-col border border-white/[0.08] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_30px_60px_rgba(0,0,0,0.4)] hover:-translate-y-2.5 hover:border-[#D4AF37]/20 hover:bg-white/[0.04]">
+                                        <div className="bg-white/[0.02] backdrop-blur-[40px] rounded-[24px] overflow-hidden cursor-pointer h-full flex flex-col border border-white/[0.08] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_30px_60px_rgba(0,0,0,0.4)] hover:-translate-y-2.5 hover:border-[#1A5276]/20 hover:bg-white/[0.04]">
 
                                             {/* Image Container */}
                                             <div className="relative aspect-[3/4] overflow-hidden bg-black/20">
@@ -188,12 +228,12 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
                                                 </div>
 
                                                 <div className="mt-auto flex items-center justify-between pt-2.5">
-                                                    <span className="font-serif text-[1.2rem] text-[#D4AF37] font-semibold">
+                                                    <span className="font-serif text-[1.2rem] text-[#1A5276] font-semibold">
                                                         {/* Dynamically format number to Naira string */}
                                                         ₦{product.price?.toLocaleString()}
                                                     </span>
 
-                                                    <div className="w-8 h-8 rounded-full border border-[#D4AF37]/30 flex items-center justify-center text-[#D4AF37] bg-[#D4AF37]/5 transition-all duration-300 ease-out group-hover:bg-[#D4AF37] group-hover:text-black">
+                                                    <div className="w-8 h-8 rounded-full border border-[#1A5276]/30 flex items-center justify-center text-[#1A5276] bg-[#1A5276]/5 transition-all duration-300 ease-out group-hover:bg-[#1A5276] group-hover:text-black">
                                                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                                             <path d="M5 12h14M12 5l7 7-7 7" />
                                                         </svg>
@@ -208,7 +248,7 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
                         </div>
                     ) : (
                         <div className="text-center py-24 text-white/40 font-sans tracking-widest text-sm uppercase">
-                            No products found in this category.
+                            No products found matching your criteria.
                         </div>
                     )}
                 </div>

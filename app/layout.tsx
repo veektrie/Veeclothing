@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://veeclothingcompany.com"),
   title: "VeeClothingCompany",
   description:
-    "Vee Clothing Company — Lagos's premier destination for bespoke tailoring, corporate uniform engineering, and executive menswear. Custom tailored suits, premium African menswear, and branded corporate apparel crafted to global standards with local soul.",
+    "Vee Clothing Company — High-quality custom tailoring and business uniforms in Lagos. We make custom suits, African menswear, and corporate clothes with expert care.",
   keywords: [
     "bespoke tailoring Lagos",
     "custom tailored suits Nigeria",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Vee Clothing Company | Bespoke Tailoring & Corporate Uniforms Lagos",
     description:
-      "Crafting premium bespoke garments and corporate identity solutions from Lagos, Nigeria. Global standards. Local soul.",
+      "High-quality custom tailoring and business uniforms from Lagos, Nigeria. World-class quality with local style.",
     url: "https://veeclothingcompany.com",
     siteName: "Vee Clothing Company",
     locale: "en_NG",

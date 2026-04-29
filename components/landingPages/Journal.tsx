@@ -3,67 +3,55 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 
-const articles = [
-  {
-    category: 'Craft & Heritage',
-    title: 'The Anatomy of a Bespoke Suit: What Separates Artisanal from Average',
-    excerpt:
-      'From the canvas chest piece to the hand-padded lapels — a deep dive into why bespoke tailoring is the ultimate investment piece for the discerning gentleman.',
-    readTime: '7 min read',
-    keywords: 'bespoke tailoring Lagos, custom suit craftsmanship Africa',
-  },
-  {
-    category: 'Corporate Identity',
-    title: "Brand Cohesion in Modern Business: Why Your Team's Uniform is Your Handshake",
-    excerpt:
-      'In high-stakes industries, the first impression your team makes is worn, not spoken. We explore how Nigeria\'s leading corporations are using apparel to signal authority.',
-    readTime: '6 min read',
-    keywords: 'corporate uniform Lagos, executive branding Nigeria',
-  },
-  {
-    category: 'Sustainable Luxury',
-    title: 'Sustainable Luxury in African Fashion: Quality Over Volume',
-    excerpt:
-      'The future of African menswear is not fast fashion — it is intentional craftsmanship. Here is how Vee Clothing Company approaches sustainable luxury from Lagos.',
-    readTime: '8 min read',
-    keywords: 'sustainable luxury African fashion, premium menswear Nigeria',
-  },
-];
+interface Article {
+  _id: string;
+  title: string;
+  slug: string;
+  category: string;
+  publishedAt: string;
+  excerpt: string;
+  readTime: string;
+}
 
-const Journal = () => {
+interface JournalProps {
+  articles: Article[];
+}
+
+const Journal = ({ articles }: JournalProps) => {
   return (
     <section className="journal-section" id="journal">
       <div className="journal-inner">
 
-        {/* Header */}
-        <div className="flex flex-col md:flex-row items-end justify-between gap-6">
-          <div>
-            <span className="section-label">The Journal</span>
-            <div className="gold-divider my-4" />
-            <h2
-              style={{
-                fontFamily: 'Cormorant Garamond, serif',
-                fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-                color: '#1C1C1E',
-                fontWeight: 400,
-                lineHeight: 1.1,
-                maxWidth: 480,
-              }}
-            >
-              Thoughts on Craft, Style &amp; Identity.
-            </h2>
-          </div>
-          <span
+        {/* Header - Centered */}
+        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+          <span className="section-label">Our Blog</span>
+          <div className="navy-divider" style={{ margin: '14px auto 20px' }} />
+          <h2
             style={{
-              fontSize: 12,
-              color: '#6B6B6B',
-              maxWidth: 280,
-              lineHeight: 1.7,
-              fontWeight: 300,
+              fontFamily: 'Inter, sans-serif',
+              fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+              color: '#1C1C1E',
+              fontWeight: 800,
+              letterSpacing: '-0.04em',
+              lineHeight: 1.1,
+              maxWidth: 600,
+              margin: '0 auto 20px'
             }}
           >
-            Long-form perspectives on bespoke tailoring, corporate branding, and the heritage of African menswear.
-          </span>
+            Stories About Style and Craft.
+          </h2>
+          <p
+            style={{
+              fontSize: 15,
+              color: '#6B6B6B',
+              maxWidth: 400,
+              lineHeight: 1.7,
+              fontWeight: 300,
+              margin: '0 auto'
+            }}
+          >
+            Read about custom tailoring, business style, and African fashion history.
+          </p>
         </div>
 
         {/* Articles */}
@@ -83,7 +71,7 @@ const Journal = () => {
                   fontSize: 9,
                   letterSpacing: '0.3em',
                   textTransform: 'uppercase',
-                  color: '#D4AF37',
+                  color: '#1A5276',
                   display: 'block',
                   marginBottom: 16,
                 }}
@@ -120,7 +108,7 @@ const Journal = () => {
                 >
                   {a.readTime}
                 </span>
-                <Link href="/journal">
+                <Link href={`/blog/${a.slug}`}>
                   <span className="journal-read-more">
                     Read More
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -135,9 +123,9 @@ const Journal = () => {
 
         {/* View All Button */}
         <div style={{ display: 'flex', justifyContent: 'center', marginTop: '4rem' }}>
-          <Link href="/journal">
+          <Link href="/blog">
             <button className="btn-ghost-navy">
-              View All Editorials
+              See All Posts
             </button>
           </Link>
         </div>
