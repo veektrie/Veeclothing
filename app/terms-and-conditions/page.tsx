@@ -1,69 +1,115 @@
 import React from "react";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ScrollText, Shield } from "lucide-react";
 
 export default function TermsAndConditions() {
   return (
-    <div className="min-h-screen bg-[#F5F5F7] dark:bg-[#1a1a1a] py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto bg-white dark:bg-[#272727] rounded-3xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-800">
-        <div className="px-6 py-8 sm:p-10">
-          <div className="flex items-center gap-4 mb-8">
-            <Link
-              href="/"
-              className="p-2 bg-gray-50 dark:bg-gray-800 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 transition"
-            >
-              <ArrowLeft className="w-5 h-5 text-gray-700 dark:text-gray-300" />
-            </Link>
-            <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Terms and Conditions</h1>
+    <div className="min-h-screen bg-[#F8FAFC] py-[clamp(100px,12vh,140px)] px-6 font-sans text-[#1C1C1E]">
+      
+      {/* Decorative Atmosphere */}
+      <div className="fixed inset-0 z-0 pointer-events-none opacity-40">
+        <div className="absolute top-[-5%] right-[-5%] w-[35%] h-[35%] rounded-full bg-blue-100/20 blur-[100px]"></div>
+        <div className="absolute bottom-[-5%] left-[-5%] w-[35%] h-[35%] rounded-full bg-emerald-100/20 blur-[100px]"></div>
+      </div>
+
+      <div className="max-w-[900px] mx-auto relative z-10">
+        
+        {/* Navigation Back */}
+        <Link href="/" className="inline-flex items-center gap-2 text-[10px] font-bold tracking-[0.2em] uppercase text-[#1A5276] mb-12 hover:opacity-70 transition-opacity">
+            <ArrowLeft className="w-3.5 h-3.5" />
+            Return to Shop
+        </Link>
+
+        <header className="mb-16">
+            <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 bg-white rounded-2xl shadow-sm border border-black/5 flex items-center justify-center">
+                    <ScrollText className="w-6 h-6 text-[#1A5276]" />
+                </div>
+                <div className="h-px flex-1 bg-black/[0.05]"></div>
+            </div>
+            <h1 style={{ fontFamily: 'Inter, sans-serif' }} className="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                Terms <span className="text-[#1A5276]">&</span> <br/>Conditions.
+            </h1>
+            <p className="text-[#64748b] mt-6 font-medium max-w-lg leading-relaxed">
+                By commissioning a piece or interacting with our archive, you agree to the following protocols that govern the Vee Clothing Company experience.
+            </p>
+        </header>
+
+        <div className="bg-white rounded-[2.5rem] border border-black/5 shadow-xl shadow-blue-900/5 overflow-hidden">
+          <div className="p-8 md:p-14">
+            
+            <div className="space-y-12">
+              
+              <section>
+                <div className="flex items-center gap-3 mb-4">
+                    <span className="text-[10px] font-black text-[#1A5276] bg-[#F8FAFC] w-6 h-6 rounded-full flex items-center justify-center border border-black/5">01</span>
+                    <h2 style={{ fontFamily: 'Inter, sans-serif' }} className="text-lg font-bold tracking-tight">Introduction</h2>
+                </div>
+                <p className="text-[#64748b] text-[15px] leading-relaxed ml-9">
+                  Welcome to Vee Clothing Company. By accessing our platform or commissioning custom tailoring, you enter into a binding agreement with us. These terms ensure the integrity of our craft and the satisfaction of our clients.
+                </p>
+              </section>
+
+              <section>
+                <div className="flex items-center gap-3 mb-4">
+                    <span className="text-[10px] font-black text-[#1A5276] bg-[#F8FAFC] w-6 h-6 rounded-full flex items-center justify-center border border-black/5">02</span>
+                    <h2 style={{ fontFamily: 'Inter, sans-serif' }} className="text-lg font-bold tracking-tight">Intellectual Property</h2>
+                </div>
+                <p className="text-[#64748b] text-[15px] leading-relaxed ml-9">
+                  Vee Clothing Company owns all design patterns, digital assets, and trademarked materials found on this website. Replicating our bespoke designs or using our brand assets without explicit written consent is strictly prohibited.
+                </p>
+              </section>
+
+              <section>
+                <div className="flex items-center gap-3 mb-4">
+                    <span className="text-[10px] font-black text-[#1A5276] bg-[#F8FAFC] w-6 h-6 rounded-full flex items-center justify-center border border-black/5">03</span>
+                    <h2 style={{ fontFamily: 'Inter, sans-serif' }} className="text-lg font-bold tracking-tight">Bespoke Commissions</h2>
+                </div>
+                <p className="text-[#64748b] text-[15px] leading-relaxed ml-9">
+                  Custom commissions require precise measurements and consultations. While we strive for perfection, slight variations in fabric texture or shade may occur due to the artisanal nature of our sourcing. Production timelines are estimates and may vary based on design complexity.
+                </p>
+              </section>
+
+              <section>
+                <div className="flex items-center gap-3 mb-4">
+                    <span className="text-[10px] font-black text-[#1A5276] bg-[#F8FAFC] w-6 h-6 rounded-full flex items-center justify-center border border-black/5">04</span>
+                    <h2 style={{ fontFamily: 'Inter, sans-serif' }} className="text-lg font-bold tracking-tight">Limitation of Liability</h2>
+                </div>
+                <p className="text-[#64748b] text-[15px] leading-relaxed ml-9">
+                  Vee Clothing Company shall not be held liable for indirect or consequential damages arising from the use of our products. Our liability is limited strictly to the value of the specific commission in question.
+                </p>
+              </section>
+
+              <section>
+                <div className="flex items-center gap-3 mb-4">
+                    <span className="text-[10px] font-black text-[#1A5276] bg-[#F8FAFC] w-6 h-6 rounded-full flex items-center justify-center border border-black/5">05</span>
+                    <h2 style={{ fontFamily: 'Inter, sans-serif' }} className="text-lg font-bold tracking-tight">Returns & Revisions</h2>
+                </div>
+                <p className="text-[#64748b] text-[15px] leading-relaxed ml-9">
+                  Bespoke and custom-tailored items are non-refundable once production begins. We offer one complimentary fitting revision for all individual commissions to ensure the perfect silhouette. Ready-to-wear items may be returned within 7 days if in original condition.
+                </p>
+              </section>
+
+            </div>
+
+            <div className="mt-20 pt-10 border-t border-black/[0.05] flex flex-col md:flex-row justify-between items-center gap-6">
+                <div className="flex items-center gap-3 text-[#1A5276]">
+                    <Shield className="w-4 h-4" />
+                    <span className="text-[10px] font-bold uppercase tracking-widest">Consumer Rights Protected</span>
+                </div>
+                <div className="text-[10px] font-bold text-[#94a3b8] uppercase tracking-[0.2em]">
+                    Last Refined: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                </div>
+            </div>
           </div>
+        </div>
 
-          <div className="prose prose-orange max-w-none text-gray-600 dark:text-gray-300 space-y-6">
-            <section>
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3">1. Introduction</h2>
-              <p>
-                Welcome to Vee Clothing Company. By accessing or using our website, you agree to be bound by these Terms and Conditions. Please read them carefully before making a purchase.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3">2. Intellectual Property Rights</h2>
-              <p>
-                Other than the content you own, under these Terms, vee  Clothing Company and/or its licensors own all the intellectual property rights and materials contained in this Website.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3">3. User Responsibilities</h2>
-              <p>
-                As a user, you agree not to use the website in any way that causes, or may cause, damage to the website or impairment of the availability or accessibility of the website. You must not use our website to copy, store, host, transmit, send, use, publish, or distribute any material which consists of (or is linked to) any spyware, computer virus, Trojan horse, worm, keystroke logger, rootkit, or other malicious computer software.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3">4. Limitation of Liability</h2>
-              <p>
-                In no event shall vee  Clothing Company, nor any of its officers, directors, and employees, be held liable for anything arising out of or in any way connected with your use of this Website. vee  Clothing Company, including its officers, directors, and employees shall not be held liable for any indirect, consequential, or special liability arising out of or in any way related to your use of this Website.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3">5. Return & Refund Policy</h2>
-              <p>
-                We stand behind our products. If you are not entirely satisfied with your purchase, please contact us within 7 days of receiving your item. Items must be returned in their original condition and packaging. Shipping costs for returns are non-refundable.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-3">6. Modifications</h2>
-              <p>
-                vee Clothing Company is permitted to revise these Terms at any time as it sees fit, and by using this Website you are expected to review these Terms on a regular basis.
-              </p>
-            </section>
-          </div>
-
-          <div className="mt-10 pt-6 border-t border-gray-100 dark:border-gray-800 text-sm text-gray-500 dark:text-gray-400">
-            Last updated: {new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
-          </div>
+        {/* Support Footer */}
+        <div className="mt-12 text-center">
+            <p className="text-[11px] text-[#64748b] font-medium">
+                Questions regarding our protocols? <br className="md:hidden" />
+                Contact us at <span className="text-[#1A5276] font-bold">veeclothingcompany@gmail.com</span>
+            </p>
         </div>
       </div>
     </div>

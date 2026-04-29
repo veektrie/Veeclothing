@@ -91,7 +91,7 @@ const LightCard = ({ step, wide = false }: { step: typeof steps[0], wide?: boole
     <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
       {step.features.map(f => (
         <li key={f} style={{ fontSize: 12, color: '#1A5276', fontWeight: 600, display: 'flex', alignItems: 'center', gap: 8 }}>
-          <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#10B981', flexShrink: 0, display: 'inline-block' }} />
+          <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#1A5276', flexShrink: 0, display: 'inline-block' }} />
           {f}
         </li>
       ))}
@@ -167,7 +167,7 @@ export default function BespokeProcess() {
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {steps[2].features.map(f => (
                   <li key={f} style={{ fontSize: 13, color: 'rgba(255,255,255,0.8)', display: 'flex', alignItems: 'center', gap: 10 }}>
-                    <span style={{ color: '#10B981', fontWeight: 800, fontSize: 16 }}>→</span>
+                    <span style={{ color: 'white', fontWeight: 800, fontSize: 16 }}>→</span>
                     {f}
                   </li>
                 ))}
@@ -176,13 +176,13 @@ export default function BespokeProcess() {
             <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
               <button
                 style={{
-                  marginTop: 40, background: '#10B981', color: 'white', border: 'none',
+                  marginTop: 40, background: 'white', color: '#1A5276', border: 'none',
                   padding: '14px 28px', borderRadius: 999, fontWeight: 700, fontSize: 14,
                   display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer',
                   transition: 'all 0.3s ease', width: 'fit-content',
                 }}
-                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = '#059669'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = '#10B981'; }}
+                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.9)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'white'; }}
               >
                 Start Your Commission
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

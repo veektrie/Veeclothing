@@ -134,7 +134,7 @@ export default async function JournalArticlePage({ params }: { params: Promise<{
               From bespoke commissions to corporate uniforms — Vee Clothing brings your vision to life.
             </p>
             <Link href="/#consultation">
-              <button style={{ background: '#10B981', color: 'white', border: 'none', padding: '14px 32px', borderRadius: 999, fontFamily: 'Inter, sans-serif', fontWeight: 700, fontSize: 14, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+              <button style={{ background: '#1A5276', color: 'white', border: 'none', padding: '14px 32px', borderRadius: 999, fontFamily: 'Inter, sans-serif', fontWeight: 700, fontSize: 14, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
                 Book a Consultation
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
               </button>

@@ -33,7 +33,7 @@ export default function JournalClient({ articles = [] }: { articles: any[] }) {
 
           <h1 style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1.05, color: 'white', margin: '0 auto 20px', maxWidth: 700, textAlign: 'center' }}>
             Thoughts on Craft,<br />
-            <em style={{ color: '#10B981', fontStyle: 'normal' }}>Style & Identity.</em>
+            <em style={{ color: 'white', fontStyle: 'normal' }}>Style & Identity.</em>
           </h1>
           <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.5)', maxWidth: 480, lineHeight: 1.7, margin: '0 auto', fontFamily: 'Inter, sans-serif', textAlign: 'center' }}>
             Long-form perspectives on bespoke tailoring, corporate branding, and the heritage of African menswear.

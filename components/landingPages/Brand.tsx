@@ -80,7 +80,7 @@ const LightCard = ({ service, wide = false }: { service: typeof services[0], wid
     <ul className="flex flex-col gap-2.5 mt-auto">
       {service.features.map(f => (
         <li key={f} className="text-[11px] text-[#1A5276] font-bold flex items-center gap-2">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] shrink-0" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#1A5276] shrink-0" />
           {f}
         </li>
       ))}
@@ -129,14 +129,14 @@ export default function CorporateAtelier() {
               <ul className="flex flex-col gap-3">
                 {services[3].features.map(f => (
                   <li key={f} className="text-[13px] text-white/80 flex items-center gap-3">
-                    <span className="text-[#10B981] font-black">→</span>
+                    <span className="text-white font-black">→</span>
                     {f}
                   </li>
                 ))}
               </ul>
             </div>
             <Link href="#consultation">
-              <button className="mt-10 bg-[#10B981] text-white border-none py-3.5 px-7 rounded-full font-bold text-sm flex items-center gap-2.5 transition-all hover:bg-[#059669] w-fit">
+              <button className="mt-10 bg-white text-[#1A5276] border-none py-3.5 px-7 rounded-full font-bold text-sm flex items-center gap-2.5 transition-all hover:bg-white/90 w-fit">
                 Partner With Us
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M5 12h14M12 5l7 7-7 7" />

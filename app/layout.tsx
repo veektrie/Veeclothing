@@ -137,13 +137,16 @@ export default function RootLayout({
             position="bottom-center"
             toastOptions={{
               style: {
-                background: '#111822',
+                background: '#1A5276',
                 color: '#fff',
-                border: '1px solid rgba(212,175,55,0.3)',
-                fontSize: '12px',
-                letterSpacing: '0.1em',
+                border: '1px solid rgba(255,255,255,0.1)',
+                fontSize: '11px',
+                letterSpacing: '0.15em',
                 textTransform: 'uppercase',
-                fontFamily: 'sans-serif'
+                fontFamily: 'Inter, sans-serif',
+                fontWeight: 700,
+                borderRadius: '12px',
+                padding: '16px 24px',
               },
             }}
           />

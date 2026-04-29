@@ -22,7 +22,7 @@ const getTagColor = (tag: string) => {
     if (!tag) return null;
     switch (tag.toUpperCase()) {
         case 'BESTSELLER': return '#1A5276'; // Navy
-        case 'NEW': return '#27AE60'; // Green
+        case 'NEW': return '#1A5276'; // Navy
         case 'LIMITED': return '#C0392B'; // Red
         case 'SIGNATURE': return '#1A5276'; // Navy
         case 'CORPORATE': return '#2980B9'; // Blue

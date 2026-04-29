@@ -67,7 +67,7 @@ const FloatingTrustBar = () => {
 const TeamAvatars = () => (
   <div style={{ width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12, padding: '24px 0' }}>
     <div style={{ display: 'flex', flexDirection: 'row' }}>
-      {['#1A5276', '#10B981', '#2E86C1', '#0D5E4B', '#1A3A5C'].map((color, i) => (
+      {['#1A5276', '#154360', '#1F618D', '#2980B9', '#1A3A5C'].map((color, i) => (
         <div key={i} style={{
           width: 44, height: 44, borderRadius: '50%',
           background: color, border: '3px solid #F8FAFC',
@@ -114,7 +114,7 @@ const MetricMockup = () => (
       {[40, 52, 45, 68, 60, 78, 88].map((h, i) => (
         <div key={i} style={{
           width: 18, height: `${h * 0.5}px`,
-          background: i === 6 ? '#10B981' : '#1A5276',
+          background: i === 6 ? '#1A5276' : '#1A5276',
           opacity: i === 6 ? 1 : 0.25 + i * 0.1,
           borderRadius: '4px 4px 0 0',
           transition: 'all 0.3s ease'

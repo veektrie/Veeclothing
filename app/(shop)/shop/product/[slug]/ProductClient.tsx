@@ -13,7 +13,7 @@ const getTagColor = (tag: string) => {
     if (!tag) return null;
     switch (tag.toUpperCase()) {
         case 'BESTSELLER': return '#1A5276'; // Navy
-        case 'NEW': return '#10B981'; // Green
+        case 'NEW': return '#1A5276'; // Navy
         case 'LIMITED': return '#C0392B'; // Red
         case 'SIGNATURE': return '#1A5276'; // Navy
         case 'CORPORATE': return '#1A5276'; // Navy
@@ -76,7 +76,7 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                     className="inline-flex items-center gap-2 text-[#64748b] hover:text-[#1A5276] transition-colors font-sans text-[10px] tracking-[0.2em] uppercase font-bold mb-10"
                 >
                     <ArrowLeft className="w-4 h-4" />
-                    Back to Collection
+                    Back to Shop
                 </Link>
 
                 {/* PRODUCT GRID SECTION */}
@@ -202,14 +202,14 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                             <button
                                 onClick={handleAddToCart}
                                 disabled={isAdding || (product.sizes?.length > 0 && !selectedSize)}
-                                className="flex-1 bg-[#10B981] hover:bg-[#059669] disabled:bg-black/10 disabled:text-black/30 disabled:cursor-not-allowed text-white py-5 px-8 rounded-xl font-sans text-[11px] tracking-[0.2em] uppercase font-extrabold flex items-center justify-center gap-3 transition-all duration-300 shadow-lg shadow-emerald-500/20"
+                                className="flex-1 bg-[#1A5276] hover:bg-[#154360] disabled:bg-black/10 disabled:text-black/30 disabled:cursor-not-allowed text-white py-5 px-8 rounded-xl font-sans text-[11px] tracking-[0.2em] uppercase font-extrabold flex items-center justify-center gap-3 transition-all duration-300 shadow-lg shadow-blue-900/10"
                             >
                                 {isAdding ? (
                                     <>Adding to Cart...</>
                                 ) : (
                                     <>
                                         <ShoppingBag className="w-5 h-5" />
-                                        Add Cart
+                                        Add to Cart
                                     </>
                                 )}
                             </button>
@@ -218,33 +218,14 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                                 <button
                                     onClick={handleAddToCart}
                                     disabled={isAdding || (product.sizes?.length > 0 && !selectedSize)}
-                                    className="flex-1 bg-[#10B981] hover:bg-[#059669] disabled:bg-black/10 disabled:text-black/30 disabled:cursor-not-allowed text-white py-5 px-8 rounded-xl font-sans text-[11px] tracking-[0.2em] uppercase font-extrabold flex items-center justify-center gap-3 transition-all duration-300 shadow-lg shadow-emerald-500/20"
+                                    className="flex-1 bg-[#1A5276] hover:bg-[#154360] disabled:bg-black/10 disabled:text-black/30 disabled:cursor-not-allowed text-white py-5 px-8 rounded-xl font-sans text-[11px] tracking-[0.2em] uppercase font-extrabold flex items-center justify-center gap-3 transition-all duration-300 shadow-lg shadow-blue-900/10"
                                 >
                                     Go To Cart
                                 </button>
                             </Link>
                         </div>
 
-                        {/* Features Accordion / List */}
-                        {product.features && product.features.length > 0 && (
-                            <div className="bg-white border border-black/5 rounded-2xl p-8 shadow-sm">
-                                <h3 style={{ fontFamily: 'Inter, sans-serif' }} className="text-xl font-bold text-[#1C1C1E] mb-6 border-b border-black/5 pb-4">
-                                    Engineering Details
-                                </h3>
-                                <ul className="flex flex-col gap-5">
-                                    {product.features.map((feature: any, idx: number) => (
-                                        <li key={idx} className="flex flex-col gap-1">
-                                            <span className="font-sans text-[12px] font-bold tracking-[0.1em] uppercase text-[#1A5276]">
-                                                {feature.title}
-                                            </span>
-                                            <span className="font-sans text-[14px] font-light text-[#64748b] leading-[1.6]">
-                                                {feature.desc}
-                                            </span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )}
+
                     </motion.div>
                 </div>
             </div>

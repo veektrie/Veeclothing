@@ -118,7 +118,7 @@ export default function IndividualServicesPage() {
           </span>
         </Link>
         <h1 style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(2.5rem, 6vw, 5rem)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1.05, margin: '0 auto 20px', maxWidth: 700, color: 'white' }}>
-          Individual <em style={{ color: '#10B981', fontStyle: 'normal' }}>Commissions</em>
+          Individual <em style={{ color: 'white', fontStyle: 'normal' }}>Commissions</em>
         </h1>
         <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.45)', maxWidth: 480, margin: '0 auto', lineHeight: 1.7 }}>
           From your first consultation to the moment you wear it — a fully bespoke experience designed around you.
@@ -204,13 +204,13 @@ export default function IndividualServicesPage() {
 
               <Link href="https://wa.me/c/2348103031020" target="_blank">
                 <button style={{
-                  marginTop: 40, background: '#10B981', color: 'white', border: 'none',
+                  marginTop: 40, background: 'white', color: '#1A5276', border: 'none',
                   padding: '14px 32px', borderRadius: 999, fontWeight: 700, fontSize: 14,
                   cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8,
                   transition: 'all 0.3s ease',
                 }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = '#059669'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = '#10B981'; }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.background = 'rgba(255,255,255,0.9)'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.background = 'white'; }}
                 >
                   Start This Commission
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
