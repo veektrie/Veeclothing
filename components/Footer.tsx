@@ -6,29 +6,27 @@ const navGroups = [
   {
     heading: 'Services',
     links: [
-      { title: 'Business Partner', url: '#corporate' },
-      { title: 'Custom Orders', url: '#bespoke' },
-      { title: 'Our Shop',        url: '/shop' },
-      { title: 'Executive Wear',    url: '#bespoke' },
-      { title: 'Business Gifts',     url: '#corporate' },
+      { title: 'Corporate Identity', url: '/services/business' },
+      { title: 'Custom Commissions', url: '/services/individual' },
+      { title: 'Business Gifting',  url: '/services/business' },
+      { title: 'Executive Wardrobe', url: '/services/individual' },
     ],
   },
   {
-    heading: 'Studio',
+    heading: 'The Studio',
     links: [
-      { title: 'Our Craft',       url: '#bespoke' },
-      { title: 'Blog',     url: '/journal' },
-      { title: 'Client Reviews', url: '/#sentiments' },
-      { title: 'About Vee',       url: '#' },
+      { title: 'Our Journal',      url: '/blog' },
+      { title: 'The Shop',         url: '/shop' },
+      { title: 'Client Reviews',   url: '/#sentiments' },
+      { title: 'Our Heritage',     url: '/#brand' },
     ],
   },
   {
     heading: 'Contact',
     links: [
-      { title: 'Talk to Us', url: '#consultation' },
-      { title: 'WhatsApp Us',          url: 'https://wa.me/2348103031020' },
-      { title: 'Instagram',            url: 'https://instagram.com/veeclothingcompany' },
-      { title: 'Facebook',             url: 'https://facebook.com/veeclothingcompany' },
+      { title: 'Consultation',     url: '/#consultation' },
+      { title: 'WhatsApp Us',      url: 'https://wa.me/2348103031020' },
+      { title: 'Instagram',        url: 'https://instagram.com/veeclothingcompany' },
     ],
   },
 ];
@@ -41,7 +39,7 @@ const Footer = () => {
         {/* Brand column — NAP for Local SEO */}
         <div itemScope itemType="https://schema.org/ClothingStore">
           <Image
-            src="/VCC-gold.png"
+            src="/VCC-navy.png"
             alt="Vee Clothing Company"
             width={110}
             height={36}
