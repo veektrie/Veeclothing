@@ -2,6 +2,7 @@ import { client } from "@/lib/sanity";
 import { groq } from "next-sanity";
 
 import Hero from '../components/landingPages/Hero';
+import TrustBar from '@/components/TrustBar';
 import CorporateAtelier from '@/components/landingPages/Brand';
 import BespokeProcess from '@/components/landingPages/Category';
 import ShopPreview from '@/components/landingPages/ShopPreview';
@@ -27,8 +28,11 @@ export default async function Home() {
   return (
     <main className="overflow-hidden">
 
-      {/* 1. Hero — corporate/bespoke toggle & Trust Bar inside */}
+      {/* 1. Hero — cinematic video background */}
       <Hero />
+      
+      {/* 1.5 Trust Bar — branding and social proof */}
+      <TrustBar />
 
       {/* 2. Corporate Atelier — B2B services */}
       <CorporateAtelier />

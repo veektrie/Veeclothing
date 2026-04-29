@@ -115,10 +115,10 @@ const Contact = () => {
 
       <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 4rem' }}>
 
-        {/* Header */}
-        <div style={{ marginBottom: '3.5rem' }}>
-          <span className="section-label" style={{ display: 'block', marginBottom: 14 }}>Talk to Us</span>
-          <div className="gold-divider" style={{ marginBottom: 20 }} />
+        {/* Header - Centered */}
+        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+          <span className="section-label">Talk to Us</span>
+          <div className="gold-divider" style={{ margin: '14px auto 20px' }} />
           <h2 className="font-kento" style={{
             fontSize: 'clamp(2rem, 4.5vw, 4rem)',
             color: '#1C1C1E', lineHeight: 1.08, marginBottom: 16,
@@ -127,9 +127,9 @@ const Contact = () => {
             <em style={{ color: '#1A5276', fontStyle: 'normal' }}>Touch.</em>
           </h2>
           <p className="font-metro" style={{
-            color: 'rgba(28,28,30,0.6)', fontSize: 15, lineHeight: 1.8, maxWidth: 480,
+            color: 'rgba(28,28,30,0.6)', fontSize: 15, lineHeight: 1.8, maxWidth: 600, margin: '0 auto'
           }}>
-            We\'ll get back to you within 24 hours. A real person will answer your message.
+            We'll get back to you within 24 hours. A real person will answer your message.
           </p>
         </div>
 

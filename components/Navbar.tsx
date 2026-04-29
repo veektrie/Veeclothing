@@ -9,8 +9,11 @@ import { Search, User, ShoppingBag, Menu, X } from 'lucide-react';
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const overlayRef = useRef<HTMLDivElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
+  const searchBarRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 30);
@@ -44,15 +47,87 @@ const Navbar = () => {
     }
   }, [menuOpen]);
 
+  useEffect(() => {
+    if (searchOpen) {
+      gsap.to(searchBarRef.current, {
+        y: 0,
+        opacity: 1,
+        pointerEvents: 'all',
+        duration: 0.4,
+        ease: 'power3.out'
+      });
+    } else {
+      gsap.to(searchBarRef.current, {
+        y: -20,
+        opacity: 0,
+        pointerEvents: 'none',
+        duration: 0.3,
+        ease: 'power3.in'
+      });
+    }
+  }, [searchOpen]);
+
   const navLinks = [
     { href: '/shop', label: 'Shop' },
-    { href: '/collections', label: 'Collections' },
-    { href: '/vessi-world', label: 'Vessi World' },
+    { href: '/blog', label: 'Blog' },
+    { href: '/#bespoke', label: 'Person' },
+    { href: '/#corporate', label: 'Business' },
   ];
 
   return (
     <>
       <header className="fixed top-6 left-0 right-0 z-[1000] px-4 md:px-8 pointer-events-none flex justify-center">
+        {/* Search Bar Overlay */}
+        <div 
+          ref={searchBarRef}
+          style={{
+            position: 'absolute',
+            top: '100%',
+            marginTop: '12px',
+            width: '100%',
+            maxWidth: '600px',
+            background: 'rgba(25, 25, 25, 0.95)',
+            backdropFilter: 'blur(20px)',
+            borderRadius: '24px',
+            padding: '16px 24px',
+            border: '1px solid rgba(255, 255, 255, 0.1)',
+            opacity: 0,
+            transform: 'translateY(-20px)',
+            pointerEvents: 'none',
+            zIndex: 1001,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 12
+          }}
+        >
+          <Search size={18} className="text-white/40" />
+          <input 
+            type="text" 
+            placeholder="Search products, style guides..." 
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                window.location.href = `/shop?search=${encodeURIComponent(searchQuery)}`;
+                setSearchOpen(false);
+              }
+            }}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              outline: 'none',
+              color: 'white',
+              fontSize: '14px',
+              width: '100%',
+              fontFamily: 'Inter, sans-serif'
+            }}
+            autoFocus
+          />
+          <button onClick={() => setSearchOpen(false)} className="text-white/40 hover:text-white">
+            <X size={18} />
+          </button>
+        </div>
+
         <div
           className="flex items-center justify-between pointer-events-auto w-full max-w-[1200px]"
           style={{
@@ -106,14 +181,17 @@ const Navbar = () => {
             <button className="text-white/90 hover:text-white transition-colors hidden sm:block">
               <User size={20} />
             </button>
-            <button className="text-white/90 hover:text-white transition-colors">
+            <button 
+              onClick={() => setSearchOpen(!searchOpen)}
+              className="text-white/90 hover:text-white transition-colors"
+            >
               <Search size={20} />
             </button>
-            <button className="text-white/90 hover:text-white transition-colors relative">
+            <Link href="/cart" className="text-white/90 hover:text-white transition-colors relative">
               <ShoppingBag size={20} />
-            </button>
+            </Link>
             <div className="hidden md:flex items-center gap-2 text-[11px] font-semibold text-white/90 tracking-wider border-l border-white/20 pl-6 ml-2">
-              <span>USD</span>
+              <span>NGN</span>
               <span className="text-white/30">|</span>
               <span>EN</span>
             </div>
@@ -155,7 +233,7 @@ const Navbar = () => {
             Account
           </Link>
           <div className="flex gap-4 mt-8">
-            <span className="text-sm text-white/40">USD</span>
+            <span className="text-sm text-white/40">NGN</span>
             <span className="text-sm text-white/40">EN</span>
           </div>
         </div>

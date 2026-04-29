@@ -46,31 +46,30 @@ const CorporateAtelier = () => {
     <section className="atelier-section" id="corporate">
       <div className="atelier-inner">
 
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-2">
-          <div>
-            <span className="section-label">Our Business Services</span>
-            <div className="gold-divider my-4" />
-            <h2
-              className="hero-title"
-              style={{
-                fontFamily: 'Cormorant Garamond, serif',
-                fontSize: 'clamp(2.2rem, 4vw, 4rem)',
-                color: '#1C1C1E',
-                maxWidth: 560,
-              }}
-            >
-              We Create the Look for Businesses.
-            </h2>
-          </div>
+        {/* Header - Centered */}
+        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+          <span className="section-label">Our Business Services</span>
+          <div className="navy-divider" style={{ margin: '14px auto 20px' }} />
+          <h2
+            style={{
+              fontFamily: 'Cormorant Garamond, serif',
+              fontSize: 'clamp(2.2rem, 4vw, 4rem)',
+              color: '#1C1C1E',
+              margin: '0 auto 24px',
+              maxWidth: 700,
+              lineHeight: 1.1
+            }}
+          >
+            We Create the Look for Businesses.
+          </h2>
           <p
             style={{
               color: 'rgba(28,28,30,0.6)',
-              fontSize: 14,
-              maxWidth: 340,
+              fontSize: 15,
+              maxWidth: 500,
               lineHeight: 1.8,
               fontWeight: 300,
-              flexShrink: 0,
+              margin: '0 auto'
             }}
           >
             From a single leader to a team of 500 — we provide quality clothes for businesses of any size.

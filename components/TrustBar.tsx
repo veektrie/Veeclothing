@@ -92,8 +92,8 @@ const TrustBar = () => {
             >
               {/* Brand Logo */}
               <div style={{
-                width: 36, height: 36, position: 'relative',
-                filter: 'grayscale(100%) brightness(0.2) contrast(1.2)',
+                width: 48, height: 48, position: 'relative',
+                filter: 'grayscale(100%) opacity(0.5)',
                 transition: 'all 0.4s ease',
                 borderRadius: 4,
                 overflow: 'hidden',
@@ -106,7 +106,7 @@ const TrustBar = () => {
                   alt={client.name}
                   fill
                   className="object-contain"
-                  sizes="36px"
+                  sizes="48px"
                 />
               </div>
 
@@ -117,7 +117,7 @@ const TrustBar = () => {
                   fontSize: 'clamp(0.9rem, 1.5vw, 1.1rem)',
                   fontWeight: 500,
                   letterSpacing: '0.05em',
-                  color: 'rgba(28, 28, 30, 0.4)',
+                  color: 'rgba(28, 28, 30, 0.6)',
                   whiteSpace: 'nowrap',
                   transition: 'all 0.4s ease',
                   cursor: 'default',
@@ -126,8 +126,7 @@ const TrustBar = () => {
                   const parent = e.currentTarget.parentElement;
                   const logo = parent?.querySelector('.brand-logo-wrapper') as HTMLElement;
                   if (logo) {
-                    logo.style.filter = 'grayscale(0%) brightness(1) contrast(1)';
-                    logo.style.opacity = '1';
+                    logo.style.filter = 'grayscale(0%) opacity(1)';
                   }
                   (e.currentTarget as HTMLElement).style.color = '#1A5276';
                 }}
@@ -135,10 +134,9 @@ const TrustBar = () => {
                   const parent = e.currentTarget.parentElement;
                   const logo = parent?.querySelector('.brand-logo-wrapper') as HTMLElement;
                   if (logo) {
-                    logo.style.filter = 'grayscale(100%) brightness(0.2) contrast(1.2)';
-                    logo.style.opacity = '0.5';
+                    logo.style.filter = 'grayscale(100%) opacity(0.5)';
                   }
-                  (e.currentTarget as HTMLElement).style.color = 'rgba(28, 28, 30, 0.4)';
+                  (e.currentTarget as HTMLElement).style.color = 'rgba(28, 28, 30, 0.6)';
                 }}
               >
                 {client.name}

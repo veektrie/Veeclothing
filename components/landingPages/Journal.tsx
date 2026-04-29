@@ -22,35 +22,35 @@ const Journal = ({ articles }: JournalProps) => {
     <section className="journal-section" id="journal">
       <div className="journal-inner">
 
-        {/* Header */}
-        <div className="flex flex-col md:flex-row items-end justify-between gap-6">
-          <div>
-            <span className="section-label">Our Blog</span>
-            <div className="gold-divider my-4" />
-            <h2
-              style={{
-                fontFamily: 'Cormorant Garamond, serif',
-                fontSize: 'clamp(2rem, 4vw, 3.5rem)',
-                color: '#1C1C1E',
-                fontWeight: 400,
-                lineHeight: 1.1,
-                maxWidth: 480,
-              }}
-            >
-              Stories About Style and Craft.
-            </h2>
-          </div>
-          <span
+        {/* Header - Centered */}
+        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+          <span className="section-label">Our Blog</span>
+          <div className="navy-divider" style={{ margin: '14px auto 20px' }} />
+          <h2
             style={{
-              fontSize: 12,
+              fontFamily: 'Cormorant Garamond, serif',
+              fontSize: 'clamp(2rem, 4vw, 3.5rem)',
+              color: '#1C1C1E',
+              fontWeight: 400,
+              lineHeight: 1.1,
+              maxWidth: 600,
+              margin: '0 auto 20px'
+            }}
+          >
+            Stories About Style and Craft.
+          </h2>
+          <p
+            style={{
+              fontSize: 15,
               color: '#6B6B6B',
-              maxWidth: 280,
+              maxWidth: 400,
               lineHeight: 1.7,
               fontWeight: 300,
+              margin: '0 auto'
             }}
           >
             Read about custom tailoring, business style, and African fashion history.
-          </span>
+          </p>
         </div>
 
         {/* Articles */}
