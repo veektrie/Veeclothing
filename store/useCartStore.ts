@@ -1,7 +1,5 @@
-import { create } from "zustand";
-import { persist } from "zustand/middleware";
-import { toast } from "react-hot-toast";
-import product from "@/sanity/schemaTypes/product";
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
 export interface CartItem {
   id: string;
@@ -13,69 +11,65 @@ export interface CartItem {
   color?: string;
 }
 
-interface CartState {
+interface CartStore {
   items: CartItem[];
   addItem: (item: CartItem) => void;
-  removeItem: (id: string) => void;
-  updateQuantity: (id: string, quantity: number) => void;
+  decreaseQuantity: (id: string, size?: string, color?: string) => void; // <-- New
+  removeItem: (id: string, size?: string, color?: string) => void;
   clearCart: () => void;
-  getTotalPrice: () => number;
 }
 
-export const useCartStore = create<CartState>()(
+export const useCartStore = create<CartStore>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       items: [],
 
-      addItem: (newItem) => {
-        const { items } = get();
-        const existingItem = items.find(
-          (item) =>
-            item.id === newItem.id &&
-            item.size === newItem.size &&
-            item.color === newItem.color,
+      addItem: (item) => set((state) => {
+        const existingItem = state.items.find(
+          (i) => i.id === item.id && i.size === item.size && i.color === item.color
         );
-
         if (existingItem) {
-          set({
-            items: items.map((item) =>
-              item.id === newItem.id &&
-              item.size === newItem.size &&
-              item.color === newItem.color
-                ? { ...item, quantity: item.quantity + newItem.quantity }
-                : item,
+          return {
+            items: state.items.map((i) =>
+              i.id === item.id && i.size === item.size && i.color === item.color
+                ? { ...i, quantity: i.quantity + 1 }
+                : i
             ),
-          });
-        } else {
-          set({ items: [...items, newItem] });
+          };
         }
-      },
+        return { items: [...state.items, item] };
+      }),
 
-      removeItem: (id) => {
-        set({ items: get().items.filter((item) => item.id !== id) });
-      },
-
-      updateQuantity: (id, quantity) => {
-        set({
-          items: get().items.map((item) =>
-            item.id === id
-              ? { ...item, quantity: Math.max(1, quantity) }
-              : item,
+      // --- NEW FUNCTION TO DECREASE ---
+      decreaseQuantity: (id, size, color) => set((state) => {
+        const existingItem = state.items.find(
+          (i) => i.id === id && i.size === size && i.color === color
+        );
+        if (existingItem && existingItem.quantity > 1) {
+          return {
+            items: state.items.map((i) =>
+              i.id === id && i.size === size && i.color === color
+                ? { ...i, quantity: i.quantity - 1 }
+                : i
+            ),
+          };
+        }
+        // If quantity is 1, remove it entirely
+        return {
+          items: state.items.filter((i) =>
+            !(i.id === id && i.size === size && i.color === color)
           ),
-        });
-      },
+        };
+      }),
+
+      removeItem: (id, size, color) => set((state) => ({
+        items: state.items.filter((i) =>
+          !(i.id === id && i.size === size && i.color === color)
+        ),
+      })),
 
       clearCart: () => set({ items: [] }),
-
-      getTotalPrice: () => {
-        return get().items.reduce(
-          (total, item) => total + (Number(item.price) || 0) * (Number(item.quantity) || 1),
-          0,
-        );
-      },
     }),
-    {
-      name: "cart-storage", // Saves to localStorage automatically
-    },
-  ),
+    { name: 'vinono-cart-storage' }
+  )
 );

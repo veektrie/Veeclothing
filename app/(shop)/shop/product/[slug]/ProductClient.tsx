@@ -5,6 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ShoppingBag, Check } from 'lucide-react';
+import toast from 'react-hot-toast';
+import { useCartStore } from '@/store/useCartStore'; // Added your store back!
 
 // Helper for tag colors (matching your shop page)
 const getTagColor = (tag: string) => {
@@ -20,21 +22,43 @@ const getTagColor = (tag: string) => {
     }
 };
 
-export default function ProductClient({ product }: { product: any }) {
+export default function ProductClient({ product, relatedProducts }: { product: any, relatedProducts: any[] }) {
     const [selectedSize, setSelectedSize] = useState<string>(product.sizes?.[0] || '');
     const [selectedColor, setSelectedColor] = useState<any>(product.colors?.[0] || null);
     const [isAdding, setIsAdding] = useState(false);
 
-    const handleAddToCart = () => {
-        setIsAdding(true);
-        // Add your cart logic here (e.g., useCartStore().addItem({...}))
-        console.log("Added to cart:", { product, selectedSize, selectedColor });
+    const addItem = useCartStore((state) => state.addItem); // Zustand Hook
 
-        setTimeout(() => setIsAdding(false), 1500); // Simulate network/UI delay
+    const handleAddToCart = () => {
+        // Validations
+        if (product.sizes?.length > 0 && !selectedSize) {
+            toast.error('Please select a size first.');
+            return;
+        }
+        if (product.colors?.length > 0 && !selectedColor) {
+            toast.error('Please select a color first.');
+            return;
+        }
+
+        setIsAdding(true);
+
+        // Add to Zustand
+        addItem({
+            id: product._id,
+            name: product.name,
+            price: product.price,
+            image: product.src,
+            quantity: 1,
+            size: selectedSize,
+            color: selectedColor?.name,
+        });
+
+        toast.success(`${product.name} added to your commission.`);
+        setTimeout(() => setIsAdding(false), 600);
     };
 
     return (
-        <main className="bg-[#F8FAFC] min-h-screen relative overflow-x-hidden pt-[clamp(100px,12vh,140px)] pb-24">
+        <main className="bg-[#F8FAFC] min-h-screen relative overflow-x-hidden pt-[clamp(100px,12vh,140px)]">
 
             {/* Background Atmosphere */}
             <div
@@ -44,7 +68,7 @@ export default function ProductClient({ product }: { product: any }) {
                 }}
             />
 
-            <div className="max-w-[1440px] mx-auto px-[clamp(1rem,5vw,4rem)] relative z-20">
+            <div className="max-w-[1440px] mx-auto px-[clamp(1rem,5vw,4rem)] relative z-20 pb-24">
 
                 {/* Top Navigation */}
                 <Link
@@ -55,6 +79,7 @@ export default function ProductClient({ product }: { product: any }) {
                     Back to Collection
                 </Link>
 
+                {/* PRODUCT GRID SECTION */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
 
                     {/* LEFT: Image Gallery */}
@@ -160,12 +185,10 @@ export default function ProductClient({ product }: { product: any }) {
                                         <button
                                             key={size}
                                             onClick={() => setSelectedSize(size)}
-                                            className={`
-                        px-6 py-3 font-sans text-[11px] tracking-[0.1em] uppercase font-bold rounded-lg border transition-all duration-300
-                        ${selectedSize === size
-                                                    ? 'bg-[#1A5276] border-[#1A5276] text-white'
-                                                    : 'bg-white border-black/10 text-[#64748b] hover:border-[#1A5276]/30 hover:bg-[#F8FAFC]'}
-                      `}
+                                            className={`px-6 py-3 font-sans text-[11px] tracking-[0.1em] uppercase font-bold rounded-lg border transition-all duration-300 ${selectedSize === size
+                                                ? 'bg-[#1A5276] border-[#1A5276] text-white'
+                                                : 'bg-white border-black/10 text-[#64748b] hover:border-[#1A5276]/30 hover:bg-[#F8FAFC]'
+                                                }`}
                                         >
                                             {size}
                                         </button>
@@ -182,14 +205,24 @@ export default function ProductClient({ product }: { product: any }) {
                                 className="flex-1 bg-[#10B981] hover:bg-[#059669] disabled:bg-black/10 disabled:text-black/30 disabled:cursor-not-allowed text-white py-5 px-8 rounded-xl font-sans text-[11px] tracking-[0.2em] uppercase font-extrabold flex items-center justify-center gap-3 transition-all duration-300 shadow-lg shadow-emerald-500/20"
                             >
                                 {isAdding ? (
-                                    <>Adding to Commission...</>
+                                    <>Adding to Cart...</>
                                 ) : (
                                     <>
                                         <ShoppingBag className="w-5 h-5" />
-                                        Begin Commission
+                                        Add Cart
                                     </>
                                 )}
                             </button>
+
+                            <Link href='/cart'>
+                                <button
+                                    onClick={handleAddToCart}
+                                    disabled={isAdding || (product.sizes?.length > 0 && !selectedSize)}
+                                    className="flex-1 bg-[#10B981] hover:bg-[#059669] disabled:bg-black/10 disabled:text-black/30 disabled:cursor-not-allowed text-white py-5 px-8 rounded-xl font-sans text-[11px] tracking-[0.2em] uppercase font-extrabold flex items-center justify-center gap-3 transition-all duration-300 shadow-lg shadow-emerald-500/20"
+                                >
+                                    Go To Cart
+                                </button>
+                            </Link>
                         </div>
 
                         {/* Features Accordion / List */}
@@ -212,10 +245,51 @@ export default function ProductClient({ product }: { product: any }) {
                                 </ul>
                             </div>
                         )}
-
                     </motion.div>
                 </div>
             </div>
+            {/* End of main max-w container */}
+
+            {/* --- BOTTOM SECTION (RELATED PRODUCTS) MOVED OUTSIDE --- */}
+            {relatedProducts && relatedProducts.length > 0 && (
+                <div className="bg-[#FDFBF7] py-24 px-[clamp(1rem,5vw,4rem)] border-t border-black/5 w-full">
+                    <div className="max-w-[1440px] mx-auto text-center">
+
+                        <span className="text-[9px] tracking-[0.3em] uppercase text-[#1A5276] font-bold block mb-4">
+                            EXPLORE
+                        </span>
+                        <h2 className="font-serif text-4xl md:text-5xl text-black mb-16">
+                            You Might Also Like
+                        </h2>
+
+                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10">
+                            {relatedProducts.map((item) => (
+                                <Link key={item._id} href={`/shop/product/${item.slug}`} className="group no-underline ">
+                                    <div className="flex flex-col items-center ">
+                                        <div className="relative w-full aspect-[4/5] rounded-[2rem] overflow-hidden mb-6 bg-gray-100">
+                                            {item.src && (
+                                                <Image
+                                                    src={item.src}
+                                                    alt={item.name}
+                                                    fill
+                                                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                                                />
+                                            )}
+                                        </div>
+                                        <h3 className="text-sm font-sans text-gray-900 mb-2">{item.name}</h3>
+                                        <p className="text-xs font-sans text-[#1A5276] font-semibold">
+                                            {String(item.price).toLowerCase().includes('from')
+                                                ? item.price
+                                                : `₦${item.price?.toLocaleString()}`}
+                                        </p>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+
+                    </div>
+                </div>
+            )}
         </main>
     );
 }
