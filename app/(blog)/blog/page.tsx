@@ -9,9 +9,9 @@ const allArticlesQuery = groq`*[_type == "blog"] | order(publishedAt desc) {
   "slug": slug.current,
   category,
   publishedAt,
+  "imageUrl": image.asset->url,
   "excerpt": array::join(string::split((pt::text(content)), "")[0..150], "") + "...",
-  // If you don't have a readTime field in Sanity, we can hardcode a fallback or calculate it
-  "readTime": "5 min read" 
+  "readTime": string(round(length(pt::text(content)) / 1000) + 1) + " min read"
 }`;
 
 export default async function JournalPage() {

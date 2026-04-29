@@ -3,7 +3,7 @@ import { groq } from "next-sanity";
 
 import Hero from '../components/landingPages/Hero';
 import CorporateAtelier from '@/components/landingPages/Brand';
-import BespokeProcess from '@/components/landingPages/Category';
+
 import ShopPreview from '@/components/landingPages/ShopPreview';
 import SocialProofRibbon from '@/components/landingPages/SocialProofRibbon';
 import Journal from '@/components/landingPages/Journal';
@@ -39,8 +39,7 @@ export default async function Home() {
       {/* 2. Corporate Atelier — B2B services */}
       <CorporateAtelier />
 
-      {/* 3. Private Commissions — directly under Corporate */}
-      <BespokeProcess />
+
 
       {/* 4. Shop Preview — collection teaser → /shop */}
       <ShopPreview />

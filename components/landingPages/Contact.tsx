@@ -117,8 +117,7 @@ const Contact = () => {
 
         {/* Header - Centered */}
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <span className="section-label">Talk to Us</span>
-          <div className="gold-divider" style={{ margin: '14px auto 20px' }} />
+
           <h2 style={{
             fontFamily: 'Inter, sans-serif',
             fontSize: 'clamp(2rem, 4.5vw, 4rem)',
@@ -150,35 +149,22 @@ const Contact = () => {
           }}
         >
           {/* Toggle Area */}
-          <div style={{ marginBottom: '3rem' }}>
+          <div style={{ marginBottom: '2.5rem' }}>
             <p className="font-metro" style={{
               fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase',
-              color: 'rgba(26, 82, 118, 0.7)', marginBottom: 16, fontWeight: 700
+              color: 'rgba(26, 82, 118, 0.7)', marginBottom: 12, fontWeight: 700
             }}>
               Select Service
             </p>
-            <div style={{
-              display: 'inline-flex', border: '1px solid rgba(0,0,0,0.05)',
-              padding: 4, background: 'rgba(0,0,0,0.02)',
-              borderRadius: 12,
-            }}>
+            <div className="inline-flex flex-wrap border border-black/5 p-1 bg-black/[0.02] rounded-xl gap-1">
               {(['corporate', 'individual'] as ServiceType[]).map((t) => (
                 <button
                   key={t}
                   type="button"
                   onClick={() => setServiceType(t)}
-                  className="font-metro"
-                  style={{
-                    padding: '12px 28px', fontSize: 10, letterSpacing: '0.25em',
-                    textTransform: 'uppercase', cursor: 'pointer',
-                    background: serviceType === t ? 'rgba(26, 82, 118, 0.15)' : 'transparent',
-                    border: '1px solid transparent',
-                    borderColor: serviceType === t ? 'rgba(26, 82, 118, 0.3)' : 'transparent',
-                    color: serviceType === t ? '#1A5276' : 'rgba(28,28,30,0.4)',
-                    borderRadius: 10,
-                    transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-                    fontWeight: serviceType === t ? 700 : 400,
-                  }}
+                  className={`px-6 py-2.5 text-[10px] font-bold tracking-[0.2em] uppercase transition-all duration-300 rounded-lg whitespace-nowrap ${
+                    serviceType === t ? 'bg-[#1A5276]/10 text-[#1A5276] border border-[#1A5276]/20' : 'text-black/40 hover:text-black/60'
+                  }`}
                 >
                   {t === 'corporate' ? 'Corporate' : 'Individual'}
                 </button>

@@ -47,7 +47,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         {/* — Organization Schema — */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({

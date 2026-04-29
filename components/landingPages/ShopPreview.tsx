@@ -37,18 +37,18 @@ const ShopPreview = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <span className="section-label" style={{ display: 'block', marginBottom: 16 }}>Our Collection</span>
+
             <h2 style={{
               fontFamily: 'Cormorant Garamond, serif',
               fontWeight: 300,
               fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
               color: '#1C1C1E',
               lineHeight: 1,
-              marginBottom: 24
+              marginBottom: 24,
+              textAlign: 'center'
             }}>
               Pick Your <em style={{ color: '#1A5276', fontStyle: 'italic' }}>Style.</em>
             </h2>
-            <div className="gold-divider-center" />
           </motion.div>
         </div>
 

@@ -70,8 +70,8 @@ const Navbar = () => {
   const navLinks = [
     { href: '/shop', label: 'Shop' },
     { href: '/blog', label: 'Blog' },
-    { href: '/#bespoke', label: 'Individual' },
-    { href: '/#corporate', label: 'Business' },
+    { href: '/services/individual', label: 'Individual' },
+    { href: '/services/business', label: 'Business' },
   ];
 
   return (
