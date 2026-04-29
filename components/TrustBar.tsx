@@ -46,27 +46,27 @@ const TrustBar = () => {
         {/* Fade masks */}
         <div style={{
           position: 'absolute', top: 0, bottom: 0, left: 0,
-          width: 'clamp(80px, 15vw, 200px)', zIndex: 11, pointerEvents: 'none',
+          width: 'clamp(40px, 10vw, 200px)', zIndex: 11, pointerEvents: 'none',
           background: 'linear-gradient(to right, rgba(255,255,255,1) 0%, transparent)',
         }} />
         <div style={{
           position: 'absolute', top: 0, bottom: 0, right: 0,
-          width: 'clamp(80px, 15vw, 200px)', zIndex: 11, pointerEvents: 'none',
+          width: 'clamp(40px, 10vw, 200px)', zIndex: 11, pointerEvents: 'none',
           background: 'linear-gradient(to left, rgba(255,255,255,1) 0%, transparent)',
         }} />
 
         {/* "Trusted" label */}
         <div style={{
           position: 'absolute', left: 0, top: 0, bottom: 0,
-          zIndex: 30, width: 'clamp(120px, 20vw, 200px)',
+          zIndex: 30, width: 'clamp(80px, 15vw, 200px)',
           display: 'flex', alignItems: 'center', gap: 12,
-          paddingLeft: 'clamp(1rem, 4vw, 3rem)',
-          background: 'linear-gradient(to right, rgba(255,255,255,0.95) 80%, transparent)',
+          paddingLeft: 'clamp(0.75rem, 3vw, 3rem)',
+          background: 'linear-gradient(to right, rgba(255,255,255,0.98) 85%, transparent)',
         }}>
           <span style={{
-            fontSize: 8, letterSpacing: '0.4em',
+            fontSize: 'clamp(7px, 1.5vw, 8px)', letterSpacing: '0.3em',
             color: '#1A5276', fontFamily: 'Inter, sans-serif',
-            fontWeight: 900, whiteSpace: 'nowrap',
+            fontWeight: 900, whiteSpace: 'nowrap', textTransform: 'uppercase'
           }}>
             Trusted By
           </span>
@@ -76,7 +76,7 @@ const TrustBar = () => {
         <motion.div
           style={{
             display: 'flex', alignItems: 'center', gap: 0,
-            paddingLeft: 'clamp(150px, 25vw, 250px)', width: 'max-content',
+            paddingLeft: 'clamp(90px, 18vw, 250px)', width: 'max-content',
           }}
           animate={{ x: ['0%', '-50%'] }}
           transition={{ duration: 40, ease: 'linear', repeat: Infinity }}
@@ -85,14 +85,14 @@ const TrustBar = () => {
             <div
               key={i}
               style={{
-                display: 'flex', alignItems: 'center', gap: 20,
-                padding: '0 clamp(24px, 5vw, 64px)',
+                display: 'flex', alignItems: 'center', gap: 'clamp(10px, 2vw, 20px)',
+                padding: '0 clamp(16px, 4vw, 64px)',
                 borderRight: '1px solid rgba(0, 0, 0, 0.05)',
               }}
             >
               {/* Brand Logo */}
               <div style={{
-                width: 48, height: 48, position: 'relative',
+                width: 'clamp(32px, 5vw, 48px)', height: 'clamp(32px, 5vw, 48px)', position: 'relative',
                 filter: 'grayscale(100%) opacity(0.5)',
                 transition: 'all 0.4s ease',
                 borderRadius: 4,
@@ -114,7 +114,7 @@ const TrustBar = () => {
               <span
                 style={{
                   fontFamily: 'Cormorant Garamond, serif',
-                  fontSize: 'clamp(0.9rem, 1.5vw, 1.1rem)',
+                  fontSize: 'clamp(0.8rem, 1.5vw, 1.1rem)',
                   fontWeight: 500,
                   letterSpacing: '0.05em',
                   color: 'rgba(28, 28, 30, 0.6)',

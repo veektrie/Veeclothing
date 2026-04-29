@@ -76,7 +76,7 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="fixed top-6 left-0 right-0 z-[1000] px-4 md:px-8 pointer-events-none flex justify-center">
+      <header className="fixed left-0 right-0 z-[1000] px-4 md:px-8 pointer-events-none flex justify-center" style={{ top: 'clamp(0.5rem, 3vw, 1.5rem)' }}>
         {/* Search Bar Overlay */}
         <div 
           ref={searchBarRef}
@@ -84,7 +84,7 @@ const Navbar = () => {
             position: 'absolute',
             top: '100%',
             marginTop: '12px',
-            width: '100%',
+            width: 'calc(100% - 32px)',
             maxWidth: '600px',
             background: 'rgba(25, 25, 25, 0.95)',
             backdropFilter: 'blur(20px)',
@@ -136,7 +136,7 @@ const Navbar = () => {
             WebkitBackdropFilter: 'blur(20px)',
             border: '1px solid rgba(255, 255, 255, 0.1)',
             borderRadius: '999px',
-            padding: '12px 32px',
+            padding: '12px clamp(1rem, 5vw, 2rem)',
             boxShadow: scrolled ? '0 10px 30px -10px rgba(0,0,0,0.5)' : 'none',
             transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
           }}

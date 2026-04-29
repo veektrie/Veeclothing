@@ -70,14 +70,18 @@ const SocialProofRibbon = () => {
           </h2>
         </div>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-          gap: 'clamp(2rem, 4vw, 3rem)',
-        }}>
+        <div 
+          className="sentiments-grid"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+            gap: 'clamp(2rem, 4vw, 3rem)',
+          }}
+        >
           {sentiments.map((s, i) => (
             <motion.div
               key={i}
+              className="sentiment-card"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -87,7 +91,7 @@ const SocialProofRibbon = () => {
                 paddingLeft: '1.5rem',
               }}
             >
-              <div style={{ display: 'flex', gap: 4, marginBottom: 16 }}>
+              <div className="star-container" style={{ display: 'flex', gap: 4, marginBottom: 16 }}>
                 {[1, 2, 3, 4, 5].map((_, star) => (
                   <svg key={star} width="12" height="12" viewBox="0 0 24 24" fill="#1A5276">
                     <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
@@ -125,6 +129,26 @@ const SocialProofRibbon = () => {
           ))}
         </div>
       </div>
+      <style jsx>{`
+        @media (max-width: 768px) {
+          .sentiments-grid {
+             gap: 3rem;
+          }
+          .sentiment-card {
+            border-left: none !important;
+            padding-left: 0 !important;
+            text-align: center;
+            border-bottom: 1px solid rgba(26, 82, 118, 0.1);
+            padding-bottom: 2rem;
+          }
+          .sentiment-card:last-child {
+            border-bottom: none;
+          }
+          .star-container {
+            justify-content: center;
+          }
+        }
+      `}</style>
     </section>
   );
 };
