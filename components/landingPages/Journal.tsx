@@ -35,7 +35,7 @@ const Journal = ({ articles }: JournalProps) => {
 
         {/* Header */}
 
-          <div className="flex flex-col items-center gap-8">
+          <div className="flex flex-col items-center gap-4 mb-16">
             <h2 style={{
               fontFamily: 'Inter, sans-serif',
               fontSize: 'clamp(1.8rem, 5vw, 3rem)',
@@ -44,16 +44,6 @@ const Journal = ({ articles }: JournalProps) => {
             }}>
               Stories About <em style={{ color: '#1A5276', fontStyle: 'normal' }}>Style & Craft</em>
             </h2>
-            <Link href="/blog">
-              <button
-                className="bg-[#1A5276] text-white border-none py-3 px-7 rounded-full font-bold text-sm flex items-center gap-2.5 transition-all hover:bg-[#154360] w-fit"
-              >
-                See All Posts
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M5 12h14M12 5l7 7-7 7" />
-                </svg>
-              </button>
-            </Link>
           </div>
 
 
@@ -127,6 +117,20 @@ const Journal = ({ articles }: JournalProps) => {
               </motion.div>
             ))
           )}
+        </div>
+        
+        {/* View All CTA - Moved below posts */}
+        <div className="flex justify-center mt-16">
+          <Link href="/blog">
+            <button
+              className="bg-[#1A5276] text-white border-none py-4 px-10 rounded-full font-bold text-sm flex items-center gap-3 transition-all hover:bg-[#154360] shadow-lg shadow-blue-900/10 hover:shadow-blue-900/20"
+            >
+              See All Posts
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </button>
+          </Link>
         </div>
 
       </div>

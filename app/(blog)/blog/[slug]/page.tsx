@@ -18,6 +18,24 @@ const singleArticleQuery = groq`*[_type == "blog" && slug.current == $slug][0] {
   "readTime": string(round(length(pt::text(content)) / 1000) + 1) + " min read"
 }`;
 
+import { Metadata } from 'next';
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const article = await client.fetch(groq`*[_type == "blog" && slug.current == $slug][0] { title, "excerpt": array::join(string::split((pt::text(content)), "")[0..160], "") }`, { slug });
+
+  if (!article) return { title: "Article Not Found | Vee Clothing" };
+
+  return {
+    title: `${article.title} | The Journal | Vee Clothing`,
+    description: article.excerpt || `Read ${article.title} on the Vee Clothing Company journal.`,
+    openGraph: {
+      title: `${article.title} | Vee Clothing`,
+      description: article.excerpt,
+    }
+  };
+}
+
 export default async function JournalArticlePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const article = await client.fetch(singleArticleQuery, { slug });

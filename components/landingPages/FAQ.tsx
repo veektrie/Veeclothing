@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 
 type Tab = 'corporate' | 'bespoke';
 
@@ -179,7 +180,7 @@ const FAQSection = () => {
           <p className="font-metro" style={{ color: 'var(--stone)', fontSize: 13, marginBottom: 18 }}>
             Don't see your question? Our team responds to all inquiries within 24 hours.
           </p>
-          <a href="#contact" style={{ textDecoration: 'none' }}>
+          <Link href="/#consultation" style={{ textDecoration: 'none' }}>
             <button className="btn-solid-navy" style={{ 
               margin: '0 auto', 
               fontFamily: 'Inter, sans-serif', 
@@ -204,7 +205,7 @@ const FAQSection = () => {
                 <path d="M5 12h14M12 5l7 7-7 7" />
               </svg>
             </button>
-          </a>
+          </Link>
         </div>
 
       </div>

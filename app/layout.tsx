@@ -39,6 +39,23 @@ export const metadata: Metadata = {
       },
     ],
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Vee Clothing Company | Bespoke Tailoring & Corporate Uniforms Lagos",
+    description: "High-quality custom tailoring and business uniforms from Lagos, Nigeria. World-class quality with local style.",
+    images: ['/kaftan07.jpeg'],
+  },
   icons: {
     icon: "/favicon.ico",
   },

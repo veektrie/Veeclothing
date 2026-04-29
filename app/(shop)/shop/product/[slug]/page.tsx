@@ -3,7 +3,25 @@ import { groq } from "next-sanity";
 import Link from "next/link";
 import ProductClient from "./ProductClient";
 
+import { Metadata } from 'next';
+
 export const revalidate = 60;
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const product = await client.fetch(groq`*[_type == "product" && slug.current == $slug][0] { name, description }`, { slug });
+
+  if (!product) return { title: "Product Not Found | Vee Clothing" };
+
+  return {
+    title: `${product.name} | Bespoke Tailoring | Vee Clothing`,
+    description: product.description || `Handcrafted ${product.name} from Vee Clothing Company. Premium bespoke tailoring in Lagos.`,
+    openGraph: {
+      title: `${product.name} | Vee Clothing`,
+      description: product.description,
+    }
+  };
+}
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

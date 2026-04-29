@@ -2,6 +2,13 @@ import React from "react";
 import Link from "next/link";
 import { ArrowLeft, ScrollText, Shield } from "lucide-react";
 
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Terms & Conditions | Vee Clothing Company",
+  description: "Our commitment to quality and transparency. Review the terms and conditions for our bespoke tailoring and corporate branding services.",
+};
+
 export default function TermsAndConditions() {
   return (
     <div className="min-h-screen bg-[#F8FAFC] py-[clamp(100px,12vh,140px)] px-6 font-sans text-[#1C1C1E]">
