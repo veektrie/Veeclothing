@@ -1,6 +1,7 @@
 import { client } from "@/lib/sanity";
 import { groq } from "next-sanity";
 import ShopClient from "./ShopClient";
+import { Suspense } from "react";
 
 // Fetch products and format the data to match what your UI expects
 const shopQuery = groq`*[_type == "product"] | order(_createdAt desc) {
@@ -19,5 +20,9 @@ export const revalidate = 60; // Optional: Revalidate cache every 60 seconds
 export default async function ShopPage() {
   const products = await client.fetch(shopQuery);
 
-  return <ShopClient initialProducts={products} />;
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-white flex items-center justify-center">Loading Shop...</div>}>
+      <ShopClient initialProducts={products} />
+    </Suspense>
+  );
 }
