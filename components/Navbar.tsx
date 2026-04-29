@@ -70,7 +70,7 @@ const Navbar = () => {
   const navLinks = [
     { href: '/shop', label: 'Shop' },
     { href: '/blog', label: 'Blog' },
-    { href: '/#bespoke', label: 'Person' },
+    { href: '/#bespoke', label: 'Individual' },
     { href: '/#corporate', label: 'Business' },
   ];
 
