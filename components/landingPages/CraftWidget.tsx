@@ -40,7 +40,7 @@ const CraftWidget = () => {
           style={{
             background: 'rgba(28,28,30,0.85)',
             backdropFilter: 'blur(10px)',
-            border: '1px solid rgba(212,175,55,0.25)',
+            border: '1px solid rgba(26,82,118,0.25)',
             padding: '6px 14px',
             display: 'flex',
             alignItems: 'center',
@@ -51,8 +51,8 @@ const CraftWidget = () => {
           <span
             style={{
               width: 6, height: 6, borderRadius: '50%',
-              background: '#D4AF37',
-              boxShadow: '0 0 8px rgba(212,175,55,0.8)',
+              background: '#1A5276',
+              boxShadow: '0 0 8px rgba(26,82,118,0.8)',
               animation: 'pulse 1.5s infinite',
               display: 'inline-block',
             }}
@@ -85,12 +85,12 @@ const CraftWidget = () => {
           height: expanded ? 160 : 56,
           borderRadius: expanded ? 8 : '50%',
           overflow: 'hidden',
-          border: `2px solid ${expanded ? 'rgba(212,175,55,0.5)' : 'rgba(212,175,55,0.25)'}`,
+          border: `2px solid ${expanded ? 'rgba(26,82,118,0.5)' : 'rgba(26,82,118,0.25)'}`,
           cursor: 'pointer',
           transition: 'all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)',
           position: 'relative',
           boxShadow: expanded
-            ? '0 16px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(212,175,55,0.15)'
+            ? '0 16px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(26,82,118,0.15)'
             : '0 4px 20px rgba(0,0,0,0.3)',
           background: '#1C1C1E',
         }}
@@ -116,7 +116,7 @@ const CraftWidget = () => {
             background: 'rgba(26,82,118,0.4)',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="#D4AF37">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#1A5276">
               <polygon points="5 3 19 12 5 21 5 3"/>
             </svg>
           </div>

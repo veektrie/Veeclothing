@@ -23,13 +23,13 @@
   --navy: #1A5276;
   --navy-mid: #2980B9;
   --sky: #85C1E9;
-  --gold: #D4AF37;
-  --gold-light: #F0D060;
-  --cream: #FAF8F5;
+  --gold: #1A5276;
+  --gold-light: #2980B9;
+  --cream: #FFFFFF;
   --charcoal: #1C1C1E;
   --stone: #6B6B6B;
   --glass-bg: rgba(26, 82, 118, 0.3);
-  --glass-border: rgba(212, 175, 55, 0.25);
+  --glass-border: rgba(26, 82, 118, 0.25);
 
   /* Typography */
   --font-title: "Kento";
@@ -182,8 +182,8 @@ body {
   align-items: center;
   gap: 10px;
   padding: 14px 32px;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(28, 28, 30, 0.2);
+  color: rgba(28, 28, 30, 0.7);
   background: transparent;
   font-family: "Inter", sans-serif;
   font-size: 11px;
@@ -207,10 +207,10 @@ body {
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(26, 82, 118, 0.45);
+  background: rgba(255, 255, 255, 0.45);
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
-  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+  border-bottom: 1px solid rgba(28, 28, 30, 0.1);
   transition: all 0.4s ease;
 }
 
@@ -249,12 +249,12 @@ body {
   left: 0;
   width: 0;
   height: 1px;
-  background: var(--gold);
+  background: var(--navy);
   transition: width 0.3s ease;
 }
 
 .nav-link:hover {
-  color: var(--gold);
+  color: var(--navy);
 }
 
 .nav-link:hover::after {
@@ -310,7 +310,7 @@ body {
   bottom: 0;
   left: 61.5%;
   width: 1px;
-  background: rgba(212, 175, 55, 0.4);
+  background: rgba(26, 82, 118, 0.4);
   z-index: 10;
 }
 
@@ -320,7 +320,7 @@ body {
   font-weight: 500;
   letter-spacing: 0.35em;
   text-transform: uppercase;
-  color: var(--gold);
+  color: var(--navy);
   display: block;
   margin-bottom: 12px;
 }
@@ -424,7 +424,7 @@ body {
 
 /* ===== CORPORATE ATELIER ===== */
 .atelier-section {
-  background: var(--navy);
+  background: #FFFFFF;
   padding: 7rem 0;
   position: relative;
   overflow: hidden;
@@ -555,7 +555,7 @@ body {
 
 /* ===== TESTIMONIALS ===== */
 .testimonials-section {
-  background: var(--charcoal);
+  background: #FFFFFF;
   padding: 7rem 0;
 }
 
@@ -627,7 +627,7 @@ body {
 
 /* ===== CONTACT / CONSULTATION ===== */
 .consultation-section {
-  background: var(--navy);
+  background: #FFFFFF;
   padding: 7rem 0;
   position: relative;
   overflow: hidden;
@@ -749,7 +749,7 @@ body {
   font-size: 13px;
   color: var(--stone);
   text-decoration: none;
-  transition: color 0.3s ease;
+  transition: all 0.3s ease;
   letter-spacing: 0.03em;
   line-height: 2;
 }

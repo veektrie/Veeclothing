@@ -82,7 +82,7 @@ const FAQSection = () => {
         {/* Tab toggle */}
         <div style={{
           display: 'inline-flex', marginBottom: '3rem',
-          border: '1px solid rgba(212,175,55,0.25)', padding: 3,
+          border: '1px solid rgba(26, 82, 118, 0.25)', padding: 3,
           background: 'rgba(255,255,255,0.5)', backdropFilter: 'blur(10px)',
           borderRadius: 8,
         }}>
@@ -94,8 +94,8 @@ const FAQSection = () => {
               style={{
                 padding: '10px 28px', fontSize: 10, letterSpacing: '0.25em',
                 textTransform: 'uppercase', cursor: 'pointer',
-                color: tab === t ? 'var(--charcoal)' : 'rgba(28,28,30,0.4)',
-                background: tab === t ? '#D4AF37' : 'transparent',
+                color: tab === t ? '#FFFFFF' : 'rgba(28,28,30,0.4)',
+                background: tab === t ? '#1A5276' : 'transparent',
                 border: 'none', transition: 'all 0.35s ease',
                 fontWeight: tab === t ? 500 : 400,
                 borderRadius: 6,
@@ -143,9 +143,9 @@ const FAQSection = () => {
                     </span>
                     <span style={{
                       width: 28, height: 28, flexShrink: 0,
-                      border: '1px solid rgba(212,175,55,0.4)',
+                      border: '1px solid rgba(26, 82, 118, 0.4)',
                       display: 'flex', alignItems: 'center', justifyContent: 'center',
-                      color: '#D4AF37', transition: 'transform 0.35s ease',
+                      color: '#1A5276', transition: 'transform 0.35s ease',
                       borderRadius: 4,
                       transform: openIdx === i ? 'rotate(45deg)' : 'rotate(0deg)',
                     }}>
@@ -167,7 +167,7 @@ const FAQSection = () => {
                       >
                         <p className="font-metro" style={{
                           color: 'var(--stone)', fontSize: 14.5, lineHeight: 1.85,
-                          paddingBottom: '1.4rem', borderLeft: '2px solid #D4AF37',
+                          paddingBottom: '1.4rem', borderLeft: '2px solid #1A5276',
                           paddingLeft: '1rem', marginLeft: 2,
                         }}>
                           {faq.a}
@@ -187,7 +187,7 @@ const FAQSection = () => {
             Don't see your question? Our team responds to all enquiries within 24 hours.
           </p>
           <a href="#consultation" style={{ textDecoration: 'none' }}>
-            <button className="btn-ghost-gold" style={{ fontFamily: 'Metrophobic, Inter, sans-serif', fontSize: 10 }}>
+            <button className="btn-ghost-gold" style={{ fontFamily: 'Metrophobic, Inter, sans-serif', fontSize: 10, color: '#1A5276', borderColor: 'rgba(26, 82, 118, 0.3)' }}>
               Ask a Question
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7" />

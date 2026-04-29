@@ -14,7 +14,7 @@ const ShopPreview = () => {
     <section
       id="collection"
       style={{
-        background: 'var(--navy)',
+        background: '#FFFFFF',
         padding: 'clamp(5rem, 10vw, 12rem) 0',
         position: 'relative',
         overflow: 'hidden',
@@ -23,7 +23,7 @@ const ShopPreview = () => {
       {/* Decorative Brand Elements */}
       <div style={{
         position: 'absolute', top: 0, left: 0, right: 0, height: '100%',
-        background: 'radial-gradient(circle at 80% 20%, rgba(212,175,55,0.08) 0%, transparent 50%), radial-gradient(circle at 20% 80%, rgba(212,175,55,0.05) 0%, transparent 50%)',
+        background: 'radial-gradient(circle at 80% 20%, rgba(26, 82, 118, 0.08) 0%, transparent 50%), radial-gradient(circle at 20% 80%, rgba(26, 82, 118, 0.05) 0%, transparent 50%)',
         pointerEvents: 'none',
       }} />
 
@@ -42,11 +42,11 @@ const ShopPreview = () => {
               fontFamily: 'Cormorant Garamond, serif',
               fontWeight: 300,
               fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
-              color: '#fff',
+              color: '#1C1C1E',
               lineHeight: 1,
               marginBottom: 24
             }}>
-              Pick Your <em style={{ color: 'var(--gold)', fontStyle: 'italic' }}>Style.</em>
+              Pick Your <em style={{ color: '#1A5276', fontStyle: 'italic' }}>Style.</em>
             </h2>
             <div className="gold-divider-center" />
           </motion.div>
@@ -71,8 +71,8 @@ const ShopPreview = () => {
                 <div 
                   className="galleria-card"
                   style={{
-                    background: 'rgba(255,255,255,0.03)',
-                    border: '1px solid rgba(212,175,55,0.15)',
+                    background: '#FFFFFF',
+                    border: '1px solid rgba(0, 0, 0, 0.05)',
                     borderRadius: 24,
                     padding: 12,
                     height: '100%',
@@ -80,16 +80,10 @@ const ShopPreview = () => {
                     flexDirection: 'column',
                     transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
                     position: 'relative',
-                    overflow: 'hidden'
+                    overflow: 'hidden',
+                    boxShadow: '0 10px 30px -10px rgba(0,0,0,0.05)'
                   }}
                 >
-                  {/* Subtle Grain Overlay */}
-                  <div style={{ 
-                    position: 'absolute', inset: 0, 
-                    backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")', 
-                    opacity: 0.05, pointerEvents: 'none' 
-                  }} />
-
                   <div style={{ position: 'relative', aspectRatio: '4/5', overflow: 'hidden', marginBottom: 24, borderRadius: 20 }}>
                     <motion.div 
                       whileHover={{ scale: 1.05 }} 
@@ -108,9 +102,9 @@ const ShopPreview = () => {
                     {/* Floating Tag */}
                     <div style={{
                       position: 'absolute', top: 15, right: 15,
-                      padding: '6px 12px', background: 'rgba(28,28,30,0.8)',
-                      backdropFilter: 'blur(10px)', border: '1px solid rgba(212,175,55,0.3)',
-                      color: 'var(--gold)', fontSize: 8, letterSpacing: '0.25em',
+                      padding: '6px 12px', background: 'rgba(255, 255, 255, 0.9)',
+                      backdropFilter: 'blur(10px)', border: '1px solid rgba(26, 82, 118, 0.3)',
+                      color: '#1A5276', fontSize: 8, letterSpacing: '0.25em',
                       fontWeight: 700, textTransform: 'uppercase', borderRadius: 6
                     }}>
                       {item.tag}
@@ -120,13 +114,13 @@ const ShopPreview = () => {
                   <div style={{ padding: '0 10px 10px' }}>
                     <h3 style={{
                       fontFamily: 'Cormorant Garamond, serif', fontSize: '1.6rem',
-                      color: '#fff', fontWeight: 400, marginBottom: 12, letterSpacing: '0.02em'
+                      color: '#1C1C1E', fontWeight: 400, marginBottom: 12, letterSpacing: '0.02em'
                     }}>
                       {item.label}
                     </h3>
                     <p style={{
                       fontFamily: 'Inter, sans-serif', fontSize: 13,
-                      color: 'rgba(255,255,255,0.4)', lineHeight: 1.6, fontWeight: 300,
+                      color: 'rgba(28,28,30,0.5)', lineHeight: 1.6, fontWeight: 300,
                       marginBottom: 24
                     }}>
                       Made with care. Available for custom orders in premium fabrics.
@@ -134,11 +128,11 @@ const ShopPreview = () => {
                     
                     <div style={{ 
                       display: 'flex', alignItems: 'center', gap: 10,
-                      color: 'var(--gold)', fontSize: 9, letterSpacing: '0.2em',
+                      color: '#1A5276', fontSize: 9, letterSpacing: '0.2em',
                       fontWeight: 600, textTransform: 'uppercase'
                     }}>
                       See Details
-                      <div style={{ width: 30, height: 1, background: 'var(--gold)', opacity: 0.5 }} />
+                      <div style={{ width: 30, height: 1, background: '#1A5276', opacity: 0.5 }} />
                     </div>
                   </div>
                 </div>
@@ -146,14 +140,14 @@ const ShopPreview = () => {
             </motion.div>
           ))}
           
-          {/* Reserved Space for Future Expansion (Tees, Shoes) */}
+          {/* Reserved Space for Future Expansion */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.4 }}
             style={{
-              border: '1px dashed rgba(212,175,55,0.2)',
+              border: '1px dashed rgba(26, 82, 118, 0.2)',
               borderRadius: 24,
               padding: 40,
               display: 'flex',
@@ -161,19 +155,19 @@ const ShopPreview = () => {
               alignItems: 'center',
               justifyContent: 'center',
               textAlign: 'center',
-              background: 'rgba(212,175,55,0.02)'
+              background: 'rgba(26, 82, 118, 0.02)'
             }}
           >
             <span style={{ 
-              fontSize: 9, letterSpacing: '0.3em', color: 'rgba(255,255,255,0.2)',
+              fontSize: 9, letterSpacing: '0.3em', color: 'rgba(28,28,30,0.2)',
               textTransform: 'uppercase', marginBottom: 16 
             }}>Coming Soon</span>
             <h4 style={{ 
               fontFamily: 'Cormorant Garamond, serif', fontSize: '1.4rem', 
-              color: 'rgba(255,255,255,0.4)', fontWeight: 300 
+              color: 'rgba(28,28,30,0.4)', fontWeight: 300 
             }}>
               Footwear & Essentials<br />
-              <em style={{ color: 'var(--gold)', opacity: 0.6 }}>Coming Soon</em>
+              <em style={{ color: '#1A5276', opacity: 0.6 }}>Coming Soon</em>
             </h4>
           </motion.div>
         </div>
@@ -187,9 +181,9 @@ const ShopPreview = () => {
           style={{ marginTop: '6rem', display: 'flex', justifyContent: 'center' }}
         >
           <Link href="/shop">
-            <button className="btn-solid-gold" style={{ padding: '20px 50px', borderRadius: 100 }}>
+            <button className="btn-solid-gold" style={{ padding: '20px 50px', borderRadius: 100, background: '#1A5276', color: '#fff' }}>
               Shop All
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ marginLeft: 10 }}>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" strokeWidth="2" style={{ marginLeft: 10 }}>
                 <path d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
             </button>
@@ -201,9 +195,8 @@ const ShopPreview = () => {
       <style jsx>{`
         .galleria-card:hover {
           transform: translateY(-10px);
-          background: rgba(255,255,255,0.06);
-          border-color: var(--gold);
-          box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+          border-color: #1A5276;
+          box-shadow: 0 30px 60px rgba(0,0,0,0.1);
         }
       `}</style>
     </section>

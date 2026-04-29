@@ -50,7 +50,7 @@ const BespokeProcess = () => {
               style={{
                 fontFamily: 'Cormorant Garamond, serif',
                 fontSize: 'clamp(2.2rem, 4vw, 4rem)',
-                color: '#fff',
+                color: '#1C1C1E',
                 maxWidth: 560,
               }}
             >
@@ -59,7 +59,7 @@ const BespokeProcess = () => {
           </div>
           <p
             style={{
-              color: 'rgba(255,255,255,0.5)',
+              color: 'rgba(28,28,30,0.6)',
               fontSize: 14,
               maxWidth: 340,
               lineHeight: 1.8,
@@ -88,24 +88,23 @@ const BespokeProcess = () => {
               transition={{ duration: 0.6, delay: i * 0.12 }}
               viewport={{ once: true }}
               style={{
-                background: 'rgba(255, 255, 255, 0.02)',
-                backdropFilter: 'blur(30px)',
-                WebkitBackdropFilter: 'blur(30px)',
-                border: '1px solid rgba(255, 255, 255, 0.06)',
+                background: '#FFFFFF',
+                border: '1px solid rgba(0, 0, 0, 0.05)',
                 padding: '2.5rem',
                 borderRadius: 24,
                 transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                 cursor: 'default',
+                boxShadow: '0 10px 30px -10px rgba(0,0,0,0.05)'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-                e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.3)';
+                e.currentTarget.style.borderColor = 'rgba(26, 82, 118, 0.3)';
                 e.currentTarget.style.transform = 'translateY(-8px)';
+                e.currentTarget.style.boxShadow = '0 20px 40px -15px rgba(0,0,0,0.1)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.02)';
-                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.06)';
+                e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.05)';
                 e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 10px 30px -10px rgba(0,0,0,0.05)';
               }}
             >
               <div className="flex items-start justify-between mb-6">
@@ -114,7 +113,7 @@ const BespokeProcess = () => {
                     fontFamily: 'Cormorant Garamond, serif',
                     fontSize: '3rem',
                     fontWeight: 300,
-                    color: 'rgba(212,175,55,0.4)',
+                    color: 'rgba(26, 82, 118, 0.4)',
                     lineHeight: 1,
                   }}
                 >
@@ -125,8 +124,8 @@ const BespokeProcess = () => {
                     fontSize: 8,
                     letterSpacing: '0.25em',
                     textTransform: 'uppercase',
-                    color: '#D4AF37',
-                    background: 'rgba(212, 175, 55, 0.08)',
+                    color: '#1A5276',
+                    background: 'rgba(26, 82, 118, 0.08)',
                     padding: '6px 12px',
                     borderRadius: 4,
                   }}
@@ -138,7 +137,7 @@ const BespokeProcess = () => {
                 style={{
                   fontFamily: 'Cormorant Garamond, serif',
                   fontSize: '1.6rem',
-                  color: '#fff',
+                  color: '#1C1C1E',
                   fontWeight: 400,
                   marginBottom: 14,
                   letterSpacing: '0.02em'
@@ -146,7 +145,7 @@ const BespokeProcess = () => {
               >
                 {s.title}
               </h3>
-              <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 14, lineHeight: 1.8, fontWeight: 300, fontFamily: 'Inter, sans-serif' }}>
+              <p style={{ color: 'rgba(28,28,30,0.5)', fontSize: 14, lineHeight: 1.8, fontWeight: 300, fontFamily: 'Inter, sans-serif' }}>
                 {s.description}
               </p>
             </motion.div>
@@ -156,7 +155,7 @@ const BespokeProcess = () => {
         {/* CTA */}
         <div className="mt-12 flex gap-4 flex-wrap">
           <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-            <button className="btn-solid-gold">
+            <button className="btn-solid-gold" style={{ background: '#1A5276', color: '#fff', border: '1px solid #1A5276' }}>
               Start Your Order
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7" />
@@ -168,14 +167,14 @@ const BespokeProcess = () => {
         {/* Craft quote */}
         <div
           className="mt-20 p-10 border-l-2"
-          style={{ borderColor: '#D4AF37', background: 'rgba(212,175,55,0.06)' }}
+          style={{ borderColor: '#1A5276', background: 'rgba(26, 82, 118, 0.02)' }}
         >
           <blockquote
             style={{
               fontFamily: 'Cormorant Garamond, serif',
               fontSize: 'clamp(1.4rem, 2.5vw, 2rem)',
               fontStyle: 'italic',
-              color: '#fff',
+              color: '#1C1C1E',
               fontWeight: 300,
               lineHeight: 1.5,
               marginBottom: 16,
@@ -183,7 +182,7 @@ const BespokeProcess = () => {
           >
             "World-class quality with a local touch. We mix the best of Lagos style with expert tailoring."
           </blockquote>
-          <span className="section-label" style={{ color: 'rgba(255,255,255,0.4)' }}>
+          <span className="section-label" style={{ color: 'rgba(28,28,30,0.4)' }}>
             — Vee Clothing Company, Lagos
           </span>
         </div>

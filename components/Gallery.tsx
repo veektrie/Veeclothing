@@ -77,7 +77,7 @@ const Lookbook = () => {
                   fontSize: 9,
                   letterSpacing: '0.3em',
                   textTransform: 'uppercase',
-                  color: '#D4AF37',
+                  color: '#1A5276',
                   marginBottom: 6,
                 }}
               >
@@ -117,7 +117,7 @@ const Lookbook = () => {
             key={cat}
             className="section-label cursor-pointer transition-colors duration-300"
             style={{ color: '#6B6B6B' }}
-            onMouseEnter={(e) => ((e.target as HTMLElement).style.color = '#D4AF37')}
+            onMouseEnter={(e) => ((e.target as HTMLElement).style.color = '#1A5276')}
             onMouseLeave={(e) => ((e.target as HTMLElement).style.color = '#6B6B6B')}
           >
             {cat}

@@ -70,7 +70,7 @@ const Journal = ({ articles }: JournalProps) => {
                   fontSize: 9,
                   letterSpacing: '0.3em',
                   textTransform: 'uppercase',
-                  color: '#D4AF37',
+                  color: '#1A5276',
                   display: 'block',
                   marginBottom: 16,
                 }}

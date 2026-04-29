@@ -36,9 +36,9 @@ const Field = ({
     <label
       htmlFor={id}
       className="font-metro"
-      style={{ fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(212,175,55,0.65)' }}
+      style={{ fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(26, 82, 118, 0.65)' }}
     >
-      {label}{error && <span style={{ color: 'rgba(212,175,55,0.9)', marginLeft: 8 }}>Required</span>}
+      {label}{error && <span style={{ color: 'rgba(26, 82, 118, 0.9)', marginLeft: 8 }}>Required</span>}
     </label>
     {children}
   </div>
@@ -47,8 +47,8 @@ const Field = ({
 const inputStyle: React.CSSProperties = {
   width: '100%', padding: '14px 0',
   background: 'transparent', border: 'none',
-  borderBottom: '1px solid rgba(212,175,55,0.25)',
-  color: '#fff', fontFamily: 'Metrophobic, Inter, sans-serif',
+  borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
+  color: '#1C1C1E', fontFamily: 'Metrophobic, Inter, sans-serif',
   fontSize: 14, fontWeight: 400, outline: 'none',
   transition: 'border-color 0.3s ease',
 };
@@ -84,12 +84,10 @@ const Contact = () => {
         reset();
       } else {
         console.error('Submission failed', result);
-        // Still show success for UX fallback if needed, or handle error
         setSubmitted(true); 
       }
     } catch (err) {
       console.error('Form submission error:', err);
-      // fallback — still show success for UX
       setSubmitted(true);
     } finally {
       setSending(false);
@@ -97,21 +95,21 @@ const Contact = () => {
   };
 
   const handleFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    e.currentTarget.style.borderBottomColor = '#D4AF37';
-    e.currentTarget.style.boxShadow = '0 4px 12px rgba(212,175,55,0.08)';
+    e.currentTarget.style.borderBottomColor = '#1A5276';
+    e.currentTarget.style.boxShadow = '0 4px 12px rgba(26, 82, 118, 0.08)';
   };
   const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    e.currentTarget.style.borderBottomColor = 'rgba(212,175,55,0.25)';
+    e.currentTarget.style.borderBottomColor = 'rgba(0, 0, 0, 0.1)';
     e.currentTarget.style.boxShadow = 'none';
   };
 
   return (
-    <section id="consultation" style={{ background: 'var(--navy)', padding: '7rem 0', position: 'relative', overflow: 'hidden' }}>
-      {/* Ambient gold glow */}
+    <section id="consultation" style={{ background: '#FFFFFF', padding: '7rem 0', position: 'relative', overflow: 'hidden' }}>
+      {/* Ambient navy glow */}
       <div style={{
         position: 'absolute', bottom: '-300px', right: '-200px',
         width: 700, height: 700,
-        background: 'radial-gradient(circle, rgba(212,175,55,0.04) 0%, transparent 65%)',
+        background: 'radial-gradient(circle, rgba(26, 82, 118, 0.04) 0%, transparent 65%)',
         pointerEvents: 'none',
       }} />
 
@@ -123,13 +121,13 @@ const Contact = () => {
           <div className="gold-divider" style={{ marginBottom: 20 }} />
           <h2 className="font-kento" style={{
             fontSize: 'clamp(2rem, 4.5vw, 4rem)',
-            color: '#fff', lineHeight: 1.08, marginBottom: 16,
+            color: '#1C1C1E', lineHeight: 1.08, marginBottom: 16,
           }}>
             Get in{' '}
-            <em style={{ color: '#D4AF37', fontStyle: 'normal' }}>Touch.</em>
+            <em style={{ color: '#1A5276', fontStyle: 'normal' }}>Touch.</em>
           </h2>
           <p className="font-metro" style={{
-            color: 'rgba(255,255,255,0.45)', fontSize: 15, lineHeight: 1.8, maxWidth: 480,
+            color: 'rgba(28,28,30,0.6)', fontSize: 15, lineHeight: 1.8, maxWidth: 480,
           }}>
             We\'ll get back to you within 24 hours. A real person will answer your message.
           </p>
@@ -141,26 +139,24 @@ const Contact = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           style={{
-            background: 'rgba(255, 255, 255, 0.02)',
-            backdropFilter: 'blur(40px)',
-            WebkitBackdropFilter: 'blur(40px)',
-            border: '1px solid rgba(255, 255, 255, 0.06)',
+            background: '#FFFFFF',
+            border: '1px solid rgba(0, 0, 0, 0.05)',
             padding: 'clamp(1.5rem, 4vw, 4rem)',
             borderRadius: 32,
-            boxShadow: '0 40px 100px rgba(0,0,0,0.1)',
+            boxShadow: '0 40px 100px rgba(0,0,0,0.05)',
           }}
         >
           {/* Toggle Area */}
           <div style={{ marginBottom: '3rem' }}>
             <p className="font-metro" style={{
               fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase',
-              color: 'rgba(212,175,55,0.7)', marginBottom: 16, fontWeight: 700
+              color: 'rgba(26, 82, 118, 0.7)', marginBottom: 16, fontWeight: 700
             }}>
               Select Service
             </p>
             <div style={{
-              display: 'inline-flex', border: '1px solid rgba(255,255,255,0.08)',
-              padding: 4, background: 'rgba(255,255,255,0.03)',
+              display: 'inline-flex', border: '1px solid rgba(0,0,0,0.05)',
+              padding: 4, background: 'rgba(0,0,0,0.02)',
               borderRadius: 12,
             }}>
               {(['corporate', 'individual'] as ServiceType[]).map((t) => (
@@ -172,10 +168,10 @@ const Contact = () => {
                   style={{
                     padding: '12px 28px', fontSize: 10, letterSpacing: '0.25em',
                     textTransform: 'uppercase', cursor: 'pointer',
-                    background: serviceType === t ? 'rgba(212,175,55,0.15)' : 'transparent',
+                    background: serviceType === t ? 'rgba(26, 82, 118, 0.15)' : 'transparent',
                     border: '1px solid transparent',
-                    borderColor: serviceType === t ? 'rgba(212,175,55,0.3)' : 'transparent',
-                    color: serviceType === t ? '#D4AF37' : 'rgba(255,255,255,0.4)',
+                    borderColor: serviceType === t ? 'rgba(26, 82, 118, 0.3)' : 'transparent',
+                    color: serviceType === t ? '#1A5276' : 'rgba(28,28,30,0.4)',
                     borderRadius: 10,
                     transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                     fontWeight: serviceType === t ? 700 : 400,
@@ -196,32 +192,32 @@ const Contact = () => {
             }}>
               <div style={{ marginBottom: 30 }}>
                 <div style={{ 
-                  width: 64, height: 64, borderRadius: '50%', background: 'rgba(212,175,55,0.1)',
+                  width: 64, height: 64, borderRadius: '50%', background: 'rgba(26, 82, 118, 0.1)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto'
                 }}>
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#D4AF37" strokeWidth="1.5">
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1A5276" strokeWidth="1.5">
                     <path d="M20 6L9 17l-5-5" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
               </div>
               <h3 className="font-kento" style={{
                 fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
-                color: '#fff', marginBottom: 16,
+                color: '#1C1C1E', marginBottom: 16,
                 fontFamily: 'Cormorant Garamond, serif'
               }}>
-                Message <em style={{ color: '#D4AF37' }}>Sent.</em>
+                Message <em style={{ color: '#1A5276' }}>Sent.</em>
               </h3>
               <p className="font-metro" style={{
-                color: 'rgba(255,255,255,0.5)', fontSize: 15, lineHeight: 1.8,
+                color: 'rgba(28,28,30,0.5)', fontSize: 15, lineHeight: 1.8,
                 maxWidth: 420, margin: '0 auto 32px',
               }}>
-                Thanks for contacting us. We\'ll get back to you within 24 hours.
+                Thanks for contacting us. We'll get back to you within 24 hours.
               </p>
               <button
                 onClick={() => setSubmitted(false)}
                 style={{
-                  background: 'none', border: '1px solid rgba(212,175,55,0.3)',
-                  color: '#D4AF37', padding: '14px 32px',
+                  background: 'none', border: '1px solid rgba(26, 82, 118, 0.3)',
+                  color: '#1A5276', padding: '14px 32px',
                   fontSize: 10, letterSpacing: '0.25em', textTransform: 'uppercase',
                   cursor: 'pointer', borderRadius: 8, transition: 'all 0.3s ease',
                   fontWeight: 700
@@ -278,7 +274,7 @@ const Contact = () => {
                         {corporateScales.map((s) => (
                           <option key={s} value={s === corporateScales[0] ? '' : s}
                             disabled={s === corporateScales[0]}
-                            style={{ background: '#112D42', color: '#fff' }}>
+                            style={{ background: '#FFFFFF', color: '#1C1C1E' }}>
                             {s}
                           </option>
                         ))}
@@ -309,19 +305,19 @@ const Contact = () => {
                 disabled={sending}
                 style={{
                   width: '100%', padding: '22px',
-                  background: sending ? 'rgba(212,175,55,0.1)' : '#D4AF37',
-                  border: '1px solid rgba(212,175,55,0.3)',
-                  color: sending ? '#D4AF37' : 'var(--charcoal)',
+                  background: sending ? 'rgba(26, 82, 118, 0.1)' : '#1A5276',
+                  border: '1px solid rgba(26, 82, 118, 0.3)',
+                  color: sending ? '#1A5276' : '#FFFFFF',
                   fontFamily: 'Inter, sans-serif',
                   fontSize: 11, letterSpacing: '0.3em', textTransform: 'uppercase',
                   cursor: sending ? 'not-allowed' : 'pointer',
                   transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                   borderRadius: 12,
                   fontWeight: 800,
-                  boxShadow: sending ? 'none' : '0 15px 35px rgba(212,175,55,0.2)',
+                  boxShadow: sending ? 'none' : '0 15px 35px rgba(26, 82, 118, 0.2)',
                 }}
-                onMouseEnter={e => { if (!sending) { (e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 20px 40px rgba(212,175,55,0.3)'; }}}
-                onMouseLeave={e => { if (!sending) { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 15px 35px rgba(212,175,55,0.2)'; }}}
+                onMouseEnter={e => { if (!sending) { (e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 20px 40px rgba(26, 82, 118, 0.3)'; }}}
+                onMouseLeave={e => { if (!sending) { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 15px 35px rgba(26, 82, 118, 0.2)'; }}}
               >
                 {sending ? 'Sending...' : 'Send Message'}
               </button>
@@ -333,7 +329,7 @@ const Contact = () => {
         {/* ── Contact & Socials strip ── */}
         <div style={{
           marginTop: '3.5rem', paddingTop: '2.5rem',
-          borderTop: '1px solid rgba(255,255,255,0.06)',
+          borderTop: '1px solid rgba(0,0,0,0.06)',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           flexWrap: 'wrap', gap: 20,
         }}>
@@ -344,12 +340,12 @@ const Contact = () => {
               { label: 'Location', value: 'Lagos, Nigeria', href: '#' },
             ].map((c) => (
               <div key={c.label}>
-                <span className="font-metro" style={{ fontSize: 8, letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(212,175,55,0.5)', display: 'block', marginBottom: 4 }}>
+                <span className="font-metro" style={{ fontSize: 8, letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(26, 82, 118, 0.5)', display: 'block', marginBottom: 4 }}>
                   {c.label}
                 </span>
-                <Link href={c.href} target={c.href.startsWith('http') ? '_blank' : undefined} style={{ color: 'rgba(255,255,255,0.5)', fontSize: 13, transition: 'color 0.3s' }}
-                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#D4AF37'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(255,255,255,0.5)'; }}
+                <Link href={c.href} target={c.href.startsWith('http') ? '_blank' : undefined} style={{ color: 'rgba(28,28,30,0.5)', fontSize: 13, transition: 'color 0.3s' }}
+                  onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#1A5276'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(28,28,30,0.5)'; }}
                 >
                   {c.value}
                 </Link>

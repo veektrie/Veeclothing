@@ -116,18 +116,18 @@ const Hero = () => {
   };
 
   return (
-    <section style={{
-      position: 'relative',
-      minHeight: '90vh', // Increased to accommodate card + trust bar
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      overflow: 'hidden',
-      background: '#000',
-      paddingTop: '100px' // Added padding to ensure navbar is not on the hero
-    }}>
+      <section style={{
+        position: 'relative',
+        minHeight: '90vh',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        overflow: 'hidden',
+        background: '#FFFFFF',
+        paddingTop: '120px'
+      }}>
 
-      {/* Background Images - Extended to fill the entire tall section */}
+      {/* Background Images */}
       <div ref={corporateRef}
         className="absolute inset-0"
         style={{
@@ -139,7 +139,7 @@ const Hero = () => {
           fill priority sizes="100vw"
           className="object-cover object-top"
         />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 70%, rgba(0,0,0,1) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.7) 70%, rgba(255,255,255,1) 100%)' }} />
       </div>
 
       <div
@@ -155,7 +155,7 @@ const Hero = () => {
           className="object-cover object-center"
           style={{ filter: 'grayscale(10%)' }}
         />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.8) 70%, rgba(0,0,0,1) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to bottom, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.8) 70%, rgba(255,255,255,1) 100%)' }} />
       </div>
 
       <div
@@ -165,7 +165,7 @@ const Hero = () => {
           inset: 0,
           zIndex: 15,
           opacity: 0,
-          background: 'rgba(0,0,0,0.1)',
+          background: 'rgba(255,255,255,0.1)',
           backdropFilter: 'blur(0px)',
           pointerEvents: 'none',
           willChange: 'backdrop-filter, opacity',
@@ -179,15 +179,15 @@ const Hero = () => {
         width: '95%',
         maxWidth: '1400px',
         minHeight: '50vh',
-        background: 'rgba(255, 255, 255, 0.03)',
+        background: 'rgba(255, 255, 255, 0.4)',
         backdropFilter: 'blur(40px)',
         WebkitBackdropFilter: 'blur(40px)',
-        border: '1px solid rgba(255, 255, 255, 0.08)',
+        border: '1px solid rgba(0, 0, 0, 0.05)',
         borderRadius: 'clamp(24px, 5vw, 48px)',
         display: 'flex',
         flexDirection: 'column',
-        boxShadow: '0 40px 100px -20px rgba(0,0,0,0.6)',
-        marginBottom: '60px' // Space before trust bar
+        boxShadow: '0 40px 100px -20px rgba(0,0,0,0.1)',
+        marginBottom: '60px'
       }}>
 
         {/* Card Content */}
@@ -208,11 +208,11 @@ const Hero = () => {
           <div
             style={{
               display: 'inline-flex', alignItems: 'center', gap: 5, marginBottom: 24,
-              padding: '8px 20px', background: 'rgba(212,175,55,0.08)',
-              border: '1px solid rgba(212,175,55,0.2)', borderRadius: '999px', width: 'fit-content'
+              padding: '8px 20px', background: 'rgba(26, 82, 118, 0.1)',
+              border: '1px solid rgba(26, 82, 118, 0.2)', borderRadius: '999px', width: 'fit-content'
             }}>
-            <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#D4AF37' }} />
-            <span style={{ fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#D4AF37', fontWeight: 600 }}>
+            <div style={{ width: 6, height: 6, borderRadius: '50%', background: '#1A5276' }} />
+            <span style={{ fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase', color: '#1A5276', fontWeight: 600 }}>
               {isCorporate ? 'Business' : 'Custom Order'}
             </span>
           </div>
@@ -221,16 +221,16 @@ const Hero = () => {
             fontFamily: 'Cormorant Garamond, serif',
             fontWeight: 300,
             fontSize: 'clamp(2.8rem, 7vw, 7.5rem)',
-            color: '#fff',
+            color: '#1C1C1E',
             lineHeight: 1.05,
             letterSpacing: '-0.02em',
             marginBottom: 32,
             maxWidth: '1100px'
           }}>
             {isCorporate ? (
-              <>Workwear for Teams,<br /><em style={{ color: '#D4AF37', fontStyle: 'italic' }}>Made to Order.</em></>
+              <>Workwear for Teams,<br /><em style={{ color: '#1A5276', fontStyle: 'italic' }}>Made to Order.</em></>
             ) : (
-              <>Made Just<br /><em style={{ color: '#D4AF37', fontStyle: 'italic' }}>For You.</em></>
+              <>Made Just<br /><em style={{ color: '#1A5276', fontStyle: 'italic' }}>For You.</em></>
             )}
           </h1>
 
@@ -240,9 +240,9 @@ const Hero = () => {
             style={{
               display: 'flex',
               flexWrap: 'nowrap',
-              background: 'rgba(255,255,255,0.04)',
+              background: 'rgba(0,0,0,0.04)',
               backdropFilter: 'blur(12px)',
-              border: '1px solid rgba(255,255,255,0.1)',
+              border: '1px solid rgba(0,0,0,0.05)',
               padding: 4,
               borderRadius: '999px',
               position: 'relative',
@@ -254,7 +254,7 @@ const Hero = () => {
               ref={highlightRef}
               style={{
                 position: 'absolute', top: 4, bottom: 4, left: 0,
-                background: 'rgba(212,175,55,0.15)', border: '1px solid rgba(212,175,55,0.3)',
+                background: 'rgba(26, 82, 118, 0.15)', border: '1px solid rgba(26, 82, 118, 0.3)',
                 borderRadius: '999px', zIndex: -1, pointerEvents: 'none'
               }}
             />
@@ -269,7 +269,7 @@ const Hero = () => {
                   fontWeight: 600,
                   letterSpacing: '0.2em',
                   textTransform: 'uppercase',
-                  color: mode === m ? '#D4AF37' : 'rgba(255,255,255,0.3)',
+                  color: mode === m ? '#1A5276' : 'rgba(0,0,0,0.3)',
                   background: 'transparent', border: 'none', cursor: 'pointer',
                   transition: 'all 0.35s ease', borderRadius: '999px',
                 }}
@@ -280,7 +280,7 @@ const Hero = () => {
           </div>
 
           <p style={{
-            color: 'rgba(255,255,255,0.65)',
+            color: 'rgba(28,28,30,0.65)',
             fontSize: 'clamp(14px, 1.3vw, 19px)',
             fontWeight: 300,
             maxWidth: '620px',
@@ -297,15 +297,15 @@ const Hero = () => {
             <Link href="#consultation">
               <button style={{
                 padding: '18px 40px',
-                background: '#D4AF37', color: '#000',
+                background: '#1A5276', color: '#FFFFFF',
                 fontFamily: 'Inter, sans-serif', fontSize: 10,
                 fontWeight: 700, letterSpacing: '0.25em', textTransform: 'uppercase',
                 cursor: 'pointer', borderRadius: '999px', border: 'none',
                 transition: 'all 0.4s ease',
-                boxShadow: '0 10px 25px rgba(212,175,55,0.3)'
+                boxShadow: '0 10px 25px rgba(26, 82, 118, 0.3)'
               }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 10px 25px rgba(212,175,55,0.3)'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = 'none'; }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(-3px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 10px 25px rgba(26, 82, 118, 0.3)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 10px 25px rgba(26, 82, 118, 0.2)'; }}
               >
                 {isCorporate ? 'Partner With Us' : 'Book a Fitting'}
               </button>
@@ -313,14 +313,14 @@ const Hero = () => {
             <Link href={isCorporate ? '#corporate' : '#bespoke'}>
               <button style={{
                 padding: '18px 40px',
-                background: 'rgba(255,255,255,0.05)', color: '#fff',
+                background: 'rgba(0,0,0,0.05)', color: '#1C1C1E',
                 fontFamily: 'Inter, sans-serif', fontSize: 10,
                 fontWeight: 600, letterSpacing: '0.2em', textTransform: 'uppercase',
-                cursor: 'pointer', borderRadius: '999px', border: '1px solid rgba(255, 255, 255, 0.1)',
+                cursor: 'pointer', borderRadius: '999px', border: '1px solid rgba(0, 0, 0, 0.1)',
                 transition: 'all 0.4s ease',
               }}
-                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.1)'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.05)'; }}
+                onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(0,0,0,0.1)'; }}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(0,0,0,0.05)'; }}
               >
                 {isCorporate ? 'Our Services' : 'How It Works'}
               </button>
@@ -334,20 +334,19 @@ const Hero = () => {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          borderTop: '1px solid rgba(255, 255, 255, 0.05)',
-          background: 'rgba(255,255,255,0.01)',
+          borderTop: '1px solid rgba(0, 0, 0, 0.05)',
+          background: 'rgba(0,0,0,0.01)',
           flexWrap: 'wrap',
           gap: 20
         }}>
           <div style={{ display: 'flex', gap: 24 }}>
             {['Instagram', 'Lagos', 'Abuja'].map(item => (
-              <span key={item} style={{ fontSize: 8, letterSpacing: '0.35em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.3)', fontWeight: 600 }}>{item}</span>
+              <span key={item} style={{ fontSize: 8, letterSpacing: '0.35em', textTransform: 'uppercase', color: 'rgba(0,0,0,0.3)', fontWeight: 600 }}>{item}</span>
             ))}
           </div>
         </div>
       </div>
 
-      {/* ── Trust Bar Integrated with Hero Background ── */}
       <TrustBar />
 
     </section>

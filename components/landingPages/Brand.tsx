@@ -56,7 +56,7 @@ const CorporateAtelier = () => {
               style={{
                 fontFamily: 'Cormorant Garamond, serif',
                 fontSize: 'clamp(2.2rem, 4vw, 4rem)',
-                color: '#fff',
+                color: '#1C1C1E',
                 maxWidth: 560,
               }}
             >
@@ -65,7 +65,7 @@ const CorporateAtelier = () => {
           </div>
           <p
             style={{
-              color: 'rgba(255,255,255,0.5)',
+              color: 'rgba(28,28,30,0.6)',
               fontSize: 14,
               maxWidth: 340,
               lineHeight: 1.8,
@@ -94,24 +94,23 @@ const CorporateAtelier = () => {
               transition={{ duration: 0.6, delay: i * 0.12 }}
               viewport={{ once: true }}
               style={{
-                background: 'rgba(255, 255, 255, 0.02)',
-                backdropFilter: 'blur(30px)',
-                WebkitBackdropFilter: 'blur(30px)',
-                border: '1px solid rgba(255, 255, 255, 0.06)',
+                background: '#FFFFFF',
+                border: '1px solid rgba(0, 0, 0, 0.05)',
                 padding: '2.5rem',
                 borderRadius: 24,
                 transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                 cursor: 'default',
+                boxShadow: '0 10px 30px -10px rgba(0,0,0,0.05)'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.05)';
-                e.currentTarget.style.borderColor = 'rgba(212, 175, 55, 0.3)';
+                e.currentTarget.style.borderColor = 'rgba(26, 82, 118, 0.3)';
                 e.currentTarget.style.transform = 'translateY(-8px)';
+                e.currentTarget.style.boxShadow = '0 20px 40px -15px rgba(0,0,0,0.1)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.02)';
-                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.06)';
+                e.currentTarget.style.borderColor = 'rgba(0, 0, 0, 0.05)';
                 e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = '0 10px 30px -10px rgba(0,0,0,0.05)';
               }}
             >
               <div className="flex items-start justify-between mb-6">
@@ -120,7 +119,7 @@ const CorporateAtelier = () => {
                     fontFamily: 'Cormorant Garamond, serif',
                     fontSize: '3rem',
                     fontWeight: 300,
-                    color: 'rgba(212,175,55,0.4)',
+                    color: 'rgba(26, 82, 118, 0.4)',
                     lineHeight: 1,
                   }}
                 >
@@ -131,8 +130,8 @@ const CorporateAtelier = () => {
                     fontSize: 8,
                     letterSpacing: '0.25em',
                     textTransform: 'uppercase',
-                    color: '#D4AF37',
-                    background: 'rgba(212, 175, 55, 0.08)',
+                    color: '#1A5276',
+                    background: 'rgba(26, 82, 118, 0.08)',
                     padding: '6px 12px',
                     borderRadius: 4,
                   }}
@@ -144,7 +143,7 @@ const CorporateAtelier = () => {
                 style={{
                   fontFamily: 'Cormorant Garamond, serif',
                   fontSize: '1.6rem',
-                  color: '#fff',
+                  color: '#1C1C1E',
                   fontWeight: 400,
                   marginBottom: 14,
                   letterSpacing: '0.02em'
@@ -152,7 +151,7 @@ const CorporateAtelier = () => {
               >
                 {s.title}
               </h3>
-              <p style={{ color: 'rgba(255,255,255,0.4)', fontSize: 14, lineHeight: 1.8, fontWeight: 300, fontFamily: 'Inter, sans-serif' }}>
+              <p style={{ color: 'rgba(28,28,30,0.5)', fontSize: 14, lineHeight: 1.8, fontWeight: 300, fontFamily: 'Inter, sans-serif' }}>
                 {s.description}
               </p>
             </motion.div>
@@ -161,10 +160,10 @@ const CorporateAtelier = () => {
 
         {/* Corporate Clients Banner */}
         <div
-          className="mt-16 p-8"
+          className="mt-16 p-8 rounded-[24px]"
           style={{
-            background: 'rgba(212,175,55,0.06)',
-            border: '1px solid rgba(212,175,55,0.15)',
+            background: 'rgba(0,0,0,0.02)',
+            border: '1px solid rgba(0,0,0,0.05)',
           }}
         >
           <h3
@@ -173,7 +172,7 @@ const CorporateAtelier = () => {
               fontSize: 10,
               letterSpacing: '0.3em',
               textTransform: 'uppercase',
-              color: 'rgba(212,175,55,0.7)',
+              color: '#1A5276',
               marginBottom: '1.5rem',
             }}
           >
@@ -182,8 +181,8 @@ const CorporateAtelier = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {corporate.map((c) => (
               <div key={c.name}>
-                <p style={{ color: '#fff', fontWeight: 500, fontSize: 14, marginBottom: 6 }}>{c.name}</p>
-                <p style={{ color: 'rgba(255,255,255,0.35)', fontSize: 12, lineHeight: 1.6 }}>{c.description}</p>
+                <p style={{ color: '#1C1C1E', fontWeight: 500, fontSize: 14, marginBottom: 6 }}>{c.name}</p>
+                <p style={{ color: 'rgba(28,28,30,0.4)', fontSize: 12, lineHeight: 1.6 }}>{c.description}</p>
               </div>
             ))}
           </div>
