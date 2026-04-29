@@ -5,7 +5,7 @@ import Link from 'next/link';
 import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { Search, User, ShoppingBag, Menu, X } from 'lucide-react';
-
+import CartBadge from './CartBadge';
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -70,15 +70,15 @@ const Navbar = () => {
   const navLinks = [
     { href: '/shop', label: 'Shop' },
     { href: '/blog', label: 'Blog' },
-    { href: '/#bespoke', label: 'Individual' },
-    { href: '/#corporate', label: 'Business' },
+    { href: '/services/individual', label: 'Individual' },
+    { href: '/services/business', label: 'Business' },
   ];
 
   return (
     <>
       <header className="fixed left-0 right-0 z-[1000] px-4 md:px-8 pointer-events-none flex justify-center" style={{ top: 'clamp(0.5rem, 3vw, 1.5rem)' }}>
         {/* Search Bar Overlay */}
-        <div 
+        <div
           ref={searchBarRef}
           style={{
             position: 'absolute',
@@ -101,9 +101,9 @@ const Navbar = () => {
           }}
         >
           <Search size={18} className="text-white/40" />
-          <input 
-            type="text" 
-            placeholder="Search products, style guides..." 
+          <input
+            type="text"
+            placeholder="Search products, style guides..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={(e) => {
@@ -155,7 +155,7 @@ const Navbar = () => {
           </nav>
 
           {/* Mobile Menu Toggle (Left on Mobile) */}
-          <button 
+          <button
             className="lg:hidden p-2 text-white/90 flex-1 flex justify-start"
             onClick={() => setMenuOpen(true)}
           >
@@ -181,15 +181,19 @@ const Navbar = () => {
             <button className="text-white/90 hover:text-white transition-colors hidden sm:block">
               <User size={20} />
             </button>
-            <button 
+            <button
               onClick={() => setSearchOpen(!searchOpen)}
               className="text-white/90 hover:text-white transition-colors"
             >
               <Search size={20} />
             </button>
-            <Link href="/cart" className="text-white/90 hover:text-white transition-colors relative">
+
+
+            {/* <Link href="/cart" className="text-white/90 hover:text-white transition-colors relative">
               <ShoppingBag size={20} />
-            </Link>
+            </Link> */}
+            <CartBadge />
+
             <div className="hidden md:flex items-center gap-2 text-[11px] font-semibold text-white/90 tracking-wider border-l border-white/20 pl-6 ml-2">
               <span>NGN</span>
               <span className="text-white/30">|</span>
@@ -204,13 +208,13 @@ const Navbar = () => {
         ref={overlayRef}
         className="fixed inset-0 z-[1001] bg-black/95 opacity-0 pointer-events-none flex flex-col items-center justify-center"
       >
-        <button 
+        <button
           className="absolute top-8 right-8 p-2 text-white/60 hover:text-white"
           onClick={() => setMenuOpen(false)}
         >
           <X size={32} />
         </button>
-        
+
         <div
           ref={linksRef}
           className="flex flex-col items-center gap-8"

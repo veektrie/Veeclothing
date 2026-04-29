@@ -20,7 +20,6 @@ export default function CartPage() {
 
     // Calculations
     const subtotal = items.reduce((total, item) => total + (item.price * item.quantity), 0);
-    //   const shipping = items.length > 0 ? 10000 : 0; // Flat ₦10,000 shipping (adjust as needed)
     const total = subtotal;
 
     return (
@@ -82,7 +81,7 @@ export default function CartPage() {
                                             <h3 className="font-serif text-2xl text-white">{item.name}</h3>
                                             <button
                                                 onClick={() => removeItem(item.id, item.size, item.color)}
-                                                className="text-white/20 hover:text-red-400 transition-colors"
+                                                className="text-red-400 hover:text-red-900 transition-colors"
                                                 title="Remove from cart"
                                             >
                                                 <Trash2 className="w-5 h-5" />
@@ -156,9 +155,6 @@ export default function CartPage() {
                                     </button>
                                 </Link>
 
-                                <p className="text-center text-white/30 text-[10px] uppercase tracking-widest mt-6">
-                                    Taxes calculated at checkout
-                                </p>
                             </div>
                         </div>
 

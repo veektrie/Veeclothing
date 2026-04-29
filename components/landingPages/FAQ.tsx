@@ -61,8 +61,7 @@ const FAQSection = () => {
 
         {/* Header - Centered */}
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <span className="section-label">Common Questions</span>
-          <div className="navy-divider" style={{ margin: '14px auto 20px' }} />
+
           <h2 className="font-kento" style={{
             fontFamily: 'Inter, sans-serif',
             fontSize: 'clamp(1.8rem, 3.5vw, 3rem)',
@@ -70,7 +69,8 @@ const FAQSection = () => {
             fontWeight: 800,
             letterSpacing: '-0.04em',
             lineHeight: 1.12,
-            marginBottom: '20px'
+            marginBottom: '20px',
+            textAlign: 'center'
           }}>
             Common Questions.
           </h2>
@@ -83,31 +83,17 @@ const FAQSection = () => {
         </div>
 
         {/* Tab toggle - Centered */}
-        <div style={{
-          display: 'flex', justifyContent: 'center', marginBottom: '3rem'
-        }}>
-          <div style={{
-            display: 'inline-flex',
-            border: '1px solid rgba(26, 82, 118, 0.25)', padding: 3,
-            background: 'rgba(255,255,255,0.5)', backdropFilter: 'blur(10px)',
-            borderRadius: 8,
-          }}>
+        <div className="flex justify-center mb-12">
+          <div className="inline-flex flex-wrap justify-center border border-[#1A5276]/20 p-1 bg-white/50 backdrop-blur-md rounded-xl gap-1">
             {(['corporate', 'bespoke'] as Tab[]).map((t) => (
               <button
                 key={t}
                 onClick={() => { setTab(t); setOpenIdx(0); }}
-                className="font-metro"
-                style={{
-                  padding: '10px 28px', fontSize: 10, letterSpacing: '0.25em',
-                  textTransform: 'uppercase', cursor: 'pointer',
-                  color: tab === t ? '#FFFFFF' : 'rgba(28,28,30,0.4)',
-                  background: tab === t ? '#1A5276' : 'transparent',
-                  border: 'none', transition: 'all 0.35s ease',
-                  fontWeight: tab === t ? 500 : 400,
-                  borderRadius: 6,
-                }}
+                className={`px-6 py-2.5 text-[10px] font-bold tracking-[0.2em] uppercase transition-all duration-300 rounded-lg whitespace-nowrap ${
+                  tab === t ? 'bg-[#1A5276] text-white shadow-lg' : 'text-[#1A5276]/40 hover:text-[#1A5276]/60'
+                }`}
               >
-                {t === 'corporate' ? 'Corporate Clients' : 'Individual Clients'}
+                {t === 'corporate' ? 'Corporate' : 'Individual'}
               </button>
             ))}
           </div>
@@ -194,7 +180,25 @@ const FAQSection = () => {
             Don't see your question? Our team responds to all inquiries within 24 hours.
           </p>
           <a href="#contact" style={{ textDecoration: 'none' }}>
-            <button className="btn-ghost-navy" style={{ margin: '0 auto', fontFamily: 'Metrophobic, Inter, sans-serif', fontSize: 10, color: '#1A5276', border: '1px solid rgba(26, 82, 118, 0.3)', padding: '12px 32px', borderRadius: '999px', background: 'transparent', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 8, justifyContent: 'center' }}>
+            <button className="btn-solid-navy" style={{ 
+              margin: '0 auto', 
+              fontFamily: 'Inter, sans-serif', 
+              fontSize: 10, 
+              color: '#FFFFFF', 
+              background: '#1A5276',
+              border: 'none', 
+              padding: '14px 36px', 
+              borderRadius: '999px', 
+              cursor: 'pointer', 
+              display: 'flex', 
+              alignItems: 'center', 
+              gap: 8, 
+              justifyContent: 'center',
+              fontWeight: 700,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              boxShadow: '0 10px 20px rgba(26, 82, 118, 0.2)'
+            }}>
               Ask a Question
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M5 12h14M12 5l7 7-7 7" />

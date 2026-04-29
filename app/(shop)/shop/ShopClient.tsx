@@ -53,7 +53,7 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
     });
 
     return (
-        <main className="bg-[#08101A] min-h-screen relative overflow-x-hidden">
+        <main className="bg-[#F8FAFC] min-h-screen relative overflow-x-hidden">
 
             {/* ── Background Atmosphere ── */}
             <div
@@ -79,12 +79,12 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
 
                         {/* Breadcrumb */}
                         <div className="flex gap-2.5 items-center mb-6">
-                            <Link href="/" className="text-[10px] text-white/30 font-sans tracking-[0.15em] uppercase no-underline hover:text-white transition-colors">
+                            <Link href="/" className="text-[10px] text-[#64748b] font-sans tracking-[0.15em] uppercase no-underline hover:text-[#1A5276] transition-colors">
                                 Home
                             </Link>
                             <div className="w-1 h-1 rounded-full bg-[#1A5276]/30" />
                             <span className="text-[10px] text-[#1A5276] font-sans tracking-[0.15em] uppercase font-semibold">
-                                The Archive
+                                The Shop
                             </span>
                         </div>
 
@@ -93,30 +93,29 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6 }}
                         >
-                            <span className="text-[9px] tracking-[0.4em] uppercase text-[#1A5276] font-extrabold block mb-4">
+                            <span className="text-[10px] tracking-[0.12em] uppercase text-[#1C1C1E] font-bold inline-block border border-black/10 rounded-full px-4 py-2 mb-5">
                                 Boutique Collection
                             </span>
-                            <div className="h-[1px] w-20 bg-[#1A5276]/20 mb-6" />
 
-                            <h1 className="font-serif font-light text-[clamp(2.5rem,6vw,4.8rem)] text-white leading-[1.05] mb-5 tracking-[-0.02em]">
+                            <h1 style={{ fontFamily: 'Inter, sans-serif' }} className="font-bold text-[clamp(2.2rem,5vw,4rem)] text-[#1C1C1E] leading-[1.05] mb-5 tracking-[-0.04em]">
                                 The Collection.<br />
-                                <em className="text-[#1A5276] italic">Made to Measure.</em>
+                                <em style={{ color: '#1A5276', fontStyle: 'normal' }}>Made to Measure.</em>
                             </h1>
 
-                            <p className="text-white/50 text-[clamp(14px,1.2vw,16px)] font-light leading-[1.8] max-w-[520px] font-sans">
-                                Every piece in our shop is engineered to order. We combine heritage craftsmanship with modern silhouettes to create garments that project authority and timeless style.
+                            <p className="text-[#64748b] text-[clamp(14px,1.2vw,16px)] font-light leading-[1.8] max-w-[520px]" style={{ fontFamily: 'Inter, sans-serif' }}>
+                                Every piece is engineered to order. We combine heritage craftsmanship with modern silhouettes to create garments that project authority and timeless style.
                             </p>
                         </motion.div>
                     </div>
                 </div>
 
-                {/* ── Offer Strip (Glassmorphic) ── */}
-                <div className="bg-[#1A5276]/5 backdrop-blur-[20px] border-y border-[#1A5276]/10 py-3 px-[clamp(1rem,5vw,4rem)] flex items-center justify-center gap-6">
-                    <span className="font-serif text-[clamp(0.9rem,1.1vw,1.1rem)] italic text-[#1A5276] font-normal">
+                {/* ── Offer Strip ── */}
+                <div className="bg-white border-y border-black/5 py-3 px-[clamp(1rem,5vw,4rem)] flex items-center justify-center gap-6">
+                    <span style={{ fontFamily: 'Cormorant Garamond, serif' }} className="text-[clamp(0.9rem,1.1vw,1.1rem)] italic text-[#1A5276] font-normal">
                         Exclusive Heritage Fabrics Now in Stock
                     </span>
                     <div className="h-3 w-[1px] bg-[#1A5276]/20 hidden md:block" />
-                    <span className="text-[9px] tracking-[0.2em] text-white/50 font-sans uppercase font-bold hidden md:block">
+                    <span className="text-[9px] tracking-[0.2em] text-[#64748b] font-sans uppercase font-bold hidden md:block">
                         Complimentary Fitting on All Commissions
                     </span>
                 </div>
@@ -133,10 +132,10 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
                                         onClick={() => setActive(c.key)}
                                         className={`
                         px-6 py-3 text-[10px] tracking-[0.2em] uppercase cursor-pointer font-sans whitespace-nowrap
-                        rounded-full border backdrop-blur-[20px] transition-all duration-400 ease-[cubic-bezier(0.16,1,0.3,1)]
+                        rounded-full border transition-all duration-300
                         ${isActive
-                                                ? 'font-extrabold bg-[#1A5276]/10 text-[#1A5276] border-[#1A5276]/30'
-                                                : 'font-semibold bg-white/5 text-white/40 border-white/5 hover:bg-white/10 hover:text-white/70'}
+                                                ? 'font-extrabold bg-[#1A5276] text-white border-[#1A5276]'
+                                                : 'font-semibold bg-white text-[#64748b] border-black/10 hover:border-[#1A5276]/30 hover:text-[#1A5276]'}
                       `}
                                     >
                                         {c.label}
@@ -149,21 +148,21 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
                         <div className="relative w-full max-w-[300px]">
                             <input 
                                 type="text"
-                                placeholder="Search the archive..."
+                                placeholder="Search the collection..."
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
-                                className="w-full bg-white/5 border border-white/10 rounded-full py-3 px-6 text-[10px] text-white font-sans tracking-widest uppercase focus:outline-none focus:border-[#1A5276]/40 transition-colors"
+                                className="w-full bg-white border border-black/10 rounded-full py-3 px-6 text-[12px] text-[#1C1C1E] font-sans tracking-wide focus:outline-none focus:border-[#1A5276]/40 transition-colors"
                             />
                         </div>
                     </div>
                     
                     {searchQuery && (
                         <div className="mb-8 flex items-center gap-3">
-                            <span className="text-[10px] text-white/30 uppercase tracking-[0.2em]">Results for:</span>
+                            <span className="text-[10px] text-[#64748b] uppercase tracking-[0.2em]">Results for:</span>
                             <span className="text-[10px] text-[#1A5276] uppercase tracking-[0.2em] font-bold">"{searchQuery}"</span>
                             <button 
                                 onClick={() => setSearchQuery('')}
-                                className="text-[10px] text-white/20 hover:text-white transition-colors uppercase tracking-[0.2em]"
+                                className="text-[10px] text-[#94a3b8] hover:text-[#1A5276] transition-colors uppercase tracking-[0.2em]"
                             >
                                 (Clear)
                             </button>
@@ -188,7 +187,7 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
                                         href={`/shop/product/${product.slug}`} // Using Sanity's slug for routing
                                         className="no-underline text-inherit block h-full"
                                     >
-                                        <div className="bg-white/[0.02] backdrop-blur-[40px] rounded-[24px] overflow-hidden cursor-pointer h-full flex flex-col border border-white/[0.08] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_30px_60px_rgba(0,0,0,0.4)] hover:-translate-y-2.5 hover:border-[#1A5276]/20 hover:bg-white/[0.04]">
+                                        <div className="bg-white rounded-[24px] overflow-hidden cursor-pointer h-full flex flex-col border border-black/[0.06] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_16px_48px_rgba(26,82,118,0.12)] hover:-translate-y-2 hover:border-[#1A5276]/20">
 
                                             {/* Image Container */}
                                             <div className="relative aspect-[3/4] overflow-hidden bg-black/20">
@@ -219,21 +218,20 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
                                             {/* Details Container */}
                                             <div className="p-8 flex-1 flex flex-col gap-3">
                                                 <div>
-                                                    <h3 className="font-serif text-[1.6rem] font-normal text-white mb-1 leading-[1.2]">
+                                                    <h3 style={{ fontFamily: 'Inter, sans-serif' }} className="text-[1.15rem] font-bold text-[#1C1C1E] mb-1 leading-[1.3] tracking-[-0.02em]">
                                                         {product.name}
                                                     </h3>
-                                                    <p className="font-sans text-[13px] text-white/40 leading-[1.6] font-light line-clamp-2">
+                                                    <p className="font-sans text-[13px] text-[#64748b] leading-[1.6] font-light line-clamp-2">
                                                         {product.desc}
                                                     </p>
                                                 </div>
 
                                                 <div className="mt-auto flex items-center justify-between pt-2.5">
-                                                    <span className="font-serif text-[1.2rem] text-[#1A5276] font-semibold">
-                                                        {/* Dynamically format number to Naira string */}
+                                                    <span style={{ fontFamily: 'Inter, sans-serif' }} className="text-[1.15rem] text-[#1A5276] font-bold">
                                                         ₦{product.price?.toLocaleString()}
                                                     </span>
 
-                                                    <div className="w-8 h-8 rounded-full border border-[#1A5276]/30 flex items-center justify-center text-[#1A5276] bg-[#1A5276]/5 transition-all duration-300 ease-out group-hover:bg-[#1A5276] group-hover:text-black">
+                                                    <div className="w-8 h-8 rounded-full border border-[#1A5276]/30 flex items-center justify-center text-[#1A5276] bg-[#F8FAFC] transition-all duration-300 ease-out group-hover:bg-[#1A5276] group-hover:text-white">
                                                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                                             <path d="M5 12h14M12 5l7 7-7 7" />
                                                         </svg>
@@ -247,7 +245,7 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
                             ))}
                         </div>
                     ) : (
-                        <div className="text-center py-24 text-white/40 font-sans tracking-widest text-sm uppercase">
+                        <div className="text-center py-24 text-[#94a3b8] font-sans tracking-widest text-sm uppercase">
                             No products found matching your criteria.
                         </div>
                     )}

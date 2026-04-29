@@ -55,12 +55,7 @@ const SocialProofRibbon = () => {
 
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 clamp(1.5rem, 4vw, 2rem)' }}>
         <div style={{ textAlign: 'center', marginBottom: 'clamp(2rem, 5vw, 4rem)' }}>
-          <span style={{
-            fontSize: 10, letterSpacing: '0.25em', textTransform: 'uppercase',
-            color: '#1A5276', display: 'block', marginBottom: 12, fontFamily: 'Inter, sans-serif'
-          }}>
-            Client Reviews
-          </span>
+
           <h2 style={{
             fontFamily: 'Inter, sans-serif',
             fontSize: 'clamp(2rem, 4vw, 3rem)',

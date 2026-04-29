@@ -2,24 +2,26 @@ import { client } from "@/lib/sanity";
 import { groq } from "next-sanity";
 
 import Hero from '../components/landingPages/Hero';
-import TrustBar from '@/components/TrustBar';
 import CorporateAtelier from '@/components/landingPages/Brand';
-import BespokeProcess from '@/components/landingPages/Category';
+
 import ShopPreview from '@/components/landingPages/ShopPreview';
 import SocialProofRibbon from '@/components/landingPages/SocialProofRibbon';
 import Journal from '@/components/landingPages/Journal';
 import FAQSection from '@/components/landingPages/FAQ';
 import Contact from '@/components/landingPages/Contact';
 import CraftWidget from '@/components/landingPages/CraftWidget';
+import WhyChooseUs from '@/components/landingPages/WhyChooseUs';
 
 const latestArticlesQuery = groq`*[_type == "blog"] | order(publishedAt desc)[0...3] {
   _id,
   title,
   "slug": slug.current,
   category,
+  author,
   publishedAt,
-  "excerpt": array::join(string::split((pt::text(content)), "")[0..150], "") + "...",
-  "readTime": "6 min read" 
+  "imageUrl": image.asset->url,
+  "excerpt": array::join(string::split((pt::text(content)), "")[0..160], "") + "...",
+  "readTime": string(round(length(pt::text(content)) / 1000) + 1) + " min read"
 }`;
 
 export default async function Home() {
@@ -31,14 +33,13 @@ export default async function Home() {
       {/* 1. Hero — cinematic video background */}
       <Hero />
       
-      {/* 1.5 Trust Bar — branding and social proof */}
-      <TrustBar />
+      {/* 1.5 Why Choose Us — with floating trust bar */}
+      <WhyChooseUs />
 
       {/* 2. Corporate Atelier — B2B services */}
       <CorporateAtelier />
 
-      {/* 3. Private Commissions — directly under Corporate */}
-      <BespokeProcess />
+
 
       {/* 4. Shop Preview — collection teaser → /shop */}
       <ShopPreview />
