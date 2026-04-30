@@ -45,10 +45,10 @@ export default async function JournalArticlePage({ params }: { params: Promise<{
 
   if (!article) {
     return (
-      <div style={{ minHeight: '100vh', background: '#F8FAFC', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 16 }}>
-        <h1 style={{ fontFamily: 'Inter, sans-serif', fontSize: '2rem', fontWeight: 800, color: '#1C1C1E' }}>Article not found</h1>
-        <Link href="/blog" style={{ textDecoration: 'none' }}>
-          <button style={{ background: '#1A5276', color: 'white', border: 'none', padding: '12px 28px', borderRadius: 999, fontFamily: 'Inter, sans-serif', fontWeight: 700, fontSize: 13, cursor: 'pointer' }}>
+      <div className="min-h-screen bg-[#F8FAFC] flex flex-col items-center justify-center gap-4">
+        <h1 className="font-inter text-3xl font-extrabold text-[#1C1C1E]">Article not found</h1>
+        <Link href="/blog">
+          <button className="bg-navy text-white border-none px-8 py-3 rounded-full font-inter font-bold text-sm hover:bg-navy/90 transition-all">
             Return to Journal
           </button>
         </Link>
@@ -62,24 +62,24 @@ export default async function JournalArticlePage({ params }: { params: Promise<{
 
   const ptComponents = {
     block: {
-      h1: ({ children }: any) => <h1 style={{ fontFamily: 'Inter, sans-serif', fontSize: '2.5rem', fontWeight: 800, color: '#1C1C1E', margin: '3rem 0 1.5rem', lineHeight: 1.1, letterSpacing: '-0.03em' }}>{children}</h1>,
-      h2: ({ children }: any) => <h2 style={{ fontFamily: 'Inter, sans-serif', fontSize: '1.8rem', fontWeight: 700, color: '#1C1C1E', margin: '2.5rem 0 1rem', lineHeight: 1.2, letterSpacing: '-0.02em' }}>{children}</h2>,
-      h3: ({ children }: any) => <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '1.3rem', fontWeight: 700, color: '#1C1C1E', margin: '2rem 0 0.75rem' }}>{children}</h3>,
-      normal: ({ children }: any) => <p style={{ fontFamily: 'Inter, sans-serif', fontSize: '1.05rem', color: '#374151', lineHeight: 1.8, marginBottom: '1.5rem' }}>{children}</p>,
+      h1: ({ children }: any) => <h1 className="font-inter text-3xl md:text-5xl font-extrabold text-[#1C1C1E] mt-12 mb-6 leading-tight tracking-tight">{children}</h1>,
+      h2: ({ children }: any) => <h2 className="font-inter text-2xl md:text-3xl font-bold text-[#1C1C1E] mt-10 mb-4 leading-tight tracking-tight">{children}</h2>,
+      h3: ({ children }: any) => <h3 className="font-inter text-xl md:text-2xl font-bold text-[#1C1C1E] mt-8 mb-3">{children}</h3>,
+      normal: ({ children }: any) => <p className="font-inter text-base md:text-lg text-slate-600 leading-relaxed mb-6">{children}</p>,
       blockquote: ({ children }: any) => (
-        <blockquote style={{ borderLeft: '3px solid #1A5276', paddingLeft: '1.5rem', fontFamily: 'Cormorant Garamond, serif', fontSize: '1.4rem', fontStyle: 'italic', color: '#1C1C1E', margin: '2.5rem 0', lineHeight: 1.5 }}>
+        <blockquote className="border-l-4 border-navy pl-6 my-10 font-cormorant text-xl md:text-2xl italic text-[#1C1C1E] leading-relaxed">
           {children}
         </blockquote>
       ),
     },
     list: {
-      bullet: ({ children }: any) => <ul style={{ paddingLeft: '1.5rem', marginBottom: '1.5rem', fontFamily: 'Inter, sans-serif', color: '#374151', fontSize: '1rem', lineHeight: 1.8 }}>{children}</ul>,
-      number: ({ children }: any) => <ol style={{ paddingLeft: '1.5rem', marginBottom: '1.5rem', fontFamily: 'Inter, sans-serif', color: '#374151', fontSize: '1rem', lineHeight: 1.8 }}>{children}</ol>,
+      bullet: ({ children }: any) => <ul className="pl-6 mb-6 list-disc space-y-2 text-slate-600 text-base md:text-lg font-inter">{children}</ul>,
+      number: ({ children }: any) => <ol className="pl-6 mb-6 list-decimal space-y-2 text-slate-600 text-base md:text-lg font-inter">{children}</ol>,
     },
     marks: {
-      strong: ({ children }: any) => <strong style={{ fontWeight: 700, color: '#1C1C1E' }}>{children}</strong>,
+      strong: ({ children }: any) => <strong className="font-bold text-[#1C1C1E]">{children}</strong>,
       link: ({ value, children }: any) => (
-        <a href={value?.href} target="_blank" rel="noreferrer" style={{ color: '#1A5276', textDecoration: 'underline', textUnderlineOffset: 3 }}>
+        <a href={value?.href} target="_blank" rel="noreferrer" className="text-navy underline underline-offset-4 decoration-navy/30 hover:decoration-navy transition-all">
           {children}
         </a>
       ),
@@ -87,39 +87,38 @@ export default async function JournalArticlePage({ params }: { params: Promise<{
   };
 
   return (
-    <main style={{ background: '#F8FAFC', minHeight: '100vh' }}>
+    <main className="bg-[#F8FAFC] min-h-screen overflow-x-hidden">
 
       {/* Top Nav */}
-      <div style={{ background: 'white', borderBottom: '1px solid rgba(0,0,0,0.06)', padding: '0 32px', height: 64, display: 'flex', alignItems: 'center', justifyContent: 'space-between', position: 'sticky', top: 0, zIndex: 50 }}>
-        <Link href="/blog" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: 8, color: '#64748b', fontFamily: 'Inter, sans-serif', fontSize: 12, fontWeight: 600, letterSpacing: '0.05em', textTransform: 'uppercase' }}>
-          <ArrowLeft size={14} />
+      <div className="bg-white border-b border-black/[0.06] px-6 md:px-8 h-16 flex items-center justify-between sticky top-0 z-50 backdrop-blur-md bg-white/80">
+        <Link href="/blog" className="flex items-center gap-2 text-slate-500 font-inter text-[10px] md:text-xs font-bold tracking-widest uppercase hover:text-navy transition-colors">
+          <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-1" />
           Back to Journal
         </Link>
-        <button style={{ background: 'transparent', border: '1px solid rgba(0,0,0,0.1)', borderRadius: 999, padding: '8px 16px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: 6, fontFamily: 'Inter, sans-serif', fontSize: 12, color: '#64748b' }}>
+        <button className="bg-transparent border border-black/10 rounded-full px-4 py-2 flex items-center gap-2 font-inter text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-500 hover:bg-slate-50 transition-all">
           <Share2 size={13} />
           Share
         </button>
       </div>
 
       {/* Hero area */}
-      <div style={{ background: '#1A5276', padding: '80px 32px 60px' }}>
-        <div style={{ maxWidth: 800, margin: '0 auto', textAlign: 'center' }}>
-
-          <h1 style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(2rem, 5vw, 3.5rem)', fontWeight: 800, letterSpacing: '-0.04em', lineHeight: 1.1, color: 'white', margin: '0 0 32px' }}>
+      <div className="bg-navy py-16 md:py-24 px-6 md:px-8 text-center">
+        <div className="max-w-[800px] mx-auto">
+          <h1 className="font-inter text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white mb-8">
             {article.title}
           </h1>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 24, borderTop: '1px solid rgba(255,255,255,0.1)', borderBottom: '1px solid rgba(255,255,255,0.1)', padding: '16px 0', flexWrap: 'wrap' }}>
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 pt-8 border-t border-white/10">
             {article.author && (
-              <span style={{ fontFamily: 'Inter, sans-serif', fontSize: 12, color: 'rgba(255,255,255,0.7)', fontWeight: 600 }}>
+              <span className="font-inter text-[11px] md:text-xs text-white/70 font-bold uppercase tracking-widest">
                 By {article.author}
               </span>
             )}
-            <span style={{ display: 'flex', alignItems: 'center', gap: 6, fontFamily: 'Inter, sans-serif', fontSize: 12, color: 'rgba(255,255,255,0.5)' }}>
-              <Calendar size={12} />
+            <span className="flex items-center gap-2 font-inter text-[11px] md:text-xs text-white/50 font-medium uppercase tracking-widest">
+              <Calendar size={12} className="opacity-50" />
               {formattedDate}
             </span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: 6, fontFamily: 'Inter, sans-serif', fontSize: 12, color: 'rgba(255,255,255,0.5)' }}>
-              <Clock size={12} />
+            <span className="flex items-center gap-2 font-inter text-[11px] md:text-xs text-white/50 font-medium uppercase tracking-widest">
+              <Clock size={12} className="opacity-50" />
               {article.readTime}
             </span>
           </div>
@@ -127,37 +126,46 @@ export default async function JournalArticlePage({ params }: { params: Promise<{
       </div>
 
       {/* Article body */}
-      <article style={{ maxWidth: 760, margin: '0 auto', padding: '64px 32px 100px' }}>
+      <article className="max-w-[800px] mx-auto px-6 md:px-8 py-12 md:py-20">
 
         {/* Featured Image */}
         {article.image && (
-          <div style={{ position: 'relative', width: '100%', aspectRatio: '16/9', marginBottom: 56, borderRadius: 20, overflow: 'hidden', background: '#EBF5FB' }}>
-            <Image src={article.image} alt={article.title} fill style={{ objectFit: 'cover' }} priority />
+          <div className="relative w-full aspect-video mb-12 md:mb-16 rounded-[24px] md:rounded-[32px] overflow-hidden bg-blue-50 shadow-2xl shadow-navy/5">
+            <Image 
+              src={article.image} 
+              alt={article.title} 
+              fill 
+              className="object-cover" 
+              priority 
+              sizes="(max-width: 800px) 100vw, 800px"
+            />
           </div>
         )}
 
         {/* Content */}
-        <div>
+        <div className="prose prose-slate prose-lg max-w-none">
           {article.content ? (
             <PortableText value={article.content} components={ptComponents} />
           ) : (
-            <p style={{ fontFamily: 'Inter, sans-serif', color: '#94a3b8', fontStyle: 'italic' }}>No content available for this article.</p>
+            <p className="font-inter text-slate-400 italic">No content available for this article.</p>
           )}
         </div>
 
         {/* Footer CTA */}
-        <div style={{ marginTop: 80, borderTop: '1px solid rgba(0,0,0,0.08)', paddingTop: 60 }}>
-          <div style={{ background: '#1A5276', borderRadius: 24, padding: '48px', textAlign: 'center' }}>
-            <h3 style={{ fontFamily: 'Inter, sans-serif', fontSize: '1.8rem', fontWeight: 800, letterSpacing: '-0.03em', color: 'white', marginBottom: 12 }}>
+        <div className="mt-20 md:mt-32 pt-16 md:pt-24 border-t border-black/[0.06]">
+          <div className="bg-navy rounded-[32px] md:rounded-[48px] p-8 md:p-16 text-center shadow-2xl shadow-navy/20 relative overflow-hidden group">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:scale-110 transition-transform duration-700"></div>
+            
+            <h3 className="font-inter text-2xl md:text-4xl font-extrabold tracking-tight text-white mb-4 relative z-10">
               Ready to elevate your wardrobe?
             </h3>
-            <p style={{ fontFamily: 'Inter, sans-serif', fontSize: 14, color: 'rgba(255,255,255,0.6)', marginBottom: 32, maxWidth: 400, margin: '0 auto 32px', lineHeight: 1.7 }}>
-              From bespoke commissions to corporate uniforms — Vee Clothing brings your vision to life.
+            <p className="font-inter text-sm md:text-base text-white/60 mb-10 max-w-md mx-auto leading-relaxed relative z-10">
+              From bespoke commissions to corporate uniforms — Vee Clothing brings your vision to life with artisan precision.
             </p>
-            <Link href="/#consultation">
-              <button style={{ background: '#1A5276', color: 'white', border: 'none', padding: '14px 32px', borderRadius: 999, fontFamily: 'Inter, sans-serif', fontWeight: 700, fontSize: 14, cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+            <Link href="/#consultation" className="relative z-10 inline-block">
+              <button className="bg-white text-navy border-none px-10 py-5 rounded-full font-inter font-bold text-[11px] md:text-xs uppercase tracking-[0.2em] hover:scale-105 transition-all shadow-xl shadow-black/10 flex items-center gap-3 group/btn">
                 Book a Consultation
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" className="transition-transform group-hover/btn:translate-x-1"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
               </button>
             </Link>
           </div>
@@ -165,4 +173,4 @@ export default async function JournalArticlePage({ params }: { params: Promise<{
       </article>
     </main>
   );
-}
+}

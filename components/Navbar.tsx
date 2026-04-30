@@ -168,16 +168,17 @@ const Navbar = () => {
               <Image
                 src="/VCC-white.png"
                 alt="VeeClothingCompany"
-                width={90}
-                height={30}
-                className="object-contain"
+                width={70}
+                height={24}
+                className="object-contain md:w-[90px] md:h-[30px]"
                 priority
               />
             </Link>
           </div>
 
           {/* Right: Icons & Selectors */}
-          <div className="flex items-center justify-end gap-5 lg:gap-7 flex-1">
+          <div className="flex items-center justify-end gap-3 sm:gap-5 lg:gap-7 flex-1">
+
             <button className="text-white/90 hover:text-white transition-colors hidden sm:block">
               <User size={20} />
             </button>
