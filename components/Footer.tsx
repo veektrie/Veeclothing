@@ -142,8 +142,8 @@ const Footer = () => {
       <div className="footer-bottom">
         <span>© {new Date().getFullYear()} Vee Clothing Company. All rights reserved.</span>
         <div style={{ display: 'flex', gap: 24 }}>
-          <Link href="/" className="footer-link">Privacy</Link>
-          <Link href="/" className="footer-link">Terms of Use</Link>
+          <Link href="/terms-and-conditions" className="footer-link">Privacy</Link>
+          <Link href="/terms-and-conditions" className="footer-link">Terms of Use</Link>
         </div>
       </div>
     </footer>
