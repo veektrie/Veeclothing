@@ -29,6 +29,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${article.title} | The Journal | Vee Clothing`,
     description: article.excerpt || `Read ${article.title} on the Vee Clothing Company journal.`,
+    alternates: {
+      canonical: `/blog/${slug}`,
+    },
     openGraph: {
       title: `${article.title} | Vee Clothing`,
       description: article.excerpt,

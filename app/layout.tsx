@@ -21,7 +21,11 @@ export const metadata: Metadata = {
     "executive wardrobe Lagos",
     "artisan tailoring Africa",
     "corporate branding apparel Nigeria",
+    "corporate branding",
   ],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Vee Clothing Company | Bespoke Tailoring & Corporate Uniforms Lagos",
     description:

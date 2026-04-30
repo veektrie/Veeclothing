@@ -7,6 +7,9 @@ import { Metadata } from 'next';
 export const metadata: Metadata = {
   title: "Terms & Conditions | Vee Clothing Company",
   description: "Our commitment to quality and transparency. Review the terms and conditions for our bespoke tailoring and corporate branding services.",
+  alternates: {
+    canonical: '/terms-and-conditions',
+  },
 };
 
 export default function TermsAndConditions() {

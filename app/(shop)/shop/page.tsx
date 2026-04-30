@@ -18,6 +18,9 @@ const shopQuery = groq`*[_type == "product"] | order(_createdAt desc) {
 export const metadata = {
   title: "The Collection | Bespoke Tailoring & Luxury Menswear | Vee Clothing",
   description: "Explore our collection of precision-engineered executive suits, premium kaftans, and bespoke agbadas. Handcrafted in Lagos for the discerning gentleman.",
+  alternates: {
+    canonical: '/shop',
+  },
 };
 
 export const revalidate = 60; // Optional: Revalidate cache every 60 seconds

@@ -17,6 +17,9 @@ const allArticlesQuery = groq`*[_type == "blog"] | order(publishedAt desc) {
 export const metadata = {
   title: "The Journal | Style Insights & Heritage Tailoring | Vee Clothing",
   description: "Insights into the world of bespoke tailoring, corporate branding, and modern menswear. Stories about craft, heritage, and style from Vee Clothing Company.",
+  alternates: {
+    canonical: '/blog',
+  },
 };
 
 export const revalidate = 30;

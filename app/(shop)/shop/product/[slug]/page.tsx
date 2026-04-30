@@ -16,6 +16,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return {
     title: `${product.name} | Bespoke Tailoring | Vee Clothing`,
     description: product.description || `Handcrafted ${product.name} from Vee Clothing Company. Premium bespoke tailoring in Lagos.`,
+    alternates: {
+      canonical: `/shop/product/${slug}`,
+    },
     openGraph: {
       title: `${product.name} | Vee Clothing`,
       description: product.description,
