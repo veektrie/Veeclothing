@@ -9,7 +9,7 @@ import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://veeclothingcompany.com"),
-  title: "VeeClothingCompany",
+  title: "Bespoke Mens Tailor",
   description:
     "Vee Clothing Company — High-quality custom tailoring and business uniforms in Lagos. We make custom suits, African menswear, and corporate clothes with expert care.",
   keywords: [
