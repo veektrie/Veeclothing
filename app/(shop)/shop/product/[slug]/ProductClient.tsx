@@ -202,7 +202,7 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                             <button
                                 onClick={handleAddToCart}
                                 disabled={isAdding || (product.sizes?.length > 0 && !selectedSize)}
-                                className="flex-1 bg-[#1A5276] hover:bg-[#154360] disabled:bg-black/10 disabled:text-black/30 disabled:cursor-not-allowed text-white py-5 px-8 rounded-xl font-sans text-[11px] tracking-[0.2em] uppercase font-extrabold flex items-center justify-center gap-3 transition-all duration-300 shadow-lg shadow-blue-900/10"
+                                className="flex-1 shadow-xl bg-[#1A5276] hover:bg-[#154360] disabled:bg-black/10 disabled:text-black/30 disabled:cursor-not-allowed text-white py-5 px-8 rounded-xl font-sans text-[11px] tracking-[0.2em] uppercase font-extrabold flex items-center justify-center gap-3 transition-all duration-300 shadow-lg shadow-blue-900/10"
                             >
                                 {isAdding ? (
                                     <>Adding to Cart...</>
@@ -218,7 +218,7 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                                 <button
                                     onClick={handleAddToCart}
                                     disabled={isAdding || (product.sizes?.length > 0 && !selectedSize)}
-                                    className="flex-1 bg-[#1A5276] hover:bg-[#154360] disabled:bg-black/10 disabled:text-black/30 disabled:cursor-not-allowed text-white py-5 px-8 rounded-xl font-sans text-[11px] tracking-[0.2em] uppercase font-extrabold flex items-center justify-center gap-3 transition-all duration-300 shadow-lg shadow-blue-900/10"
+                                    className="flex-1 shadow-xl bg-[#1A5276] hover:bg-[#154360] disabled:bg-black/10 disabled:text-black/30 disabled:cursor-not-allowed text-white py-5 px-8 rounded-xl font-sans text-[11px] tracking-[0.2em] uppercase font-extrabold flex items-center justify-center gap-3 transition-all duration-300 shadow-lg shadow-blue-900/10"
                                 >
                                     Go To Cart
                                 </button>
@@ -246,7 +246,7 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10">
                             {relatedProducts.map((item) => (
                                 <Link key={item._id} href={`/shop/product/${item.slug}`} className="group no-underline ">
-                                    <div className="flex flex-col items-center ">
+                                    <div className="flex flex-col items-center shadow-xl">
                                         <div className="relative w-full aspect-[4/5] rounded-[2rem] overflow-hidden mb-6 bg-gray-100">
                                             {item.src && (
                                                 <Image

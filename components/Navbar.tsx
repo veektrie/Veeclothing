@@ -178,10 +178,6 @@ const Navbar = () => {
 
           {/* Right: Icons & Selectors */}
           <div className="flex items-center justify-end gap-3 sm:gap-5 lg:gap-7 flex-1">
-
-            <button className="text-white/90 hover:text-white transition-colors hidden sm:block">
-              <User size={20} />
-            </button>
             <button
               onClick={() => setSearchOpen(!searchOpen)}
               className="text-white/90 hover:text-white transition-colors"
