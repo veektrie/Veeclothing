@@ -46,8 +46,8 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
     // Filter based on active category and search query
     const filtered = initialProducts.filter(p => {
         const matchesCategory = active === 'all' || p.cat === active;
-        const matchesSearch = !searchQuery || 
-            p.name?.toLowerCase().includes(searchQuery.toLowerCase()) || 
+        const matchesSearch = !searchQuery ||
+            p.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
             p.desc?.toLowerCase().includes(searchQuery.toLowerCase());
         return matchesCategory && matchesSearch;
     });
@@ -146,7 +146,7 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
 
                         {/* Inline Search Input */}
                         <div className="relative w-full max-w-[300px]">
-                            <input 
+                            <input
                                 type="text"
                                 placeholder="Search the collection..."
                                 value={searchQuery}
@@ -155,12 +155,12 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
                             />
                         </div>
                     </div>
-                    
+
                     {searchQuery && (
                         <div className="mb-8 flex items-center gap-3">
                             <span className="text-[10px] text-[#64748b] uppercase tracking-[0.2em]">Results for:</span>
                             <span className="text-[10px] text-[#1A5276] uppercase tracking-[0.2em] font-bold">"{searchQuery}"</span>
-                            <button 
+                            <button
                                 onClick={() => setSearchQuery('')}
                                 className="text-[10px] text-[#94a3b8] hover:text-[#1A5276] transition-colors uppercase tracking-[0.2em]"
                             >
@@ -181,13 +181,13 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
                                     whileInView={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.5, delay: i % 4 * 0.1 }}
                                     viewport={{ once: true }}
-                                    className="group"
+                                    className="group "
                                 >
                                     <Link
                                         href={`/shop/product/${product.slug}`} // Using Sanity's slug for routing
                                         className="no-underline text-inherit block h-full"
                                     >
-                                        <div className="bg-white rounded-[24px] overflow-hidden cursor-pointer h-full flex flex-col border border-black/[0.06] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_16px_48px_rgba(26,82,118,0.12)] hover:-translate-y-2 hover:border-[#1A5276]/20">
+                                        <div className="bg-white shadow-xl rounded-[24px] overflow-hidden cursor-pointer h-full flex flex-col border border-black/[0.06] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_16px_48px_rgba(26,82,118,0.12)] hover:-translate-y-2 hover:border-[#1A5276]/20">
 
                                             {/* Image Container */}
                                             <div className="relative aspect-[3/4] overflow-hidden bg-black/20">
