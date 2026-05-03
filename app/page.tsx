@@ -24,7 +24,7 @@ const latestArticlesQuery = groq`*[_type == "blog"] | order(publishedAt desc)[0.
   "readTime": string(round(length(pt::text(content)) / 1000) + 1) + " min read"
 }`;
 
-const shopPreviewQuery = groq`*[_type == "product"] | order(_createdAt desc)[0...3] {
+const shopPreviewQuery = groq`*[_type == "product"] | order(_createdAt desc)[0...12] {
   _id,
   name,
   "slug": slug.current,
