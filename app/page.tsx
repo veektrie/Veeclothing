@@ -24,8 +24,20 @@ const latestArticlesQuery = groq`*[_type == "blog"] | order(publishedAt desc)[0.
   "readTime": string(round(length(pt::text(content)) / 1000) + 1) + " min read"
 }`;
 
+const shopPreviewQuery = groq`*[_type == "product"] | order(_createdAt desc)[0...3] {
+  _id,
+  name,
+  "slug": slug.current,
+  price,
+  tag,
+  "cat": category,
+  "desc": description,
+  "src": image.asset->url
+}`;
+
 export default async function Home() {
   const articles = await client.fetch(latestArticlesQuery);
+  const products = await client.fetch(shopPreviewQuery);
 
   return (
     <main className="overflow-hidden">
@@ -42,7 +54,7 @@ export default async function Home() {
 
 
       {/* 4. Shop Preview — collection teaser → /shop */}
-      <ShopPreview />
+      <ShopPreview products={products} />
 
       {/* 5. The Journal — SEO topical authority */}
       <Journal articles={articles} />

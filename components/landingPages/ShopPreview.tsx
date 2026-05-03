@@ -9,7 +9,16 @@ const previews = [
   { id: 1, src: '/cop01.jpg',    label: 'Corporate Branding', tag: 'CORPORATE'  },
 ];
 
-const ShopPreview = () => {
+const ShopPreview = ({ products }: { products?: any[] }) => {
+  const displayItems = products && products.length > 0 
+    ? products.map(p => ({
+        id: p.slug || p._id,
+        src: p.src || '/suit01.jpg',
+        label: p.name,
+        tag: p.tag || p.cat || 'SIGNATURE'
+      }))
+    : previews;
+
   return (
     <section
       id="collection"
@@ -59,7 +68,7 @@ const ShopPreview = () => {
           gap: '2.5rem',
           alignItems: 'stretch'
         }}>
-          {previews.map((item, i) => (
+          {displayItems.map((item, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, scale: 0.95 }}
