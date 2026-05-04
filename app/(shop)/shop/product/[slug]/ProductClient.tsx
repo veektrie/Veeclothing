@@ -243,26 +243,60 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                             You Might Also Like
                         </h2>
 
-                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10 text-left">
                             {relatedProducts.map((item) => (
-                                <Link key={item._id} href={`/shop/product/${item.slug}`} className="group no-underline ">
-                                    <div className="flex flex-col items-center shadow-xl">
-                                        <div className="relative w-full aspect-[4/5] rounded-[2rem] overflow-hidden mb-6 bg-gray-100">
+                                <Link key={item._id} href={`/shop/product/${item.slug}`} className="no-underline text-inherit block h-full group">
+                                    <div className="bg-white shadow-xl rounded-[24px] overflow-hidden cursor-pointer h-full flex flex-col border border-black/[0.06] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_16px_48px_rgba(26,82,118,0.12)] hover:-translate-y-2 hover:border-[#1A5276]/20">
+                                        {/* Image Container */}
+                                        <div className="relative aspect-[3/4] overflow-hidden bg-black/20">
                                             {item.src && (
                                                 <Image
                                                     src={item.src}
                                                     alt={item.name}
                                                     fill
-                                                    className="object-cover group-hover:scale-105 transition-transform duration-700"
+                                                    className="object-cover transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] brightness-90 group-hover:scale-105 group-hover:brightness-100"
+                                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                                                 />
                                             )}
+                                            {item.tag && (
+                                                <div
+                                                    className="absolute top-5 left-5 px-3.5 py-1.5 rounded-lg backdrop-blur-md border border-white/10 z-10"
+                                                    style={{
+                                                        background: getTagColor(item.tag) ? `${getTagColor(item.tag)}bb` : 'rgba(26,82,118,0.7)',
+                                                    }}
+                                                >
+                                                    <span className="text-[8px] tracking-[0.2em] font-extrabold text-white font-sans uppercase">
+                                                        {item.tag}
+                                                    </span>
+                                                </div>
+                                            )}
                                         </div>
-                                        <h3 className="text-sm font-sans text-gray-900 mb-2">{item.name}</h3>
-                                        <p className="text-xs font-sans text-[#1A5276] font-semibold">
-                                            {String(item.price).toLowerCase().includes('from')
-                                                ? item.price
-                                                : `₦${item.price?.toLocaleString()}`}
-                                        </p>
+
+                                        {/* Details Container */}
+                                        <div className="p-6 flex-1 flex flex-col gap-3">
+                                            <div>
+                                                <h3 style={{ fontFamily: 'Inter, sans-serif' }} className="text-[1.05rem] font-bold text-[#1C1C1E] mb-1 leading-[1.3] tracking-[-0.02em]">
+                                                    {item.name}
+                                                </h3>
+                                                <p className="font-sans text-[12px] text-[#64748b] leading-[1.6] font-light line-clamp-2">
+                                                    {item.desc || 'Premium tailoring with meticulous attention to detail.'}
+                                                </p>
+                                            </div>
+
+                                            <div className="mt-auto flex items-center justify-between pt-2.5">
+                                                <span style={{ fontFamily: 'Inter, sans-serif' }} className="text-[1.05rem] text-[#1A5276] font-bold">
+                                                    {String(item.price).toLowerCase().includes('from')
+                                                        ? item.price
+                                                        : `₦${item.price?.toLocaleString()}`}
+                                                </span>
+
+                                                <div className="w-8 h-8 rounded-full border border-[#1A5276]/30 flex items-center justify-center text-[#1A5276] bg-[#F8FAFC] transition-all duration-300 ease-out group-hover:bg-[#1A5276] group-hover:text-white">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                        <path d="M5 12h14M12 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </Link>
                             ))}

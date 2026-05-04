@@ -7,13 +7,14 @@ import { motion } from 'framer-motion';
 import { useSearchParams } from 'next/navigation';
 
 // Hardcoded categories to ensure labels look nice (matches your Sanity values)
-type Category = 'all' | 'corporate' | 'bespoke' | 'kaftan' | 'accessories';
+type Category = 'all' | 'corporate' | 'bespoke' | 'kaftan' | 'casual' | 'accessories';
 
 const CATEGORIES: { key: Category; label: string }[] = [
     { key: 'all', label: 'All Pieces' },
     { key: 'corporate', label: 'Corporate' },
     { key: 'bespoke', label: 'Bespoke Suiting' },
     { key: 'kaftan', label: 'Kaftans & Agbada' },
+    { key: 'casual', label: 'Casual Wear' },
     { key: 'accessories', label: 'Accessories' },
 ];
 

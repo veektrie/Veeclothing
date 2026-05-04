@@ -64,6 +64,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       _id,
       name,
       price,
+      tag,
+      "desc": description,
       "slug": slug.current,
       "src": image.asset->url
     }`,
