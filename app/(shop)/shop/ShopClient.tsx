@@ -7,16 +7,19 @@ import { motion } from 'framer-motion';
 import { useSearchParams } from 'next/navigation';
 import { useQuickViewStore } from '@/store/useQuickViewStore';
 import RecentlyViewed from '@/components/RecentlyViewed';
+import { ChevronDown } from 'lucide-react';
 
 // Hardcoded categories to ensure labels look nice (matches your Sanity values)
-type Category = 'all' | 'corporate' | 'bespoke' | 'kaftan' | 'casual' | 'accessories';
+type Category = 'all' | 'corporate' | 'bespoke' | 'kaftan' | 'tees' | 'hoodies' | 'polo' | 'accessories';
 
 const CATEGORIES: { key: Category; label: string }[] = [
     { key: 'all', label: 'All Pieces' },
     { key: 'corporate', label: 'Corporate' },
     { key: 'bespoke', label: 'Bespoke Suiting' },
     { key: 'kaftan', label: 'Kaftans & Agbada' },
-    { key: 'casual', label: 'Casual Wear' },
+    { key: 'tees', label: 'Tees' },
+    { key: 'hoodies', label: 'Hoodies' },
+    { key: 'polo', label: 'Polo' },
     { key: 'accessories', label: 'Accessories' },
 ];
 
@@ -188,40 +191,52 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
 
                     {/* Advanced Filters */}
                     <div className="flex flex-wrap items-center gap-4 mb-8">
-                        <select
-                            value={sortOrder}
-                            onChange={(e) => setSortOrder(e.target.value as any)}
-                            className="bg-white border border-black/10 rounded-full py-2 px-4 text-[11px] text-[#1C1C1E] font-sans tracking-widest uppercase focus:outline-none focus:border-[#1A5276]/40 cursor-pointer transition-colors"
-                        >
-                            <option value="featured">Sort by: Recommended</option>
-                            <option value="price_asc">Price: Low to High</option>
-                            <option value="price_desc">Price: High to Low</option>
-                        </select>
-
-                        {availableSizes.length > 0 && (
+                        {/* Sort Order */}
+                        <div className="relative group/filter">
                             <select
-                                value={selectedSizeFilter}
-                                onChange={(e) => setSelectedSizeFilter(e.target.value)}
-                                className="bg-white border border-black/10 rounded-full py-2 px-4 text-[11px] text-[#1C1C1E] font-sans tracking-widest uppercase focus:outline-none focus:border-[#1A5276]/40 cursor-pointer transition-colors"
+                                value={sortOrder}
+                                onChange={(e) => setSortOrder(e.target.value as any)}
+                                className="bg-white border border-black/10 rounded-full py-2.5 pl-6 pr-10 text-[11px] text-[#1C1C1E] font-sans tracking-widest uppercase focus:outline-none focus:border-[#1A5276]/40 cursor-pointer appearance-none transition-all hover:border-[#1A5276]/30"
                             >
-                                <option value="all">Size: All</option>
-                                {availableSizes.map(size => (
-                                    <option key={size} value={size}>Size: {size}</option>
-                                ))}
+                                <option value="featured">Sort by: Recommended</option>
+                                <option value="price_asc">Price: Low to High</option>
+                                <option value="price_desc">Price: High to Low</option>
                             </select>
+                            <ChevronDown size={14} className="absolute right-4 top-1/2 -translate-y-1/2 text-[#64748b] pointer-events-none group-hover/filter:text-[#1A5276] transition-colors" />
+                        </div>
+
+                        {/* Size Filter */}
+                        {availableSizes.length > 0 && (
+                            <div className="relative group/filter">
+                                <select
+                                    value={selectedSizeFilter}
+                                    onChange={(e) => setSelectedSizeFilter(e.target.value)}
+                                    className="bg-white border border-black/10 rounded-full py-2.5 pl-6 pr-10 text-[11px] text-[#1C1C1E] font-sans tracking-widest uppercase focus:outline-none focus:border-[#1A5276]/40 cursor-pointer appearance-none transition-all hover:border-[#1A5276]/30"
+                                >
+                                    <option value="all">Size: All</option>
+                                    {availableSizes.map(size => (
+                                        <option key={size} value={size}>Size: {size}</option>
+                                    ))}
+                                </select>
+                                <ChevronDown size={14} className="absolute right-4 top-1/2 -translate-y-1/2 text-[#64748b] pointer-events-none group-hover/filter:text-[#1A5276] transition-colors" />
+                            </div>
                         )}
 
+                        {/* Color Filter */}
                         {availableColors.length > 0 && (
-                            <select
-                                value={selectedColorFilter}
-                                onChange={(e) => setSelectedColorFilter(e.target.value)}
-                                className="bg-white border border-black/10 rounded-full py-2 px-4 text-[11px] text-[#1C1C1E] font-sans tracking-widest uppercase focus:outline-none focus:border-[#1A5276]/40 cursor-pointer transition-colors"
-                            >
-                                <option value="all">Color: All</option>
-                                {availableColors.map(color => (
-                                    <option key={color} value={color}>Color: {color}</option>
-                                ))}
-                            </select>
+                            <div className="relative group/filter">
+                                <select
+                                    value={selectedColorFilter}
+                                    onChange={(e) => setSelectedColorFilter(e.target.value)}
+                                    className="bg-white border border-black/10 rounded-full py-2.5 pl-6 pr-10 text-[11px] text-[#1C1C1E] font-sans tracking-widest uppercase focus:outline-none focus:border-[#1A5276]/40 cursor-pointer appearance-none transition-all hover:border-[#1A5276]/30"
+                                >
+                                    <option value="all">Color: All</option>
+                                    {availableColors.map(color => (
+                                        <option key={color} value={color}>Color: {color}</option>
+                                    ))}
+                                </select>
+                                <ChevronDown size={14} className="absolute right-4 top-1/2 -translate-y-1/2 text-[#64748b] pointer-events-none group-hover/filter:text-[#1A5276] transition-colors" />
+                            </div>
                         )}
                     </div>
                 </div>
