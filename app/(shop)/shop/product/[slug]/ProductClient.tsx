@@ -1,12 +1,14 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ShoppingBag, Check } from 'lucide-react';
 import toast from 'react-hot-toast';
-import { useCartStore } from '@/store/useCartStore'; // Added your store back!
+import { useCartStore } from '@/store/useCartStore';
+import { useRecentlyViewedStore } from '@/store/useRecentlyViewedStore';
+import RecentlyViewed from '@/components/RecentlyViewed';
 
 // Helper for tag colors (matching your shop page)
 const getTagColor = (tag: string) => {
@@ -28,6 +30,13 @@ export default function ProductClient({ product, relatedProducts }: { product: a
     const [isAdding, setIsAdding] = useState(false);
 
     const addItem = useCartStore((state) => state.addItem); // Zustand Hook
+    const addRecentlyViewed = useRecentlyViewedStore((state) => state.addRecentlyViewed);
+
+    useEffect(() => {
+        if (product) {
+            addRecentlyViewed(product);
+        }
+    }, [product, addRecentlyViewed]);
 
     const handleAddToCart = () => {
         // Validations
@@ -220,9 +229,12 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                                     useCartStore.getState().setIsOpen(true);
                                 }}
                                 disabled={isAdding || (product.sizes?.length > 0 && !selectedSize)}
-                                className="flex-1 shadow-xl bg-[#1A5276] hover:bg-[#154360] disabled:bg-black/10 disabled:text-black/30 disabled:cursor-not-allowed text-white py-5 px-8 rounded-xl font-sans text-[11px] tracking-[0.2em] uppercase font-extrabold flex items-center justify-center gap-3 transition-all duration-300 shadow-lg shadow-blue-900/10"
+                                className="group relative flex-1 overflow-hidden shadow-xl bg-[#1A5276] disabled:bg-black/10 disabled:text-black/30 disabled:cursor-not-allowed text-white py-5 px-8 rounded-xl font-sans text-[11px] tracking-[0.2em] uppercase font-extrabold flex items-center justify-center gap-3 transition-all duration-300 hover:shadow-[0_16px_48px_rgba(26,82,118,0.25)]"
                             >
-                                Buy Now
+                                <span className="absolute inset-0 w-full h-full -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-[shimmer_1.5s_infinite]"></span>
+                                <span className="relative z-10 flex items-center gap-3">
+                                    Buy Now
+                                </span>
                             </button>
                         </div>
 
@@ -306,6 +318,8 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                     </div>
                 </div>
             )}
+            
+            <RecentlyViewed currentProductId={product._id} />
         </main>
     );
 }

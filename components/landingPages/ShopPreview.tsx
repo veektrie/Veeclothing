@@ -3,13 +3,16 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useQuickViewStore } from '@/store/useQuickViewStore';
 
 const CATEGORIES = [
   { key: 'all', label: 'All Pieces' },
   { key: 'corporate', label: 'Corporate' },
   { key: 'bespoke', label: 'Bespoke Suiting' },
   { key: 'kaftan', label: 'Kaftans & Agbada' },
-  { key: 'casual', label: 'Casual Wear' },
+  { key: 'tees', label: 'Tees' },
+  { key: 'hoodies', label: 'Hoodies' },
+  { key: 'polo', label: 'Polo' },
   { key: 'accessories', label: 'Accessories' },
 ];
 
@@ -143,10 +146,18 @@ const ShopPreview = ({ products }: { products?: any[] }) => {
                       )}
 
                       {/* Quick View Hover Overlay */}
-                      <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px] z-20">
-                         <div className="bg-white/95 text-[#1A5276] px-6 py-3 rounded-full text-[10px] tracking-[0.2em] font-bold uppercase translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-lg">
-                           View Details
-                         </div>
+                      <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px] z-20 pointer-events-none">
+                         <button 
+                           onClick={(e) => {
+                             e.preventDefault();
+                             e.stopPropagation();
+                             useQuickViewStore.getState().openQuickView(item);
+                           }}
+                           className="group relative pointer-events-auto bg-white/95 text-[#1A5276] px-6 py-3 rounded-full text-[10px] tracking-[0.2em] font-bold uppercase translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-lg hover:bg-[#1A5276] hover:text-white overflow-hidden"
+                         >
+                           <span className="absolute inset-0 w-full h-full -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent group-hover:animate-[shimmer_1.5s_infinite]"></span>
+                           <span className="relative z-10">Quick Add</span>
+                         </button>
                       </div>
 
                       {item.tag && (
@@ -212,22 +223,26 @@ const ShopPreview = ({ products }: { products?: any[] }) => {
                   textAlign: 'center',
                   transition: 'all 0.5s cubic-bezier(0.16,1,0.3,1)',
                   boxShadow: '0 20px 40px rgba(26,82,118,0.2)',
-                  minHeight: '400px'
-                }} className="hover:-translate-y-2 hover:shadow-[0_30px_60px_rgba(26,82,118,0.3)] border border-transparent">
-                  <div className="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center mb-6 text-white bg-white/5">
+                  minHeight: '400px',
+                  position: 'relative',
+                  overflow: 'hidden'
+                }} className="group hover:-translate-y-2 hover:shadow-[0_30px_60px_rgba(26,82,118,0.3)] border border-transparent">
+                  <span className="absolute inset-0 w-full h-full -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent group-hover:animate-[shimmer_1.5s_infinite]"></span>
+                  <div className="relative z-10 w-16 h-16 rounded-full border border-white/20 flex items-center justify-center mb-6 text-white bg-white/5">
                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
                         <path d="M5 12h14M12 5l7 7-7 7"/>
                      </svg>
                   </div>
                   <h4 style={{ 
                     fontFamily: 'Cormorant Garamond, serif', fontSize: '1.8rem', 
-                    color: '#FFFFFF', fontWeight: 400, marginBottom: 12, lineHeight: 1.1 
+                    color: '#FFFFFF', fontWeight: 400, marginBottom: 12, lineHeight: 1.1,
+                    position: 'relative', zIndex: 10
                   }}>
                     Explore The<br />Full Range
                   </h4>
                   <span style={{ 
                     fontSize: 9, letterSpacing: '0.3em', color: 'rgba(255,255,255,0.7)',
-                    textTransform: 'uppercase'
+                    textTransform: 'uppercase', position: 'relative', zIndex: 10
                   }}>View All Pieces</span>
                 </div>
               </Link>

@@ -32,8 +32,12 @@ const shopPreviewQuery = groq`*[_type == "product"] | order(_createdAt desc)[0..
   tag,
   "cat": category,
   "desc": description,
-  "src": image.asset->url
+  "src": image.asset->url,
+  sizes,
+  colors[]{name, hex}
 }`;
+
+import AnimatedSection from '@/components/AnimatedSection';
 
 export default async function Home() {
   const articles = await client.fetch(latestArticlesQuery);
@@ -41,36 +45,37 @@ export default async function Home() {
 
   return (
     <main className="overflow-hidden">
-
-      {/* 1. Hero — cinematic video background */}
       <Hero />
       
-      {/* 1.5 Why Choose Us — with floating trust bar */}
-      <WhyChooseUs />
+      <AnimatedSection>
+        <WhyChooseUs />
+      </AnimatedSection>
 
-      {/* 2. Corporate Atelier — B2B services */}
-      <CorporateAtelier />
+      <AnimatedSection>
+        <CorporateAtelier />
+      </AnimatedSection>
 
+      <AnimatedSection>
+        <ShopPreview products={products} />
+      </AnimatedSection>
 
+      <AnimatedSection>
+        <Journal articles={articles} />
+      </AnimatedSection>
 
-      {/* 4. Shop Preview — collection teaser → /shop */}
-      <ShopPreview products={products} />
+      <AnimatedSection>
+        <SocialProofRibbon />
+      </AnimatedSection>
 
-      {/* 5. The Journal — SEO topical authority */}
-      <Journal articles={articles} />
+      <AnimatedSection>
+        <FAQSection />
+      </AnimatedSection>
 
-      {/* 6. Social Proof Ribbon — merged testimonials + reviews */}
-      <SocialProofRibbon />
+      <AnimatedSection>
+        <Contact />
+      </AnimatedSection>
 
-      {/* 7. FAQ — friction removal */}
-      <FAQSection />
-
-      {/* 8. Concierge Portal — consultation CTA */}
-      <Contact />
-
-      {/* 9. Floating craft video widget */}
       <CraftWidget />
-
     </main>
   );
 }

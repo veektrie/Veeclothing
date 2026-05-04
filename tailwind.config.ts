@@ -38,6 +38,7 @@ module.exports = {
         'fade-up':    'fadeUp 0.8s ease forwards',
         'fade-in':    'fadeIn 1s ease forwards',
         'slide-left': 'slideLeft 0.7s ease forwards',
+        'shimmer':    'shimmer 2s linear infinite',
       },
       keyframes: {
         fadeUp: {
@@ -51,6 +52,10 @@ module.exports = {
         slideLeft: {
           '0%':   { opacity: '0', transform: 'translateX(40px)' },
           '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        shimmer: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
         },
       },
     },

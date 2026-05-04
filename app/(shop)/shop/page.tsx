@@ -12,7 +12,9 @@ const shopQuery = groq`*[_type == "product"] | order(_createdAt desc) {
   tag,
   "cat": category,
   "desc": description,
-  "src": image.asset->url
+  "src": image.asset->url,
+  sizes,
+  colors[]{name, hex}
 }`;
 
 export const metadata = {

@@ -5,6 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useSearchParams } from 'next/navigation';
+import { useQuickViewStore } from '@/store/useQuickViewStore';
+import RecentlyViewed from '@/components/RecentlyViewed';
 
 // Hardcoded categories to ensure labels look nice (matches your Sanity values)
 type Category = 'all' | 'corporate' | 'bespoke' | 'kaftan' | 'casual' | 'accessories';
@@ -44,13 +46,27 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
         }
     }, [searchParam]);
 
-    // Filter based on active category and search query
+    const [sortOrder, setSortOrder] = useState<'featured' | 'price_asc' | 'price_desc'>('featured');
+    const [selectedSizeFilter, setSelectedSizeFilter] = useState<string>('all');
+    const [selectedColorFilter, setSelectedColorFilter] = useState<string>('all');
+    const [showFilters, setShowFilters] = useState(false);
+
+    const availableSizes = Array.from(new Set(initialProducts.flatMap(p => p.sizes || []))).filter(Boolean) as string[];
+    const availableColors = Array.from(new Set(initialProducts.flatMap(p => p.colors?.map((c: any) => c.name) || []))).filter(Boolean) as string[];
+
+    // Filter based on active category, search query, size, and color
     const filtered = initialProducts.filter(p => {
         const matchesCategory = active === 'all' || p.cat === active;
         const matchesSearch = !searchQuery ||
             p.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
             p.desc?.toLowerCase().includes(searchQuery.toLowerCase());
-        return matchesCategory && matchesSearch;
+        const matchesSize = selectedSizeFilter === 'all' || p.sizes?.includes(selectedSizeFilter);
+        const matchesColor = selectedColorFilter === 'all' || p.colors?.some((c: any) => c.name === selectedColorFilter);
+        return matchesCategory && matchesSearch && matchesSize && matchesColor;
+    }).sort((a, b) => {
+        if (sortOrder === 'price_asc') return (a.price || 0) - (b.price || 0);
+        if (sortOrder === 'price_desc') return (b.price || 0) - (a.price || 0);
+        return 0;
     });
 
     return (
@@ -158,7 +174,7 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
                     </div>
 
                     {searchQuery && (
-                        <div className="mb-8 flex items-center gap-3">
+                        <div className="mb-4 flex items-center gap-3">
                             <span className="text-[10px] text-[#64748b] uppercase tracking-[0.2em]">Results for:</span>
                             <span className="text-[10px] text-[#1A5276] uppercase tracking-[0.2em] font-bold">"{searchQuery}"</span>
                             <button
@@ -169,6 +185,45 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
                             </button>
                         </div>
                     )}
+
+                    {/* Advanced Filters */}
+                    <div className="flex flex-wrap items-center gap-4 mb-8">
+                        <select
+                            value={sortOrder}
+                            onChange={(e) => setSortOrder(e.target.value as any)}
+                            className="bg-white border border-black/10 rounded-full py-2 px-4 text-[11px] text-[#1C1C1E] font-sans tracking-widest uppercase focus:outline-none focus:border-[#1A5276]/40 cursor-pointer transition-colors"
+                        >
+                            <option value="featured">Sort by: Recommended</option>
+                            <option value="price_asc">Price: Low to High</option>
+                            <option value="price_desc">Price: High to Low</option>
+                        </select>
+
+                        {availableSizes.length > 0 && (
+                            <select
+                                value={selectedSizeFilter}
+                                onChange={(e) => setSelectedSizeFilter(e.target.value)}
+                                className="bg-white border border-black/10 rounded-full py-2 px-4 text-[11px] text-[#1C1C1E] font-sans tracking-widest uppercase focus:outline-none focus:border-[#1A5276]/40 cursor-pointer transition-colors"
+                            >
+                                <option value="all">Size: All</option>
+                                {availableSizes.map(size => (
+                                    <option key={size} value={size}>Size: {size}</option>
+                                ))}
+                            </select>
+                        )}
+
+                        {availableColors.length > 0 && (
+                            <select
+                                value={selectedColorFilter}
+                                onChange={(e) => setSelectedColorFilter(e.target.value)}
+                                className="bg-white border border-black/10 rounded-full py-2 px-4 text-[11px] text-[#1C1C1E] font-sans tracking-widest uppercase focus:outline-none focus:border-[#1A5276]/40 cursor-pointer transition-colors"
+                            >
+                                <option value="all">Color: All</option>
+                                {availableColors.map(color => (
+                                    <option key={color} value={color}>Color: {color}</option>
+                                ))}
+                            </select>
+                        )}
+                    </div>
                 </div>
 
                 {/* ── Product Grid (Glassmorphic) ── */}
@@ -201,6 +256,19 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
                                                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                                                     />
                                                 )}
+
+                                                <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px] z-20 pointer-events-none">
+                                                    <button 
+                                                        onClick={(e) => {
+                                                            e.preventDefault();
+                                                            e.stopPropagation();
+                                                            useQuickViewStore.getState().openQuickView(product);
+                                                        }}
+                                                        className="pointer-events-auto bg-white/95 text-[#1A5276] px-6 py-3 rounded-full text-[10px] tracking-[0.2em] font-bold uppercase translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-lg hover:bg-[#1A5276] hover:text-white"
+                                                    >
+                                                        Quick Add
+                                                    </button>
+                                                </div>
 
                                                 {product.tag && (
                                                     <div
@@ -253,6 +321,7 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
                 </div>
 
             </div>
+            <RecentlyViewed />
         </main>
     );
 }
