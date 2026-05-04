@@ -96,7 +96,7 @@ const ShopPreview = ({ products }: { products?: any[] }) => {
         </div>
 
         {/* 1. Category Filtering Tabs */}
-        <div className="flex justify-center gap-2 md:gap-4 overflow-x-auto pb-4 mb-8 hide-scrollbar snap-x">
+        <div className="flex justify-start md:justify-center gap-2 md:gap-4 overflow-x-auto pb-4 mb-8 hide-scrollbar snap-x -mx-[clamp(1.5rem,5vw,4rem)] px-[clamp(1.5rem,5vw,4rem)]">
           {CATEGORIES.map(c => (
             <button
               key={c.key}
