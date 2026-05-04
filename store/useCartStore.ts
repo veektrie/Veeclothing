@@ -13,16 +13,21 @@ export interface CartItem {
 
 interface CartStore {
   items: CartItem[];
+  isOpen: boolean;
   addItem: (item: CartItem) => void;
-  decreaseQuantity: (id: string, size?: string, color?: string) => void; // <-- New
+  decreaseQuantity: (id: string, size?: string, color?: string) => void;
   removeItem: (id: string, size?: string, color?: string) => void;
   clearCart: () => void;
+  setIsOpen: (isOpen: boolean) => void;
 }
 
 export const useCartStore = create<CartStore>()(
   persist(
     (set) => ({
       items: [],
+      isOpen: false,
+
+      setIsOpen: (isOpen) => set({ isOpen }),
 
       addItem: (item) => set((state) => {
         const existingItem = state.items.find(
@@ -35,12 +40,12 @@ export const useCartStore = create<CartStore>()(
                 ? { ...i, quantity: i.quantity + 1 }
                 : i
             ),
+            isOpen: true,
           };
         }
-        return { items: [...state.items, item] };
+        return { items: [...state.items, item], isOpen: true };
       }),
 
-      // --- NEW FUNCTION TO DECREASE ---
       decreaseQuantity: (id, size, color) => set((state) => {
         const existingItem = state.items.find(
           (i) => i.id === id && i.size === size && i.color === color
@@ -54,7 +59,6 @@ export const useCartStore = create<CartStore>()(
             ),
           };
         }
-        // If quantity is 1, remove it entirely
         return {
           items: state.items.filter((i) =>
             !(i.id === id && i.size === size && i.color === color)
@@ -70,6 +74,9 @@ export const useCartStore = create<CartStore>()(
 
       clearCart: () => set({ items: [] }),
     }),
-    { name: 'vinono-cart-storage' }
+    { 
+      name: 'vinono-cart-storage',
+      partialize: (state) => ({ items: state.items })
+    }
   )
 );

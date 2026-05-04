@@ -214,15 +214,16 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                                 )}
                             </button>
 
-                            <Link href='/cart'>
-                                <button
-                                    onClick={handleAddToCart}
-                                    disabled={isAdding || (product.sizes?.length > 0 && !selectedSize)}
-                                    className="flex-1 shadow-xl bg-[#1A5276] hover:bg-[#154360] disabled:bg-black/10 disabled:text-black/30 disabled:cursor-not-allowed text-white py-5 px-8 rounded-xl font-sans text-[11px] tracking-[0.2em] uppercase font-extrabold flex items-center justify-center gap-3 transition-all duration-300 shadow-lg shadow-blue-900/10"
-                                >
-                                    Go To Cart
-                                </button>
-                            </Link>
+                            <button
+                                onClick={() => {
+                                    handleAddToCart();
+                                    useCartStore.getState().setIsOpen(true);
+                                }}
+                                disabled={isAdding || (product.sizes?.length > 0 && !selectedSize)}
+                                className="flex-1 shadow-xl bg-[#1A5276] hover:bg-[#154360] disabled:bg-black/10 disabled:text-black/30 disabled:cursor-not-allowed text-white py-5 px-8 rounded-xl font-sans text-[11px] tracking-[0.2em] uppercase font-extrabold flex items-center justify-center gap-3 transition-all duration-300 shadow-lg shadow-blue-900/10"
+                            >
+                                Buy Now
+                            </button>
                         </div>
 
 

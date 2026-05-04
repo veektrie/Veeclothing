@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import GSAPInitializer from "@/components/GSAPInitializer";
+import CartDrawer from "@/components/CartDrawer";
 import "./globals.css";
 import type { Metadata } from 'next';
 import Script from 'next/script';
@@ -179,6 +180,7 @@ export default function RootLayout({
             }}
           />
           <Navbar />
+          <CartDrawer />
           {children}
           <Footer />
         </SmoothScroll>

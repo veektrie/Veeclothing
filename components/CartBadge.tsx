@@ -18,9 +18,11 @@ export default function CartBadge() {
     // Calculate the total number of items (sums up the quantities)
     const totalItems = items.reduce((total, item) => total + item.quantity, 0);
 
+    const setIsOpen = useCartStore((state) => state.setIsOpen);
+
     return (
-        <Link
-            href="/cart"
+        <button
+            onClick={() => setIsOpen(true)}
             className="relative p-2 flex items-center justify-center text-gray-400 hover:text-[#D4AF37] transition-colors"
             title="View Commission"
         >
@@ -42,6 +44,6 @@ export default function CartBadge() {
                     </motion.span>
                 )}
             </AnimatePresence>
-        </Link>
+        </button>
     );
 }
