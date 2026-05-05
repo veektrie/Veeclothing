@@ -44,4 +44,4 @@ Allow: /
 User-agent: msnbot
 Allow: /
 
-Sitemap: https://veeclothingcompany.com/sitemap.xml
+Sitemap: https://www.veeclothingcompany.com/sitemap.xml

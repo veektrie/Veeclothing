@@ -11,7 +11,7 @@ import Script from 'next/script';
 import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://veeclothingcompany.com"),
+  metadataBase: new URL("https://www.veeclothingcompany.com"),
   title: "Bespoke Mens Tailor",
   description:
     "Vee Clothing Company — High-quality custom tailoring and business uniforms in Lagos. We make custom suits, African menswear, and corporate clothes with expert care.",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     title: "Vee Clothing Company | Bespoke Tailoring & Corporate Uniforms Lagos",
     description:
       "High-quality custom tailoring and business uniforms from Lagos, Nigeria. World-class quality with local style.",
-    url: "https://veeclothingcompany.com",
+    url: "https://www.veeclothingcompany.com",
     siteName: "Vee Clothing Company",
     locale: "en_NG",
     type: "website",
@@ -87,8 +87,8 @@ export default function RootLayout({
             "@context": "https://schema.org",
             "@type": "Organization",
             "name": "Vee Clothing Company",
-            "url": "https://veeclothingcompany.com",
-            "logo": "https://veeclothingcompany.com/VCC-white.png",
+            "url": "https://www.veeclothingcompany.com",
+            "logo": "https://www.veeclothingcompany.com/VCC-white.png",
             "description": "Lagos-based premium bespoke tailoring house and corporate uniform engineering firm. Global standards. Local soul.",
             "foundingLocation": { "@type": "Place", "name": "Lagos, Nigeria" },
             "areaServed": ["Nigeria", "West Africa", "African Diaspora"],
@@ -110,11 +110,11 @@ export default function RootLayout({
             "serviceType": "Corporate Uniform Engineering",
             "name": "Corporate Identity & Uniform Engineering",
             "description": "Precision-branded corporate uniforms, executive wardrobe curation, and branded gifting solutions for organisations across Nigeria. Minimum order: 5 units. Up to 500+ units. On-site fittings available in Lagos and Abuja.",
-            "provider": { "@type": "Organization", "name": "Vee Clothing Company", "url": "https://veeclothingcompany.com" },
+            "provider": { "@type": "Organization", "name": "Vee Clothing Company", "url": "https://www.veeclothingcompany.com" },
             "areaServed": { "@type": "Place", "name": "Nigeria" },
             "audience": { "@type": "BusinessAudience", "name": "Corporate clients, HR departments, and brand managers" },
             "offers": { "@type": "Offer", "priceCurrency": "NGN", "availability": "https://schema.org/InStock", "priceRange": "₦₦₦" },
-            "url": "https://veeclothingcompany.com/#corporate"
+            "url": "https://www.veeclothingcompany.com/#corporate"
           })
         }} />
 
@@ -126,11 +126,11 @@ export default function RootLayout({
             "serviceType": "Bespoke Tailoring",
             "name": "Bespoke Tailoring — The Private Commission",
             "description": "Made-to-measure bespoke suits, kaftans, and agbada for discerning individuals in Lagos and across Nigeria. Private consultation, minimum two fittings, premium global and local fabrics. Turnaround: minimum 10 working days.",
-            "provider": { "@type": "Organization", "name": "Vee Clothing Company", "url": "https://veeclothingcompany.com" },
+            "provider": { "@type": "Organization", "name": "Vee Clothing Company", "url": "https://www.veeclothingcompany.com" },
             "areaServed": [{ "@type": "Place", "name": "Lagos, Nigeria" }, { "@type": "Place", "name": "Abuja, Nigeria" }],
             "audience": { "@type": "Audience", "name": "Individual clients, executives, and high-net-worth individuals" },
             "offers": { "@type": "Offer", "priceCurrency": "NGN", "availability": "https://schema.org/InStock", "priceRange": "₦₦₦₦" },
-            "url": "https://veeclothingcompany.com/#bespoke"
+            "url": "https://www.veeclothingcompany.com/#bespoke"
           })
         }} />
 

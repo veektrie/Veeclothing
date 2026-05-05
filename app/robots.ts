@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/', '/admin/', '/order/'],
     },
-    sitemap: 'https://veeclothingcompany.com/sitemap.xml',
+    sitemap: 'https://www.veeclothingcompany.com/sitemap.xml',
   };
 }
