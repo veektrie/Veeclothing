@@ -5,6 +5,7 @@ import GSAPInitializer from "@/components/GSAPInitializer";
 import CartDrawer from "@/components/CartDrawer";
 import QuickViewModal from "@/components/QuickViewModal";
 import CustomCursor from "@/components/CustomCursor";
+import WhatsAppFloat from "@/components/WhatsAppFloat";
 import "./globals.css";
 import type { Metadata } from 'next';
 import Script from 'next/script';
@@ -187,6 +188,7 @@ export default function RootLayout({
           <QuickViewModal />
           {children}
           <Footer />
+          <WhatsAppFloat />
         </SmoothScroll>
       </body>
     </html>

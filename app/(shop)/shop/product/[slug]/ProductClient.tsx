@@ -4,42 +4,62 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowLeft, ShoppingBag, Check } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Check, MessageSquare } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useCartStore } from '@/store/useCartStore';
 import { useRecentlyViewedStore } from '@/store/useRecentlyViewedStore';
 import RecentlyViewed from '@/components/RecentlyViewed';
+import { getBlurDataURL } from '@/lib/imageUtils';
 
-// Helper for tag colors (matching your shop page)
+// ─── Helpers ─────────────────────────────────────────────────────────────────
+
 const getTagColor = (tag: string) => {
-    if (!tag) return null;
-    switch (tag.toUpperCase()) {
-        case 'BESTSELLER': return '#1A5276'; // Navy
-        case 'NEW': return '#1A5276'; // Navy
-        case 'LIMITED': return '#C0392B'; // Red
-        case 'SIGNATURE': return '#1A5276'; // Navy
-        case 'CORPORATE': return '#1A5276'; // Navy
-        case 'BESPOKE': return '#1A5276'; // Navy
+    switch (tag?.toUpperCase()) {
+        case 'LIMITED': return '#C0392B';
         default: return '#1A5276';
     }
 };
 
-export default function ProductClient({ product, relatedProducts }: { product: any, relatedProducts: any[] }) {
+/** Build a WhatsApp commission message pre-filled with the product name */
+function buildCommissionUrl(productName: string, slug: string): string {
+    const msg = encodeURIComponent(
+        `Hello, I'd like to commission a bespoke version of "${productName}".\n\nProduct link: https://www.veeclothingcompany.com/shop/product/${slug}`
+    );
+    return `https://wa.me/2348103031020?text=${msg}`;
+}
+
+/** Derive a material label from category for the JSON-LD description */
+function categoryToMaterial(cat: string): string {
+    const map: Record<string, string> = {
+        bespoke: 'Super 120s Italian Wool',
+        corporate: 'Premium Woven Fabric',
+        kaftan: 'Heritage Silk-Cotton Blend',
+        agbada: 'Hand-Embroidered Damask',
+        hoodies: 'Heavyweight French Terry',
+        tees: 'Supima Cotton Piqué',
+        polo: 'Mercerised Cotton Piqué',
+        pants: 'Stretch Worsted Wool',
+        jacket: 'Structured Twill Weave',
+        shirts: 'Egyptian Cotton Poplin',
+    };
+    return map[(cat ?? '').toLowerCase()] ?? 'Artisan-Crafted Fabric';
+}
+
+// ─── Component ───────────────────────────────────────────────────────────────
+
+export default function ProductClient({ product, relatedProducts }: { product: any; relatedProducts: any[] }) {
     const [selectedSize, setSelectedSize] = useState<string>(product.sizes?.[0] || '');
     const [selectedColor, setSelectedColor] = useState<any>(product.colors?.[0] || null);
     const [isAdding, setIsAdding] = useState(false);
 
-    const addItem = useCartStore((state) => state.addItem); // Zustand Hook
+    const addItem = useCartStore((state) => state.addItem);
     const addRecentlyViewed = useRecentlyViewedStore((state) => state.addRecentlyViewed);
 
     useEffect(() => {
-        if (product) {
-            addRecentlyViewed(product);
-        }
+        if (product) addRecentlyViewed(product);
     }, [product, addRecentlyViewed]);
 
     const handleAddToCart = () => {
-        // Validations
         if (product.sizes?.length > 0 && !selectedSize) {
             toast.error('Please select a size first.');
             return;
@@ -48,10 +68,7 @@ export default function ProductClient({ product, relatedProducts }: { product: a
             toast.error('Please select a color first.');
             return;
         }
-
         setIsAdding(true);
-
-        // Add to Zustand
         addItem({
             id: product._id,
             name: product.name,
@@ -61,25 +78,65 @@ export default function ProductClient({ product, relatedProducts }: { product: a
             size: selectedSize,
             color: selectedColor?.name,
         });
-
         toast.success(`${product.name} added to your commission.`);
         setTimeout(() => setIsAdding(false), 600);
     };
 
+    // ── JSON-LD: Product structured data (#13) ────────────────────────────
+    const productJsonLd = {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: product.name,
+        description: product.longDesc || product.desc || `Handcrafted ${product.name} from Vee Clothing Company.`,
+        image: product.src ? [product.src] : [],
+        brand: {
+            '@type': 'Brand',
+            name: 'Vee Clothing Company',
+        },
+        material: categoryToMaterial(product.cat),
+        offers: {
+            '@type': 'Offer',
+            priceCurrency: 'NGN',
+            price: product.price,
+            availability: 'https://schema.org/InStock',
+            seller: {
+                '@type': 'Organization',
+                name: 'Vee Clothing Company',
+            },
+            url: `https://www.veeclothingcompany.com/shop/product/${product.slug ?? ''}`,
+        },
+        ...(product.sizes?.length > 0 && {
+            hasVariant: product.sizes.map((s: string) => ({
+                '@type': 'ProductModel',
+                name: `${product.name} — Size ${s}`,
+                size: s,
+            })),
+        }),
+    };
+
+    const blurUrl = getBlurDataURL();
+    const commissionUrl = buildCommissionUrl(product.name, product.slug ?? '');
+
     return (
         <main className="bg-[#F8FAFC] min-h-screen relative overflow-x-hidden pt-[clamp(100px,12vh,140px)]">
+
+            {/* ── JSON-LD injection (#13) ─────────────────────────────────── */}
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+            />
 
             {/* Background Atmosphere */}
             <div
                 className="fixed inset-0 z-0 pointer-events-none"
                 style={{
-                    background: 'radial-gradient(circle at 20% 30%, rgba(26,82,118,0.03) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(26, 82, 118, 0.05) 0%, transparent 50%)',
+                    background: 'radial-gradient(circle at 20% 30%, rgba(26,82,118,0.03) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(26,82,118,0.05) 0%, transparent 50%)',
                 }}
             />
 
             <div className="max-w-[1440px] mx-auto px-[clamp(1rem,5vw,4rem)] relative z-20 pb-24">
 
-                {/* Top Navigation */}
+                {/* Back link */}
                 <Link
                     href="/shop"
                     className="inline-flex items-center gap-2 text-[#64748b] hover:text-[#1A5276] transition-colors font-sans text-[10px] tracking-[0.2em] uppercase font-bold mb-10"
@@ -88,22 +145,24 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                     Back to Shop
                 </Link>
 
-                {/* PRODUCT GRID SECTION */}
+                {/* Product Grid */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
 
-                    {/* LEFT: Image Gallery */}
+                    {/* LEFT: Image (#11 blur placeholder) */}
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.6 }}
-                        className="relative w-full aspect-[3/4] md:aspect-[4/5] rounded-[2rem] overflow-hidden bg-white border border-black/5 shadow-xl"
+                        className="relative w-full aspect-[3/4] md:aspect-[4/5] rounded-[2rem] overflow-hidden bg-[#E2E8F0] border border-black/5 shadow-xl"
                     >
                         {product.src && (
                             <Image
                                 src={product.src}
-                                alt={product.name}
+                                alt={`${product.name} — Vee Clothing Company`}
                                 fill
                                 priority
+                                placeholder="blur"
+                                blurDataURL={blurUrl}
                                 className="object-cover"
                                 sizes="(max-width: 1024px) 100vw, 50vw"
                             />
@@ -112,7 +171,7 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                         {product.tag && (
                             <div
                                 className="absolute top-6 left-6 px-4 py-2 rounded-xl backdrop-blur-md border border-white/10 z-10"
-                                style={{ background: getTagColor(product.tag) ? `${getTagColor(product.tag)}` : 'rgba(26,82,118,0.9)' }}
+                                style={{ background: getTagColor(product.tag) }}
                             >
                                 <span className="text-[10px] tracking-[0.2em] font-extrabold text-white font-sans uppercase">
                                     {product.tag}
@@ -146,16 +205,14 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                             {product.longDesc || product.desc}
                         </p>
 
-                        {/* Colors Selection */}
-                        {product.colors && product.colors.length > 0 && (
+                        {/* Colors */}
+                        {product.colors?.length > 0 && (
                             <div className="mb-8">
                                 <div className="flex justify-between items-center mb-4">
                                     <span className="font-sans text-[10px] tracking-[0.2em] uppercase text-[#1C1C1E] font-bold">
                                         Select Color
                                     </span>
-                                    <span className="font-sans text-[11px] text-[#64748b]">
-                                        {selectedColor?.name}
-                                    </span>
+                                    <span className="font-sans text-[11px] text-[#64748b]">{selectedColor?.name}</span>
                                 </div>
                                 <div className="flex flex-wrap gap-4">
                                     {product.colors.map((color: any) => (
@@ -178,8 +235,8 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                             </div>
                         )}
 
-                        {/* Sizes Selection */}
-                        {product.sizes && product.sizes.length > 0 && (
+                        {/* Sizes */}
+                        {product.sizes?.length > 0 && (
                             <div className="mb-10">
                                 <div className="flex justify-between items-center mb-4">
                                     <span className="font-sans text-[10px] tracking-[0.2em] uppercase text-[#1C1C1E] font-bold">
@@ -207,14 +264,15 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                         )}
 
                         {/* Action Buttons */}
-                        <div className="flex gap-4 mb-12">
+                        <div className="flex gap-4 mb-6">
                             <button
+                                id="product-add-to-cart"
                                 onClick={handleAddToCart}
                                 disabled={isAdding || (product.sizes?.length > 0 && !selectedSize)}
-                                className="flex-1 shadow-xl bg-[#1A5276] hover:bg-[#154360] disabled:bg-black/10 disabled:text-black/30 disabled:cursor-not-allowed text-white py-5 px-8 rounded-xl font-sans text-[11px] tracking-[0.2em] uppercase font-extrabold flex items-center justify-center gap-3 transition-all duration-300 shadow-lg shadow-blue-900/10"
+                                className="flex-1 shadow-xl bg-[#1A5276] hover:bg-[#154360] disabled:bg-black/10 disabled:text-black/30 disabled:cursor-not-allowed text-white py-5 px-8 rounded-xl font-sans text-[11px] tracking-[0.2em] uppercase font-extrabold flex items-center justify-center gap-3 transition-all duration-300"
                             >
                                 {isAdding ? (
-                                    <>Adding to Cart...</>
+                                    <>Adding...</>
                                 ) : (
                                     <>
                                         <ShoppingBag className="w-5 h-5" />
@@ -224,6 +282,7 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                             </button>
 
                             <button
+                                id="product-buy-now"
                                 onClick={() => {
                                     handleAddToCart();
                                     useCartStore.getState().setIsOpen(true);
@@ -231,52 +290,97 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                                 disabled={isAdding || (product.sizes?.length > 0 && !selectedSize)}
                                 className="group relative flex-1 overflow-hidden shadow-xl bg-[#1A5276] disabled:bg-black/10 disabled:text-black/30 disabled:cursor-not-allowed text-white py-5 px-8 rounded-xl font-sans text-[11px] tracking-[0.2em] uppercase font-extrabold flex items-center justify-center gap-3 transition-all duration-300 hover:shadow-[0_16px_48px_rgba(26,82,118,0.25)]"
                             >
-                                <span className="absolute inset-0 w-full h-full -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-[shimmer_1.5s_infinite]"></span>
-                                <span className="relative z-10 flex items-center gap-3">
-                                    Buy Now
-                                </span>
+                                <span className="absolute inset-0 w-full h-full -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-[shimmer_1.5s_infinite]" />
+                                <span className="relative z-10">Buy Now</span>
                             </button>
                         </div>
 
+                        {/* ── #2: Commission This Piece CTA ──────────────────────── */}
+                        <a
+                            href={commissionUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            id="product-commission-cta"
+                            className="group flex items-center justify-between w-full rounded-xl px-6 py-4 transition-all duration-300 hover:shadow-[0_4px_20px_rgba(212,175,55,0.15)] mb-10"
+                            style={{
+                                border: '1px solid rgba(212,175,55,0.35)',
+                                background: 'rgba(212,175,55,0.04)',
+                            }}
+                        >
+                            <div>
+                                <p
+                                    className="text-[10px] tracking-[0.2em] uppercase font-bold text-[#1C1C1E] mb-0.5"
+                                    style={{ fontFamily: 'Inter, sans-serif' }}
+                                >
+                                    Want this in your exact measurements?
+                                </p>
+                                <p
+                                    className="text-[12px] font-light text-[#64748b]"
+                                    style={{ fontFamily: 'Inter, sans-serif' }}
+                                >
+                                    Commission a bespoke version — made precisely to you.
+                                </p>
+                            </div>
+                            <div
+                                className="flex-shrink-0 flex items-center gap-2 ml-4 px-4 py-2 rounded-full text-[9px] tracking-[0.2em] uppercase font-bold transition-all duration-300 group-hover:shadow-md"
+                                style={{
+                                    color: '#D4AF37',
+                                    border: '1px solid #D4AF37',
+                                    background: 'transparent',
+                                    fontFamily: 'Inter, sans-serif',
+                                }}
+                            >
+                                <MessageSquare size={12} />
+                                Commission →
+                            </div>
+                        </a>
 
+                        {/* Features */}
+                        {product.features?.length > 0 && (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                {product.features.map((f: any, i: number) => (
+                                    <div key={i} className="bg-white rounded-xl p-5 border border-black/[0.05]">
+                                        <p className="text-[11px] tracking-[0.1em] uppercase font-bold text-[#1C1C1E] mb-1" style={{ fontFamily: 'Inter, sans-serif' }}>
+                                            {f.title}
+                                        </p>
+                                        <p className="text-[12px] text-[#64748b] font-light" style={{ fontFamily: 'Inter, sans-serif' }}>
+                                            {f.desc}
+                                        </p>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </motion.div>
                 </div>
             </div>
-            {/* End of main max-w container */}
 
-            {/* --- BOTTOM SECTION (RELATED PRODUCTS) MOVED OUTSIDE --- */}
-            {relatedProducts && relatedProducts.length > 0 && (
+            {/* Related Products */}
+            {relatedProducts?.length > 0 && (
                 <div className="bg-[#FDFBF7] py-24 px-[clamp(1rem,5vw,4rem)] border-t border-black/5 w-full">
                     <div className="max-w-[1440px] mx-auto text-center">
-
-                        <span className="text-[9px] tracking-[0.3em] uppercase text-[#1A5276] font-bold block mb-4">
-                            EXPLORE
-                        </span>
-                        <h2 className="font-serif text-4xl md:text-5xl text-black mb-16">
-                            You Might Also Like
-                        </h2>
+                        <span className="text-[9px] tracking-[0.3em] uppercase text-[#1A5276] font-bold block mb-4">EXPLORE</span>
+                        <h2 className="font-serif text-4xl md:text-5xl text-black mb-16">You Might Also Like</h2>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10 text-left">
                             {relatedProducts.map((item) => (
                                 <Link key={item._id} href={`/shop/product/${item.slug}`} className="no-underline text-inherit block h-full group">
-                                    <div className="bg-white shadow-xl rounded-[24px] overflow-hidden cursor-pointer h-full flex flex-col border border-black/[0.06] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_16px_48px_rgba(26,82,118,0.12)] hover:-translate-y-2 hover:border-[#1A5276]/20">
-                                        {/* Image Container */}
-                                        <div className="relative aspect-[3/4] overflow-hidden bg-black/20">
+                                    <div className="bg-white shadow-xl rounded-[24px] overflow-hidden cursor-pointer h-full flex flex-col border border-black/[0.06] transition-all duration-500 hover:shadow-[0_16px_48px_rgba(26,82,118,0.12)] hover:-translate-y-2 hover:border-[#1A5276]/20">
+                                        <div className="relative aspect-[3/4] overflow-hidden bg-[#E2E8F0]">
                                             {item.src && (
                                                 <Image
                                                     src={item.src}
                                                     alt={item.name}
                                                     fill
-                                                    className="object-cover transition-transform duration-1000 ease-[cubic-bezier(0.16,1,0.3,1)] brightness-90 group-hover:scale-105 group-hover:brightness-100"
-                                                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                                                    placeholder="blur"
+                                                    blurDataURL={getBlurDataURL()}
+                                                    className="object-cover transition-transform duration-1000 brightness-90 group-hover:scale-105 group-hover:brightness-100"
+                                                    sizes="(max-width: 768px) 100vw, 25vw"
                                                 />
                                             )}
                                             {item.tag && (
                                                 <div
                                                     className="absolute top-5 left-5 px-3.5 py-1.5 rounded-lg backdrop-blur-md border border-white/10 z-10"
-                                                    style={{
-                                                        background: getTagColor(item.tag) ? `${getTagColor(item.tag)}bb` : 'rgba(26,82,118,0.7)',
-                                                    }}
+                                                    style={{ background: `${getTagColor(item.tag)}bb` }}
                                                 >
                                                     <span className="text-[8px] tracking-[0.2em] font-extrabold text-white font-sans uppercase">
                                                         {item.tag}
@@ -284,8 +388,6 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                                                 </div>
                                             )}
                                         </div>
-
-                                        {/* Details Container */}
                                         <div className="p-6 flex-1 flex flex-col gap-3">
                                             <div>
                                                 <h3 style={{ fontFamily: 'Inter, sans-serif' }} className="text-[1.05rem] font-bold text-[#1C1C1E] mb-1 leading-[1.3] tracking-[-0.02em]">
@@ -295,15 +397,11 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                                                     {item.desc || 'Premium tailoring with meticulous attention to detail.'}
                                                 </p>
                                             </div>
-
                                             <div className="mt-auto flex items-center justify-between pt-2.5">
                                                 <span style={{ fontFamily: 'Inter, sans-serif' }} className="text-[1.05rem] text-[#1A5276] font-bold">
-                                                    {String(item.price).toLowerCase().includes('from')
-                                                        ? item.price
-                                                        : `₦${item.price?.toLocaleString()}`}
+                                                    ₦{item.price?.toLocaleString()}
                                                 </span>
-
-                                                <div className="w-8 h-8 rounded-full border border-[#1A5276]/30 flex items-center justify-center text-[#1A5276] bg-[#F8FAFC] transition-all duration-300 ease-out group-hover:bg-[#1A5276] group-hover:text-white">
+                                                <div className="w-8 h-8 rounded-full border border-[#1A5276]/30 flex items-center justify-center text-[#1A5276] bg-[#F8FAFC] transition-all duration-300 group-hover:bg-[#1A5276] group-hover:text-white">
                                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                                         <path d="M5 12h14M12 5l7 7-7 7" />
                                                     </svg>
@@ -314,11 +412,10 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                                 </Link>
                             ))}
                         </div>
-
                     </div>
                 </div>
             )}
-            
+
             <RecentlyViewed currentProductId={product._id} />
         </main>
     );

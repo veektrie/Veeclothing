@@ -2,61 +2,165 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { ArrowLeft, Home, Compass } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-[#F8FAFC] text-center px-6 relative overflow-hidden">
-      
-      {/* Decorative Atmosphere */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-50">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-blue-100/30 blur-[120px]"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-emerald-100/30 blur-[120px]"></div>
-      </div>
+    <div
+      className="min-h-screen flex flex-col items-center justify-center text-center px-6 relative overflow-hidden"
+      style={{ background: '#F8FAFC' }}
+    >
+      {/* Atmospheric gradients */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            'radial-gradient(ellipse at 70% 20%, rgba(26,82,118,0.07) 0%, transparent 55%), radial-gradient(ellipse at 20% 80%, rgba(212,175,55,0.06) 0%, transparent 55%)',
+        }}
+      />
 
-      <div className="relative z-10 max-w-lg">
-        <div className="mb-8 flex justify-center">
-            <div className="w-24 h-24 bg-white rounded-full shadow-xl shadow-blue-900/5 flex items-center justify-center border border-black/5">
-                <Compass className="w-10 h-10 text-[#1A5276]/20 animate-pulse" />
-            </div>
+      {/* Gold horizontal rule — top */}
+      <div
+        className="absolute top-0 left-0 right-0 h-[2px]"
+        style={{ background: 'linear-gradient(90deg, transparent, #D4AF37, transparent)' }}
+      />
+
+      <div className="relative z-10 max-w-[540px]">
+
+        {/* Monogram watermark */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="mb-10 flex justify-center"
+        >
+          <div
+            className="w-20 h-20 rounded-full flex items-center justify-center"
+            style={{
+              background: 'rgba(26,82,118,0.06)',
+              border: '1px solid rgba(212,175,55,0.25)',
+            }}
+          >
+            <span
+              className="text-2xl font-bold tracking-tight"
+              style={{ color: '#D4AF37', fontFamily: 'Inter, sans-serif' }}
+            >
+              V
+            </span>
+          </div>
+        </motion.div>
+
+        {/* Ghost 404 */}
+        <div
+          className="text-[clamp(6rem,20vw,10rem)] font-black leading-none select-none mb-0"
+          style={{
+            fontFamily: 'Inter, sans-serif',
+            color: 'transparent',
+            WebkitTextStroke: '1px rgba(26,82,118,0.08)',
+          }}
+        >
+          404
         </div>
 
-        <h1 className="text-8xl md:text-9xl font-black text-[#1A5276]/5 mb-4">404</h1>
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="-mt-4"
+        >
+          {/* Eyebrow */}
+          <span
+            className="block text-[9px] tracking-[0.3em] uppercase font-bold mb-5"
+            style={{ color: '#D4AF37', fontFamily: 'Inter, sans-serif' }}
+          >
+            Page Not Found
+          </span>
 
-        <div className="-mt-16 md:-mt-20">
-            <h2 style={{ fontFamily: 'Inter, sans-serif' }} className="text-3xl md:text-4xl font-extrabold text-[#1C1C1E] mb-4 tracking-tight">
-                Lost in <span className="text-[#1A5276]">Design.</span>
-            </h2>
-            <p className="text-[#64748b] mb-10 max-w-sm mx-auto font-medium leading-relaxed">
-                The collection or page you are looking for has been moved or curated out of our current archive.
-            </p>
+          <h1
+            className="text-[clamp(1.6rem,4vw,2.8rem)] font-semibold tracking-[-0.03em] leading-[1.15] text-[#1C1C1E] mb-4"
+            style={{ fontFamily: 'Inter, sans-serif' }}
+          >
+            This piece has left the floor.
+          </h1>
 
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button
-                    onClick={() => router.back()}
-                    className="h-14 px-10 rounded-full border border-black/10 bg-white hover:bg-[#F8FAFC] text-[#1C1C1E] font-bold text-[11px] tracking-[0.2em] uppercase flex items-center justify-center gap-2.5 transition-all shadow-sm active:scale-95"
-                >
-                    <ArrowLeft className="w-4 h-4" />
-                    Go Back
-                </button>
-
-                <Link href="/">
-                    <button className="h-14 px-10 rounded-full bg-[#1A5276] hover:bg-[#154360] text-white font-bold text-[11px] tracking-[0.2em] uppercase flex items-center justify-center gap-2.5 transition-all shadow-xl shadow-blue-900/10 active:scale-95">
-                        <Home className="w-4 h-4" />
-                        Go Home
-                    </button>
-                </Link>
-            </div>
-        </div>
-      </div>
-
-      {/* Brand Watermark */}
-      <div className="absolute bottom-12 left-0 w-full text-center">
-          <p className="text-[9px] font-bold tracking-[0.4em] uppercase text-[#1A5276]/20">
-              Vee Clothing Company
+          <p
+            className="text-[14px] font-light text-[#94a3b8] leading-[1.8] mb-10 max-w-[380px] mx-auto"
+            style={{ fontFamily: 'Inter, sans-serif' }}
+          >
+            But the atelier remains open. The collection or page you are looking for
+            may have been moved, archived, or commissioned out.
           </p>
+
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+            <button
+              onClick={() => router.back()}
+              id="notfound-go-back"
+              className="flex items-center gap-2 px-7 py-3.5 rounded-full text-[10px] tracking-[0.2em] uppercase font-bold text-[#64748b] hover:text-[#1A5276] transition-colors border border-black/10 hover:border-[#1A5276]/30 bg-white"
+              style={{ fontFamily: 'Inter, sans-serif' }}
+            >
+              <ArrowLeft size={13} />
+              Go Back
+            </button>
+
+            <Link
+              href="/shop"
+              id="notfound-view-shop"
+              className="flex items-center gap-2 px-7 py-3.5 rounded-full text-[10px] tracking-[0.2em] uppercase font-bold text-white no-underline transition-all duration-300 hover:shadow-[0_8px_24px_rgba(26,82,118,0.25)]"
+              style={{
+                fontFamily: 'Inter, sans-serif',
+                background: 'linear-gradient(135deg, #1A5276, #2980B9)',
+              }}
+            >
+              View the Collection
+            </Link>
+          </div>
+
+          {/* Featured suggestion */}
+          <div className="mt-12 pt-8 border-t border-black/5">
+            <p
+              className="text-[9px] tracking-[0.25em] uppercase text-[#94a3b8] mb-4"
+              style={{ fontFamily: 'Inter, sans-serif' }}
+            >
+              You may be looking for
+            </p>
+            <div className="flex flex-wrap gap-2 justify-center">
+              {[
+                { label: 'Bespoke Suits', href: '/shop?category=bespoke' },
+                { label: 'Kaftans', href: '/shop?category=kaftan' },
+                { label: 'Corporate', href: '/shop?category=corporate' },
+                { label: 'Blog', href: '/blog' },
+              ].map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="px-4 py-2 rounded-full text-[9px] tracking-[0.15em] uppercase font-bold no-underline transition-all duration-200 hover:border-[#D4AF37]/50 hover:text-[#1A5276]"
+                  style={{
+                    fontFamily: 'Inter, sans-serif',
+                    color: '#64748b',
+                    border: '1px solid rgba(0,0,0,0.08)',
+                    background: 'white',
+                  }}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* Brand watermark */}
+      <div className="absolute bottom-8 left-0 w-full text-center">
+        <p
+          className="text-[8px] font-bold tracking-[0.5em] uppercase"
+          style={{ color: 'rgba(26,82,118,0.15)', fontFamily: 'Inter, sans-serif' }}
+        >
+          Vee Clothing Company · Lagos
+        </p>
       </div>
     </div>
   );
