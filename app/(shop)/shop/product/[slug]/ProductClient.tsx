@@ -36,9 +36,12 @@ function buildCommissionUrl(productName: string, slug: string): string {
 export default function ProductClient({ product, relatedProducts }: { product: any; relatedProducts: any[] }) {
     const [selectedSize, setSelectedSize] = useState<string>(product.sizes?.[0] || '');
     const [selectedColor, setSelectedColor] = useState<any>(product.colors?.[0] || null);
+    const [activeImage, setActiveImage] = useState<string>(product.src || '');
     const [isAdding, setIsAdding] = useState(false);
     const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
     const [mounted, setMounted] = useState(false);
+
+    const allImages = [product.src, ...(product.gallery || [])].filter(Boolean);
 
     const { toggleItem, hasItem } = useWishlistStore();
     // Wait for Zustand persist to hydrate before reading wishlist state
@@ -109,29 +112,54 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.6 }}
-                        className="relative w-full aspect-[3/4] md:aspect-[4/5] rounded-[2rem] overflow-hidden bg-[#E2E8F0] border border-black/5 shadow-xl"
+                        className="flex flex-col gap-4"
                     >
-                        {product.src && (
-                            <Image
-                                src={product.src}
-                                alt={`${product.name} — Vee Clothing Company`}
-                                fill
-                                priority
-                                placeholder="blur"
-                                blurDataURL={blurUrl}
-                                className="object-cover"
-                                sizes="(max-width: 1024px) 100vw, 50vw"
-                            />
-                        )}
+                        <div className="relative w-full aspect-[3/4] md:aspect-[4/5] rounded-[2rem] overflow-hidden bg-[#E2E8F0] border border-black/5 shadow-xl">
+                            {activeImage && (
+                                <Image
+                                    src={activeImage}
+                                    alt={`${product.name} — Vee Clothing Company`}
+                                    fill
+                                    priority
+                                    placeholder="blur"
+                                    blurDataURL={blurUrl}
+                                    className="object-cover"
+                                    sizes="(max-width: 1024px) 100vw, 50vw"
+                                />
+                            )}
 
-                        {product.tag && (
-                            <div
-                                className="absolute top-6 left-6 px-4 py-2 rounded-xl backdrop-blur-md border border-white/10 z-10"
-                                style={{ background: getTagColor(product.tag) }}
-                            >
-                                <span className="text-[10px] tracking-[0.2em] font-extrabold text-white font-sans uppercase">
-                                    {product.tag}
-                                </span>
+                            {product.tag && (
+                                <div
+                                    className="absolute top-6 left-6 px-4 py-2 rounded-xl backdrop-blur-md border border-white/10 z-10"
+                                    style={{ background: getTagColor(product.tag) }}
+                                >
+                                    <span className="text-[10px] tracking-[0.2em] font-extrabold text-white font-sans uppercase">
+                                        {product.tag}
+                                    </span>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Thumbnail Strip */}
+                        {allImages.length > 1 && (
+                            <div className="flex gap-4 overflow-x-auto hide-scrollbar pb-2 pt-1">
+                                {allImages.map((img: string, idx: number) => (
+                                    <button
+                                        key={idx}
+                                        onClick={() => setActiveImage(img)}
+                                        className={`relative w-20 aspect-[3/4] md:w-24 flex-shrink-0 rounded-xl overflow-hidden border-2 transition-all ${
+                                            activeImage === img ? 'border-[#1A5276]' : 'border-transparent opacity-60 hover:opacity-100'
+                                        }`}
+                                    >
+                                        <Image
+                                            src={img}
+                                            alt={`${product.name} Thumbnail ${idx + 1}`}
+                                            fill
+                                            className="object-cover"
+                                            sizes="96px"
+                                        />
+                                    </button>
+                                ))}
                             </div>
                         )}
                     </motion.div>

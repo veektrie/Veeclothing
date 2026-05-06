@@ -61,6 +61,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       tag,
       "cat": category,
       "desc": description,
+      "gallery": gallery[].asset->url,
       longDesc,
       features[]{ title, desc },
       colors[]{ name, hex },

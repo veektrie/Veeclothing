@@ -80,7 +80,7 @@ export default async function JournalArticlePage({ params }: { params: Promise<{
     marks: {
       strong: ({ children }: any) => <strong className="font-bold text-[#1C1C1E]">{children}</strong>,
       link: ({ value, children }: any) => (
-        <a href={value?.href} target="_blank" rel="noreferrer" className="text-navy underline underline-offset-4 decoration-navy/30 hover:decoration-navy transition-all">
+        <a href={value?.href} target="_blank" rel="noreferrer" className="text-[#D4AF37] underline underline-offset-4 decoration-[#D4AF37]/30 hover:decoration-[#D4AF37] transition-all font-semibold">
           {children}
         </a>
       ),

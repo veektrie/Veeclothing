@@ -80,6 +80,13 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'gallery',
+      title: 'Image Gallery (Multi-Shot)',
+      type: 'array',
+      of: [{ type: 'image', options: { hotspot: true } }],
+      description: 'Add multiple shots: front, back, detail, etc. These appear as thumbnails on the product page.',
+    }),
+    defineField({
       name: 'features',
       title: 'Features',
       type: 'array',
