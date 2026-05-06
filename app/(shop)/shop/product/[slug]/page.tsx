@@ -90,7 +90,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       "slug": slug.current,
       "src": image.asset->url
     }`,
-    { category: product.cat, currentId: product._id }
+    { category: product.cat || null, currentId: product._id }
   );
 
   // ── JSON-LD built server-side — no client-side script injection ────────────
@@ -120,13 +120,13 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   };
 
   return (
-    <>
-      {/* JSON-LD in Server Component — safe for client-side navigation */}
+    <main>
+      {/* Lowercase <script> for JSON-LD — static data, not executable JS */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
       />
       <ProductClient product={product} relatedProducts={relatedProducts} />
-    </>
+    </main>
   );
 }

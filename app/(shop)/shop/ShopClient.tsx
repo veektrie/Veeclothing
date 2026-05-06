@@ -505,11 +505,16 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: (index % 12) * 0.04 }}
-      className="group"
+      className="group h-full relative"
     >
-      <Link href={`/shop/product/${product.slug}`} className="no-underline text-inherit block h-full">
-        <div className="bg-white shadow-xl rounded-[24px] overflow-hidden cursor-pointer h-full flex flex-col border border-black/[0.06] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_16px_48px_rgba(26,82,118,0.12)] hover:-translate-y-2 hover:border-[#1A5276]/20">
+      <div className="bg-white shadow-xl rounded-[24px] overflow-hidden h-full flex flex-col border border-black/[0.06] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] hover:shadow-[0_16px_48px_rgba(26,82,118,0.12)] hover:-translate-y-2 hover:border-[#1A5276]/20 relative">
 
+        {/* 1. Link wraps content natively — no z-index hacks */}
+        <Link
+          href={`/shop/product/${product.slug}`}
+          className="flex flex-col h-full w-full no-underline text-inherit"
+          aria-label={`View ${product.name}`}
+        >
           {/* Image */}
           <div className="relative aspect-[3/4] overflow-hidden bg-black/10">
             {product.src && (
@@ -522,24 +527,13 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
               />
             )}
 
-            {/* Quick Add overlay */}
-            <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px] z-20 pointer-events-none">
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  useQuickViewStore.getState().openQuickView(product);
-                }}
-                className="pointer-events-auto bg-white/95 text-[#1A5276] px-6 py-3 rounded-full text-[10px] tracking-[0.2em] font-bold uppercase translate-y-4 group-hover:translate-y-0 transition-all duration-300 shadow-lg hover:bg-[#1A5276] hover:text-white"
-              >
-                Quick Add
-              </button>
-            </div>
+            {/* Dark hover overlay — visual only, no interactive children */}
+            <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-[2px] pointer-events-none" />
 
             {/* Tag badge */}
             {product.tag && (
               <div
-                className="absolute top-5 left-5 px-3.5 py-1.5 rounded-lg backdrop-blur-md border border-white/10 z-10"
+                className="absolute top-5 left-5 px-3.5 py-1.5 rounded-lg backdrop-blur-md border border-white/10 pointer-events-none"
                 style={{ background: `${getTagColor(product.tag)}bb` }}
               >
                 <span className="text-[8px] tracking-[0.2em] font-extrabold text-white font-sans uppercase">
@@ -574,8 +568,21 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
               </div>
             </div>
           </div>
-        </div>
-      </Link>
+        </Link>
+
+        {/* 2. Quick Add — direct sibling to Link, NOT nested inside it */}
+        <button
+          className="absolute top-[28%] left-1/2 -translate-x-1/2 z-20 bg-white/95 text-[#1A5276] px-6 py-3 rounded-full text-[10px] tracking-[0.2em] font-bold uppercase opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg hover:bg-[#1A5276] hover:text-white"
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            useQuickViewStore.getState().openQuickView(product);
+          }}
+        >
+          Quick Add
+        </button>
+
+      </div>
     </motion.div>
   );
 }
