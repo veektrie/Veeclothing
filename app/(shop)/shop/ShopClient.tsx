@@ -99,6 +99,13 @@ const getTagColor = (tag: string) => {
 
 const PAGE_SIZE = 12;
 
+/** #10 — Trigger a subtle haptic pulse on supported mobile browsers */
+function haptic(ms = 10) {
+  if (typeof window !== 'undefined' && 'vibrate' in navigator) {
+    navigator.vibrate(ms);
+  }
+}
+
 // ─── Component ───────────────────────────────────────────────────────────────
 
 export default function ShopClient({ initialProducts = [] }: { initialProducts: Product[] }) {
@@ -135,6 +142,7 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
   );
 
   const handleCategoryChange = (cat: string) => {
+    haptic();
     setActiveCategory(cat);
     setVisibleCount(PAGE_SIZE);
     setFilterVersion((v) => v + 1);
@@ -250,7 +258,7 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
             </span>
             <button
               id="mobile-filter-toggle"
-              onClick={() => setMobileFiltersOpen((o) => !o)}
+              onClick={() => { haptic(8); setMobileFiltersOpen((o) => !o); }}
               className="flex items-center gap-2 text-[11px] tracking-[0.15em] uppercase font-bold text-[#1A5276] border border-[#1A5276]/30 px-4 py-2.5 rounded-full hover:bg-[#1A5276] hover:text-white transition-all duration-300"
             >
               <SlidersHorizontal size={13} />

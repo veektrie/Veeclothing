@@ -30,23 +30,6 @@ function buildCommissionUrl(productName: string, slug: string): string {
     return `https://wa.me/2348103031020?text=${msg}`;
 }
 
-/** Derive a material label from category for the JSON-LD description */
-function categoryToMaterial(cat: string): string {
-    const map: Record<string, string> = {
-        bespoke: 'Super 120s Italian Wool',
-        corporate: 'Premium Woven Fabric',
-        kaftan: 'Heritage Silk-Cotton Blend',
-        agbada: 'Hand-Embroidered Damask',
-        hoodies: 'Heavyweight French Terry',
-        tees: 'Supima Cotton Piqué',
-        polo: 'Mercerised Cotton Piqué',
-        pants: 'Stretch Worsted Wool',
-        jacket: 'Structured Twill Weave',
-        shirts: 'Egyptian Cotton Poplin',
-    };
-    return map[(cat ?? '').toLowerCase()] ?? 'Artisan-Crafted Fabric';
-}
-
 // ─── Component ───────────────────────────────────────────────────────────────
 
 export default function ProductClient({ product, relatedProducts }: { product: any; relatedProducts: any[] }) {
@@ -54,14 +37,17 @@ export default function ProductClient({ product, relatedProducts }: { product: a
     const [selectedColor, setSelectedColor] = useState<any>(product.colors?.[0] || null);
     const [isAdding, setIsAdding] = useState(false);
     const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
+    const [mounted, setMounted] = useState(false);
 
     const { toggleItem, hasItem } = useWishlistStore();
-    const isWishlisted = hasItem(product._id);
+    // Wait for Zustand persist to hydrate before reading wishlist state
+    const isWishlisted = mounted && hasItem(product._id);
 
     const addItem = useCartStore((state) => state.addItem);
     const addRecentlyViewed = useRecentlyViewedStore((state) => state.addRecentlyViewed);
 
     useEffect(() => {
+        setMounted(true);
         if (product) addRecentlyViewed(product);
     }, [product, addRecentlyViewed]);
 
@@ -88,49 +74,11 @@ export default function ProductClient({ product, relatedProducts }: { product: a
         setTimeout(() => setIsAdding(false), 600);
     };
 
-    // ── JSON-LD: Product structured data (#13) ────────────────────────────
-    const productJsonLd = {
-        '@context': 'https://schema.org',
-        '@type': 'Product',
-        name: product.name,
-        description: product.longDesc || product.desc || `Handcrafted ${product.name} from Vee Clothing Company.`,
-        image: product.src ? [product.src] : [],
-        brand: {
-            '@type': 'Brand',
-            name: 'Vee Clothing Company',
-        },
-        material: categoryToMaterial(product.cat),
-        offers: {
-            '@type': 'Offer',
-            priceCurrency: 'NGN',
-            price: product.price,
-            availability: 'https://schema.org/InStock',
-            seller: {
-                '@type': 'Organization',
-                name: 'Vee Clothing Company',
-            },
-            url: `https://www.veeclothingcompany.com/shop/product/${product.slug ?? ''}`,
-        },
-        ...(product.sizes?.length > 0 && {
-            hasVariant: product.sizes.map((s: string) => ({
-                '@type': 'ProductModel',
-                name: `${product.name} — Size ${s}`,
-                size: s,
-            })),
-        }),
-    };
-
     const blurUrl = BLUR_DATA_URL;
     const commissionUrl = buildCommissionUrl(product.name, product.slug ?? '');
 
     return (
         <main className="bg-[#F8FAFC] min-h-screen relative overflow-x-hidden pt-[clamp(100px,12vh,140px)]">
-
-            {/* ── JSON-LD injection (#13) ─────────────────────────────────── */}
-            <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
-            />
 
             {/* Background Atmosphere */}
             <div
