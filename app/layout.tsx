@@ -6,6 +6,7 @@ import CartDrawer from "@/components/CartDrawer";
 import QuickViewModal from "@/components/QuickViewModal";
 import CustomCursor from "@/components/CustomCursor";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import { Inter } from 'next/font/google';
 import "./globals.css";
 import type { Metadata } from 'next';
 import Script from 'next/script';
@@ -69,6 +70,13 @@ export const metadata: Metadata = {
   },
 };
 
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-inter',
+  display: 'swap',
+});
+
 export const viewport = {
   width: 'device-width',
   initialScale: 1,
@@ -80,7 +88,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={inter.variable}>
       <head>
         {/* — Organization Schema — */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{

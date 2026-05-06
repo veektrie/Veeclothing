@@ -4,12 +4,14 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowLeft, ShoppingBag, Check, MessageSquare } from 'lucide-react';
+import { ArrowLeft, ShoppingBag, Check, MessageSquare, Heart } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useCartStore } from '@/store/useCartStore';
 import { useRecentlyViewedStore } from '@/store/useRecentlyViewedStore';
 import RecentlyViewed from '@/components/RecentlyViewed';
-import { getBlurDataURL } from '@/lib/imageUtils';
+import { BLUR_DATA_URL } from '@/lib/imageUtils';
+import SizeGuideModal from '@/components/SizeGuideModal';
+import { useWishlistStore } from '@/store/useWishlistStore';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -51,6 +53,10 @@ export default function ProductClient({ product, relatedProducts }: { product: a
     const [selectedSize, setSelectedSize] = useState<string>(product.sizes?.[0] || '');
     const [selectedColor, setSelectedColor] = useState<any>(product.colors?.[0] || null);
     const [isAdding, setIsAdding] = useState(false);
+    const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
+
+    const { toggleItem, hasItem } = useWishlistStore();
+    const isWishlisted = hasItem(product._id);
 
     const addItem = useCartStore((state) => state.addItem);
     const addRecentlyViewed = useRecentlyViewedStore((state) => state.addRecentlyViewed);
@@ -114,7 +120,7 @@ export default function ProductClient({ product, relatedProducts }: { product: a
         }),
     };
 
-    const blurUrl = getBlurDataURL();
+    const blurUrl = BLUR_DATA_URL;
     const commissionUrl = buildCommissionUrl(product.name, product.slug ?? '');
 
     return (
@@ -242,9 +248,12 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                                     <span className="font-sans text-[10px] tracking-[0.2em] uppercase text-[#1C1C1E] font-bold">
                                         Select Size
                                     </span>
-                                    <Link href="#" className="font-sans text-[10px] tracking-[0.1em] text-[#1A5276] hover:underline uppercase font-bold">
+                                    <button
+                                        onClick={() => setSizeGuideOpen(true)}
+                                        className="font-sans text-[10px] tracking-[0.1em] text-[#1A5276] hover:underline uppercase font-bold"
+                                    >
                                         Size Guide
-                                    </Link>
+                                    </button>
                                 </div>
                                 <div className="flex flex-wrap gap-3">
                                     {product.sizes.map((size: string) => (
@@ -264,7 +273,7 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                         )}
 
                         {/* Action Buttons */}
-                        <div className="flex gap-4 mb-6">
+                        <div className="flex gap-3 mb-6">
                             <button
                                 id="product-add-to-cart"
                                 onClick={handleAddToCart}
@@ -292,6 +301,26 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                             >
                                 <span className="absolute inset-0 w-full h-full -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-[shimmer_1.5s_infinite]" />
                                 <span className="relative z-10">Buy Now</span>
+                            </button>
+
+                            {/* Wishlist toggle */}
+                            <button
+                                id="product-wishlist-toggle"
+                                aria-label={isWishlisted ? 'Remove from saved pieces' : 'Save this piece'}
+                                onClick={() => {
+                                    toggleItem(product);
+                                    toast(isWishlisted ? 'Removed from saved pieces' : 'Saved to your selection', {
+                                        icon: isWishlisted ? '🗑' : '♡',
+                                    });
+                                }}
+                                className="flex-shrink-0 w-[54px] h-[54px] rounded-xl flex items-center justify-center transition-all duration-300 border"
+                                style={{
+                                    background: isWishlisted ? 'rgba(212,175,55,0.08)' : 'white',
+                                    borderColor: isWishlisted ? '#D4AF37' : 'rgba(0,0,0,0.08)',
+                                    color: isWishlisted ? '#D4AF37' : '#94a3b8',
+                                }}
+                            >
+                                <Heart size={18} fill={isWishlisted ? '#D4AF37' : 'none'} />
                             </button>
                         </div>
 
@@ -372,7 +401,7 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                                                     alt={item.name}
                                                     fill
                                                     placeholder="blur"
-                                                    blurDataURL={getBlurDataURL()}
+                                                    blurDataURL={BLUR_DATA_URL}
                                                     className="object-cover transition-transform duration-1000 brightness-90 group-hover:scale-105 group-hover:brightness-100"
                                                     sizes="(max-width: 768px) 100vw, 25vw"
                                                 />
@@ -417,6 +446,13 @@ export default function ProductClient({ product, relatedProducts }: { product: a
             )}
 
             <RecentlyViewed currentProductId={product._id} />
+
+            {/* Size Guide Modal (#1) */}
+            <SizeGuideModal
+                isOpen={sizeGuideOpen}
+                onClose={() => setSizeGuideOpen(false)}
+                category={product.cat}
+            />
         </main>
     );
 }

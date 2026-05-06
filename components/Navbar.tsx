@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState, useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { Search, User, ShoppingBag, Menu, X } from 'lucide-react';
+import { Search, User, ShoppingBag, Menu, X, Heart } from 'lucide-react';
 import CartBadge from './CartBadge';
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -184,6 +184,10 @@ const Navbar = () => {
             >
               <Search size={20} />
             </button>
+
+            <Link href="/saved" aria-label="Saved pieces" className="text-white/90 hover:text-white transition-colors">
+              <Heart size={20} />
+            </Link>
 
 
             {/* <Link href="/cart" className="text-white/90 hover:text-white transition-colors relative">

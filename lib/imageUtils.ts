@@ -1,37 +1,22 @@
 /**
- * Generates a tiny base64-encoded SVG blur placeholder for use with next/image.
- * Usage: <Image placeholder="blur" blurDataURL={getBlurDataURL()} ... />
- *
- * The shimmer effect gives a premium animated loading feel.
+ * Pre-computed blur placeholder for next/image.
+ * These are static constants — NO runtime Buffer / Node API calls.
+ * Safe to import in Client Components.
  */
-export function getBlurDataURL(w = 8, h = 10): string {
-  // A simple grey SVG that is valid as a blurDataURL
-  const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}">
-      <rect width="${w}" height="${h}" fill="#E2E8F0"/>
-    </svg>
-  `;
-  const base64 = Buffer.from(svg).toString('base64');
-  return `data:image/svg+xml;base64,${base64}`;
-}
+
+// A flat grey SVG, pre-encoded to base64
+export const BLUR_DATA_URL =
+  'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjEwIj48cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSIxMCIgZmlsbD0iI0UyRThGMCIvPjwvc3ZnPg==';
+
+// A shimmer-gradient SVG, pre-encoded to base64
+export const SHIMMER_DATA_URL =
+  'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjEwIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjAlIj48c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjRTJFOEYwIi8+PHN0b3Agb2Zmc2V0PSI1MCUiIHN0b3AtY29sb3I9IiNGMUY1RjkiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNFMkU4RjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB3aWR0aD0iOCIgaGVpZ2h0PSIxMCIgZmlsbD0idXJsKCNnKSIvPjwvc3ZnPg==';
 
 /**
- * A shimmer-style blur placeholder — more premium, slightly animated look.
- * Use this for hero / featured images.
+ * Server-side only: generate a custom blur URL from dimensions.
+ * Only call this in Server Components or getStaticProps.
  */
-export function getShimmerDataURL(w = 8, h = 10): string {
-  const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}">
-      <defs>
-        <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stop-color="#E2E8F0"/>
-          <stop offset="50%" stop-color="#F1F5F9"/>
-          <stop offset="100%" stop-color="#E2E8F0"/>
-        </linearGradient>
-      </defs>
-      <rect width="${w}" height="${h}" fill="url(#g)"/>
-    </svg>
-  `;
-  const base64 = Buffer.from(svg).toString('base64');
-  return `data:image/svg+xml;base64,${base64}`;
+export function getBlurDataURL(w = 8, h = 10): string {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><rect width="${w}" height="${h}" fill="#E2E8F0"/></svg>`;
+  return `data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}`;
 }
