@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { useRecentlyViewedStore } from '@/store/useRecentlyViewedStore';
+import { useCurrencyStore } from '@/store/useCurrencyStore';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -31,6 +32,7 @@ function getMaterialLine(item: any): string {
 
 export default function RecentlyViewed({ currentProductId }: { currentProductId?: string }) {
   const { items } = useRecentlyViewedStore();
+  const { convert } = useCurrencyStore();
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => { setIsMounted(true); }, []);
@@ -200,11 +202,8 @@ export default function RecentlyViewed({ currentProductId }: { currentProductId?
                     </p>
 
                     {/* Price — understated, no emphasis */}
-                    <p
-                      className="text-[12px] text-[#64748b] font-normal tracking-wide"
-                      style={{ fontFamily: 'Inter, sans-serif' }}
-                    >
-                      ₦{price.toLocaleString()}
+                    <p className="font-sans text-[10px] tracking-wide text-[#64748b]">
+                      {convert(price).symbol}{(convert(price).value).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                     </p>
                   </div>
                 </Link>

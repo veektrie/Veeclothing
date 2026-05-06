@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useCartStore } from '@/store/useCartStore';
+import { useCurrencyStore } from '@/store/useCurrencyStore';
 import { Trash2, Plus, Minus, ArrowRight, ShoppingBag, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -11,6 +12,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export default function CartDrawer() {
     const { items, isOpen, setIsOpen, addItem, decreaseQuantity, removeItem } = useCartStore();
+    const { convert } = useCurrencyStore();
     const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => { setIsMounted(true); }, []);
@@ -110,7 +112,7 @@ export default function CartDrawer() {
                                     </div>
                                     <div className="mt-auto flex items-center justify-between">
                                         <p style={{ fontFamily: 'Inter, sans-serif' }} className="text-[13px] font-bold text-[#1A5276]">
-                                            ₦{(item.price * item.quantity).toLocaleString()}
+                                            {convert(item.price * item.quantity).symbol}{convert(item.price * item.quantity).value.toLocaleString()}
                                         </p>
                                         <div className="flex items-center gap-2 bg-[#F8FAFC] rounded-full px-2 py-1 border border-black/[0.05]">
                                             <button onClick={() => decreaseQuantity(item.id, item.size, item.color)} aria-label="Decrease" className="w-5 h-5 rounded-full flex items-center justify-center text-[#64748b] hover:text-[#1A5276] hover:bg-white transition-all">
@@ -135,7 +137,7 @@ export default function CartDrawer() {
                     <div className="flex justify-between items-center mb-4">
                         <span className="text-[#64748b] text-[12px] font-medium">Subtotal</span>
                         <span style={{ fontFamily: 'Inter, sans-serif' }} className="text-lg font-bold text-[#1A5276]">
-                            ₦{subtotal.toLocaleString()}
+                            {convert(subtotal).symbol}{convert(subtotal).value.toLocaleString()}
                         </span>
                     </div>
                     <div className="flex flex-col gap-2.5">

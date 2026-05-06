@@ -2,24 +2,52 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import gsap from 'gsap';
-import { Search, User, ShoppingBag, Menu, X, Heart } from 'lucide-react';
+import { Search, Menu, X, Heart, ChevronDown } from 'lucide-react';
 import CartBadge from './CartBadge';
+import { useCurrencyStore } from '@/store/useCurrencyStore';
+
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [currencyOpen, setCurrencyOpen] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
   const searchBarRef = useRef<HTMLDivElement>(null);
+  const currencyRef = useRef<HTMLDivElement>(null);
+
+  const { currency, setCurrency, fetchRates } = useCurrencyStore();
+
+  const currencies = [
+    { code: 'NGN', symbol: '₦', label: 'NGN' },
+    { code: 'USD', symbol: '$', label: 'USD' },
+    { code: 'GBP', symbol: '£', label: 'GBP' },
+    { code: 'EUR', symbol: '€', label: 'EUR' },
+  ] as const;
+
+  const activeCurrency = currencies.find(c => c.code === currency) || currencies[0];
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 30);
     window.addEventListener('scroll', handleScroll, { passive: true });
+    fetchRates();
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [fetchRates]);
+
+  // Close currency popover on outside click
+  useEffect(() => {
+    if (!currencyOpen) return;
+    const handler = (e: MouseEvent) => {
+      if (currencyRef.current && !currencyRef.current.contains(e.target as Node)) {
+        setCurrencyOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, [currencyOpen]);
 
   useEffect(() => {
     if (menuOpen) {
@@ -195,10 +223,59 @@ const Navbar = () => {
             </Link> */}
             <CartBadge />
 
-            <div className="hidden md:flex items-center gap-2 text-[11px] font-semibold text-white/90 tracking-wider border-l border-white/20 pl-6 ml-2">
-              <span>NGN</span>
-              <span className="text-white/30">|</span>
-              <span>EN</span>
+            {/* Currency Picker — Desktop */}
+            <div ref={currencyRef} className="hidden md:flex items-center gap-3 border-l border-white/20 pl-6 ml-2 relative">
+              <button
+                onClick={() => setCurrencyOpen(o => !o)}
+                className="flex items-center gap-1.5 text-[11px] font-bold text-white/80 hover:text-white tracking-widest uppercase transition-colors duration-200 group"
+              >
+                <span>{activeCurrency.symbol}</span>
+                <span>{activeCurrency.label}</span>
+                <ChevronDown
+                  size={11}
+                  className={`text-white/50 transition-transform duration-300 ${currencyOpen ? 'rotate-180' : ''}`}
+                />
+              </button>
+
+              {/* Floating popover */}
+              {currencyOpen && (
+                <div
+                  className="absolute top-full right-0 mt-4 z-50 overflow-hidden"
+                  style={{
+                    background: 'rgba(18, 18, 18, 0.92)',
+                    backdropFilter: 'blur(24px)',
+                    WebkitBackdropFilter: 'blur(24px)',
+                    border: '1px solid rgba(255,255,255,0.08)',
+                    borderRadius: '14px',
+                    minWidth: '120px',
+                    boxShadow: '0 16px 48px rgba(0,0,0,0.4)',
+                  }}
+                >
+                  {currencies.map((c, i) => (
+                    <button
+                      key={c.code}
+                      onClick={() => { setCurrency(c.code as any); setCurrencyOpen(false); }}
+                      className={`w-full flex items-center gap-3 px-5 py-3 text-[11px] font-bold tracking-widest uppercase transition-colors duration-150
+                        ${
+                          currency === c.code
+                            ? 'text-white bg-white/10'
+                            : 'text-white/50 hover:text-white hover:bg-white/5'
+                        }
+                        ${i !== currencies.length - 1 ? 'border-b border-white/5' : ''}
+                      `}
+                    >
+                      <span className="w-4 text-center opacity-70">{c.symbol}</span>
+                      <span>{c.label}</span>
+                      {currency === c.code && (
+                        <span className="ml-auto w-1.5 h-1.5 rounded-full bg-white/70" />
+                      )}
+                    </button>
+                  ))}
+                </div>
+              )}
+
+              <span className="text-white/20">|</span>
+              <span className="text-[11px] font-bold text-white/50 tracking-widest uppercase">EN</span>
             </div>
           </div>
         </div>
@@ -237,9 +314,23 @@ const Navbar = () => {
           >
             Account
           </Link>
-          <div className="flex gap-4 mt-8">
-            <span className="text-sm text-white/40">NGN</span>
-            <span className="text-sm text-white/40">EN</span>
+          {/* Currency Picker — Mobile */}
+          <div className="flex flex-wrap gap-2 mt-8 justify-center">
+            {currencies.map(c => (
+              <button
+                key={c.code}
+                onClick={() => { setCurrency(c.code as any); setMenuOpen(false); }}
+                className={`px-4 py-2 rounded-full text-[11px] font-bold tracking-widest uppercase transition-all duration-200
+                  ${
+                    currency === c.code
+                      ? 'bg-white text-black'
+                      : 'border border-white/20 text-white/50 hover:border-white/50 hover:text-white/80'
+                  }
+                `}
+              >
+                {c.symbol} {c.label}
+              </button>
+            ))}
           </div>
         </div>
       </div>

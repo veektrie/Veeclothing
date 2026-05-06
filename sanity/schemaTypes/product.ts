@@ -142,5 +142,27 @@ export default defineType({
       },
       description: 'Select sizes that are currently out of stock to trigger the "Notify Me" button.',
     }),
+    defineField({
+      name: 'reviews',
+      title: 'Reviews & Social Proof',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            { name: 'reviewerName', title: 'Reviewer Name', type: 'string' },
+            { 
+              name: 'rating', 
+              title: 'Rating', 
+              type: 'number',
+              validation: (Rule) => Rule.min(1).max(5).integer(),
+              description: '1 to 5 stars',
+            },
+            { name: 'body', title: 'Review Body', type: 'text', rows: 3 },
+            { name: 'isVerifiedPurchase', title: 'Verified Purchase?', type: 'boolean', initialValue: true },
+          ],
+        },
+      ],
+    }),
   ],
 })

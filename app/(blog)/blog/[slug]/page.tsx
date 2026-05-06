@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Clock, Calendar, ArrowLeft, Share2 } from "lucide-react";
+import BlogNav from "@/components/BlogNav";
 import { client } from "@/lib/sanity";
 import { groq } from "next-sanity";
 import { PortableText } from "@portabletext/react";
@@ -49,7 +50,7 @@ export default async function JournalArticlePage({ params }: { params: Promise<{
         <h1 className="font-inter text-3xl font-extrabold text-[#1C1C1E]">Article not found</h1>
         <Link href="/blog">
           <button className="bg-navy text-white border-none px-8 py-3 rounded-full font-inter font-bold text-sm hover:bg-navy/90 transition-all">
-            Return to Journal
+          Return to Blog
           </button>
         </Link>
       </div>
@@ -89,20 +90,10 @@ export default async function JournalArticlePage({ params }: { params: Promise<{
   return (
     <main className="bg-[#F8FAFC] min-h-screen overflow-x-hidden">
 
-      {/* Top Nav */}
-      <div className="bg-white border-b border-black/[0.06] px-6 md:px-8 h-16 flex items-center justify-between sticky top-0 z-50 backdrop-blur-md bg-white/80">
-        <Link href="/blog" className="flex items-center gap-2 text-slate-500 font-inter text-[10px] md:text-xs font-bold tracking-widest uppercase hover:text-navy transition-colors">
-          <ArrowLeft size={14} className="transition-transform group-hover:-translate-x-1" />
-          Back to Journal
-        </Link>
-        <button className="bg-transparent border border-black/10 rounded-full px-4 py-2 flex items-center gap-2 font-inter text-[10px] md:text-xs font-bold uppercase tracking-widest text-slate-500 hover:bg-slate-50 transition-all">
-          <Share2 size={13} />
-          Share
-        </button>
-      </div>
+      <BlogNav />
 
       {/* Hero area */}
-      <div className="bg-navy py-16 md:py-24 px-6 md:px-8 text-center">
+      <div className="bg-navy pt-[clamp(8rem,15vw,10rem)] pb-16 md:pb-24 px-6 md:px-8 text-center">
         <div className="max-w-[800px] mx-auto">
           <h1 className="font-inter text-3xl md:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white mb-8">
             {article.title}

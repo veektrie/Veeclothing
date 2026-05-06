@@ -65,7 +65,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       features[]{ title, desc },
       colors[]{ name, hex },
       sizes,
-      soldOutSizes
+      soldOutSizes,
+      reviews[]{ reviewerName, rating, body, isVerifiedPurchase }
     }`,
     { slug }
   );
@@ -94,8 +95,15 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     { category: product.cat || null, currentId: product._id }
   );
 
+  // Calculate aggregate rating if reviews exist
+  const reviews = product.reviews || [];
+  const reviewCount = reviews.length;
+  const averageRating = reviewCount > 0 
+    ? reviews.reduce((sum: number, r: any) => sum + r.rating, 0) / reviewCount 
+    : 0;
+
   // ── JSON-LD built server-side — no client-side script injection ────────────
-  const productJsonLd = {
+  const productJsonLd: any = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.name,
@@ -119,6 +127,26 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       })),
     }),
   };
+
+  if (reviewCount > 0) {
+    productJsonLd.aggregateRating = {
+      '@type': 'AggregateRating',
+      ratingValue: averageRating.toFixed(1),
+      reviewCount: reviewCount,
+    };
+    productJsonLd.review = reviews.map((r: any) => ({
+      '@type': 'Review',
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: r.rating,
+      },
+      author: {
+        '@type': 'Person',
+        name: r.reviewerName,
+      },
+      reviewBody: r.body,
+    }));
+  }
 
   return (
     <main>

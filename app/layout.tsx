@@ -6,6 +6,7 @@ import CartDrawer from "@/components/CartDrawer";
 import QuickViewModal from "@/components/QuickViewModal";
 import CustomCursor from "@/components/CustomCursor";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import ExitIntentPopup from "@/components/ExitIntentPopup";
 import { Inter } from 'next/font/google';
 import "./globals.css";
 import type { Metadata } from 'next';
@@ -198,6 +199,7 @@ export default function RootLayout({
           <Footer />
           <WhatsAppFloat />
         </SmoothScroll>
+        <ExitIntentPopup />
       </body>
     </html>
   );

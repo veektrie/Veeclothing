@@ -12,6 +12,7 @@ import RecentlyViewed from '@/components/RecentlyViewed';
 import { BLUR_DATA_URL } from '@/lib/imageUtils';
 import SizeGuideModal from '@/components/SizeGuideModal';
 import { useWishlistStore } from '@/store/useWishlistStore';
+import { useCurrencyStore } from '@/store/useCurrencyStore';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -45,6 +46,7 @@ export default function ProductClient({ product, relatedProducts }: { product: a
 
     const addItem = useCartStore((state) => state.addItem);
     const addRecentlyViewed = useRecentlyViewedStore((state) => state.addRecentlyViewed);
+    const { convert } = useCurrencyStore();
 
     useEffect(() => {
         setMounted(true);
@@ -151,7 +153,7 @@ export default function ProductClient({ product, relatedProducts }: { product: a
 
                         <div className="flex justify-between items-center mb-8">
                             <p style={{ fontFamily: 'Inter, sans-serif' }} className="text-3xl text-[#1A5276] font-bold mb-0">
-                                ₦{product.price?.toLocaleString()}
+                                {convert(product.price).symbol}{(convert(product.price).value).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                             </p>
                             
                             {/* Wishlist toggle */}
@@ -352,6 +354,39 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                                 ))}
                             </div>
                         )}
+
+                        {/* Reviews Section */}
+                        {product.reviews && product.reviews.length > 0 && (
+                            <div className="mt-16 pt-16 border-t border-black/5">
+                                <h3 style={{ fontFamily: 'Inter, sans-serif' }} className="text-2xl font-bold text-[#1C1C1E] mb-8 tracking-tight">
+                                    Client Reviews ({product.reviews.length})
+                                </h3>
+                                <div className="space-y-8">
+                                    {product.reviews.map((review: any, idx: number) => (
+                                        <div key={idx} className="pb-8 border-b border-black/5 last:border-0 last:pb-0">
+                                            <div className="flex items-center justify-between mb-3">
+                                                <div className="flex items-center gap-2">
+                                                    <span className="font-bold text-[#1C1C1E] text-sm">{review.reviewerName}</span>
+                                                    {review.isVerifiedPurchase && (
+                                                        <span className="text-[#1A5276] text-[10px] uppercase tracking-wider font-bold bg-[#1A5276]/10 px-2 py-0.5 rounded-sm">
+                                                            Verified
+                                                        </span>
+                                                    )}
+                                                </div>
+                                                <div className="flex gap-1 text-[#D4AF37]">
+                                                    {[...Array(5)].map((_, i) => (
+                                                        <span key={i} className={i < review.rating ? '' : 'opacity-30'}>★</span>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                            <p className="text-[#64748b] text-sm leading-relaxed font-light">
+                                                {review.body}
+                                            </p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
                     </motion.div>
                 </div>
             </div>
@@ -401,7 +436,7 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                                             </div>
                                             <div className="mt-auto flex items-center justify-between pt-2.5">
                                                 <span style={{ fontFamily: 'Inter, sans-serif' }} className="text-[1.05rem] text-[#1A5276] font-bold">
-                                                    ₦{item.price?.toLocaleString()}
+                                                    {convert(item.price).symbol}{(convert(item.price).value).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                                 </span>
                                                 <div className="w-8 h-8 rounded-full border border-[#1A5276]/30 flex items-center justify-center text-[#1A5276] bg-[#F8FAFC] transition-all duration-300 group-hover:bg-[#1A5276] group-hover:text-white">
                                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

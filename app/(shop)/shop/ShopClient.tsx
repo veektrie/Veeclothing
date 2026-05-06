@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { useQuickViewStore } from '@/store/useQuickViewStore';
+import { useCurrencyStore } from '@/store/useCurrencyStore';
 import RecentlyViewed from '@/components/RecentlyViewed';
 import { ChevronDown, Search, SlidersHorizontal, X } from 'lucide-react';
 
@@ -500,6 +501,8 @@ function CategoryItem({
 }
 
 function ProductCard({ product, index }: { product: Product; index: number }) {
+  const { convert } = useCurrencyStore();
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
@@ -559,7 +562,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 
             <div className="mt-auto flex items-center justify-between pt-2.5">
               <span style={{ fontFamily: 'Inter, sans-serif' }} className="text-[1.05rem] text-[#1A5276] font-bold">
-                ₦{product.price?.toLocaleString()}
+                {convert(product.price).symbol}{(convert(product.price).value).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
               </span>
               <div className="w-8 h-8 rounded-full border border-[#1A5276]/30 flex items-center justify-center text-[#1A5276] bg-[#F8FAFC] transition-all duration-300 group-hover:bg-[#1A5276] group-hover:text-white">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

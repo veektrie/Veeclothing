@@ -6,11 +6,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Check, ShoppingBag } from 'lucide-react';
 import { useQuickViewStore } from '@/store/useQuickViewStore';
 import { useCartStore } from '@/store/useCartStore';
+import { useCurrencyStore } from '@/store/useCurrencyStore';
 import toast from 'react-hot-toast';
 
 export default function QuickViewModal() {
     const { isOpen, product, closeQuickView } = useQuickViewStore();
     const addItem = useCartStore((state) => state.addItem);
+    const { convert } = useCurrencyStore();
 
     const [selectedSize, setSelectedSize] = useState<string>('');
     const [selectedColor, setSelectedColor] = useState<any>(null);
@@ -111,7 +113,7 @@ export default function QuickViewModal() {
                             </h2>
 
                             <p style={{ fontFamily: 'Inter, sans-serif' }} className="text-xl text-[#1A5276] font-bold mb-6">
-                                {product.price ? `₦${product.price.toLocaleString()}` : 'Price on request'}
+                                {product.price ? `${convert(product.price).symbol}${(convert(product.price).value).toLocaleString()}` : 'Price on request'}
                             </p>
 
                             <p style={{ fontFamily: 'Inter, sans-serif' }} className="text-sm text-[#64748b] leading-[1.6] font-light mb-8">

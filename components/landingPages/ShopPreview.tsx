@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useQuickViewStore } from '@/store/useQuickViewStore';
+import { useCurrencyStore } from '@/store/useCurrencyStore';
 
 const CATEGORIES = [
   { key: 'all', label: 'All Pieces' },
@@ -37,6 +38,7 @@ const previews = [
 
 const ShopPreview = ({ products }: { products?: any[] }) => {
   const [activeCategory, setActiveCategory] = useState('all');
+  const { convert } = useCurrencyStore();
 
   const allItems = products && products.length > 0 
     ? products.map(p => ({
@@ -187,7 +189,7 @@ const ShopPreview = ({ products }: { products?: any[] }) => {
 
                       <div className="mt-auto flex items-center justify-between pt-2.5">
                         <span style={{ fontFamily: 'Inter, sans-serif' }} className="text-[1.15rem] text-[#1A5276] font-bold">
-                          {item.price ? `₦${item.price.toLocaleString()}` : 'Price on request'}
+                          {item.price ? `${convert(item.price).symbol}${convert(item.price).value.toLocaleString()}` : 'Price on request'}
                         </span>
 
                         <div className="w-8 h-8 rounded-full border border-[#1A5276]/30 flex items-center justify-center text-[#1A5276] bg-[#F8FAFC] transition-all duration-300 ease-out group-hover:bg-[#1A5276] group-hover:text-white">
