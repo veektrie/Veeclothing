@@ -149,9 +149,31 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                             {product.name}
                         </h1>
 
-                        <p style={{ fontFamily: 'Inter, sans-serif' }} className="text-3xl text-[#1A5276] font-bold mb-8">
-                            ₦{product.price?.toLocaleString()}
-                        </p>
+                        <div className="flex justify-between items-center mb-8">
+                            <p style={{ fontFamily: 'Inter, sans-serif' }} className="text-3xl text-[#1A5276] font-bold mb-0">
+                                ₦{product.price?.toLocaleString()}
+                            </p>
+                            
+                            {/* Wishlist toggle */}
+                            <button
+                                id="product-wishlist-toggle"
+                                aria-label={isWishlisted ? 'Remove from saved pieces' : 'Save this piece'}
+                                onClick={() => {
+                                    toggleItem(product);
+                                    toast(isWishlisted ? 'Removed from saved pieces' : 'Saved to your selection', {
+                                        icon: isWishlisted ? '🗑' : '♡',
+                                    });
+                                }}
+                                className="flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 border"
+                                style={{
+                                    background: isWishlisted ? 'rgba(212,175,55,0.08)' : 'white',
+                                    borderColor: isWishlisted ? '#D4AF37' : 'rgba(0,0,0,0.08)',
+                                    color: isWishlisted ? '#D4AF37' : '#94a3b8',
+                                }}
+                            >
+                                <Heart size={20} fill={isWishlisted ? '#D4AF37' : 'none'} />
+                            </button>
+                        </div>
 
                         <div className="h-[1px] w-full bg-black/5 mb-8" />
 
@@ -204,73 +226,76 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                                     </button>
                                 </div>
                                 <div className="flex flex-wrap gap-3">
-                                    {product.sizes.map((size: string) => (
-                                        <button
-                                            key={size}
-                                            onClick={() => setSelectedSize(size)}
-                                            className={`px-6 py-3 font-sans text-[11px] tracking-[0.1em] uppercase font-bold rounded-lg border transition-all duration-300 ${selectedSize === size
-                                                ? 'bg-[#1A5276] border-[#1A5276] text-white'
-                                                : 'bg-white border-black/10 text-[#64748b] hover:border-[#1A5276]/30 hover:bg-[#F8FAFC]'
-                                                }`}
-                                        >
-                                            {size}
-                                        </button>
-                                    ))}
+                                    {product.sizes.map((size: string) => {
+                                        const isSoldOut = product.soldOutSizes?.includes(size);
+                                        return (
+                                            <button
+                                                key={size}
+                                                onClick={() => setSelectedSize(size)}
+                                                className={`px-6 py-3 font-sans text-[11px] tracking-[0.1em] uppercase font-bold rounded-lg border transition-all duration-300 relative overflow-hidden ${
+                                                    selectedSize === size
+                                                        ? 'bg-[#1A5276] border-[#1A5276] text-white'
+                                                        : isSoldOut
+                                                            ? 'bg-gray-100 border-gray-200 text-gray-400 opacity-60 hover:opacity-100'
+                                                            : 'bg-white border-black/10 text-[#64748b] hover:border-[#1A5276]/30 hover:bg-[#F8FAFC]'
+                                                    }`}
+                                            >
+                                                {size}
+                                                {isSoldOut && (
+                                                    <span className="absolute top-1/2 left-0 w-full h-[1px] bg-gray-400 -translate-y-1/2 rotate-[15deg]" />
+                                                )}
+                                            </button>
+                                        );
+                                    })}
                                 </div>
                             </div>
                         )}
 
                         {/* Action Buttons */}
-                        <div className="flex gap-3 mb-6">
-                            <button
-                                id="product-add-to-cart"
-                                onClick={handleAddToCart}
-                                disabled={isAdding || (product.sizes?.length > 0 && !selectedSize)}
-                                className="flex-1 shadow-xl bg-[#1A5276] hover:bg-[#154360] disabled:bg-black/10 disabled:text-black/30 disabled:cursor-not-allowed text-white py-5 px-8 rounded-xl font-sans text-[11px] tracking-[0.2em] uppercase font-extrabold flex items-center justify-center gap-3 transition-all duration-300"
-                            >
-                                {isAdding ? (
-                                    <>Adding...</>
-                                ) : (
-                                    <>
-                                        <ShoppingBag className="w-5 h-5" />
-                                        Add to Cart
-                                    </>
-                                )}
-                            </button>
+                        {product.soldOutSizes?.includes(selectedSize) ? (
+                            <div className="mb-6">
+                                <button
+                                    onClick={() => {
+                                        // In a real app, this would open a modal to collect email
+                                        toast.success('We will notify you when this size is back in stock.', { icon: '📩' });
+                                    }}
+                                    className="w-full shadow-xl bg-white border border-[#1A5276] text-[#1A5276] hover:bg-[#F8FAFC] py-5 px-8 rounded-xl font-sans text-[11px] tracking-[0.2em] uppercase font-extrabold flex items-center justify-center transition-all duration-300"
+                                >
+                                    Notify Me When Available
+                                </button>
+                            </div>
+                        ) : (
+                            <div className="flex gap-3 mb-6">
+                                <button
+                                    id="product-add-to-cart"
+                                    onClick={handleAddToCart}
+                                    disabled={isAdding || (product.sizes?.length > 0 && !selectedSize)}
+                                    className="flex-1 shadow-xl bg-[#1A5276] hover:bg-[#154360] disabled:bg-black/10 disabled:text-black/30 disabled:cursor-not-allowed text-white py-5 px-8 rounded-xl font-sans text-[11px] tracking-[0.2em] uppercase font-extrabold flex items-center justify-center gap-3 transition-all duration-300"
+                                >
+                                    {isAdding ? (
+                                        <>Adding...</>
+                                    ) : (
+                                        <>
+                                            <ShoppingBag className="w-5 h-5" />
+                                            Add to Cart
+                                        </>
+                                    )}
+                                </button>
 
-                            <button
-                                id="product-buy-now"
-                                onClick={() => {
-                                    handleAddToCart();
-                                    useCartStore.getState().setIsOpen(true);
-                                }}
-                                disabled={isAdding || (product.sizes?.length > 0 && !selectedSize)}
-                                className="group relative flex-1 overflow-hidden shadow-xl bg-[#1A5276] disabled:bg-black/10 disabled:text-black/30 disabled:cursor-not-allowed text-white py-5 px-8 rounded-xl font-sans text-[11px] tracking-[0.2em] uppercase font-extrabold flex items-center justify-center gap-3 transition-all duration-300 hover:shadow-[0_16px_48px_rgba(26,82,118,0.25)]"
-                            >
-                                <span className="absolute inset-0 w-full h-full -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-[shimmer_1.5s_infinite]" />
-                                <span className="relative z-10">Buy Now</span>
-                            </button>
-
-                            {/* Wishlist toggle */}
-                            <button
-                                id="product-wishlist-toggle"
-                                aria-label={isWishlisted ? 'Remove from saved pieces' : 'Save this piece'}
-                                onClick={() => {
-                                    toggleItem(product);
-                                    toast(isWishlisted ? 'Removed from saved pieces' : 'Saved to your selection', {
-                                        icon: isWishlisted ? '🗑' : '♡',
-                                    });
-                                }}
-                                className="flex-shrink-0 w-[54px] h-[54px] rounded-xl flex items-center justify-center transition-all duration-300 border"
-                                style={{
-                                    background: isWishlisted ? 'rgba(212,175,55,0.08)' : 'white',
-                                    borderColor: isWishlisted ? '#D4AF37' : 'rgba(0,0,0,0.08)',
-                                    color: isWishlisted ? '#D4AF37' : '#94a3b8',
-                                }}
-                            >
-                                <Heart size={18} fill={isWishlisted ? '#D4AF37' : 'none'} />
-                            </button>
-                        </div>
+                                <button
+                                    id="product-buy-now"
+                                    onClick={() => {
+                                        handleAddToCart();
+                                        useCartStore.getState().setIsOpen(true);
+                                    }}
+                                    disabled={isAdding || (product.sizes?.length > 0 && !selectedSize)}
+                                    className="group relative flex-1 overflow-hidden shadow-xl bg-[#1A5276] disabled:bg-black/10 disabled:text-black/30 disabled:cursor-not-allowed text-white py-5 px-8 rounded-xl font-sans text-[11px] tracking-[0.2em] uppercase font-extrabold flex items-center justify-center gap-3 transition-all duration-300 hover:shadow-[0_16px_48px_rgba(26,82,118,0.25)]"
+                                >
+                                    <span className="absolute inset-0 w-full h-full -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-[shimmer_1.5s_infinite]" />
+                                    <span className="relative z-10">Buy Now</span>
+                                </button>
+                            </div>
+                        )}
 
                         {/* ── #2: Commission This Piece CTA ──────────────────────── */}
                         <a

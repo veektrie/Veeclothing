@@ -124,5 +124,23 @@ export default defineType({
         ],
       },
     }),
+    defineField({
+      name: 'soldOutSizes',
+      title: 'Sold Out Sizes',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: {
+        list: [
+          { title: 'Small', value: 'S' },
+          { title: 'Medium', value: 'M' },
+          { title: 'Large', value: 'L' },
+          { title: 'XL', value: 'XL' },
+          { title: 'XXL', value: 'XXL' },
+          { title: 'Bespoke', value: 'Bespoke' },
+          { title: 'Bulk Sizing', value: 'Bulk Sizing' },
+        ],
+      },
+      description: 'Select sizes that are currently out of stock to trigger the "Notify Me" button.',
+    }),
   ],
 })

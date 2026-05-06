@@ -64,7 +64,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       longDesc,
       features[]{ title, desc },
       colors[]{ name, hex },
-      sizes
+      sizes,
+      soldOutSizes
     }`,
     { slug }
   );
