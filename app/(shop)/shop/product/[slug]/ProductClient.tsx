@@ -37,6 +37,8 @@ export default function ProductClient({ product, relatedProducts }: { product: a
     const [selectedSize, setSelectedSize] = useState<string>(product.sizes?.[0] || '');
     const [selectedColor, setSelectedColor] = useState<any>(product.colors?.[0] || null);
     const [activeImage, setActiveImage] = useState<string>(product.src || '');
+    const [hasMonogram, setHasMonogram] = useState(false);
+    const [monogramText, setMonogramText] = useState('');
     const [isAdding, setIsAdding] = useState(false);
     const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
     const [mounted, setMounted] = useState(false);
@@ -65,15 +67,21 @@ export default function ProductClient({ product, relatedProducts }: { product: a
             toast.error('Please select a color first.');
             return;
         }
+        if (hasMonogram && (!monogramText || monogramText.length > 3)) {
+            toast.error('Please enter 1-3 initials for monogramming.');
+            return;
+        }
+
         setIsAdding(true);
         addItem({
             id: product._id,
             name: product.name,
-            price: product.price,
+            price: hasMonogram ? product.price + 15000 : product.price,
             image: product.src,
             quantity: 1,
             size: selectedSize,
             color: selectedColor?.name,
+            monogramText: hasMonogram ? monogramText.toUpperCase() : undefined,
         });
         toast.success(`${product.name} added to your commission.`);
         setTimeout(() => setIsAdding(false), 600);
@@ -280,6 +288,40 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                                 </div>
                             </div>
                         )}
+
+                        {/* Monogramming Service (Feature 1) */}
+                        <div className="mb-10 p-6 rounded-3xl border border-[#D4AF37]/20 bg-[#D4AF37]/5">
+                            <div className="flex items-center justify-between mb-4">
+                                <div>
+                                    <h4 className="font-sans text-[11px] tracking-[0.2em] uppercase text-[#1C1C1E] font-bold">Monogramming Service</h4>
+                                    <p className="text-[10px] text-[#64748b] mt-1 italic">Personalize your garment with custom initials (+₦15,000)</p>
+                                </div>
+                                <button
+                                    onClick={() => setHasMonogram(!hasMonogram)}
+                                    className={`w-12 h-6 rounded-full transition-all relative ${hasMonogram ? 'bg-[#1A5276]' : 'bg-[#E2E8F0]'}`}
+                                >
+                                    <div className={`absolute top-1 w-4 h-4 rounded-full bg-white transition-all ${hasMonogram ? 'left-7' : 'left-1'}`} />
+                                </button>
+                            </div>
+                            
+                            {hasMonogram && (
+                                <motion.div
+                                    initial={{ opacity: 0, height: 0 }}
+                                    animate={{ opacity: 1, height: 'auto' }}
+                                    className="pt-2"
+                                >
+                                    <label className="block text-[9px] tracking-[0.1em] uppercase text-[#1A5276] font-bold mb-2 ml-1">Enter Initials (Max 3)</label>
+                                    <input
+                                        type="text"
+                                        maxLength={3}
+                                        value={monogramText}
+                                        onChange={(e) => setMonogramText(e.target.value.toUpperCase())}
+                                        className="w-full bg-white border border-[#D4AF37]/30 rounded-xl px-4 py-3 text-sm font-bold tracking-[0.3em] text-[#1C1C1E] focus:outline-none focus:border-[#1A5276] uppercase"
+                                        placeholder="ABC"
+                                    />
+                                </motion.div>
+                            )}
+                        </div>
 
                         {/* Action Buttons */}
                         {product.soldOutSizes?.includes(selectedSize) ? (

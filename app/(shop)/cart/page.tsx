@@ -8,7 +8,7 @@ import { Trash2, Plus, Minus, ArrowRight, ShoppingBag, ArrowLeft } from 'lucide-
 import { motion } from 'framer-motion';
 
 export default function CartPage() {
-    const { items, addItem, decreaseQuantity, removeItem } = useCartStore();
+    const { items, addItem, decreaseQuantity, removeItem, hasGiftPackaging, toggleGiftPackaging } = useCartStore();
     const [isMounted, setIsMounted] = useState(false);
 
     // Prevent hydration mismatch
@@ -19,7 +19,8 @@ export default function CartPage() {
     if (!isMounted) return null;
 
     const subtotal = items.reduce((total, item) => total + (item.price * item.quantity), 0);
-    const total = subtotal;
+    const giftPackagingPrice = hasGiftPackaging ? 15000 : 0;
+    const total = subtotal + giftPackagingPrice;
 
     return (
         <main className="bg-[#F8FAFC] min-h-screen relative font-sans overflow-x-hidden pt-[clamp(100px,12vh,140px)] pb-24">
@@ -71,7 +72,7 @@ export default function CartPage() {
                         <div className="lg:col-span-2 flex flex-col gap-5">
                             {items.map((item, index) => (
                                 <motion.div
-                                    key={`${item.id}-${item.size}-${item.color}`}
+                                    key={`${item.id}-${item.size}-${item.color}-${item.monogramText}`}
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: index * 0.1 }}
@@ -87,7 +88,7 @@ export default function CartPage() {
                                         <div className="flex justify-between items-start mb-1">
                                             <h3 style={{ fontFamily: 'Inter, sans-serif' }} className="text-xl font-bold text-[#1C1C1E]">{item.name}</h3>
                                             <button
-                                                onClick={() => removeItem(item.id, item.size, item.color)}
+                                                onClick={() => removeItem(item.id, item.size, item.color, item.monogramText)}
                                                 className="text-[#64748b] hover:text-red-500 transition-colors p-2 -mr-2"
                                                 title="Remove from cart"
                                             >
@@ -106,6 +107,11 @@ export default function CartPage() {
                                                     Color: <span className="text-[#1A5276]">{item.color}</span>
                                                 </span>
                                             )}
+                                            {item.monogramText && (
+                                                <span className="bg-[#D4AF37]/5 px-3 py-1 rounded-full border border-[#D4AF37]/20">
+                                                    Monogram: <span className="text-[#D4AF37]">{item.monogramText}</span>
+                                                </span>
+                                            )}
                                         </div>
 
                                         <div className="mt-auto flex items-center justify-between">
@@ -116,7 +122,7 @@ export default function CartPage() {
                                             {/* Quantity Controls */}
                                             <div className="flex items-center gap-4 bg-[#F8FAFC] rounded-full px-2 py-1 border border-black/[0.05]">
                                                 <button
-                                                    onClick={() => decreaseQuantity(item.id, item.size, item.color)}
+                                                    onClick={() => decreaseQuantity(item.id, item.size, item.color, item.monogramText)}
                                                     className="w-8 h-8 rounded-full flex items-center justify-center text-[#64748b] hover:text-[#1A5276] hover:bg-white transition-all shadow-sm active:scale-90"
                                                 >
                                                     <Minus className="w-3 h-3" />
@@ -144,11 +150,36 @@ export default function CartPage() {
                                     Commission Summary
                                 </h3>
 
+                                {/* Gift Packaging Toggle */}
+                                <div className="mb-8 p-6 rounded-3xl border border-[#D4AF37]/20 bg-[#D4AF37]/5">
+                                    <div className="flex items-center justify-between mb-2">
+                                        <div className="flex items-center gap-3">
+                                            <span className="text-xl">🎁</span>
+                                            <span className="text-[11px] font-bold text-[#1C1C1E] uppercase tracking-wider">Luxury Packaging</span>
+                                        </div>
+                                        <button
+                                            onClick={toggleGiftPackaging}
+                                            className={`w-10 h-5 rounded-full transition-all relative ${hasGiftPackaging ? 'bg-[#1A5276]' : 'bg-[#E2E8F0]'}`}
+                                        >
+                                            <div className={`absolute top-0.5 w-4 h-4 rounded-full bg-white transition-all ${hasGiftPackaging ? 'left-5.5' : 'left-0.5'}`} />
+                                        </button>
+                                    </div>
+                                    <p className="text-[10px] text-[#64748b] leading-relaxed">
+                                        Signature box, acid-free tissue, and a handwritten card. (+₦15,000)
+                                    </p>
+                                </div>
+
                                 <div className="flex flex-col gap-4 text-sm font-medium mb-8">
                                     <div className="flex justify-between items-center text-[#64748b]">
                                         <span>Subtotal</span>
                                         <span className="text-[#1C1C1E]">₦{subtotal.toLocaleString()}</span>
                                     </div>
+                                    {hasGiftPackaging && (
+                                        <div className="flex justify-between items-center text-[#D4AF37]">
+                                            <span>Gift Packaging</span>
+                                            <span>+₦15,000</span>
+                                        </div>
+                                    )}
                                     <div className="flex justify-between items-center text-[#64748b]">
                                         <span>Delivery</span>
                                         <span className="text-[#1A5276]">Calculated at next step</span>

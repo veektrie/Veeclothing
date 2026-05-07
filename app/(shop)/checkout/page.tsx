@@ -8,14 +8,15 @@ import Image from 'next/image';
 import toast from 'react-hot-toast';
 
 export default function CheckoutPage() {
-    const { items, clearCart } = useCartStore();
+    const { items, clearCart, hasGiftPackaging } = useCartStore();
     const [isMounted, setIsMounted] = useState(false);
     const [isProcessing, setIsProcessing] = useState(false);
     const [termsAccepted, setTermsAccepted] = useState(false);
     
     // Calculations
     const subtotal = items.reduce((total, item) => total + (item.price * item.quantity), 0);
-    const total = subtotal;
+    const giftPackagingPrice = hasGiftPackaging ? 15000 : 0;
+    const total = subtotal + giftPackagingPrice;
 
     // Form State
     const [formData, setFormData] = useState({
@@ -57,12 +58,14 @@ export default function CheckoutPage() {
                 phoneNumber: formData.phone,
                 address: `${formData.address}, ${formData.state}`,
                 city: formData.city,
+                giftPackaging: hasGiftPackaging,
                 items: items.map((item) => ({
                     _key: Math.random().toString(36).substring(7),
                     productName: item.name,
                     quantity: item.quantity,
                     size: item.size || null,
                     color: item.color || null,
+                    monogram: item.monogramText || null,
                     price: item.price,
                     productImage: item.image,
                 })),
@@ -246,7 +249,7 @@ export default function CheckoutPage() {
 
                             <div className="flex flex-col gap-6 mb-8 max-h-[35vh] overflow-y-auto pr-2 custom-scrollbar">
                                 {items.map((item) => (
-                                    <div key={`${item.id}-${item.size}-${item.color}`} className="flex gap-4">
+                                    <div key={`${item.id}-${item.size}-${item.color}-${item.monogramText}`} className="flex gap-4">
                                         <div className="relative w-16 h-20 rounded-xl overflow-hidden bg-[#F8FAFC] shrink-0 border border-black/[0.05]">
                                             <Image src={item.image} alt={item.name} fill className="object-cover" />
                                             <div className="absolute top-0 right-0 bg-[#1A5276] text-white text-[9px] font-bold w-4 h-4 flex items-center justify-center rounded-bl-lg">
@@ -258,6 +261,7 @@ export default function CheckoutPage() {
                                             <p className="text-[#64748b] text-[9px] uppercase tracking-widest font-bold mb-2">
                                                 {item.size && `Size: ${item.size} `}
                                                 {item.color && `| Color: ${item.color}`}
+                                                {item.monogramText && ` | ID: ${item.monogramText}`}
                                             </p>
                                             <p className="text-[#1A5276] text-[13px] font-bold">
                                                 ₦{(item.price * item.quantity).toLocaleString()}
@@ -272,6 +276,12 @@ export default function CheckoutPage() {
                                     <span>Subtotal</span>
                                     <span className="text-[#1C1C1E]">₦{subtotal.toLocaleString()}</span>
                                 </div>
+                                {hasGiftPackaging && (
+                                    <div className="flex justify-between items-center text-[#D4AF37]">
+                                        <span>Gift Packaging</span>
+                                        <span className="text-[#D4AF37]">₦15,000</span>
+                                    </div>
+                                )}
                                 <div className="flex justify-between items-center text-[#64748b]">
                                     <span>Delivery</span>
                                     <span className="text-[#1A5276]">Calculating...</span>

@@ -11,7 +11,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 // ─── Component ───────────────────────────────────────────────────────────────
 
 export default function CartDrawer() {
-    const { items, isOpen, setIsOpen, addItem, decreaseQuantity, removeItem } = useCartStore();
+    const { items, isOpen, setIsOpen, addItem, decreaseQuantity, removeItem, hasGiftPackaging, toggleGiftPackaging } = useCartStore();
     const { convert } = useCurrencyStore();
     const [isMounted, setIsMounted] = useState(false);
 
@@ -24,6 +24,8 @@ export default function CartDrawer() {
     if (!isMounted) return null;
 
     const subtotal = items.reduce((t, i) => t + i.price * i.quantity, 0);
+    const giftPackagingPrice = hasGiftPackaging ? 15000 : 0;
+    const total = subtotal + giftPackagingPrice;
     const itemCount = items.reduce((t, i) => t + i.quantity, 0);
 
     // ── Shared inner content ─────────────────────────────────────────────────
@@ -79,7 +81,7 @@ export default function CartDrawer() {
                     <div className="flex flex-col gap-3">
                         {items.map((item) => (
                             <div
-                                key={`${item.id}-${item.size}-${item.color}`}
+                                key={`${item.id}-${item.size}-${item.color}-${item.monogramText}`}
                                 className="bg-white rounded-2xl border border-black/[0.05] p-4 flex gap-4 shadow-sm"
                             >
                                 <div className="relative w-20 aspect-[4/5] rounded-xl overflow-hidden bg-[#F8FAFC] shrink-0">
@@ -91,7 +93,7 @@ export default function CartDrawer() {
                                             {item.name}
                                         </h4>
                                         <button
-                                            onClick={() => removeItem(item.id, item.size, item.color)}
+                                            onClick={() => removeItem(item.id, item.size, item.color, item.monogramText)}
                                             aria-label={`Remove ${item.name}`}
                                             className="text-[#94a3b8] hover:text-red-400 transition-colors flex-shrink-0"
                                         >
@@ -109,13 +111,18 @@ export default function CartDrawer() {
                                                 {item.color}
                                             </span>
                                         )}
+                                        {item.monogramText && (
+                                            <span className="text-[9px] tracking-[0.12em] text-[#D4AF37] uppercase font-bold bg-[#D4AF37]/10 px-2 py-0.5 rounded-full border border-[#D4AF37]/20">
+                                                ID: {item.monogramText}
+                                            </span>
+                                        )}
                                     </div>
                                     <div className="mt-auto flex items-center justify-between">
                                         <p style={{ fontFamily: 'Inter, sans-serif' }} className="text-[13px] font-bold text-[#1A5276]">
                                             {convert(item.price * item.quantity).symbol}{convert(item.price * item.quantity).value.toLocaleString()}
                                         </p>
                                         <div className="flex items-center gap-2 bg-[#F8FAFC] rounded-full px-2 py-1 border border-black/[0.05]">
-                                            <button onClick={() => decreaseQuantity(item.id, item.size, item.color)} aria-label="Decrease" className="w-5 h-5 rounded-full flex items-center justify-center text-[#64748b] hover:text-[#1A5276] hover:bg-white transition-all">
+                                            <button onClick={() => decreaseQuantity(item.id, item.size, item.color, item.monogramText)} aria-label="Decrease" className="w-5 h-5 rounded-full flex items-center justify-center text-[#64748b] hover:text-[#1A5276] hover:bg-white transition-all">
                                                 <Minus className="w-2.5 h-2.5" />
                                             </button>
                                             <span className="text-[#1C1C1E] text-[11px] font-bold w-4 text-center tabular-nums">{item.quantity}</span>
@@ -134,10 +141,39 @@ export default function CartDrawer() {
             {/* Footer */}
             {items.length > 0 && (
                 <div className="p-5 border-t border-black/[0.05] bg-white flex-shrink-0">
-                    <div className="flex justify-between items-center mb-4">
-                        <span className="text-[#64748b] text-[12px] font-medium">Subtotal</span>
-                        <span style={{ fontFamily: 'Inter, sans-serif' }} className="text-lg font-bold text-[#1A5276]">
-                            {convert(subtotal).symbol}{convert(subtotal).value.toLocaleString()}
+                    {/* Gift Packaging Toggle */}
+                    <div className="mb-6 p-4 rounded-2xl border border-[#D4AF37]/20 bg-[#D4AF37]/5 flex items-center justify-between">
+                        <div className="flex items-center gap-3">
+                            <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center border border-[#D4AF37]/30">
+                                <span className="text-lg">🎁</span>
+                            </div>
+                            <div>
+                                <p className="text-[11px] font-bold text-[#1C1C1E] uppercase tracking-wider">Luxury Gift Packaging</p>
+                                <p className="text-[10px] text-[#64748b]">+ {convert(15000).symbol}{convert(15000).value.toLocaleString()}</p>
+                            </div>
+                        </div>
+                        <button
+                            onClick={toggleGiftPackaging}
+                            className={`w-10 h-5 rounded-full transition-all relative ${hasGiftPackaging ? 'bg-[#1A5276]' : 'bg-[#E2E8F0]'}`}
+                        >
+                            <div className={`absolute top-0.5 w-4 h-4 rounded-full bg-white transition-all ${hasGiftPackaging ? 'left-5.5' : 'left-0.5'}`} />
+                        </button>
+                    </div>
+
+                    <div className="flex justify-between items-center mb-1 text-[12px] font-medium text-[#64748b]">
+                        <span>Subtotal</span>
+                        <span>{convert(subtotal).symbol}{convert(subtotal).value.toLocaleString()}</span>
+                    </div>
+                    {hasGiftPackaging && (
+                        <div className="flex justify-between items-center mb-4 text-[12px] font-medium text-[#D4AF37]">
+                            <span>Gift Packaging</span>
+                            <span>+ {convert(15000).symbol}{convert(15000).value.toLocaleString()}</span>
+                        </div>
+                    )}
+                    <div className="flex justify-between items-center mb-5 border-t border-black/[0.03] pt-4">
+                        <span className="text-[#1C1C1E] text-sm font-bold uppercase tracking-widest">Total</span>
+                        <span style={{ fontFamily: 'Inter, sans-serif' }} className="text-xl font-black text-[#1A5276]">
+                            {convert(total).symbol}{convert(total).value.toLocaleString()}
                         </span>
                     </div>
                     <div className="flex flex-col gap-2.5">
