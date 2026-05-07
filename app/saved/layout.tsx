@@ -4,6 +4,7 @@ export const metadata: Metadata = {
   title: 'Saved Pieces | Vee Clothing Company',
   description: 'Your saved collection — pieces held for your consideration.',
   alternates: { canonical: '/saved' },
+  robots: { index: false },
 };
 
 export default function SavedLayout({ children }: { children: React.ReactNode }) {

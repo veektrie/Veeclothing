@@ -6,6 +6,7 @@ import BlogNav from "@/components/BlogNav";
 import { client } from "@/lib/sanity";
 import { groq } from "next-sanity";
 import { PortableText } from "@portabletext/react";
+import { notFound } from "next/navigation";
 
 const singleArticleQuery = groq`*[_type == "blog" && slug.current == $slug][0] {
   _id,
@@ -45,16 +46,7 @@ export default async function JournalArticlePage({ params }: { params: Promise<{
   const article = await client.fetch(singleArticleQuery, { slug });
 
   if (!article) {
-    return (
-      <div className="min-h-screen bg-[#F8FAFC] flex flex-col items-center justify-center gap-4">
-        <h1 className="font-inter text-3xl font-extrabold text-[#1C1C1E]">Article not found</h1>
-        <Link href="/blog">
-          <button className="bg-navy text-white border-none px-8 py-3 rounded-full font-inter font-bold text-sm hover:bg-navy/90 transition-all">
-          Return to Blog
-          </button>
-        </Link>
-      </div>
-    );
+    notFound();
   }
 
   const formattedDate = article.publishedAt

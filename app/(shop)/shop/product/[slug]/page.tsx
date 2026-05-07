@@ -1,6 +1,7 @@
 import { client } from "@/lib/sanity";
 import { groq } from "next-sanity";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import ProductClient from "./ProductClient";
 import { Metadata } from 'next';
 
@@ -73,14 +74,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   );
 
   if (!product) {
-    return (
-      <div className="min-h-screen bg-[#F8FAFC] flex flex-col items-center justify-center">
-        <h1 className="font-serif text-4xl mb-4 text-[#1C1C1E]">Product not found</h1>
-        <Link href="/shop" className="text-[#1A5276] border-b border-[#1A5276] pb-1 uppercase text-[10px] tracking-widest font-bold">
-          Return to Archive
-        </Link>
-      </div>
-    );
+    notFound();
   }
 
   const relatedProducts = await client.fetch(

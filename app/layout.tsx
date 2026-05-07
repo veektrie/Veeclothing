@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     "corporate branding",
   ],
   alternates: {
-    canonical: "/",
+    canonical: "https://www.veeclothingcompany.com",
   },
   openGraph: {
     title: "Vee Clothing Company | Bespoke Tailoring & Corporate Uniforms Lagos",
