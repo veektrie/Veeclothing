@@ -125,6 +125,26 @@ export default function IndividualServicesPage() {
         </p>
       </div>
 
+      {/* Core Thesis & Architecture */}
+      <section style={{ maxWidth: 800, margin: '0 auto', padding: '100px 32px 20px' }}>
+        <h2 style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', fontWeight: 800, letterSpacing: '-0.03em', color: '#1C1C1E', marginBottom: 24, lineHeight: 1.1 }}>
+          Personal Infrastructure.<br />
+          <span style={{ color: '#1A5276' }}>Engineered for the Individual.</span>
+        </h2>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 20, fontSize: 16, color: '#4B5563', lineHeight: 1.8 }}>
+          <p>
+            A suit is not merely a garment. It is a calculated advantage. For the modern executive, clothing functions as personal infrastructure. It serves as the definitive boundary between the individual and the high-stakes environments they navigate. When a leader enters a boardroom, the cut of their lapel, the structure of their shoulder, and the break of their trouser communicate absolute competence before a single word is exchanged.
+          </p>
+          <p>
+            The Private Commission by Vee Clothing Company is designed for individuals who understand the psychology of presence. We do not manufacture clothes for occasions. We engineer tools for commanding authority. By treating the creation of a suit as the engineering of a high-performance system, we remove friction from professional interactions and equip our clients with immediate visual leverage.
+          </p>
+          <p>
+            <strong>The Architecture of the Silhouette</strong><br />
+            Tailoring is executed as a precise structural science. During our measurement protocol, we collect vital anatomical data points — calculating shoulder pitch, spinal curvature, and natural movement patterns. We draft a unique mathematical pattern block for every individual client, constructing our jackets with a hand-stitched floating canvas that breathes, moves, and progressively moulds to the client over time.
+          </p>
+        </div>
+      </section>
+
       {/* Services */}
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '80px 32px' }}>
         {services.map((service, sIdx) => (
@@ -247,6 +267,47 @@ export default function IndividualServicesPage() {
           </div>
         ))}
       </div>
+
+      {/* FAQ / AEO Section */}
+      <section itemScope itemType="https://schema.org/FAQPage" style={{ maxWidth: 800, margin: '0 auto', padding: '20px 32px 120px' }}>
+        <hr style={{ border: 'none', borderTop: '1px solid rgba(0,0,0,0.08)', marginBottom: 60 }} />
+        <h2 style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', fontWeight: 800, letterSpacing: '-0.03em', color: '#1C1C1E', marginBottom: 40 }}>
+          Common Questions
+        </h2>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+          {faqs.map((faq, idx) => (
+            <div key={idx} itemScope itemProp="mainEntity" itemType="https://schema.org/Question" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: 24 }}>
+              <h3 itemProp="name" style={{ fontSize: 18, fontWeight: 700, color: '#1C1C1E', marginBottom: 12 }}>
+                {faq.q}
+              </h3>
+              <div itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+                <p itemProp="text" style={{ fontSize: 15, color: '#4B5563', lineHeight: 1.7 }}>
+                  {faq.a}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
+
+const faqs = [
+  {
+    q: 'What is The Private Commission?',
+    a: 'The Private Commission is the exclusive individual bespoke tailoring service offered by Vee Clothing Company. It is a rigorous engineering process where a unique pattern is drafted from scratch based on precise anatomical data, resulting in a fully custom, structurally flawless garment built for the specific operational needs of the client.',
+  },
+  {
+    q: 'How long does a bespoke commission take?',
+    a: 'A standard Private Commission requires four to six weeks from the initial Strategic Dialogue to The Final Integration. This timeline is strictly maintained to allow for meticulous fabric sourcing, hand-stitched canvas construction, and the necessary fitting protocols required to ensure perfect structural alignment.',
+  },
+  {
+    q: 'Where are the fabrics sourced?',
+    a: 'We source our textiles directly from premium global mills. Our curation focuses entirely on high-performance materials including Super 150s wools, resilient linens, and breathable silks. These fabrics are specifically chosen for their ability to maintain shape, manage temperature, and provide superior comfort in both the dynamic Lagos climate and international travel environments.',
+  },
+  {
+    q: 'Do you offer private office fittings?',
+    a: 'Yes. We understand the severe time constraints placed upon our clients. Our specialists can execute the complete measurement protocol and all subsequent fitting sessions in the absolute privacy of the client\'s office or residence in Lagos, ensuring the highest level of convenience and total discretion.',
+  },
+];

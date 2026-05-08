@@ -1324,22 +1324,38 @@ html.dark .footer-copy {
 
 /* ===== SOCIAL ICONS ===== */
 .social-icon-luxury {
-  width: 38px;
-  height: 38px;
-  border: 1px solid rgba(212, 175, 55, 0.3);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(26, 82, 118, 0.2);
+  background: rgba(26, 82, 118, 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(26, 82, 118, 0.7);
   font-size: 15px;
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
 .social-icon-luxury:hover {
-  border-color: var(--gold);
-  color: var(--gold);
-  background: rgba(212, 175, 55, 0.08);
+  background: #1A5276;
+  border-color: #1A5276;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(26, 82, 118, 0.25);
+}
+
+html.dark .social-icon-luxury {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.55);
+}
+
+html.dark .social-icon-luxury:hover {
+  background: #1A5276;
+  border-color: #1A5276;
+  color: #ffffff;
 }
 
 /* ===== SCROLL REVEAL ===== */
@@ -1419,3 +1435,55 @@ a {
 .footer__copyrights-link {
   @apply flex-1 flex sm:justify-end justify-center max-sm:mt-4 gap-10;
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   ABOUT PAGE — DARK MODE
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* Page background handled by the global html.dark body rule */
+
+/* Headings */
+html.dark [id$="-heading"],
+html.dark [id="faq-heading"] {
+  color: var(--text-primary, #F1F1F1) !important;
+}
+
+/* Body text paragraphs */
+html.dark main[itemtype*="Organization"] p {
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+
+/* H1 */
+html.dark main[itemtype*="Organization"] h1 {
+  color: var(--text-primary, #F1F1F1) !important;
+}
+
+/* H3 service names (The Private Commission etc.) */
+html.dark main[itemtype*="Organization"] h3 {
+  color: #93c5fd !important;
+}
+
+/* FAQ question headings */
+html.dark [itemtype*="Question"] h3 {
+  color: var(--text-primary, #F1F1F1) !important;
+}
+
+/* FAQ answer text */
+html.dark [itemtype*="Answer"] p {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Horizontal rules */
+html.dark main[itemtype*="Organization"] hr {
+  border-top-color: rgba(255, 255, 255, 0.07) !important;
+}
+
+/* FAQ dividers */
+html.dark [itemtype*="Question"] {
+  border-bottom-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* Page label and closing tagline */
+html.dark main[itemtype*="Organization"] > p {
+  color: rgba(96, 165, 250, 0.5) !important;
+}

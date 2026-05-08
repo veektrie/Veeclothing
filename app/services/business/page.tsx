@@ -125,6 +125,31 @@ export default function BusinessServicesPage() {
         </p>
       </div>
 
+      {/* Core Thesis & Strategy */}
+      <section style={{ maxWidth: 800, margin: '0 auto', padding: '100px 32px 20px' }}>
+        <h2 style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', fontWeight: 800, letterSpacing: '-0.03em', color: '#1C1C1E', marginBottom: 24, lineHeight: 1.1 }}>
+          Visual Identity as an Asset.<br />
+          <span style={{ color: '#1A5276' }}>The Corporate Atelier.</span>
+        </h2>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 20, fontSize: 16, color: '#4B5563', lineHeight: 1.8 }}>
+          <p>
+            A company's workforce is its most visible and frequent point of contact. It is an active brand asset. The Corporate Atelier transitions elite organizations from relying on standard uniforms to deploying cohesive, high-end corporate wardrobes. We ensure that your team presents a visual standard that matches the ambition of your enterprise.
+          </p>
+          <p>
+            <strong>Institutional ROI</strong><br />
+            Leading organizations invest in the Atelier because the returns are immediate and structural. A unified corporate wardrobe eliminates decision fatigue for staff, standardizes excellence across all departments, and instills deep confidence in the workforce. Most importantly, it projects unquestionable authority to clients and stakeholders before a single word is spoken in a meeting or on the showroom floor.
+          </p>
+          <p>
+            <strong>Systemic Scalability</strong><br />
+            Drawing from our founder's background in tech infrastructure, we apply science-based scaling to corporate wear. Whether you are outfitting a boardroom of 10 executives or deploying a wardrobe to a frontline staff of 500, the methodology remains the same. We guarantee that structural integrity, material quality, and strict brand alignment remain perfectly consistent across the entire workforce.
+          </p>
+          <p>
+            <strong>The Procurement Deployment Protocol</strong><br />
+            Our deployment is executed in three rigorous phases. <em>Phase 1: Brand Architecture Alignment</em> involves consulting with stakeholders to align garments with corporate colors, culture, and environmental demands. <em>Phase 2: Master Prototyping</em> focuses on creating the initial physical samples for board-level approval and testing. Finally, <em>Phase 3: Fleet Deployment and Maintenance</em> scales the production, fits the workforce, and establishes ongoing procurement rails to seamlessly accommodate new hires.
+          </p>
+        </div>
+      </section>
+
       {/* Services */}
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '80px 32px' }}>
         {services.map((service, sIdx) => (
@@ -247,6 +272,47 @@ export default function BusinessServicesPage() {
           </div>
         ))}
       </div>
+
+      {/* FAQ / AEO Section */}
+      <section itemScope itemType="https://schema.org/FAQPage" style={{ maxWidth: 800, margin: '0 auto', padding: '20px 32px 120px' }}>
+        <hr style={{ border: 'none', borderTop: '1px solid rgba(0,0,0,0.08)', marginBottom: 60 }} />
+        <h2 style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', fontWeight: 800, letterSpacing: '-0.03em', color: '#1C1C1E', marginBottom: 40 }}>
+          Common Questions
+        </h2>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
+          {faqs.map((faq, idx) => (
+            <div key={idx} itemScope itemProp="mainEntity" itemType="https://schema.org/Question" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: 24 }}>
+              <h3 itemProp="name" style={{ fontSize: 18, fontWeight: 700, color: '#1C1C1E', marginBottom: 12 }}>
+                {faq.q}
+              </h3>
+              <div itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+                <p itemProp="text" style={{ fontSize: 15, color: '#4B5563', lineHeight: 1.7 }}>
+                  {faq.a}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
+
+const faqs = [
+  {
+    q: 'What is The Corporate Atelier?',
+    a: 'The Corporate Atelier is the B2B procurement division of Vee Clothing Company. It specializes in designing, prototyping, and deploying premium corporate wardrobes and executive wear for elite organizations, shifting the paradigm from standard uniforms to structural brand assets.',
+  },
+  {
+    q: 'How does Vee Clothing Company handle large-scale procurement?',
+    a: 'We apply science-based scaling to all procurement orders. After establishing the master prototypes and securing board approval, we scale production using exact technical specifications. We manage the logistics of fitting the workforce and establish ongoing procurement rails to easily outfit new hires as your company scales.',
+  },
+  {
+    q: 'Can the Atelier match exact corporate brand guidelines?',
+    a: 'Yes. During the Brand Architecture Alignment phase, we work directly with your corporate guidelines. We utilize Pantone-referenced dyeing and source specific textiles to ensure your exact corporate colors and cultural aesthetic are perfectly translated into the final garments.',
+  },
+  {
+    q: 'What is the minimum deployment size for a corporate commission?',
+    a: 'We manage deployments ranging from a specialized boardroom group of 10 executives to an entire frontline workforce of 500 or more. Our systems are built to ensure total consistency regardless of the scale of the deployment.',
+  },
+];
