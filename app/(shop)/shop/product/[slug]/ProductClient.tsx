@@ -91,7 +91,7 @@ export default function ProductClient({ product, relatedProducts }: { product: a
     const commissionUrl = buildCommissionUrl(product.name, product.slug ?? '');
 
     return (
-        <main className="bg-[#F8FAFC] min-h-screen relative overflow-x-hidden pt-[clamp(100px,12vh,140px)]">
+        <main className="bg-[#F8FAFC] dark:bg-charcoal min-h-screen relative overflow-x-hidden pt-[clamp(100px,12vh,140px)]">
 
             {/* Background Atmosphere */}
             <div
@@ -188,7 +188,7 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                         </h1>
 
                         <div className="flex justify-between items-center mb-8">
-                            <p style={{ fontFamily: 'Inter, sans-serif' }} className="text-3xl text-[#1A5276] font-bold mb-0">
+                            <p suppressHydrationWarning style={{ fontFamily: 'Inter, sans-serif' }} className="text-3xl text-[#1A5276] font-bold mb-0">
                                 {convert(product.price).symbol}{(convert(product.price).value).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                             </p>
                             
@@ -505,7 +505,7 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                                                 </p>
                                             </div>
                                             <div className="mt-auto flex items-center justify-between pt-2.5">
-                                                <span style={{ fontFamily: 'Inter, sans-serif' }} className="text-[1.05rem] text-[#1A5276] font-bold">
+                                                <span suppressHydrationWarning style={{ fontFamily: 'Inter, sans-serif' }} className="text-[1.05rem] text-[#1A5276] font-bold">
                                                     {convert(item.price).symbol}{(convert(item.price).value).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                                 </span>
                                                 <div className="w-8 h-8 rounded-full border border-[#1A5276]/30 flex items-center justify-center text-[#1A5276] bg-[#F8FAFC] transition-all duration-300 group-hover:bg-[#1A5276] group-hover:text-white">

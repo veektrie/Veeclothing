@@ -17,6 +17,148 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ═══════════════════════════════════════════════════════════════════
+   DARK MODE — Comprehensive site-wide overrides
+   Variables are set by ThemeProvider.tsx on :root
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── 1. Page & layout backgrounds ─────────────────────────────────── */
+html.dark body,
+html.dark main,
+html.dark #__next {
+  background-color: var(--page-bg, #111113) !important;
+  color: var(--text-primary, #F1F1F1) !important;
+}
+
+html.dark section {
+  background-color: var(--page-bg, #111113) !important;
+  color: var(--text-primary, #F1F1F1);
+}
+
+/* ── 2. ALL headings and paragraphs ────────────────────────────────── */
+html.dark h1, html.dark h2, html.dark h3,
+html.dark h4, html.dark h5, html.dark h6 {
+  color: var(--text-primary, #F1F1F1);
+}
+
+html.dark p {
+  color: var(--text-secondary, #9ca3af);
+}
+
+html.dark label {
+  color: var(--text-secondary, #9ca3af);
+}
+
+/* ── 3. Tailwind class overrides ───────────────────────────────────── */
+@layer utilities {
+  /* Backgrounds */
+  html.dark .bg-white           { background-color: var(--card-bg, #1E1E20) !important; }
+  html.dark .bg-\[\#FFFFFF\]    { background-color: var(--card-bg, #1E1E20) !important; }
+  html.dark .bg-\[\#F8FAFC\]    { background-color: var(--secondary-bg, #1A1A1C) !important; }
+  html.dark .bg-\[\#FDFBF7\]    { background-color: var(--secondary-bg, #1A1A1C) !important; }
+  html.dark .bg-\[\#FAF8F5\]    { background-color: var(--secondary-bg, #1A1A1C) !important; }
+  html.dark .bg-\[\#FDFCF9\]    { background-color: var(--secondary-bg, #1A1A1C) !important; }
+  html.dark .bg-\[\#E2E8F0\]    { background-color: #222224 !important; }
+
+  /* Text colors */
+  html.dark .text-\[\#1C1C1E\]  { color: var(--text-primary, #F1F1F1) !important; }
+  html.dark .text-black          { color: var(--text-primary, #F1F1F1) !important; }
+  html.dark .text-\[\#64748b\]  { color: var(--text-secondary, #9ca3af) !important; }
+  html.dark .text-\[\#94a3b8\]  { color: var(--text-muted, #6b7280) !important; }
+  html.dark .text-\[\#6B6B6B\]  { color: var(--text-secondary, #9ca3af) !important; }
+
+  /* Borders */
+  html.dark .border-black\/\[0\.06\],
+  html.dark .border-black\/\[0\.05\],
+  html.dark .border-black\/\[0\.04\],
+  html.dark .border-black\/\[0\.03\]  { border-color: rgba(255,255,255,0.08) !important; }
+  html.dark .border-black\/10         { border-color: rgba(255,255,255,0.10) !important; }
+  html.dark .border-black\/5          { border-color: rgba(255,255,255,0.06) !important; }
+
+  /* Inputs */
+  html.dark input:not([type="checkbox"]):not([type="radio"]),
+  html.dark textarea,
+  html.dark select {
+    background-color: var(--input-bg, #2A2A2C) !important;
+    color: var(--text-primary, #F1F1F1) !important;
+    border-color: rgba(255,255,255,0.12) !important;
+  }
+  html.dark input::placeholder,
+  html.dark textarea::placeholder {
+    color: var(--text-muted, #6b7280) !important;
+  }
+
+  /* Placeholders for Tailwind placeholder: classes */
+  html.dark .placeholder\:\text-\[\#94a3b8\]::placeholder { color: var(--text-muted, #6b7280) !important; }
+}
+
+/* ── 4. Inline-style overrides (React JSX inline styles) ───────────── */
+/* Note: attribute selectors are used here as a best-effort fallback.
+   ThemeProvider also sets CSS variables that components should use.   */
+html.dark [style*="color: #1C1C1E"],
+html.dark [style*="color:#1C1C1E"] {
+  color: var(--text-primary, #F1F1F1) !important;
+}
+html.dark [style*="color: #64748b"],
+html.dark [style*="color:#64748b"] {
+  color: var(--text-secondary, #9ca3af) !important;
+}
+html.dark [style*="color: #94a3b8"],
+html.dark [style*="color:#94a3b8"] {
+  color: var(--text-muted, #6b7280) !important;
+}
+html.dark [style*="background: #FFFFFF"],
+html.dark [style*="background:#FFFFFF"],
+html.dark [style*="background-color: #FFFFFF"],
+html.dark [style*="background-color:#FFFFFF"] {
+  background: var(--card-bg, #1E1E20) !important;
+  background-color: var(--card-bg, #1E1E20) !important;
+}
+html.dark [style*="background: #F8FAFC"],
+html.dark [style*="background:#F8FAFC"],
+html.dark [style*="background-color: #F8FAFC"],
+html.dark [style*="background: #FDFBF7"] {
+  background: var(--secondary-bg, #1A1A1C) !important;
+  background-color: var(--secondary-bg, #1A1A1C) !important;
+}
+
+/* ── 5. Legacy CSS class blocks ────────────────────────────────────── */
+html.dark .lookbook-section,
+html.dark .process-section,
+html.dark .journal-section,
+html.dark .testimonials-section,
+html.dark .atelier-section,
+html.dark .consultation-section,
+html.dark .atelier-section::before { background: transparent !important; }
+
+html.dark .atelier-card,
+html.dark .testimonial-card {
+  background: var(--card-bg, #1E1E20) !important;
+  border-color: rgba(255,255,255,0.08) !important;
+}
+html.dark .atelier-card:hover  { background: rgba(255,255,255,0.05) !important; }
+
+html.dark .footer-luxury {
+  background: var(--secondary-bg, #1A1A1C) !important;
+  color: var(--text-primary, #F1F1F1) !important;
+  border-top-color: rgba(255,255,255,0.06) !important;
+}
+html.dark .footer-link          { color: var(--text-secondary, #9ca3af) !important; }
+html.dark .footer-link:hover    { color: #93c5fd !important; }
+html.dark .footer-bottom        { color: rgba(255,255,255,0.35) !important; border-top-color: rgba(255,255,255,0.04) !important; }
+html.dark .footer-heading       { color: #93c5fd !important; }
+
+html.dark .process-step         { border-top-color: rgba(255,255,255,0.1) !important; }
+html.dark .journal-card         { border-bottom-color: rgba(255,255,255,0.08) !important; }
+
+/* ── 6. Skeletons in dark mode ─────────────────────────────────────── */
+html.dark .skeleton,
+html.dark .animate-pulse {
+  background: linear-gradient(90deg, #2a2a2c 25%, #333335 37%, #2a2a2c 63%) !important;
+  background-size: 800px 100% !important;
+}
+
+
 /* ── #12: Premium Shimmer Skeleton ─────────────────────────────────────────── */
 @keyframes skeleton-shimmer {
   0%   { background-position: -400px 0; }
@@ -61,7 +203,51 @@
   --font-title: "Kento";
   --font-subheading: "Homenaje";
   --font-body: "Metrophobic";
+
+  /* Semantic design tokens for theming */
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F8FAFC;
+  --bg-tertiary: #F1F5F9;
+  --bg-card: #FFFFFF;
+  --bg-overlay: rgba(0, 0, 0, 0.04);
+
+  --text-primary: #1C1C1E;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  --text-accent: #1A5276;
+
+  --border-color: rgba(0, 0, 0, 0.08);
+  --border-subtle: rgba(0, 0, 0, 0.04);
+
+  --shadow-color: rgba(26, 82, 118, 0.12);
+  --input-bg: #FFFFFF;
 }
+
+/* ===== DARK MODE OVERRIDES ===== */
+html.dark {
+  --cream: #111113;
+  --charcoal: #F1F1F1;
+  --stone: #9ca3af;
+
+  --bg-primary: #111113;
+  --bg-secondary: #1A1A1C;
+  --bg-tertiary: #222224;
+  --bg-card: #1E1E20;
+  --bg-overlay: rgba(255, 255, 255, 0.04);
+
+  --text-primary: #F1F1F1;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  --text-accent: #60a5fa;
+
+  --border-color: rgba(255, 255, 255, 0.08);
+  --border-subtle: rgba(255, 255, 255, 0.04);
+
+  --shadow-color: rgba(0, 0, 0, 0.4);
+  --input-bg: #2A2A2C;
+}
+
+
 
 * {
   margin: 0;
@@ -80,6 +266,7 @@ body {
   color: var(--charcoal);
   overflow-x: hidden;
   width: 100%;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* ===== TYPOGRAPHY ===== */

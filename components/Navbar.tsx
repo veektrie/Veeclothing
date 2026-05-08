@@ -4,9 +4,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import gsap from 'gsap';
-import { Search, Menu, X, Heart, ChevronDown } from 'lucide-react';
+import { Search, Menu, X, Heart, ChevronDown, Sun, Moon } from 'lucide-react';
 import CartBadge from './CartBadge';
 import { useCurrencyStore } from '@/store/useCurrencyStore';
+import { useThemeStore } from '@/store/useThemeStore';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -20,6 +21,7 @@ const Navbar = () => {
   const currencyRef = useRef<HTMLDivElement>(null);
 
   const { currency, setCurrency, fetchRates } = useCurrencyStore();
+  const { theme, setTheme } = useThemeStore();
 
   const currencies = [
     { code: 'NGN', symbol: '₦', label: 'NGN' },
@@ -159,13 +161,13 @@ const Navbar = () => {
         <div
           className="flex items-center justify-between pointer-events-auto w-full max-w-[1200px]"
           style={{
-            background: 'rgba(25, 25, 25, 0.6)',
+            background: theme === 'dark' ? 'rgba(20, 20, 22, 0.85)' : 'rgba(18, 18, 20, 0.8)',
             backdropFilter: 'blur(20px)',
             WebkitBackdropFilter: 'blur(20px)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
+            border: theme === 'dark' ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(255,255,255,0.15)',
             borderRadius: '999px',
             padding: '12px clamp(1rem, 5vw, 2rem)',
-            boxShadow: scrolled ? '0 10px 30px -10px rgba(0,0,0,0.5)' : 'none',
+            boxShadow: scrolled ? '0 10px 30px -10px rgba(0,0,0,0.6)' : '0 4px 24px rgba(0,0,0,0.15)',
             transition: 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
           }}
         >
@@ -175,20 +177,25 @@ const Navbar = () => {
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-[13px] font-medium text-white/90 hover:text-white transition-colors"
+                className="text-[13px] font-medium text-white/80 hover:text-white transition-colors"
               >
                 {link.label}
               </Link>
             ))}
           </nav>
 
-          {/* Mobile Menu Toggle (Left on Mobile) */}
-          <button
-            className="lg:hidden p-2 text-white/90 flex-1 flex justify-start"
-            onClick={() => setMenuOpen(true)}
-          >
-            <Menu size={20} />
-          </button>
+          {/* Mobile Menu Toggle & Saved (Left on Mobile) */}
+          <div className="lg:hidden flex-1 flex items-center gap-1">
+            <button
+              className="p-2 -ml-2 text-white/80 hover:text-white transition-colors"
+              onClick={() => setMenuOpen(true)}
+            >
+              <Menu size={20} />
+            </button>
+            <Link href="/saved" aria-label="Saved pieces" className="text-white/80 hover:text-white transition-colors p-2">
+              <Heart size={20} />
+            </Link>
+          </div>
 
           {/* Center: Logo */}
           <div className="flex justify-center flex-1">
@@ -208,32 +215,39 @@ const Navbar = () => {
           <div className="flex items-center justify-end gap-3 sm:gap-5 lg:gap-7 flex-1">
             <button
               onClick={() => setSearchOpen(!searchOpen)}
-              className="text-white/90 hover:text-white transition-colors"
+              className="text-white/80 hover:text-white transition-colors"
             >
               <Search size={20} />
             </button>
 
-            <Link href="/saved" aria-label="Saved pieces" className="text-white/90 hover:text-white transition-colors">
+            <Link href="/saved" aria-label="Saved pieces" className="hidden lg:block text-white/80 hover:text-white transition-colors">
               <Heart size={20} />
             </Link>
 
-
-            {/* <Link href="/cart" className="text-white/90 hover:text-white transition-colors relative">
-              <ShoppingBag size={20} />
-            </Link> */}
             <CartBadge />
+
+            {/* Theme Toggle — Desktop */}
+            <button
+              suppressHydrationWarning
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              className="hidden md:flex items-center justify-center text-white/80 hover:text-white transition-colors"
+              aria-label="Toggle Theme"
+            >
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
 
             {/* Currency Picker — Desktop */}
             <div ref={currencyRef} className="hidden md:flex items-center gap-3 border-l border-white/20 pl-6 ml-2 relative">
               <button
+                suppressHydrationWarning
                 onClick={() => setCurrencyOpen(o => !o)}
-                className="flex items-center gap-1.5 text-[11px] font-bold text-white/80 hover:text-white tracking-widest uppercase transition-colors duration-200 group"
+                className="flex items-center gap-1.5 text-[11px] font-bold text-white/70 hover:text-white tracking-widest uppercase transition-colors duration-200 group"
               >
                 <span>{activeCurrency.symbol}</span>
                 <span>{activeCurrency.label}</span>
                 <ChevronDown
                   size={11}
-                  className={`text-white/50 transition-transform duration-300 ${currencyOpen ? 'rotate-180' : ''}`}
+                  className={`text-white/40 transition-transform duration-300 ${currencyOpen ? 'rotate-180' : ''}`}
                 />
               </button>
 
@@ -242,13 +256,13 @@ const Navbar = () => {
                 <div
                   className="absolute top-full right-0 mt-4 z-50 overflow-hidden"
                   style={{
-                    background: 'rgba(18, 18, 18, 0.92)',
+                    background: 'rgba(14, 14, 16, 0.96)',
                     backdropFilter: 'blur(24px)',
                     WebkitBackdropFilter: 'blur(24px)',
-                    border: '1px solid rgba(255,255,255,0.08)',
+                    border: '1px solid rgba(255,255,255,0.1)',
                     borderRadius: '14px',
-                    minWidth: '120px',
-                    boxShadow: '0 16px 48px rgba(0,0,0,0.4)',
+                    minWidth: '130px',
+                    boxShadow: '0 16px 48px rgba(0,0,0,0.5)',
                   }}
                 >
                   {currencies.map((c, i) => (
@@ -261,7 +275,7 @@ const Navbar = () => {
                             ? 'text-white bg-white/10'
                             : 'text-white/50 hover:text-white hover:bg-white/5'
                         }
-                        ${i !== currencies.length - 1 ? 'border-b border-white/5' : ''}
+                        ${i !== currencies.length - 1 ? 'border-b border-white/[0.06]' : ''}
                       `}
                     >
                       <span className="w-4 text-center opacity-70">{c.symbol}</span>
@@ -273,9 +287,6 @@ const Navbar = () => {
                   ))}
                 </div>
               )}
-
-              <span className="text-white/20">|</span>
-              <span className="text-[11px] font-bold text-white/50 tracking-widest uppercase">EN</span>
             </div>
           </div>
         </div>
@@ -314,10 +325,25 @@ const Navbar = () => {
           >
             Account
           </Link>
+          
+          {/* Theme Toggle — Mobile */}
+          <button
+            suppressHydrationWarning
+            onClick={() => { setTheme(theme === 'dark' ? 'light' : 'dark'); setMenuOpen(false); }}
+            className="flex items-center gap-3 text-xl font-serif text-white/60 hover:text-white transition-all mt-4"
+          >
+            {theme === 'dark' ? (
+              <><Sun size={24} /> Light Mode</>
+            ) : (
+              <><Moon size={24} /> Dark Mode</>
+            )}
+          </button>
+
           {/* Currency Picker — Mobile */}
           <div className="flex flex-wrap gap-2 mt-8 justify-center">
             {currencies.map(c => (
               <button
+                suppressHydrationWarning
                 key={c.code}
                 onClick={() => { setCurrency(c.code as any); setMenuOpen(false); }}
                 className={`px-4 py-2 rounded-full text-[11px] font-bold tracking-widest uppercase transition-all duration-200

@@ -188,7 +188,7 @@ const ShopPreview = ({ products }: { products?: any[] }) => {
                       </div>
 
                       <div className="mt-auto flex items-center justify-between pt-2.5">
-                        <span style={{ fontFamily: 'Inter, sans-serif' }} className="text-[1.15rem] text-[#1A5276] font-bold">
+                        <span suppressHydrationWarning style={{ fontFamily: 'Inter, sans-serif' }} className="text-[1.15rem] text-[#1A5276] font-bold">
                           {item.price ? `${convert(item.price).symbol}${convert(item.price).value.toLocaleString()}` : 'Price on request'}
                         </span>
 

@@ -85,12 +85,27 @@ export const viewport = {
 };
 
 
+import ThemeProvider from "@/components/ThemeProvider";
+
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning className={inter.variable}>
       <head>
+        {/* Anti-FOUC: Apply theme class before first paint */}
+        <script dangerouslySetInnerHTML={{
+          __html: `
+            try {
+              var stored = JSON.parse(localStorage.getItem('theme-storage') || '{}');
+              var theme = stored.state && stored.state.theme;
+              if (!theme || theme === 'system') {
+                theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+              }
+              document.documentElement.classList.add(theme);
+            } catch(e) {}
+          `
+        }} />
         {/* — Organization Schema — */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -171,9 +186,10 @@ export default function RootLayout({
           `}
         </Script>
       </head>
-      <body className="relative">
-        <GSAPInitializer />
-        <SmoothScroll>
+      <body className="relative bg-white dark:bg-charcoal text-[#1C1C1E] dark:text-off-white transition-colors duration-500">
+        <ThemeProvider>
+          <GSAPInitializer />
+          <SmoothScroll>
           <Toaster
             position="bottom-center"
             toastOptions={{
@@ -200,6 +216,7 @@ export default function RootLayout({
           <WhatsAppFloat />
         </SmoothScroll>
         <ExitIntentPopup />
+        </ThemeProvider>
       </body>
     </html>
   );
