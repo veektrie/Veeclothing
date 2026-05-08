@@ -36,39 +36,32 @@ const Footer = () => {
     <footer className="footer-luxury">
       {/* Top */}
       <div className="footer-top">
-        {/* Brand column — NAP for Local SEO */}
+        {/* Brand column */}
         <div itemScope itemType="https://schema.org/ClothingStore">
+          {/* Show navy logo in light mode, white logo in dark mode */}
           <Image
             src="/VCC-navy.png"
             alt="Vee Clothing Company"
             width={110}
             height={36}
-            className="object-contain mb-6"
+            className="object-contain mb-6 block dark:hidden"
             style={{ height: 'auto', opacity: 0.9 }}
           />
-          <p
-            style={{
-              color: 'rgba(28,28,30,0.6)',
-              fontSize: 13,
-              lineHeight: 1.85,
-              fontWeight: 300,
-              maxWidth: 300,
-              marginBottom: 24,
-            }}
-          >
+          <Image
+            src="/VCC-white.png"
+            alt="Vee Clothing Company"
+            width={110}
+            height={36}
+            className="object-contain mb-6 hidden dark:block"
+            style={{ height: 'auto', opacity: 0.85 }}
+          />
+
+          <p className="footer-body-text" style={{ lineHeight: 1.85, fontWeight: 300, maxWidth: 300, marginBottom: 24 }}>
             Custom tailoring and business uniforms from Lagos, Nigeria — high quality with local style.
           </p>
 
-          {/* NAP block — matches Google Business Profile exactly */}
-          <address
-            style={{
-              fontStyle: 'normal',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 10,
-              marginBottom: 20,
-            }}
-          >
+          {/* NAP block */}
+          <address style={{ fontStyle: 'normal', display: 'flex', flexDirection: 'column', gap: 10, marginBottom: 20 }}>
             {[
               {
                 icon: (
@@ -92,20 +85,15 @@ const Footer = () => {
                 itemProp: 'email',
               },
             ].map((item) => (
-              <div
-                key={item.label}
-                itemProp={item.itemProp}
-                style={{ display: 'flex', alignItems: 'center', gap: 10 }}
-              >
+              <div key={item.label} itemProp={item.itemProp} style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
                 {item.icon}
-                <span style={{ fontSize: 12, color: 'rgba(28,28,30,0.6)', letterSpacing: '0.03em' }}>
+                <span className="footer-nap-text" style={{ fontSize: 12, letterSpacing: '0.03em' }}>
                   {item.label}
                 </span>
               </div>
             ))}
           </address>
 
-          {/* Navy accent line */}
           <div style={{ width: 40, height: 1, background: 'rgba(26, 82, 118, 0.5)', marginBottom: 16 }} />
           <p style={{ fontSize: 10, letterSpacing: '0.2em', color: '#1A5276', textTransform: 'uppercase', fontWeight: 600 }}>
             Est. Lagos, Nigeria
@@ -135,12 +123,12 @@ const Footer = () => {
 
       {/* Separator */}
       <div style={{ maxWidth: 1440, margin: '0 auto', padding: '0 4rem' }}>
-        <div style={{ height: 1, background: 'rgba(28,28,30,0.06)' }} />
+        <div className="footer-sep" style={{ height: 1 }} />
       </div>
 
       {/* Bottom */}
       <div className="footer-bottom">
-        <span>© {new Date().getFullYear()} Vee Clothing Company. All rights reserved.</span>
+        <span className="footer-copy">© {new Date().getFullYear()} Vee Clothing Company. All rights reserved.</span>
         <div style={{ display: 'flex', gap: 24 }}>
           <Link href="/terms-and-conditions" className="footer-link">Privacy</Link>
           <Link href="/terms-and-conditions" className="footer-link">Terms of Use</Link>

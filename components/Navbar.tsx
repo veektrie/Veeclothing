@@ -52,28 +52,32 @@ const Navbar = () => {
   }, [currencyOpen]);
 
   useEffect(() => {
+    const overlay = overlayRef.current;
+    if (!overlay) return;
+    const panel = overlay.querySelector('[style*="position: absolute"]') as HTMLElement | null;
+
     if (menuOpen) {
       document.body.style.overflow = 'hidden';
-      gsap.to(overlayRef.current, {
-        opacity: 1,
-        pointerEvents: 'all',
-        duration: 0.6,
-        ease: 'power3.out'
-      });
+      // Fade in backdrop
+      gsap.to(overlay, { opacity: 1, pointerEvents: 'all', duration: 0.4, ease: 'power3.out' });
+      // Slide panel in from left
+      if (panel) {
+        gsap.fromTo(panel, { x: '-100%' }, { x: '0%', duration: 0.5, ease: 'power4.out' });
+      }
+      // Stagger nav links
       if (linksRef.current) {
         gsap.fromTo(linksRef.current.children,
-          { y: 40, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: 'power4.out', delay: 0.2 }
+          { x: -24, opacity: 0 },
+          { x: 0, opacity: 1, duration: 0.55, stagger: 0.07, ease: 'power3.out', delay: 0.25 }
         );
       }
     } else {
       document.body.style.overflow = 'unset';
-      gsap.to(overlayRef.current, {
-        opacity: 0,
-        pointerEvents: 'none',
-        duration: 0.5,
-        ease: 'power3.in'
-      });
+      // Slide panel out to left, then hide
+      if (panel) {
+        gsap.to(panel, { x: '-100%', duration: 0.4, ease: 'power3.in' });
+      }
+      gsap.to(overlay, { opacity: 0, pointerEvents: 'none', duration: 0.4, ease: 'power3.in', delay: 0.15 });
     }
   }, [menuOpen]);
 
@@ -292,71 +296,162 @@ const Navbar = () => {
         </div>
       </header>
 
-      {/* Mobile Overlay Menu */}
+      {/* ── PREMIUM MOBILE MENU ─────────────────────────────────────── */}
       <div
         ref={overlayRef}
-        className="fixed inset-0 z-[1001] bg-black/95 opacity-0 pointer-events-none flex flex-col items-center justify-center"
+        className="fixed inset-0 z-[1001] opacity-0 pointer-events-none"
+        style={{ isolation: 'isolate' }}
       >
-        <button
-          className="absolute top-8 right-8 p-2 text-white/60 hover:text-white"
-          onClick={() => setMenuOpen(false)}
-        >
-          <X size={32} />
-        </button>
-
+        {/* Backdrop */}
         <div
-          ref={linksRef}
-          className="flex flex-col items-center gap-8"
-        >
-          {navLinks.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              onClick={() => setMenuOpen(false)}
-              className="text-3xl font-serif text-white/60 hover:text-white transition-all"
-            >
-              {link.label}
-            </Link>
-          ))}
-          <Link
-            href="/"
-            onClick={() => setMenuOpen(false)}
-            className="text-3xl font-serif text-white/60 hover:text-white transition-all"
-          >
-            Account
-          </Link>
-          
-          {/* Theme Toggle — Mobile */}
-          <button
-            suppressHydrationWarning
-            onClick={() => { setTheme(theme === 'dark' ? 'light' : 'dark'); setMenuOpen(false); }}
-            className="flex items-center gap-3 text-xl font-serif text-white/60 hover:text-white transition-all mt-4"
-          >
-            {theme === 'dark' ? (
-              <><Sun size={24} /> Light Mode</>
-            ) : (
-              <><Moon size={24} /> Dark Mode</>
-            )}
-          </button>
+          className="absolute inset-0"
+          style={{ background: 'rgba(0,0,0,0.65)', backdropFilter: 'blur(8px)' }}
+          onClick={() => setMenuOpen(false)}
+        />
 
-          {/* Currency Picker — Mobile */}
-          <div className="flex flex-wrap gap-2 mt-8 justify-center">
-            {currencies.map(c => (
-              <button
-                suppressHydrationWarning
-                key={c.code}
-                onClick={() => { setCurrency(c.code as any); setMenuOpen(false); }}
-                className={`px-4 py-2 rounded-full text-[11px] font-bold tracking-widest uppercase transition-all duration-200
-                  ${
-                    currency === c.code
-                      ? 'bg-white text-black'
-                      : 'border border-white/20 text-white/50 hover:border-white/50 hover:text-white/80'
-                  }
-                `}
+        {/* Panel — slides in from left */}
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            bottom: 0,
+            width: 'min(88vw, 380px)',
+            background: 'linear-gradient(160deg, #0d0d0f 0%, #121214 60%, #0a0f1a 100%)',
+            borderRight: '1px solid rgba(255,255,255,0.07)',
+            display: 'flex',
+            flexDirection: 'column',
+            overflow: 'hidden',
+          }}
+        >
+          {/* Ambient glow top-right */}
+          <div style={{
+            position: 'absolute', top: -80, right: -80,
+            width: 280, height: 280,
+            background: 'radial-gradient(circle, rgba(26,82,118,0.25) 0%, transparent 70%)',
+            pointerEvents: 'none',
+          }} />
+          {/* Ambient glow bottom-left */}
+          <div style={{
+            position: 'absolute', bottom: -60, left: -60,
+            width: 200, height: 200,
+            background: 'radial-gradient(circle, rgba(26,82,118,0.15) 0%, transparent 70%)',
+            pointerEvents: 'none',
+          }} />
+
+          {/* Header row */}
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '1.5rem 1.75rem', borderBottom: '1px solid rgba(255,255,255,0.05)', position: 'relative', zIndex: 1 }}>
+            <Link href="/" onClick={() => setMenuOpen(false)}>
+              <Image src="/VCC-white.png" alt="VCC" width={72} height={24} className="object-contain" style={{ opacity: 0.9 }} />
+            </Link>
+            <button
+              onClick={() => setMenuOpen(false)}
+              style={{ color: 'rgba(255,255,255,0.5)', padding: '6px', transition: 'color 0.2s' }}
+              aria-label="Close menu"
+              onMouseEnter={e => (e.currentTarget.style.color = 'white')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.5)')}
+            >
+              <X size={22} />
+            </button>
+          </div>
+
+          {/* Nav links */}
+          <nav
+            ref={linksRef}
+            style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: '2rem 1.75rem', gap: '0.15rem', position: 'relative', zIndex: 1 }}
+          >
+            {navLinks.map((link, i) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', padding: '1rem 0', borderBottom: '1px solid rgba(255,255,255,0.04)', textDecoration: 'none', color: 'rgba(255,255,255,0.7)', transition: 'color 0.25s' }}
+                onMouseEnter={e => (e.currentTarget.style.color = 'white')}
+                onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.7)')}
               >
-                {c.symbol} {c.label}
-              </button>
+                <span style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '11px', color: 'rgba(26,82,118,0.8)', fontWeight: 400, minWidth: '1.5rem', fontStyle: 'italic' }}>
+                  0{i + 1}
+                </span>
+                <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '1.15rem', fontWeight: 600, letterSpacing: '-0.02em' }}>
+                  {link.label}
+                </span>
+                <span style={{ marginLeft: 'auto', opacity: 0.3, fontSize: '12px' }}>→</span>
+              </Link>
             ))}
+
+            {/* Saved */}
+            <Link
+              href="/saved"
+              onClick={() => setMenuOpen(false)}
+              style={{ display: 'flex', alignItems: 'center', gap: '1.25rem', padding: '1rem 0', borderBottom: '1px solid rgba(255,255,255,0.04)', textDecoration: 'none', color: 'rgba(255,255,255,0.7)', transition: 'color 0.25s' }}
+              onMouseEnter={e => (e.currentTarget.style.color = 'white')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.7)')}
+            >
+              <span style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: '11px', color: 'rgba(26,82,118,0.8)', fontWeight: 400, minWidth: '1.5rem', fontStyle: 'italic' }}>
+                05
+              </span>
+              <span style={{ fontFamily: 'Inter, sans-serif', fontSize: '1.15rem', fontWeight: 600, letterSpacing: '-0.02em' }}>
+                Saved Pieces
+              </span>
+              <Heart size={15} style={{ marginLeft: 'auto', opacity: 0.35 }} />
+            </Link>
+          </nav>
+
+          {/* Bottom controls */}
+          <div style={{ padding: '1.25rem 1.75rem', borderTop: '1px solid rgba(255,255,255,0.05)', display: 'flex', flexDirection: 'column', gap: '1rem', position: 'relative', zIndex: 1 }}>
+            {/* Theme toggle */}
+            <button
+              suppressHydrationWarning
+              onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+              style={{
+                display: 'flex', alignItems: 'center', gap: '0.75rem',
+                color: 'rgba(255,255,255,0.55)', fontSize: '11px',
+                fontFamily: 'Inter, sans-serif', fontWeight: 600,
+                letterSpacing: '0.15em', textTransform: 'uppercase',
+                background: 'none', border: 'none', cursor: 'pointer', padding: 0,
+                transition: 'color 0.2s',
+              }}
+              onMouseEnter={e => (e.currentTarget.style.color = 'white')}
+              onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.55)')}
+            >
+              {theme === 'dark'
+                ? <><Sun size={16} /><span>Switch to Light</span></>
+                : <><Moon size={16} /><span>Switch to Dark</span></>
+              }
+            </button>
+
+            {/* Currency pills */}
+            <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+              {currencies.map(c => (
+                <button
+                  suppressHydrationWarning
+                  key={c.code}
+                  onClick={() => { setCurrency(c.code as any); }}
+                  style={{
+                    padding: '5px 14px',
+                    borderRadius: '999px',
+                    fontSize: '10px',
+                    fontWeight: 700,
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                    fontFamily: 'Inter, sans-serif',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s',
+                    ...(currency === c.code
+                      ? { background: '#1A5276', color: 'white', border: '1px solid #1A5276' }
+                      : { background: 'transparent', color: 'rgba(255,255,255,0.4)', border: '1px solid rgba(255,255,255,0.12)' }
+                    ),
+                  }}
+                >
+                  {c.symbol} {c.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Brand tagline */}
+            <p style={{ fontSize: '10px', color: 'rgba(255,255,255,0.2)', letterSpacing: '0.18em', textTransform: 'uppercase', fontFamily: 'Inter, sans-serif', marginTop: '0.25rem' }}>
+              Lagos · Bespoke · Est. 2018
+            </p>
           </div>
         </div>
       </div>
@@ -365,4 +460,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-

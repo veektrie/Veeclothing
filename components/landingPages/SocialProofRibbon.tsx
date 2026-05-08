@@ -92,7 +92,7 @@ const SocialProofRibbon = () => {
   };
 
   return (
-    <section id="testimonials" className="bg-[#F8F9FA] py-24 md:py-32 overflow-hidden">
+    <section id="testimonials" className="testimonials-section py-24 md:py-32 overflow-hidden">
       <div className="max-w-[1440px] mx-auto px-[clamp(1.5rem,5vw,4rem)]">
         
         {/* Header Row */}
@@ -114,7 +114,7 @@ const SocialProofRibbon = () => {
               className="text-[clamp(2.5rem,6vw,4.5rem)] font-extrabold text-[#1C1C1E] leading-[1.05] tracking-tight"
             >
               Chosen by the <br />
-              <span className="text-[#1C1C1E]/40">discerning elite.</span>
+              <span className="testimonials-dim-text">discerning elite.</span>
             </motion.h2>
           </div>
           
@@ -146,7 +146,7 @@ const SocialProofRibbon = () => {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="min-w-[320px] md:min-w-[400px] snap-center relative rounded-[40px] p-10 flex flex-col min-h-[400px] transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 bg-white shadow-sm border border-black/5"
+              className="min-w-[320px] md:min-w-[400px] snap-center relative rounded-[40px] p-10 flex flex-col min-h-[400px] transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 testimonial-card shadow-sm"
             >
               <div className="relative z-10 flex flex-col h-full">
                 {/* Top Row: User Info */}

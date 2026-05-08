@@ -159,6 +159,222 @@ html.dark .animate-pulse {
 }
 
 
+/* ═══════════════════════════════════════════════════════════════════
+   CONTACT SECTION
+   ═══════════════════════════════════════════════════════════════════ */
+.contact-section {
+  background: #FFFFFF;
+  padding: 7rem 0;
+  position: relative;
+  overflow: hidden;
+}
+html.dark .contact-section {
+  background: var(--page-bg, #111113) !important;
+}
+
+.contact-heading {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(2rem, 4.5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: #1C1C1E;
+  line-height: 1.08;
+  margin-bottom: 16px;
+}
+html.dark .contact-heading { color: var(--text-primary, #F1F1F1) !important; }
+
+.contact-subtext {
+  color: rgba(28,28,30,0.6);
+  font-size: 15px;
+  line-height: 1.8;
+  max-width: 600px;
+  margin: 0 auto;
+}
+html.dark .contact-subtext { color: rgba(255,255,255,0.45) !important; }
+
+.contact-field-label {
+  color: rgba(26, 82, 118, 0.65);
+}
+html.dark .contact-field-label { color: rgba(96, 165, 250, 0.75) !important; }
+
+/* ── Premium rounded input ── */
+.contact-input {
+  width: 100%;
+  padding: 14px 16px;
+  background: #F8FAFC;
+  border: 1.5px solid rgba(0, 0, 0, 0.09);
+  border-radius: 14px;
+  color: #1C1C1E;
+  font-family: 'Inter', 'Metrophobic', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  line-height: 1.5;
+}
+.contact-input::placeholder { color: #94a3b8; }
+
+html.dark .contact-input {
+  background: #1E1E20 !important;
+  border-color: rgba(255,255,255,0.1) !important;
+  color: #F1F1F1 !important;
+}
+html.dark .contact-input::placeholder { color: rgba(255,255,255,0.25) !important; }
+
+/* select option theming in dark mode */
+.contact-option { background: #1E1E20; color: #F1F1F1; }
+
+/* ── Form container card ── */
+.contact-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  padding: clamp(1.5rem, 4vw, 4rem);
+  border-radius: 32px;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.05);
+}
+html.dark .contact-card {
+  background: #1A1A1C !important;
+  border-color: rgba(255,255,255,0.06) !important;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.35) !important;
+}
+
+.contact-success-heading {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  color: #1C1C1E;
+  margin-bottom: 16px;
+  font-family: 'Cormorant Garamond', serif;
+}
+html.dark .contact-success-heading { color: var(--text-primary, #F1F1F1) !important; }
+
+.contact-return-btn {
+  background: none;
+  border: 1px solid rgba(26, 82, 118, 0.3);
+  color: #1A5276;
+  padding: 14px 32px;
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  font-weight: 700;
+}
+html.dark .contact-return-btn {
+  border-color: rgba(96,165,250,0.3) !important;
+  color: #93c5fd !important;
+}
+
+.contact-submit-btn {
+  width: 100%;
+  padding: 22px;
+  background: #1A5276;
+  border: 1px solid rgba(26, 82, 118, 0.3);
+  color: #FFFFFF;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  border-radius: 16px;
+  font-weight: 800;
+  box-shadow: 0 15px 35px rgba(26, 82, 118, 0.2);
+}
+.contact-submit-btn:hover { box-shadow: 0 20px 40px rgba(26, 82, 118, 0.3); }
+
+.contact-footer-strip {
+  margin-top: 3.5rem;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+html.dark .contact-footer-strip { border-top-color: rgba(255,255,255,0.06) !important; }
+
+.contact-info-items {
+  display: flex;
+  gap: clamp(24px, 5vw, 48px);
+  flex-wrap: wrap;
+}
+
+.contact-info-label {
+  font-size: 8px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(26, 82, 118, 0.5);
+  display: block;
+  margin-bottom: 4px;
+}
+html.dark .contact-info-label { color: rgba(96,165,250,0.5) !important; }
+
+.contact-info-value {
+  color: rgba(28,28,30,0.5);
+  font-size: 13px;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+html.dark .contact-info-value { color: rgba(255,255,255,0.35) !important; }
+html.dark .contact-info-value:hover { color: #93c5fd !important; }
+
+@media (max-width: 640px) {
+  .contact-footer-strip { justify-content: center; text-align: center; }
+  .contact-info-items   { justify-content: center; gap: 20px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   SOCIAL PROOF / TESTIMONIALS
+   ═══════════════════════════════════════════════════════════════════ */
+.testimonials-section {
+  background: #F8F9FA;
+}
+html.dark .testimonials-section {
+  background: var(--page-bg, #111113) !important;
+}
+
+.testimonials-dim-text {
+  color: rgba(28,28,30,0.4);
+}
+html.dark .testimonials-dim-text {
+  color: rgba(255,255,255,0.25) !important;
+}
+
+.testimonial-card {
+  background: #FFFFFF;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+html.dark .testimonial-card {
+  background: #1E1E20 !important;
+  border-color: rgba(255,255,255,0.07) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   WHY CHOOSE US
+   ═══════════════════════════════════════════════════════════════════ */
+.why-choose-section {
+  background: #F8FAFC;
+}
+html.dark .why-choose-section {
+  background: var(--page-bg, #111113) !important;
+}
+
+.why-choose-heading {
+  color: #1C1C1E;
+}
+html.dark .why-choose-heading {
+  color: var(--text-primary, #F1F1F1) !important;
+}
+
+.why-choose-card {
+  background: white !important;
+}
+html.dark .why-choose-card {
+  background: #1E1E20 !important;
+  border-color: rgba(255,255,255,0.07) !important;
+}
+
 /* ── #12: Premium Shimmer Skeleton ─────────────────────────────────────────── */
 @keyframes skeleton-shimmer {
   0%   { background-position: -400px 0; }
@@ -982,6 +1198,43 @@ body {
   text-transform: uppercase;
   color: var(--navy);
   margin-bottom: 1.5rem;
+}
+
+/* body text in brand column */
+.footer-body-text {
+  font-size: 13px;
+  color: rgba(28, 28, 30, 0.6);
+}
+
+html.dark .footer-body-text {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* NAP (address) text */
+.footer-nap-text {
+  color: rgba(28, 28, 30, 0.6);
+}
+
+html.dark .footer-nap-text {
+  color: rgba(255, 255, 255, 0.45) !important;
+}
+
+/* separator between footer-top and footer-bottom */
+.footer-sep {
+  background: rgba(28, 28, 30, 0.06);
+}
+
+html.dark .footer-sep {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* copyright text */
+.footer-copy {
+  color: rgba(28, 28, 30, 0.5);
+}
+
+html.dark .footer-copy {
+  color: rgba(255, 255, 255, 0.35) !important;
 }
 
 /* ===== JOURNAL SECTION ===== */

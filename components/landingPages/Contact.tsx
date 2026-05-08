@@ -35,23 +35,14 @@ const Field = ({
   <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
     <label
       htmlFor={id}
-      className="font-metro"
-      style={{ fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(26, 82, 118, 0.65)' }}
+      className="font-metro contact-field-label"
+      style={{ fontSize: 9, letterSpacing: '0.3em', textTransform: 'uppercase' }}
     >
       {label}{error && <span style={{ color: 'rgba(26, 82, 118, 0.9)', marginLeft: 8 }}>Required</span>}
     </label>
     {children}
   </div>
 );
-
-const inputStyle: React.CSSProperties = {
-  width: '100%', padding: '14px 0',
-  background: 'transparent', border: 'none',
-  borderBottom: '1px solid rgba(0, 0, 0, 0.1)',
-  color: '#1C1C1E', fontFamily: 'Metrophobic, Inter, sans-serif',
-  fontSize: 14, fontWeight: 400, outline: 'none',
-  transition: 'border-color 0.3s ease',
-};
 
 const Contact = () => {
   const [serviceType, setServiceType] = useState<ServiceType>('corporate');
@@ -65,27 +56,18 @@ const Contact = () => {
     try {
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
         body: JSON.stringify({
           access_key: 'c29917fd-1140-4608-84ba-316b31b4404e',
           subject: `New ${serviceType.charAt(0).toUpperCase() + serviceType.slice(1)} Consultation Request`,
           from_name: data.name,
           ...data,
-          serviceType: serviceType, // explicitly include for clarity in email
+          serviceType,
         }),
       });
-      
       const result = await res.json();
-      if (result.success) {
-        setSubmitted(true);
-        reset();
-      } else {
-        console.error('Submission failed', result);
-        setSubmitted(true); 
-      }
+      if (result.success) { setSubmitted(true); reset(); }
+      else { console.error('Submission failed', result); setSubmitted(true); }
     } catch (err) {
       console.error('Form submission error:', err);
       setSubmitted(true);
@@ -95,16 +77,16 @@ const Contact = () => {
   };
 
   const handleFocus = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    e.currentTarget.style.borderBottomColor = '#1A5276';
-    e.currentTarget.style.boxShadow = '0 4px 12px rgba(26, 82, 118, 0.08)';
+    e.currentTarget.style.borderColor = '#1A5276';
+    e.currentTarget.style.boxShadow = '0 0 0 3px rgba(26,82,118,0.08)';
   };
   const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    e.currentTarget.style.borderBottomColor = 'rgba(0, 0, 0, 0.1)';
+    e.currentTarget.style.borderColor = '';
     e.currentTarget.style.boxShadow = 'none';
   };
 
   return (
-    <section id="consultation" style={{ background: '#FFFFFF', padding: '7rem 0', position: 'relative', overflow: 'hidden' }}>
+    <section id="consultation" className="contact-section">
       {/* Ambient navy glow */}
       <div style={{
         position: 'absolute', bottom: '-300px', right: '-200px',
@@ -115,38 +97,23 @@ const Contact = () => {
 
       <div style={{ maxWidth: 860, margin: '0 auto', padding: '0 clamp(1.5rem, 5vw, 4rem)' }}>
 
-        {/* Header - Centered */}
+        {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-
-          <h2 style={{
-            fontFamily: 'Inter, sans-serif',
-            fontSize: 'clamp(2rem, 4.5vw, 4rem)',
-            fontWeight: 800,
-            letterSpacing: '-0.04em',
-            color: '#1C1C1E', lineHeight: 1.08, marginBottom: 16,
-          }}>
+          <h2 className="contact-heading">
             Get in{' '}
             <em style={{ color: '#1A5276', fontStyle: 'normal' }}>Touch.</em>
           </h2>
-          <p className="font-metro" style={{
-            color: 'rgba(28,28,30,0.6)', fontSize: 15, lineHeight: 1.8, maxWidth: 600, margin: '0 auto'
-          }}>
+          <p className="font-metro contact-subtext">
             We'll get back to you within 24 hours. A real person will answer your message.
           </p>
         </div>
 
         {/* ── SERVICE TYPE TOGGLE & FORM CONTAINER ── */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          style={{
-            background: '#FFFFFF',
-            border: '1px solid rgba(0, 0, 0, 0.05)',
-            padding: 'clamp(1.5rem, 4vw, 4rem)',
-            borderRadius: 32,
-            boxShadow: '0 40px 100px rgba(0,0,0,0.05)',
-          }}
+          className="contact-card"
         >
           {/* Toggle Area */}
           <div style={{ marginBottom: '2.5rem' }}>
@@ -163,7 +130,7 @@ const Contact = () => {
                   type="button"
                   onClick={() => setServiceType(t)}
                   className={`px-6 py-2.5 text-[10px] font-bold tracking-[0.2em] uppercase transition-all duration-300 rounded-lg whitespace-nowrap ${
-                    serviceType === t ? 'bg-[#1A5276]/10 text-[#1A5276] border border-[#1A5276]/20' : 'text-black/40 hover:text-black/60'
+                    serviceType === t ? 'bg-[#1A5276]/10 text-[#1A5276] border border-[#1A5276]/20' : 'text-black/40 hover:text-black/60 dark:text-white/30 dark:hover:text-white/60'
                   }`}
                 >
                   {t === 'corporate' ? 'Corporate' : 'Individual'}
@@ -173,14 +140,9 @@ const Contact = () => {
           </div>
 
           {submitted ? (
-            /* Success state */
-            <div style={{
-              padding: '2rem 0',
-              textAlign: 'center',
-              animation: 'fadeIn 0.6s ease',
-            }}>
+            <div style={{ padding: '2rem 0', textAlign: 'center', animation: 'fadeIn 0.6s ease' }}>
               <div style={{ marginBottom: 30 }}>
-                <div style={{ 
+                <div style={{
                   width: 64, height: 64, borderRadius: '50%', background: 'rgba(26, 82, 118, 0.1)',
                   display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto'
                 }}>
@@ -189,28 +151,15 @@ const Contact = () => {
                   </svg>
                 </div>
               </div>
-              <h3 className="font-kento" style={{
-                fontSize: 'clamp(1.5rem, 3vw, 2.5rem)',
-                color: '#1C1C1E', marginBottom: 16,
-                fontFamily: 'Cormorant Garamond, serif'
-              }}>
+              <h3 className="font-kento contact-success-heading">
                 Message <em style={{ color: '#1A5276' }}>Sent.</em>
               </h3>
-              <p className="font-metro" style={{
-                color: 'rgba(28,28,30,0.5)', fontSize: 15, lineHeight: 1.8,
-                maxWidth: 420, margin: '0 auto 32px',
-              }}>
+              <p className="font-metro contact-subtext" style={{ maxWidth: 420, margin: '0 auto 32px' }}>
                 Thanks for contacting us. We'll get back to you within 24 hours.
               </p>
               <button
                 onClick={() => setSubmitted(false)}
-                style={{
-                  background: 'none', border: '1px solid rgba(26, 82, 118, 0.3)',
-                  color: '#1A5276', padding: '14px 32px',
-                  fontSize: 10, letterSpacing: '0.25em', textTransform: 'uppercase',
-                  cursor: 'pointer', borderRadius: 8, transition: 'all 0.3s ease',
-                  fontWeight: 700
-                }}
+                className="contact-return-btn"
               >
                 Return to Form
               </button>
@@ -222,13 +171,15 @@ const Contact = () => {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 'clamp(20px, 4vw, 32px)' }}>
                 <Field id="name" label="Full Name" error={!!errors.name}>
                   <input id="name" {...register('name', { required: true })}
-                    placeholder="Full Name" style={inputStyle}
+                    placeholder="Full Name"
+                    className="contact-input"
                     onFocus={handleFocus} onBlur={handleBlur}
                   />
                 </Field>
                 <Field id="phone" label="Phone Number" error={!!errors.phone}>
                   <input id="phone" {...register('phone', { required: true })}
-                    placeholder="+234..." style={inputStyle}
+                    placeholder="+234..."
+                    className="contact-input"
                     onFocus={handleFocus} onBlur={handleBlur}
                   />
                 </Field>
@@ -236,7 +187,8 @@ const Contact = () => {
 
               <Field id="email" label="Email Address" error={!!errors.email}>
                 <input id="email" type="email" {...register('email', { required: true })}
-                  placeholder="name@email.com" style={inputStyle}
+                  placeholder="name@email.com"
+                  className="contact-input"
                   onFocus={handleFocus} onBlur={handleBlur}
                 />
               </Field>
@@ -247,23 +199,21 @@ const Contact = () => {
                   <>
                     <Field id="organisation" label="Organisation">
                       <input id="organisation" {...register('organisation')}
-                        placeholder="Company Name" style={inputStyle}
+                        placeholder="Company Name"
+                        className="contact-input"
                         onFocus={handleFocus} onBlur={handleBlur}
                       />
                     </Field>
                     <Field id="scale" label="Scale" error={!!errors.scale}>
                       <select id="scale" {...register('scale', { required: true })}
-                        style={{
-                          ...inputStyle,
-                          appearance: 'none',
-                          cursor: 'pointer',
-                        }}
+                        className="contact-input"
                         onFocus={handleFocus} onBlur={handleBlur}
+                        style={{ appearance: 'none', cursor: 'pointer' }}
                       >
                         {corporateScales.map((s) => (
                           <option key={s} value={s === corporateScales[0] ? '' : s}
                             disabled={s === corporateScales[0]}
-                            style={{ background: '#FFFFFF', color: '#1C1C1E' }}>
+                            className="contact-option">
                             {s}
                           </option>
                         ))}
@@ -274,7 +224,8 @@ const Contact = () => {
                   <Field id="occasion" label="Occasion">
                     <input id="occasion" {...register('occasion')}
                       placeholder="e.g. Bespoke Agbada, Wedding Suit"
-                      style={inputStyle} onFocus={handleFocus} onBlur={handleBlur}
+                      className="contact-input"
+                      onFocus={handleFocus} onBlur={handleBlur}
                     />
                   </Field>
                 )}
@@ -282,9 +233,10 @@ const Contact = () => {
 
               <Field id="message" label="Your Message" error={!!errors.message}>
                 <textarea id="message" {...register('message', { required: true })}
-                  rows={3}
+                  rows={4}
                   placeholder="Tell us what you need..."
-                  style={{ ...inputStyle, resize: 'none' }}
+                  className="contact-input"
+                  style={{ resize: 'none' }}
                   onFocus={handleFocus} onBlur={handleBlur}
                 />
               </Field>
@@ -292,23 +244,12 @@ const Contact = () => {
               <button
                 type="submit"
                 disabled={sending}
-                style={{
-                  width: '100%', padding: '22px',
-                  background: sending ? 'rgba(26, 82, 118, 0.1)' : '#1A5276',
-                  border: '1px solid rgba(26, 82, 118, 0.3)',
-                  color: sending ? '#1A5276' : '#FFFFFF',
-                  fontFamily: 'Inter, sans-serif',
-                  fontSize: 11, letterSpacing: '0.3em', textTransform: 'uppercase',
-                  cursor: sending ? 'not-allowed' : 'pointer',
-                  transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-                  borderRadius: 12,
-                  fontWeight: 800,
-                  boxShadow: sending ? 'none' : '0 15px 35px rgba(26, 82, 118, 0.2)',
-                }}
-                onMouseEnter={e => { if (!sending) { (e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 20px 40px rgba(26, 82, 118, 0.3)'; }}}
-                onMouseLeave={e => { if (!sending) { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; (e.currentTarget as HTMLElement).style.boxShadow = '0 15px 35px rgba(26, 82, 118, 0.2)'; }}}
+                className="contact-submit-btn"
+                style={{ opacity: sending ? 0.7 : 1 }}
+                onMouseEnter={e => { if (!sending) { (e.currentTarget as HTMLElement).style.transform = 'translateY(-4px)'; }}}
+                onMouseLeave={e => { (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}
               >
-                {sending ? 'Sending...' : 'Send Message'}
+                {sending ? 'Sending…' : 'Send Message'}
               </button>
 
             </form>
@@ -324,12 +265,11 @@ const Contact = () => {
               { label: 'Location', value: 'Lagos, Nigeria', href: '#' },
             ].map((c) => (
               <div key={c.label}>
-                <span className="font-metro" style={{ fontSize: 8, letterSpacing: '0.3em', textTransform: 'uppercase', color: 'rgba(26, 82, 118, 0.5)', display: 'block', marginBottom: 4 }}>
-                  {c.label}
-                </span>
-                <Link href={c.href} target={c.href.startsWith('http') ? '_blank' : undefined} style={{ color: 'rgba(28,28,30,0.5)', fontSize: 13, transition: 'color 0.3s' }}
+                <span className="font-metro contact-info-label">{c.label}</span>
+                <Link href={c.href} target={c.href.startsWith('http') ? '_blank' : undefined}
+                  className="contact-info-value"
                   onMouseEnter={e => { (e.currentTarget as HTMLElement).style.color = '#1A5276'; }}
-                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = 'rgba(28,28,30,0.5)'; }}
+                  onMouseLeave={e => { (e.currentTarget as HTMLElement).style.color = ''; }}
                 >
                   {c.value}
                 </Link>
@@ -349,34 +289,6 @@ const Contact = () => {
             ))}
           </div>
         </div>
-
-        <style jsx>{`
-          .contact-footer-strip {
-            margin-top: 3.5rem;
-            padding-top: 2.5rem;
-            border-top: 1px solid rgba(0,0,0,0.06);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 24px;
-          }
-          .contact-info-items {
-            display: flex;
-            gap: clamp(24px, 5vw, 48px);
-            flex-wrap: wrap;
-          }
-          @media (max-width: 640px) {
-            .contact-footer-strip {
-              justify-content: center;
-              text-align: center;
-            }
-            .contact-info-items {
-              justify-content: center;
-              gap: 20px;
-            }
-          }
-        `}</style>
 
       </div>
     </section>
