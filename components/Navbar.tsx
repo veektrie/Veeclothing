@@ -22,6 +22,13 @@ const Navbar = () => {
 
   const { currency, setCurrency, fetchRates } = useCurrencyStore();
   const { theme, setTheme } = useThemeStore();
+  // Theme‑aware text color helpers
+  // Locked to dark mode aesthetic consistently
+  const textColor = 'text-white/80';
+  const hoverColor = 'hover:text-white';
+  const subtleColor = 'text-white/70';
+  const iconColor = 'text-white/40';
+  const inputColor = 'white';
 
   const currencies = [
     { code: 'NGN', symbol: '₦', label: 'NGN' },
@@ -135,7 +142,7 @@ const Navbar = () => {
             gap: 12
           }}
         >
-          <Search size={18} className="text-white/40" />
+          <Search size={18} className={iconColor} />
           <input
             type="text"
             placeholder="Search products, style guides..."
@@ -151,14 +158,14 @@ const Navbar = () => {
               background: 'transparent',
               border: 'none',
               outline: 'none',
-              color: 'white',
+              color: inputColor,
               fontSize: '14px',
               width: '100%',
               fontFamily: 'Inter, sans-serif'
             }}
             autoFocus
           />
-          <button onClick={() => setSearchOpen(false)} className="text-white/40 hover:text-white">
+          <button onClick={() => setSearchOpen(false)} className={`${iconColor} ${hoverColor}`}>
             <X size={18} />
           </button>
         </div>
@@ -166,10 +173,10 @@ const Navbar = () => {
         <div
           className="flex items-center justify-between pointer-events-auto w-full max-w-[1200px]"
           style={{
-            background: theme === 'dark' ? 'rgba(20, 20, 22, 0.85)' : 'rgba(18, 18, 20, 0.8)',
+            background: 'rgba(20, 20, 22, 0.85)',
             backdropFilter: 'blur(20px)',
             WebkitBackdropFilter: 'blur(20px)',
-            border: theme === 'dark' ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(255,255,255,0.15)',
+            border: '1px solid rgba(255,255,255,0.1)',
             borderRadius: '999px',
             padding: '12px clamp(1rem, 5vw, 2rem)',
             boxShadow: scrolled ? '0 10px 30px -10px rgba(0,0,0,0.6)' : '0 4px 24px rgba(0,0,0,0.15)',
@@ -182,7 +189,7 @@ const Navbar = () => {
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-[13px] font-medium text-white/80 hover:text-white transition-colors"
+                className={`text-[13px] font-medium ${textColor} ${hoverColor} transition-colors`}
               >
                 {link.label}
               </Link>
@@ -192,12 +199,12 @@ const Navbar = () => {
           {/* Mobile Menu Toggle & Saved (Left on Mobile) */}
           <div className="lg:hidden flex-1 flex items-center gap-1">
             <button
-              className="p-2 -ml-2 text-white/80 hover:text-white transition-colors"
+              className={`p-2 -ml-2 ${textColor} ${hoverColor} transition-colors`}
               onClick={() => setMenuOpen(true)}
             >
               <Menu size={20} />
             </button>
-            <Link href="/saved" aria-label="Saved pieces" className="text-white/80 hover:text-white transition-colors p-2">
+            <Link href="/saved" aria-label="Saved pieces" className={`${textColor} ${hoverColor} transition-colors p-2`}>
               <Heart size={20} />
             </Link>
           </div>
@@ -220,12 +227,12 @@ const Navbar = () => {
           <div className="flex items-center justify-end gap-3 sm:gap-5 lg:gap-7 flex-1">
             <button
               onClick={() => setSearchOpen(!searchOpen)}
-              className="text-white/80 hover:text-white transition-colors"
+              className={`${textColor} ${hoverColor} transition-colors`}
             >
               <Search size={20} />
             </button>
 
-            <Link href="/saved" aria-label="Saved pieces" className="hidden lg:block text-white/80 hover:text-white transition-colors">
+            <Link href="/saved" aria-label="Saved pieces" className={`hidden lg:block ${textColor} ${hoverColor} transition-colors`}>
               <Heart size={20} />
             </Link>
 
@@ -235,7 +242,7 @@ const Navbar = () => {
             <button
               suppressHydrationWarning
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-              className="hidden md:flex items-center justify-center text-white/80 hover:text-white transition-colors"
+              className={`hidden md:flex items-center justify-center ${textColor} ${hoverColor} transition-colors`}
               aria-label="Toggle Theme"
             >
               {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
@@ -246,13 +253,13 @@ const Navbar = () => {
               <button
                 suppressHydrationWarning
                 onClick={() => setCurrencyOpen(o => !o)}
-                className="flex items-center gap-1.5 text-[11px] font-bold text-white/70 hover:text-white tracking-widest uppercase transition-colors duration-200 group"
+                className={`flex items-center gap-1.5 text-[11px] font-bold ${subtleColor} ${hoverColor} tracking-widest uppercase transition-colors duration-200 group`}
               >
                 <span>{activeCurrency.symbol}</span>
                 <span>{activeCurrency.label}</span>
                 <ChevronDown
                   size={11}
-                  className={`text-white/40 transition-transform duration-300 ${currencyOpen ? 'rotate-180' : ''}`}
+                  className={`${iconColor} transition-transform duration-300 ${currencyOpen ? 'rotate-180' : ''}`}
                 />
               </button>
 
@@ -406,13 +413,13 @@ const Navbar = () => {
               onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
               style={{
                 display: 'flex', alignItems: 'center', gap: '0.75rem',
-                color: 'rgba(255,255,255,0.55)', fontSize: '11px',
+                color: theme === 'dark' ? 'rgba(255,255,255,0.55)' : 'rgba(0,0,0,0.55)',
+                fontSize: '11px',
                 fontFamily: 'Inter, sans-serif', fontWeight: 600,
                 letterSpacing: '0.15em', textTransform: 'uppercase',
                 background: 'none', border: 'none', cursor: 'pointer', padding: 0,
                 transition: 'color 0.2s',
               }}
-              onMouseEnter={e => (e.currentTarget.style.color = 'white')}
               onMouseLeave={e => (e.currentTarget.style.color = 'rgba(255,255,255,0.55)')}
             >
               {theme === 'dark'

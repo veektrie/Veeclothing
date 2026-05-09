@@ -23,7 +23,7 @@ export default function CartBadge() {
     return (
         <button
             onClick={() => setIsOpen(true)}
-            className="relative p-2 flex items-center justify-center text-gray-400 hover:text-[#D4AF37] transition-colors"
+            className="relative p-2 flex items-center justify-center text-white/80 hover:text-[#D4AF37] transition-colors"
             title="View Commission"
         >
             <ShoppingBag className="w-6 h-6" />
