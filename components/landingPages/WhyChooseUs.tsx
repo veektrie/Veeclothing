@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import TrustBar from '../TrustBar';
 
 /* ─── Tag pill ─── */
 const Tag = ({ label }: { label: string }) => (
@@ -23,7 +24,8 @@ const Tag = ({ label }: { label: string }) => (
 
 export default function WhyChooseUs() {
   return (
-    <section id="why-professionals" style={{ padding: 'clamp(60px,10vw,100px) 0', overflow: 'hidden', background: '#F8FAFC' }}>
+    <section id="why-professionals" style={{ padding: '0 0 clamp(60px,10vw,100px) 0', overflow: 'hidden', background: '#F8FAFC' }}>
+      <TrustBar />
       <div style={{ maxWidth: 1200, margin: '0 auto', padding: '0 clamp(16px,5vw,32px)' }}>
 
         {/* Section header */}
