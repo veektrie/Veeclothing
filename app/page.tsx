@@ -11,6 +11,7 @@ import FAQSection from '@/components/landingPages/FAQ';
 import Contact from '@/components/landingPages/Contact';
 import CraftWidget from '@/components/landingPages/CraftWidget';
 import WhyChooseUs from '@/components/landingPages/WhyChooseUs';
+import CTABanner from '@/components/landingPages/CTABanner';
 
 const latestArticlesQuery = groq`*[_type == "blog"] | order(publishedAt desc)[0...3] {
   _id,
@@ -73,6 +74,10 @@ export default async function Home() {
 
       <AnimatedSection>
         <Contact />
+      </AnimatedSection>
+
+      <AnimatedSection>
+        <CTABanner />
       </AnimatedSection>
 
       <CraftWidget />

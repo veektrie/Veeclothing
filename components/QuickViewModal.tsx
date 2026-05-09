@@ -113,7 +113,7 @@ export default function QuickViewModal() {
                             </h2>
 
                             <p style={{ fontFamily: 'Inter, sans-serif' }} className="text-xl text-[#1A5276] font-bold mb-6">
-                                {product.price ? `${convert(product.price).symbol}${(convert(product.price).value).toLocaleString()}` : 'Price on request'}
+                                {product.price ? `${convert(product.price).symbol}${convert(product.price).value.toLocaleString()}` : 'Price on request'}
                             </p>
 
                             <p style={{ fontFamily: 'Inter, sans-serif' }} className="text-sm text-[#64748b] leading-[1.6] font-light mb-8">

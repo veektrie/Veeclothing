@@ -203,7 +203,7 @@ export default function RecentlyViewed({ currentProductId }: { currentProductId?
 
                     {/* Price — understated, no emphasis */}
                     <p className="font-sans text-[10px] tracking-wide text-[#64748b]">
-                      {convert(price).symbol}{(convert(price).value).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                      {convert(price ?? 0).symbol}{(convert(price ?? 0).value).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                     </p>
                   </div>
                 </Link>

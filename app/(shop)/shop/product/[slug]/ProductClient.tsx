@@ -189,7 +189,7 @@ export default function ProductClient({ product, relatedProducts }: { product: a
 
                         <div className="flex justify-between items-center mb-8">
                             <p suppressHydrationWarning style={{ fontFamily: 'Inter, sans-serif' }} className="text-3xl text-[#1A5276] font-bold mb-0">
-                                {convert(product.price).symbol}{(convert(product.price).value).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                                {convert(product.price ?? 0).symbol}{(convert(product.price ?? 0).value).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                             </p>
                             
                             {/* Wishlist toggle */}
@@ -506,7 +506,7 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                                             </div>
                                             <div className="mt-auto flex items-center justify-between pt-2.5">
                                                 <span suppressHydrationWarning style={{ fontFamily: 'Inter, sans-serif' }} className="text-[1.05rem] text-[#1A5276] font-bold">
-                                                    {convert(item.price).symbol}{(convert(item.price).value).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                                    {convert(item.price ?? 0).symbol}{(convert(item.price ?? 0).value).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
                                                 </span>
                                                 <div className="w-8 h-8 rounded-full border border-[#1A5276]/30 flex items-center justify-center text-[#1A5276] bg-[#F8FAFC] transition-all duration-300 group-hover:bg-[#1A5276] group-hover:text-white">
                                                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

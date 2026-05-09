@@ -165,7 +165,7 @@ export default function OrderSummaryPage({ params }: PageProps) {
                     </div>
 
                     {/* Price */}
-                    <p className="font-bold text-[#1C1C1E]">₦{item.price.toLocaleString()}</p>
+                    <p className="font-bold text-[#1C1C1E]">₦{(item.price ?? 0).toLocaleString()}</p>
                   </div>
                 ))}
               </div>
@@ -178,7 +178,7 @@ export default function OrderSummaryPage({ params }: PageProps) {
                   Final Commission Value
                 </span>
                 <span style={{ fontFamily: 'Inter, sans-serif' }} className="text-3xl font-black text-[#1A5276]">
-                  ₦ {order.totalPrice.toLocaleString()}
+                  ₦ {(order.totalPrice ?? 0).toLocaleString()}
                 </span>
               </div>
             </section>
