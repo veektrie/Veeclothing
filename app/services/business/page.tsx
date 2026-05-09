@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+import WhyVeeForBrand from '@/components/landingPages/WhyVeeForBrand';
 
 const services = [
   {
@@ -272,6 +273,9 @@ export default function BusinessServicesPage() {
           </div>
         ))}
       </div>
+
+      {/* Why Vee for Brands */}
+      <WhyVeeForBrand />
 
       {/* FAQ / AEO Section */}
       <section itemScope itemType="https://schema.org/FAQPage" style={{ maxWidth: 800, margin: '0 auto', padding: '20px 32px 120px' }}>

@@ -2,7 +2,7 @@ import { client } from "@/lib/sanity";
 import { groq } from "next-sanity";
 
 import Hero from '../components/landingPages/Hero';
-import CorporateAtelier from '@/components/landingPages/Brand';
+// removed duplicate brand import
 
 import ShopPreview from '@/components/landingPages/ShopPreview';
 import SocialProofRibbon from '@/components/landingPages/SocialProofRibbon';
@@ -11,6 +11,7 @@ import FAQSection from '@/components/landingPages/FAQ';
 import Contact from '@/components/landingPages/Contact';
 import CraftWidget from '@/components/landingPages/CraftWidget';
 import WhyChooseUs from '@/components/landingPages/WhyChooseUs';
+import WhyVeeForBrand from '@/components/landingPages/WhyVeeForBrand';
 import CTABanner from '@/components/landingPages/CTABanner';
 
 const latestArticlesQuery = groq`*[_type == "blog"] | order(publishedAt desc)[0...3] {
@@ -53,7 +54,7 @@ export default async function Home() {
       </AnimatedSection>
 
       <AnimatedSection>
-        <CorporateAtelier />
+        <WhyVeeForBrand />
       </AnimatedSection>
 
       <AnimatedSection>
