@@ -27,6 +27,10 @@ const faqs = {
       q: 'Can you visit our office for fittings?',
       a: 'Yes. For orders of 50 or more, we can visit your office in Lagos or Abuja for fittings. We can also meet online if you are outside Nigeria.',
     },
+    {
+      q: 'Do you offer corporate uniform services in Abuja?',
+      a: 'Absolutely. While our primary production is centralized, our master tailors frequently travel to Abuja to conduct executive fittings for corporate teams in Maitama, Wuse, and Asokoro.',
+    },
   ],
   bespoke: [
     {
@@ -48,6 +52,10 @@ const faqs = {
     {
       q: 'Do you offer alterations on existing garments?',
       a: 'We only fix clothes made by us. For new clients, we suggest starting with a new order to ensure the best quality.',
+    },
+    {
+      q: 'How do fittings work if I live in Asaba?',
+      a: 'We offer a dedicated VIP concierge fitting service for our clients in Asaba. We bring luxury fabric swatches directly to your home or office in the GRA or surrounding areas, ensuring a flawless bespoke experience without you needing to travel.',
     },
   ],
 };
@@ -209,8 +217,28 @@ const FAQSection = () => {
         </div>
 
       </div>
+
+      {/* SEO / AEO JSON-LD Schema for FAQPage */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [...faqs.corporate, ...faqs.bespoke].map((faq) => ({
+              "@type": "Question",
+              "name": faq.q,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": faq.a
+              }
+            }))
+          })
+        }}
+      />
     </section>
   );
 };
 
 export default FAQSection;
+

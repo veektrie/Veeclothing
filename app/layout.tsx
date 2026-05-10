@@ -109,18 +109,31 @@ export default function RootLayout({
             } catch(e) {}
           `
         }} />
-        {/* — Organization Schema — */}
+        {/* — SAB LocalBusiness Schema: Tailor (No Physical Address, Area Served) — */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Organization",
+            "@type": ["Tailor", "Organization"],
             "name": "Vee Clothing Company",
             "url": "https://www.veeclothingcompany.com",
             "logo": "https://www.veeclothingcompany.com/VCC-white.png",
-            "description": "Lagos-based premium bespoke tailoring house and corporate uniform engineering firm. Global standards. Local soul.",
-            "foundingLocation": { "@type": "Place", "name": "Lagos, Nigeria" },
-            "areaServed": ["Nigeria", "West Africa", "African Diaspora"],
+            "description": "Premium bespoke tailoring house and corporate uniform engineering firm serving Lagos, Abuja, and Asaba.",
             "telephone": "+2348103031020",
+            "priceRange": "₦₦₦",
+            "areaServed": [
+              { "@type": "City", "name": "Lagos", "sameAs": "https://en.wikipedia.org/wiki/Lagos" },
+              { "@type": "City", "name": "Abuja", "sameAs": "https://en.wikipedia.org/wiki/Abuja" },
+              { "@type": "City", "name": "Asaba", "sameAs": "https://en.wikipedia.org/wiki/Asaba,_Delta" }
+            ],
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Tailoring Services",
+              "itemListElement": [
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bespoke Suit Tailoring" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Corporate Uniform Engineering" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Traditional Native Wear (Agbada, Kaftan)" } }
+              ]
+            },
             "contactPoint": { "@type": "ContactPoint", "telephone": "+2348103031020", "contactType": "Customer Service", "availableLanguage": "English" },
             "sameAs": [
               "https://instagram.com/veeclothingcompany",
