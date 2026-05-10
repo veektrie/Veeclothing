@@ -11,6 +11,7 @@ interface CurrencyStore {
     currency: Currency;
     rates: Rates;
     hasAutoDetected: boolean;
+    detectedCity: string | null;
     setCurrency: (c: Currency) => void;
     fetchRates: () => Promise<void>;
     autoDetectCurrency: () => Promise<void>;
@@ -30,6 +31,7 @@ export const useCurrencyStore = create<CurrencyStore>()(
             currency: 'NGN',
             rates: { NGN: 1, USD: 0.00067, GBP: 0.00053, EUR: 0.00062 }, // Fallback rates
             hasAutoDetected: false,
+            detectedCity: null,
             setCurrency: (currency) => set({ currency }),
             fetchRates: async () => {
                 try {
@@ -55,6 +57,10 @@ export const useCurrencyStore = create<CurrencyStore>()(
                         else if (code === 'GB') setCurrency('GBP');
                         else if (['FR','DE','IT','ES','NL','BE','AT','IE','PT','FI','GR','CY','MT','LU','SK','SI','EE','LV','LT'].includes(code)) setCurrency('EUR');
                         else setCurrency('USD');
+
+                        if (data.city) {
+                            set({ detectedCity: data.city });
+                        }
                     }
                     set({ hasAutoDetected: true });
                 } catch (error) {

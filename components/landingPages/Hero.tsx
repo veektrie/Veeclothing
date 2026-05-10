@@ -2,8 +2,27 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useCurrencyStore } from '@/store/useCurrencyStore';
 
 const Hero = () => {
+  const [mounted, setMounted] = React.useState(false);
+  const detectedCity = useCurrencyStore((state) => state.detectedCity);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  let subHeadline = "Bespoke style for the modern man, wherever you are.";
+  if (detectedCity) {
+    const city = detectedCity.toLowerCase();
+    if (city === 'lagos') subHeadline = "High-impact style for Lagos professionals.";
+    else if (city === 'port harcourt') subHeadline = "Sharp, custom looks for Port Harcourt’s best.";
+    else if (city === 'abuja') subHeadline = "Elite tailoring for Abuja’s leaders.";
+    else if (city === 'onitsha') subHeadline = "Premium style for Onitsha’s business class.";
+    else if (city === 'dublin') subHeadline = "Fine tailoring for Dublin professionals.";
+    else if (city === 'london') subHeadline = "Bespoke excellence for London’s elite.";
+  }
+
   return (
     <section 
       style={{
@@ -114,7 +133,7 @@ const Hero = () => {
             fontWeight: 800,
             letterSpacing: '-0.04em',
             lineHeight: 1.0,
-            margin: '0 0 40px 0',
+            margin: '0 0 16px 0',
             textAlign: 'left',
             maxWidth: '900px',
             textShadow: '0 10px 30px rgba(0,0,0,0.3)'
@@ -123,6 +142,28 @@ const Hero = () => {
           Bespoke Tailoring for<br />
           the Discerning Gentleman.
         </motion.h1>
+
+        {/* Dynamic Sub-Headline Container (Min-Height to prevent layout shift) */}
+        <div style={{ minHeight: '32px', marginBottom: '40px' }}>
+          {mounted && (
+            <motion.h2
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              style={{
+                fontFamily: 'Inter, sans-serif',
+                fontSize: 'clamp(14px, 1.5vw, 18px)',
+                color: 'rgba(255,255,255,0.85)',
+                fontWeight: 400,
+                letterSpacing: '0.02em',
+                margin: 0,
+                textShadow: '0 4px 10px rgba(0,0,0,0.5)'
+              }}
+            >
+              {subHeadline}
+            </motion.h2>
+          )}
+        </div>
 
         {/* CTA Button */}
         <motion.div
