@@ -70,12 +70,13 @@ export default function CartDrawer() {
                         <p className="text-[#94a3b8] text-[12px] mb-7">
                             You haven't added any bespoke pieces yet.
                         </p>
-                        <button
+                        <Link
+                            href="/shop"
                             onClick={() => setIsOpen(false)}
                             className="bg-[#1A5276] text-white px-7 py-3 rounded-full text-[10px] tracking-[0.2em] uppercase font-bold transition-all hover:bg-[#154360]"
                         >
                             Continue Shopping
-                        </button>
+                        </Link>
                     </div>
                 ) : (
                     <div className="flex flex-col gap-3">

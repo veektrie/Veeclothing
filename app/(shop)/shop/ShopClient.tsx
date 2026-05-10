@@ -8,7 +8,8 @@ import { useSearchParams, useRouter, usePathname } from 'next/navigation';
 import { useQuickViewStore } from '@/store/useQuickViewStore';
 import { useCurrencyStore } from '@/store/useCurrencyStore';
 import RecentlyViewed from '@/components/RecentlyViewed';
-import { ChevronDown, Search, SlidersHorizontal, X } from 'lucide-react';
+import { ChevronDown, Search, SlidersHorizontal, X, Sparkles, ArrowRight, Wand2 } from 'lucide-react';
+import StyleQuiz from '@/components/StyleQuiz';
 
 // ─── Types ───────────────────────────────────────────────────────────────────
 
@@ -126,6 +127,7 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
   const [visibleCount, setVisibleCount] = useState<number>(urlPage * PAGE_SIZE);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [filterVersion, setFilterVersion] = useState(0); // triggers fade animation
+  const [isQuizOpen, setIsQuizOpen] = useState(false);
 
   // Dynamic categories derived from product data
   const dynamicCategories = useMemo(() => extractCategories(initialProducts), [initialProducts]);
@@ -235,6 +237,25 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
               <p className="text-[#64748b] text-[clamp(14px,1.2vw,16px)] font-light leading-[1.8] max-w-[520px]" style={{ fontFamily: 'Inter, sans-serif' }}>
                 Every piece is engineered to order. Heritage craftsmanship meets modern silhouettes — garments that project authority and timeless style.
               </p>
+
+              {/* Digital Stylist Banner Trigger */}
+              <div 
+                onClick={() => setIsQuizOpen(true)}
+                className="mt-8 flex items-center justify-between bg-white border border-[#1A5276]/20 rounded-xl px-6 py-4 cursor-pointer hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group max-w-[520px]"
+              >
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full bg-[#1A5276]/10 flex items-center justify-center text-[#1A5276] group-hover:bg-[#1A5276] group-hover:text-white transition-colors duration-300">
+                    <Sparkles size={18} />
+                  </div>
+                  <div>
+                    <h3 className="text-[11px] font-bold text-[#1C1C1E] uppercase tracking-wider mb-1">Not sure what to wear?</h3>
+                    <p className="text-[10px] text-[#64748b]">Try our AI Digital Stylist to curate your look.</p>
+                  </div>
+                </div>
+                <div className="text-[#1A5276] group-hover:translate-x-1 transition-transform">
+                  <ArrowRight size={16} />
+                </div>
+              </div>
             </motion.div>
           </div>
         </div>
@@ -444,6 +465,22 @@ export default function ShopClient({ initialProducts = [] }: { initialProducts: 
       </div>
 
       <RecentlyViewed />
+
+      {/* Floating Action Button for Stylist */}
+      <button
+        onClick={() => setIsQuizOpen(true)}
+        className="fixed bottom-6 right-6 z-[100] bg-[#1A5276] hover:bg-[#154360] text-white p-4 rounded-full shadow-2xl hover:scale-105 transition-all duration-300 group flex items-center justify-center border-2 border-white/20"
+        title="AI Digital Stylist"
+      >
+        <Wand2 size={24} className="group-hover:rotate-12 transition-transform duration-300" />
+      </button>
+
+      {/* The Quiz Modal */}
+      <StyleQuiz 
+        isOpen={isQuizOpen} 
+        onClose={() => setIsQuizOpen(false)} 
+        products={initialProducts} 
+      />
     </main>
   );
 }
