@@ -13,6 +13,8 @@ import { BLUR_DATA_URL } from '@/lib/imageUtils';
 import SizeGuideModal from '@/components/SizeGuideModal';
 import { useWishlistStore } from '@/store/useWishlistStore';
 import { useCurrencyStore } from '@/store/useCurrencyStore';
+import { useMeasurementStore } from '@/store/useMeasurementStore';
+import MeasurementWizard from '@/components/MeasurementWizard';
 
 // ─── Helpers ─────────────────────────────────────────────────────────────────
 
@@ -24,11 +26,15 @@ const getTagColor = (tag: string) => {
 };
 
 /** Build a WhatsApp commission message pre-filled with the product name */
-function buildCommissionUrl(productName: string, slug: string): string {
-    const msg = encodeURIComponent(
-        `Hello, I'd like to commission a bespoke version of "${productName}".\n\nProduct link: https://www.veeclothingcompany.com/shop/product/${slug}`
-    );
-    return `https://wa.me/2348103031020?text=${msg}`;
+function buildCommissionUrl(productName: string, slug: string, measurements?: Record<string, string>): string {
+    let msg = `Hello, I'd like to commission a bespoke version of "${productName}".\n\nProduct link: https://www.veeclothingcompany.com/shop/product/${slug}`;
+    if (measurements && Object.keys(measurements).length > 0) {
+        msg += `\n\nMy Attached Measurements:\n`;
+        for (const [key, val] of Object.entries(measurements)) {
+            if (val) msg += `- ${key}: ${val}cm\n`;
+        }
+    }
+    return `https://wa.me/2348103031020?text=${encodeURIComponent(msg)}`;
 }
 
 // ─── Component ───────────────────────────────────────────────────────────────
@@ -41,7 +47,11 @@ export default function ProductClient({ product, relatedProducts, complementaryP
     const [monogramText, setMonogramText] = useState('');
     const [isAdding, setIsAdding] = useState(false);
     const [sizeGuideOpen, setSizeGuideOpen] = useState(false);
+    const [isWizardOpen, setIsWizardOpen] = useState(false);
+    const [pendingAddToCart, setPendingAddToCart] = useState(false);
+    const [pendingBuyNow, setPendingBuyNow] = useState(false);
     const [mounted, setMounted] = useState(false);
+    const { hasProfile, measurements } = useMeasurementStore();
 
     const allImages = [product.src, ...(product.gallery || [])].filter(Boolean);
 
@@ -58,7 +68,7 @@ export default function ProductClient({ product, relatedProducts, complementaryP
         if (product) addRecentlyViewed(product);
     }, [product, addRecentlyViewed]);
 
-    const handleAddToCart = () => {
+    const handleAddToCart = (isBuyNow = false) => {
         if (product.sizes?.length > 0 && !selectedSize) {
             toast.error('Please select a size first.');
             return;
@@ -72,6 +82,18 @@ export default function ProductClient({ product, relatedProducts, complementaryP
             return;
         }
 
+        if (selectedSize?.toLowerCase() === 'bespoke' && !hasProfile) {
+            toast('Please provide your bespoke measurements (or skip).', { icon: '📏' });
+            if (isBuyNow) setPendingBuyNow(true);
+            else setPendingAddToCart(true);
+            setIsWizardOpen(true);
+            return;
+        }
+
+        performAddToCart(isBuyNow);
+    };
+
+    const performAddToCart = (isBuyNow = false) => {
         setIsAdding(true);
         addItem({
             id: product._id,
@@ -82,13 +104,17 @@ export default function ProductClient({ product, relatedProducts, complementaryP
             size: selectedSize,
             color: selectedColor?.name,
             monogramText: hasMonogram ? monogramText.toUpperCase() : undefined,
+            measurements: (selectedSize?.toLowerCase() === 'bespoke' && useMeasurementStore.getState().hasProfile) ? (useMeasurementStore.getState().measurements as any) : undefined,
         });
-        toast.success(`${product.name} added to your commission.`);
-        setTimeout(() => setIsAdding(false), 600);
+        toast.success(`${product.name} added to your cart.`);
+        setTimeout(() => {
+            setIsAdding(false);
+            if (isBuyNow) useCartStore.getState().setIsOpen(true);
+        }, 600);
     };
 
     const blurUrl = BLUR_DATA_URL;
-    const commissionUrl = buildCommissionUrl(product.name, product.slug ?? '');
+    const commissionUrl = buildCommissionUrl(product.name, product.slug ?? '', hasProfile ? (measurements as any) : undefined);
 
     return (
         <main className="bg-[#F8FAFC] dark:bg-charcoal min-h-screen relative overflow-x-hidden pt-[clamp(100px,12vh,140px)]">
@@ -340,7 +366,7 @@ export default function ProductClient({ product, relatedProducts, complementaryP
                             <div className="flex gap-3 mb-6">
                                 <button
                                     id="product-add-to-cart"
-                                    onClick={handleAddToCart}
+                                    onClick={() => handleAddToCart(false)}
                                     disabled={isAdding || (product.sizes?.length > 0 && !selectedSize)}
                                     className="flex-1 shadow-xl bg-[#1A5276] hover:bg-[#154360] disabled:bg-black/10 disabled:text-black/30 disabled:cursor-not-allowed text-white py-5 px-8 rounded-xl font-sans text-[11px] tracking-[0.2em] uppercase font-extrabold flex items-center justify-center gap-3 transition-all duration-300"
                                 >
@@ -356,10 +382,7 @@ export default function ProductClient({ product, relatedProducts, complementaryP
 
                                 <button
                                     id="product-buy-now"
-                                    onClick={() => {
-                                        handleAddToCart();
-                                        useCartStore.getState().setIsOpen(true);
-                                    }}
+                                    onClick={() => handleAddToCart(true)}
                                     disabled={isAdding || (product.sizes?.length > 0 && !selectedSize)}
                                     className="group relative flex-1 overflow-hidden shadow-xl bg-[#1A5276] disabled:bg-black/10 disabled:text-black/30 disabled:cursor-not-allowed text-white py-5 px-8 rounded-xl font-sans text-[11px] tracking-[0.2em] uppercase font-extrabold flex items-center justify-center gap-3 transition-all duration-300 hover:shadow-[0_16px_48px_rgba(26,82,118,0.25)]"
                                 >
@@ -375,38 +398,64 @@ export default function ProductClient({ product, relatedProducts, complementaryP
                             target="_blank"
                             rel="noopener noreferrer"
                             id="product-commission-cta"
-                            className="group flex items-center justify-between w-full rounded-xl px-6 py-4 transition-all duration-300 hover:shadow-[0_4px_20px_rgba(212,175,55,0.15)] mb-10"
+                            onClick={(e) => {
+                                if (!hasProfile) {
+                                    e.preventDefault();
+                                    setIsWizardOpen(true);
+                                }
+                            }}
+                            className="group flex flex-col w-full rounded-xl px-6 py-4 transition-all duration-300 hover:shadow-[0_4px_20px_rgba(212,175,55,0.15)] mb-10"
                             style={{
                                 border: '1px solid rgba(212,175,55,0.35)',
                                 background: 'rgba(212,175,55,0.04)',
                             }}
                         >
-                            <div>
-                                <p
-                                    className="text-[10px] tracking-[0.2em] uppercase font-bold text-[#1C1C1E] mb-0.5"
-                                    style={{ fontFamily: 'Inter, sans-serif' }}
+                            <div className="flex items-center justify-between">
+                                <div>
+                                    <p
+                                        className="text-[10px] tracking-[0.2em] uppercase font-bold text-[#1C1C1E] mb-0.5"
+                                        style={{ fontFamily: 'Inter, sans-serif' }}
+                                    >
+                                        Want this in your exact measurements?
+                                    </p>
+                                    <p
+                                        className="text-[12px] font-light text-[#64748b]"
+                                        style={{ fontFamily: 'Inter, sans-serif' }}
+                                    >
+                                        Commission a bespoke version — made precisely to you.
+                                    </p>
+                                </div>
+                                <div
+                                    className="flex-shrink-0 flex items-center gap-2 ml-4 px-4 py-2 rounded-full text-[9px] tracking-[0.2em] uppercase font-bold transition-all duration-300 group-hover:shadow-md"
+                                    style={{
+                                        color: '#D4AF37',
+                                        border: '1px solid #D4AF37',
+                                        background: 'white',
+                                        fontFamily: 'Inter, sans-serif',
+                                    }}
                                 >
-                                    Want this in your exact measurements?
-                                </p>
-                                <p
-                                    className="text-[12px] font-light text-[#64748b]"
-                                    style={{ fontFamily: 'Inter, sans-serif' }}
-                                >
-                                    Commission a bespoke version — made precisely to you.
-                                </p>
+                                    <MessageSquare size={12} />
+                                    Commission →
+                                </div>
                             </div>
-                            <div
-                                className="flex-shrink-0 flex items-center gap-2 ml-4 px-4 py-2 rounded-full text-[9px] tracking-[0.2em] uppercase font-bold transition-all duration-300 group-hover:shadow-md"
-                                style={{
-                                    color: '#D4AF37',
-                                    border: '1px solid #D4AF37',
-                                    background: 'transparent',
-                                    fontFamily: 'Inter, sans-serif',
-                                }}
-                            >
-                                <MessageSquare size={12} />
-                                Commission →
-                            </div>
+                            
+                            {mounted && hasProfile && (
+                                <div className="mt-4 pt-4 border-t border-[#D4AF37]/20 flex items-center justify-between">
+                                    <div className="flex items-center gap-2">
+                                        <Check size={14} className="text-[#D4AF37]" />
+                                        <span className="text-[10px] uppercase tracking-wider font-bold text-[#1A5276]">Using Saved Profile</span>
+                                    </div>
+                                    <button 
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            setIsWizardOpen(true);
+                                        }} 
+                                        className="text-[10px] uppercase tracking-widest font-bold text-[#D4AF37] hover:underline"
+                                    >
+                                        Edit
+                                    </button>
+                                </div>
+                            )}
                         </a>
 
                         {/* Features */}
@@ -581,6 +630,17 @@ export default function ProductClient({ product, relatedProducts, complementaryP
                 isOpen={sizeGuideOpen}
                 onClose={() => setSizeGuideOpen(false)}
                 category={product.cat}
+            />
+            <MeasurementWizard 
+                isOpen={isWizardOpen} 
+                onClose={(saved) => {
+                    setIsWizardOpen(false);
+                    if (pendingAddToCart || pendingBuyNow) {
+                        performAddToCart(pendingBuyNow);
+                        setPendingAddToCart(false);
+                        setPendingBuyNow(false);
+                    }
+                }} 
             />
         </main>
     );
