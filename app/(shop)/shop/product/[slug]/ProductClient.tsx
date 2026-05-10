@@ -33,7 +33,7 @@ function buildCommissionUrl(productName: string, slug: string): string {
 
 // ─── Component ───────────────────────────────────────────────────────────────
 
-export default function ProductClient({ product, relatedProducts }: { product: any; relatedProducts: any[] }) {
+export default function ProductClient({ product, relatedProducts, complementaryProducts }: { product: any; relatedProducts: any[]; complementaryProducts?: any[] }) {
     const [selectedSize, setSelectedSize] = useState<string>(product.sizes?.[0] || '');
     const [selectedColor, setSelectedColor] = useState<any>(product.colors?.[0] || null);
     const [activeImage, setActiveImage] = useState<string>(product.src || '');
@@ -460,6 +460,57 @@ export default function ProductClient({ product, relatedProducts }: { product: a
                     </motion.div>
                 </div>
             </div>
+
+            {/* Complete The Look (AI / Algorithmic Styling) */}
+            {complementaryProducts && complementaryProducts.length > 0 && (
+                <div className="bg-white py-24 px-[clamp(1rem,5vw,4rem)] border-t border-black/5 w-full">
+                    <div className="max-w-[1440px] mx-auto text-center">
+                        <h2 className="font-serif text-4xl md:text-5xl text-black mb-16">Elite Pairings</h2>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-10 text-left">
+                            {complementaryProducts.map((item) => (
+                                <Link key={item._id} href={`/shop/product/${item.slug}`} className="no-underline text-inherit block h-full group">
+                                    <div className="bg-[#F8FAFC] shadow-sm rounded-[24px] overflow-hidden cursor-pointer h-full flex flex-col border border-black/[0.04] transition-all duration-500 hover:shadow-xl hover:-translate-y-2 hover:border-[#D4AF37]/30">
+                                        <div className="relative aspect-[3/4] overflow-hidden bg-[#E2E8F0]">
+                                            {item.src && (
+                                                <Image
+                                                    src={item.src}
+                                                    alt={item.name}
+                                                    fill
+                                                    placeholder="blur"
+                                                    blurDataURL={BLUR_DATA_URL}
+                                                    className="object-cover transition-transform duration-1000 brightness-95 group-hover:scale-105 group-hover:brightness-100"
+                                                    sizes="(max-width: 768px) 100vw, 25vw"
+                                                />
+                                            )}
+                                        </div>
+                                        <div className="p-6 flex-1 flex flex-col gap-3">
+                                            <div>
+                                                <h3 style={{ fontFamily: 'Inter, sans-serif' }} className="text-[1.05rem] font-bold text-[#1C1C1E] mb-1 leading-[1.3] tracking-[-0.02em]">
+                                                    {item.name}
+                                                </h3>
+                                                <p className="font-sans text-[12px] text-[#64748b] leading-[1.6] font-light line-clamp-2">
+                                                    Pairs perfectly with your selection.
+                                                </p>
+                                            </div>
+                                            <div className="mt-auto flex items-center justify-between pt-2.5">
+                                                <span suppressHydrationWarning style={{ fontFamily: 'Inter, sans-serif' }} className="text-[1.05rem] text-[#1A5276] font-bold">
+                                                    {convert(item.price ?? 0).symbol}{(convert(item.price ?? 0).value).toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}
+                                                </span>
+                                                <div className="w-8 h-8 rounded-full border border-[#D4AF37]/40 flex items-center justify-center text-[#D4AF37] bg-white transition-all duration-300 group-hover:bg-[#D4AF37] group-hover:text-white">
+                                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                                        <path d="M5 12h14M12 5l7 7-7 7" />
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </Link>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {/* Related Products */}
             {relatedProducts?.length > 0 && (

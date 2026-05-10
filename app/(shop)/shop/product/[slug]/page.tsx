@@ -26,6 +26,17 @@ function categoryToMaterial(cat: string): string {
   return map[(cat ?? '').toLowerCase()] ?? 'Artisan-Crafted Fabric';
 }
 
+function getComplementaryCategories(cat: string): string[] {
+  const c = (cat || '').toLowerCase();
+  if (c === 'suits') return ['shirts', 'pants'];
+  if (c === 'shirts') return ['suits', 'pants'];
+  if (c === 'pants') return ['shirts', 'suits', 'polo', 'tees'];
+  if (c === 'hoodies') return ['tees', 'pants'];
+  if (c === 'kaftan' || c === 'agbada') return ['bespoke']; 
+  if (c === 'jacket') return ['shirts', 'pants', 'tees'];
+  return ['pants', 'shirts']; // fallback
+}
+
 // ─── Metadata ────────────────────────────────────────────────────────────────
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
@@ -91,6 +102,20 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     { category: product.cat || null, currentId: product._id }
   );
 
+  const compCats = getComplementaryCategories(product.cat);
+  const complementaryProducts = await client.fetch(
+    groq`*[_type == "product" && category in $compCats && _id != $currentId][0...4] {
+      _id,
+      name,
+      price,
+      tag,
+      "desc": description,
+      "slug": slug.current,
+      "src": image.asset->url
+    }`,
+    { compCats, currentId: product._id }
+  );
+
   // Calculate aggregate rating if reviews exist
   const reviews = product.reviews || [];
   const reviewCount = reviews.length;
@@ -151,7 +176,11 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
       />
-      <ProductClient product={product} relatedProducts={relatedProducts} />
+      <ProductClient 
+        product={product} 
+        relatedProducts={relatedProducts} 
+        complementaryProducts={complementaryProducts} 
+      />
     </main>
   );
 }
