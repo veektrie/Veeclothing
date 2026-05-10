@@ -2,9 +2,15 @@
 
 import { useEffect } from 'react';
 import { useThemeStore } from '@/store/useThemeStore';
+import { useCurrencyStore } from '@/store/useCurrencyStore';
 
 export default function ThemeProvider({ children }: { children: React.ReactNode }) {
   const { theme } = useThemeStore();
+  const { autoDetectCurrency } = useCurrencyStore();
+
+  useEffect(() => {
+    autoDetectCurrency();
+  }, [autoDetectCurrency]);
 
   useEffect(() => {
     const root = document.documentElement;

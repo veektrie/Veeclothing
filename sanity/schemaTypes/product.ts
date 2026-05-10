@@ -47,7 +47,7 @@ export default defineType({
       type: 'string',
       options: {
         list: [
-          { title: 'Corporate', value: 'corporate' },
+          { title: 'Suits', value: 'suits' },
           { title: 'Bespoke', value: 'bespoke' },
           { title: 'Kaftan', value: 'kaftan' },
           { title: 'Hoodies', value: 'hoodies' },

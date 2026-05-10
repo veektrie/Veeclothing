@@ -39,7 +39,8 @@ function extractCategories(products: Product[]): string[] {
 /** Capitalise a raw Sanity category value for display */
 function formatCategoryLabel(cat: string): string {
   const map: Record<string, string> = {
-    corporate: 'Corporate',
+    suits: 'Suits',
+    corporate: 'Corporate', // Fallback for old data
     bespoke: 'Bespoke Suiting',
     kaftan: 'Kaftans',
     agbada: 'Agbada',

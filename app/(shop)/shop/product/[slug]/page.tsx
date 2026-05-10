@@ -12,6 +12,7 @@ export const revalidate = 60;
 function categoryToMaterial(cat: string): string {
   const map: Record<string, string> = {
     bespoke:   'Super 120s Italian Wool',
+    suits:     'Premium Woven Fabric',
     corporate: 'Premium Woven Fabric',
     kaftan:    'Heritage Silk-Cotton Blend',
     agbada:    'Hand-Embroidered Damask',

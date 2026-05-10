@@ -10,8 +10,10 @@ interface Rates {
 interface CurrencyStore {
     currency: Currency;
     rates: Rates;
+    hasAutoDetected: boolean;
     setCurrency: (c: Currency) => void;
     fetchRates: () => Promise<void>;
+    autoDetectCurrency: () => Promise<void>;
     convert: (amount: number) => { value: number; symbol: string };
 }
 
@@ -27,6 +29,7 @@ export const useCurrencyStore = create<CurrencyStore>()(
         (set, get) => ({
             currency: 'NGN',
             rates: { NGN: 1, USD: 0.00067, GBP: 0.00053, EUR: 0.00062 }, // Fallback rates
+            hasAutoDetected: false,
             setCurrency: (currency) => set({ currency }),
             fetchRates: async () => {
                 try {
@@ -38,6 +41,25 @@ export const useCurrencyStore = create<CurrencyStore>()(
                     }
                 } catch (error) {
                     console.error('Failed to fetch exchange rates', error);
+                }
+            },
+            autoDetectCurrency: async () => {
+                const { hasAutoDetected, setCurrency } = get();
+                if (hasAutoDetected) return;
+                try {
+                    const res = await fetch('https://ipapi.co/json/');
+                    const data = await res.json();
+                    if (data && data.country_code) {
+                        const code = data.country_code;
+                        if (code === 'NG') setCurrency('NGN');
+                        else if (code === 'GB') setCurrency('GBP');
+                        else if (['FR','DE','IT','ES','NL','BE','AT','IE','PT','FI','GR','CY','MT','LU','SK','SI','EE','LV','LT'].includes(code)) setCurrency('EUR');
+                        else setCurrency('USD');
+                    }
+                    set({ hasAutoDetected: true });
+                } catch (error) {
+                    console.error('Failed to auto-detect currency', error);
+                    set({ hasAutoDetected: true });
                 }
             },
             convert: (amount: number) => {
