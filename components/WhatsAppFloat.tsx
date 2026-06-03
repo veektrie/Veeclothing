@@ -21,6 +21,11 @@ export default function WhatsAppFloat() {
 
   if (!visible) return null;
 
+  const handleOpen = (e: React.MouseEvent | React.TouchEvent) => {
+    e.preventDefault();
+    window.open(WHATSAPP_URL, '_blank', 'noopener,noreferrer');
+  };
+
   return (
     <div className="fixed bottom-6 left-6 z-[900] flex items-center gap-3">
       <AnimatePresence>
@@ -51,6 +56,8 @@ export default function WhatsAppFloat() {
         rel="noopener noreferrer"
         aria-label="Chat with a tailor on WhatsApp"
         id="whatsapp-float"
+        onClick={handleOpen}
+        onTouchEnd={handleOpen}
         initial={{ scale: 0, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ type: 'spring', stiffness: 260, damping: 22, delay: 0.1 }}
@@ -63,6 +70,8 @@ export default function WhatsAppFloat() {
           background: 'linear-gradient(135deg, #1A5276 0%, #1a6e9e 100%)',
           border: '1px solid #D4AF37',
           boxShadow: '0 8px 32px rgba(26,82,118,0.35), 0 0 0 0 rgba(212,175,55,0.4)',
+          WebkitTapHighlightColor: 'transparent',
+          touchAction: 'manipulation',
         }}
       >
         {/* WhatsApp SVG icon in brand navy/gold palette */}
