@@ -13,6 +13,7 @@ import CraftWidget from '@/components/landingPages/CraftWidget';
 import WhyChooseUs from '@/components/landingPages/WhyChooseUs';
 import WhyVeeForBrand from '@/components/landingPages/WhyVeeForBrand';
 import CTABanner from '@/components/landingPages/CTABanner';
+import TrustBar from '@/components/TrustBar';
 
 const latestArticlesQuery = groq`*[_type == "blog"] | order(publishedAt desc)[0...3] {
   _id,
@@ -49,12 +50,20 @@ export default async function Home() {
     <main className="overflow-hidden">
       <Hero featuredProduct={products[0] as FeaturedProduct} />
 
+      {/* Trust bar — immediately under hero */}
+      <TrustBar />
+
       {/* Products immediately on first scroll */}
       <AnimatedSection>
         <ShopPreview products={products} />
       </AnimatedSection>
 
-      {/* Trust signals & social proof bridge */}
+      {/* Brand positioning — why Vee for your brand */}
+      <AnimatedSection>
+        <WhyVeeForBrand />
+      </AnimatedSection>
+
+      {/* Professional proof & bento grid */}
       <AnimatedSection>
         <WhyChooseUs />
       </AnimatedSection>
@@ -65,11 +74,6 @@ export default async function Home() {
 
       <AnimatedSection>
         <SocialProofRibbon />
-      </AnimatedSection>
-
-      {/* Brand/B2B story pushed lower for those who scroll deeper */}
-      <AnimatedSection>
-        <WhyVeeForBrand />
       </AnimatedSection>
 
       <AnimatedSection>

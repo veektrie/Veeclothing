@@ -8,6 +8,11 @@ import { useCurrencyStore } from '@/store/useCurrencyStore';
 import { Trash2, Plus, Minus, ArrowRight, ShoppingBag, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// ─── Constants ──────────────────────────────────────────────────────────────
+
+/** Threshold in base NGN. Adjust to match business rules. */
+const FREE_DELIVERY_THRESHOLD = 100_000;
+
 // ─── Component ───────────────────────────────────────────────────────────────
 
 export default function CartDrawer() {
@@ -56,6 +61,53 @@ export default function CartDrawer() {
                     <X className="w-5 h-5" />
                 </button>
             </div>
+
+            {/* ── Free Delivery Progress Bar ──────────────────────────────── */}
+            {items.length > 0 && (() => {
+                const pct = Math.min((subtotal / FREE_DELIVERY_THRESHOLD) * 100, 100);
+                const remaining = FREE_DELIVERY_THRESHOLD - subtotal;
+                const isUnlocked = subtotal >= FREE_DELIVERY_THRESHOLD;
+                const { symbol, value } = convert(remaining > 0 ? remaining : 0);
+                return (
+                    <div className="px-5 py-3 bg-white border-b border-black/[0.04] flex-shrink-0">
+                        {isUnlocked ? (
+                            <motion.p
+                                key="unlocked"
+                                initial={{ opacity: 0, y: -4 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="text-[10px] font-bold tracking-[0.05em] mb-1.5"
+                                style={{ fontFamily: 'Inter, sans-serif', color: '#D4AF37' }}
+                            >
+                                🎉 Free Express Delivery unlocked!
+                            </motion.p>
+                        ) : (
+                            <motion.p
+                                key="progress"
+                                initial={{ opacity: 0, y: -4 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="text-[10px] text-[#64748b] mb-1.5"
+                                style={{ fontFamily: 'Inter, sans-serif' }}
+                            >
+                                Add{' '}
+                                <strong style={{ color: '#1A5276', fontWeight: 700 }}>
+                                    {symbol}{value.toLocaleString()}
+                                </strong>
+                                {' '}more for Free Delivery
+                            </motion.p>
+                        )}
+                        {/* Track */}
+                        <div className="h-[5px] bg-[#F1F5F9] rounded-full overflow-hidden">
+                            <motion.div
+                                className="h-full rounded-full"
+                                style={{ background: isUnlocked ? '#D4AF37' : '#1A5276' }}
+                                initial={{ width: 0 }}
+                                animate={{ width: `${pct}%` }}
+                                transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                            />
+                        </div>
+                    </div>
+                );
+            })()}
 
             {/* Items */}
             <div className="flex-1 overflow-y-auto p-5 bg-[#F8FAFC] overscroll-contain">
