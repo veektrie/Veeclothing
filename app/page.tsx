@@ -1,8 +1,8 @@
 import { client } from "@/lib/sanity";
 import { groq } from "next-sanity";
 
-import Hero from '../components/landingPages/Hero';
-// removed duplicate brand import
+import Hero, { type FeaturedProduct } from '../components/landingPages/Hero';
+
 
 import ShopPreview from '@/components/landingPages/ShopPreview';
 import SocialProofRibbon from '@/components/landingPages/SocialProofRibbon';
@@ -47,7 +47,7 @@ export default async function Home() {
 
   return (
     <main className="overflow-hidden">
-      <Hero />
+      <Hero featuredProduct={products[0] as FeaturedProduct} />
       
       <AnimatedSection>
         <WhyChooseUs />
