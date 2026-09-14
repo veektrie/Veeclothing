@@ -48,17 +48,15 @@ export default async function Home() {
   return (
     <main className="overflow-hidden">
       <Hero featuredProduct={products[0] as FeaturedProduct} />
-      
-      <AnimatedSection>
-        <WhyChooseUs />
-      </AnimatedSection>
 
-      <AnimatedSection>
-        <WhyVeeForBrand />
-      </AnimatedSection>
-
+      {/* Products immediately on first scroll */}
       <AnimatedSection>
         <ShopPreview products={products} />
+      </AnimatedSection>
+
+      {/* Trust signals & social proof bridge */}
+      <AnimatedSection>
+        <WhyChooseUs />
       </AnimatedSection>
 
       <AnimatedSection>
@@ -67,6 +65,11 @@ export default async function Home() {
 
       <AnimatedSection>
         <SocialProofRibbon />
+      </AnimatedSection>
+
+      {/* Brand/B2B story pushed lower for those who scroll deeper */}
+      <AnimatedSection>
+        <WhyVeeForBrand />
       </AnimatedSection>
 
       <AnimatedSection>
