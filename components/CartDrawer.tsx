@@ -11,7 +11,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 // ─── Constants ──────────────────────────────────────────────────────────────
 
 /** Threshold in base NGN. Adjust to match business rules. */
-const FREE_DELIVERY_THRESHOLD = 100_000;
+const FREE_DELIVERY_THRESHOLD = 1_000_000;
 
 // ─── Component ───────────────────────────────────────────────────────────────
 
