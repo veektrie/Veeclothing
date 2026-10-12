@@ -175,20 +175,6 @@ export default function RootLayout({
           })
         }} />
 
-        {/* — FAQ Schema — */}
-        <script type="application/ld+json" dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            "mainEntity": [
-              { "@type": "Question", "name": "What is the minimum order for corporate uniforms in Lagos?", "acceptedAnswer": { "@type": "Answer", "text": "Vee Clothing Company accepts corporate uniform orders from as few as 5 garments up to 500+. Volume pricing applies for orders exceeding 50 units. All orders receive identical quality assurance regardless of scale." } },
-              { "@type": "Question", "name": "How long does a bespoke tailoring commission take?", "acceptedAnswer": { "@type": "Answer", "text": "All commissions at Vee Clothing Company take a minimum of 10 working days. Bulk corporate orders of 50+ units may take up to 15 working days. Rush commissions may be accommodated depending on schedule." } },
-              { "@type": "Question", "name": "Does Vee Clothing Company do on-site corporate fittings?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. For corporate orders of 20 or more staff, Vee Clothing Company offers on-site fitting sessions at your Lagos or Abuja office. Virtual consultations are available for clients outside Nigeria." } },
-              { "@type": "Question", "name": "What fabrics does Vee Clothing Company use for bespoke garments?", "acceptedAnswer": { "@type": "Answer", "text": "Vee Clothing Company sources from Holland & Sherry wool mills in the UK, Italian linen and silk blends, and premium Nigerian fabrics including Adire, kente, and ankara, depending on the garment type and client vision." } },
-              { "@type": "Question", "name": "How does Vee Clothing Company ensure corporate brand consistency?", "acceptedAnswer": { "@type": "Answer", "text": "A Brand Alignment session precedes all production. Approved colour codes, logo placements, and fabric specifications are documented and signed off. Every garment in the order is verified against the approved sample before dispatch." } }
-            ]
-          })
-        }} />
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-BJ0RRN35YS"
           strategy="afterInteractive"

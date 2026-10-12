@@ -25,6 +25,7 @@ const navGroups = [
   {
     heading: 'Help',
     links: [
+      { title: 'FAQ & Advisory',       url: '/faq' },
       { title: 'Consultation',         url: '/#consultation' },
       { title: 'WhatsApp Us',          url: 'https://wa.me/2348103031020' },
       { title: 'Terms & Conditions',   url: '/terms-and-conditions' },

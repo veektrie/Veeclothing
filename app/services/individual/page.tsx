@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FAQ_DATA } from '@/constants/faqData';
 
 const services = [
   {
@@ -269,21 +270,63 @@ export default function IndividualServicesPage() {
       </div>
 
       {/* FAQ / AEO Section */}
-      <section itemScope itemType="https://schema.org/FAQPage" style={{ maxWidth: 800, margin: '0 auto', padding: '20px 32px 120px' }}>
+      <section itemScope itemType="https://schema.org/FAQPage" style={{ maxWidth: 840, margin: '0 auto', padding: '20px 32px 120px' }}>
         <hr style={{ border: 'none', borderTop: '1px solid rgba(0,0,0,0.08)', marginBottom: 60 }} />
-        <h2 style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(1.5rem, 3vw, 2.2rem)', fontWeight: 800, letterSpacing: '-0.03em', color: '#1C1C1E', marginBottom: 40 }}>
-          Common Questions
-        </h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
-          {faqs.map((faq, idx) => (
-            <div key={idx} itemScope itemProp="mainEntity" itemType="https://schema.org/Question" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)', paddingBottom: 24 }}>
-              <h3 itemProp="name" style={{ fontSize: 18, fontWeight: 700, color: '#1C1C1E', marginBottom: 12 }}>
-                {faq.q}
+        
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 16, marginBottom: 40 }}>
+          <div>
+            <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#1A5276', display: 'block', marginBottom: 8 }}>
+              Bespoke Commission Advisory
+            </span>
+            <h2 style={{ fontFamily: 'Inter, sans-serif', fontSize: 'clamp(1.6rem, 3.5vw, 2.4rem)', fontWeight: 800, letterSpacing: '-0.03em', color: '#1C1C1E', margin: 0 }}>
+              Frequently Asked Questions
+            </h2>
+          </div>
+          <Link href="/faq" style={{ fontSize: 13, fontWeight: 700, color: '#1A5276', textDecoration: 'none' }}>
+            View Full 46-Question FAQ Hub →
+          </Link>
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28 }}>
+          {FAQ_DATA.filter((item) => item.category === 'bespoke').map((faq) => (
+            <div
+              key={faq.id}
+              itemScope
+              itemProp="mainEntity"
+              itemType="https://schema.org/Question"
+              style={{
+                background: '#FFFFFF',
+                borderRadius: 16,
+                padding: '24px 28px',
+                border: '1px solid rgba(0,0,0,0.06)',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.02)',
+              }}
+            >
+              <h3 itemProp="name" style={{ fontSize: 17, fontWeight: 700, color: '#1C1C1E', marginBottom: 12, lineHeight: 1.4 }}>
+                {faq.question}
               </h3>
               <div itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-                <p itemProp="text" style={{ fontSize: 15, color: '#4B5563', lineHeight: 1.7 }}>
-                  {faq.a}
-                </p>
+                <div
+                  itemProp="text"
+                  style={{
+                    background: 'rgba(26, 82, 118, 0.04)',
+                    borderLeft: '3px solid #1A5276',
+                    padding: '12px 16px',
+                    borderRadius: '0 8px 8px 0',
+                    fontSize: 14,
+                    color: '#1C1C1E',
+                    fontWeight: 500,
+                    marginBottom: 12,
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {faq.shortAnswer}
+                </div>
+                <ul style={{ margin: 0, paddingLeft: 18, fontSize: 13, color: '#4B5563', lineHeight: 1.6, display: 'flex', flexDirection: 'column', gap: 6 }}>
+                  {faq.detailedAnswer.map((point, pIdx) => (
+                    <li key={pIdx}>{point}</li>
+                  ))}
+                </ul>
               </div>
             </div>
           ))}
@@ -292,22 +335,3 @@ export default function IndividualServicesPage() {
     </div>
   );
 }
-
-const faqs = [
-  {
-    q: 'What is The Private Commission?',
-    a: 'The Private Commission is the exclusive individual bespoke tailoring service offered by Vee Clothing Company. It is a rigorous engineering process where a unique pattern is drafted from scratch based on precise anatomical data, resulting in a fully custom, structurally flawless garment built for the specific operational needs of the client.',
-  },
-  {
-    q: 'How long does a bespoke commission take?',
-    a: 'A standard Private Commission requires four to six weeks from the initial Strategic Dialogue to The Final Integration. This timeline is strictly maintained to allow for meticulous fabric sourcing, hand-stitched canvas construction, and the necessary fitting protocols required to ensure perfect structural alignment.',
-  },
-  {
-    q: 'Where are the fabrics sourced?',
-    a: 'We source our textiles directly from premium global mills. Our curation focuses entirely on high-performance materials including Super 150s wools, resilient linens, and breathable silks. These fabrics are specifically chosen for their ability to maintain shape, manage temperature, and provide superior comfort in both the dynamic Lagos climate and international travel environments.',
-  },
-  {
-    q: 'Do you offer private office fittings?',
-    a: 'Yes. We understand the severe time constraints placed upon our clients. Our specialists can execute the complete measurement protocol and all subsequent fitting sessions in the absolute privacy of the client\'s office or residence in Lagos, ensuring the highest level of convenience and total discretion.',
-  },
-];

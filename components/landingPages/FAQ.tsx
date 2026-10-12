@@ -185,35 +185,54 @@ const FAQSection = () => {
 
         {/* Bottom CTA - Centered */}
         <div style={{ marginTop: '4.5rem', textAlign: 'center' }}>
-          <p className="font-metro" style={{ color: 'var(--stone)', fontSize: 13, marginBottom: 18 }}>
-            Don't see your question? Our team responds to all inquiries within 24 hours.
+          <p className="font-metro" style={{ color: 'var(--stone)', fontSize: 14, marginBottom: 20 }}>
+            Looking for comprehensive details on fabric mills, MOQ tiers, or concierge delivery?
           </p>
-          <Link href="/#consultation" style={{ textDecoration: 'none' }}>
-            <button className="btn-solid-navy" style={{ 
-              margin: '0 auto', 
-              fontFamily: 'Inter, sans-serif', 
-              fontSize: 10, 
-              color: '#FFFFFF', 
-              background: '#1A5276',
-              border: 'none', 
-              padding: '14px 36px', 
-              borderRadius: '999px', 
-              cursor: 'pointer', 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: 8, 
-              justifyContent: 'center',
-              fontWeight: 700,
-              letterSpacing: '0.1em',
-              textTransform: 'uppercase',
-              boxShadow: '0 10px 20px rgba(26, 82, 118, 0.2)'
-            }}>
-              Ask a Question
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M5 12h14M12 5l7 7-7 7" />
-              </svg>
-            </button>
-          </Link>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 14, justifyContent: 'center' }}>
+            <Link href="/faq" style={{ textDecoration: 'none' }}>
+              <button style={{ 
+                fontFamily: 'Inter, sans-serif', 
+                fontSize: 12, 
+                color: '#FFFFFF', 
+                background: '#1A5276',
+                border: 'none', 
+                padding: '14px 28px', 
+                borderRadius: '999px', 
+                cursor: 'pointer', 
+                display: 'inline-flex', 
+                alignItems: 'center', 
+                gap: 8, 
+                fontWeight: 700,
+                letterSpacing: '0.05em',
+                boxShadow: '0 8px 20px rgba(26, 82, 118, 0.25)',
+                transition: 'transform 0.2s'
+              }}>
+                Browse All 46 FAQs & Knowledge Base
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </button>
+            </Link>
+
+            <Link href="/#consultation" style={{ textDecoration: 'none' }}>
+              <button style={{ 
+                fontFamily: 'Inter, sans-serif', 
+                fontSize: 12, 
+                color: '#1C1C1E', 
+                background: '#FFFFFF',
+                border: '1px solid rgba(0,0,0,0.12)', 
+                padding: '14px 28px', 
+                borderRadius: '999px', 
+                cursor: 'pointer', 
+                display: 'inline-flex', 
+                alignItems: 'center', 
+                gap: 8, 
+                fontWeight: 600,
+              }}>
+                Book a Consultation
+              </button>
+            </Link>
+          </div>
         </div>
 
       </div>

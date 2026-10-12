@@ -113,6 +113,7 @@ const Navbar = () => {
     { href: '/blog', label: 'Blog' },
     { href: '/services/individual', label: 'Individual' },
     { href: '/services/business', label: 'Business' },
+    { href: '/faq', label: 'FAQ' },
     { href: '/about', label: 'About' },
   ];
 
